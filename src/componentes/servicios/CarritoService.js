@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 export default class CarritoService extends React.Component {
 	static items_carrito_compras = [];
 	static observers = [];
@@ -18,6 +18,12 @@ export default class CarritoService extends React.Component {
 	static removeItem() {
 		this.items_carrito_compras.pop();
 		this.notifySubscribers();
+	}
+
+	static getTotal(){
+		return this.items_carrito_compras.reduce((anterior, actual) => {
+			return anterior + actual.precio;
+		}, 0);
 	}
 
 	static notifySubscribers() {

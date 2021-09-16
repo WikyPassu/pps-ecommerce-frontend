@@ -5,16 +5,16 @@ import Carousel from './carrusel/HomeCarrusel';
 import './HomePage.css';
 function HomePage() {
   return (
-    <div>
-      <HomeNavbar/>
-      <Carousel/>
-      <br/>
-      <br/>
+    <>
+      <HomeNavbar />
+      <Carousel />
+      <br />
+      <br />
       <h1 className="titulo-productos-servicios">Nuestros productos</h1>
-      <ListaProductos listaProductos={SampleProductos}/>
+      <ListaProductos listaProductos={SampleProductos} />
       <h1 className="titulo-productos-servicios">Nuestros Servicios</h1>
-      <ListaProductos listaProductos={SampleProductos}/>
-    </div>
+      <ListaProductos listaProductos={SampleProductos} />
+    </>
   );
 }
 

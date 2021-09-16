@@ -1,10 +1,10 @@
 import React from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row } from 'react-bootstrap';
 import "./LoginAdminPage.css";
 
 export default function LoginAdmin() {
     const OnSubmitForm = (e)=>{
-        // e.preventDefault();
+
     }
     
     return (<div className="form-login-admin">

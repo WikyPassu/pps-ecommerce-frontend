@@ -23,7 +23,7 @@ function ProductoPage(props) {
     CarritoService.addItem(productoActual);
   }
   return (
-    <div>
+    <>
       <HomeNavbar />
       <section>
         <br />
@@ -66,7 +66,7 @@ function ProductoPage(props) {
 
         </div>
       </section>
-    </div>
+    </>
   );
 }
 

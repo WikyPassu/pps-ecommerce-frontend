@@ -1,6 +1,6 @@
 import React from 'react';
 import './AgregarProductoModal.css';
-import { Modal, Button, Form, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 
 export default function AgregarProductoModal(props) {

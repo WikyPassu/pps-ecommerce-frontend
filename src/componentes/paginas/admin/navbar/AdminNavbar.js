@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
 export default function AdminNavbar() {
     return (
-        <div>
+        <>
             <Navbar className="home-navbar" variant="dark">
                 <Container>
                     <Navbar.Brand href="/home">Puppyness Pet Caring</Navbar.Brand>
@@ -23,7 +23,7 @@ export default function AdminNavbar() {
                     </Nav>
                 </Container>
             </Navbar>
-        </div>
+        </>
 
     )
 };

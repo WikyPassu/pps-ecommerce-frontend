@@ -9,11 +9,11 @@ export default function HomeNavbar(props) {
     const [modalShow, setModalShow] = React.useState(false);
     const history = useHistory();
     return (
-        <div>
+        <>
             <Navbar className="home-navbar" variant="dark">
                 <Container>
                     <Navbar.Brand onClick={()=>{history.push("/")}}>
-                        <img width="40px" className="logo-img" src={foto}/>
+                        <img alt="logo-img" width="40px" className="logo-img" src={foto}/>
                         Puppyness Pet Caring
                         </Navbar.Brand>
                     <Nav className="me-auto">
@@ -31,7 +31,7 @@ export default function HomeNavbar(props) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
-        </div>
+        </>
 
     )
 };

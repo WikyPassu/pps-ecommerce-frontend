@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Carrito.css';
-import ItemCarrito from './itemCarrito/ItemCarrito';
 import { Dropdown, ListGroup, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import CarritoService from '../servicios/CarritoService';
+import ListaItemsCarrito from './listaItemsCarrito/ListaItemsCarrito';
 
 
 export default function Carrito() {
+    const [state, setState] = useState({ total:CarritoService.getTotal() })
     const history = useHistory();
-    const [items, setItems] = useState({
-        lista: CarritoService.getItems(),
-        total: CarritoService.getItems().reduce((anterior, actual) => {
-            return anterior + actual.precio;
-        }, 0)
-    })
-    CarritoService.subscribe((listaActualizada = []) => {
-        setItems({
-            lista: listaActualizada,
-            total: listaActualizada.reduce((anterior, actual) => {
-                return anterior + actual.precio;
-            }, 0)
-        });
+    CarritoService.subscribe(()=>{
+        setState({ total:CarritoService.getTotal() })
     })
 
-    return (<div>
+    return (<>
         <Dropdown>
             <Dropdown.Toggle >
                 Carrito
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown-menu">
-                <ListGroup>
-                    {items.lista.map((actual) => { return <ListGroup.Item><ItemCarrito nombre={actual.nombre} precio={actual.precio}/></ListGroup.Item> })}
+                <ListGroup className="lista-items-carrito">
+                    <ListaItemsCarrito/>
                 </ListGroup>
-                {items.lista.length ? <ListGroup.Item> <b>Total: ${items.total}</b> </ListGroup.Item> : <ListGroup.Item>No hay productos aun</ListGroup.Item>}
+                {CarritoService.getItems.length ? <ListGroup.Item> <b>Total: ${state.total}</b> </ListGroup.Item> : <ListGroup.Item>No hay productos aun</ListGroup.Item>}
                 <Button className="btn-caja" onClick={() => { history.push("/caja") }}>Ir a caja</Button>
             </Dropdown.Menu>
         </Dropdown>
-    </div>)
+    </>)
 };

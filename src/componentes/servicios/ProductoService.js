@@ -11,7 +11,7 @@ export default class ProductoService extends React.Component {
 	}
 
     static getProductoPorCodigo(codigo){
-        return this.productos.filter(c => c.codigo == codigo)[0];
+        return this.productos.filter(c => c.codigo === codigo)[0];
     }
 
 	static agregarProducto(newItem) {

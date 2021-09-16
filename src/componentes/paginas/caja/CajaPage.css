@@ -25,5 +25,12 @@
     float: right !important;
     align-items: right;
     align-items: right;
-    
+}
+
+.total-caja{
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
 }
