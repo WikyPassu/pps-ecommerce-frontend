@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import "./ResultadoTransaccion.css";
+import "./ResultadoTransaccionPage.css";
 import { useHistory } from 'react-router-dom';
 import HomeNavbar from '../../../navbar/HomeNavbar';
-function ResultadoTransaccion() {
+function ResultadoTransaccionPage() {
     const history = useHistory();
     useEffect(() => {
         setTimeout(() => {
@@ -16,4 +16,4 @@ function ResultadoTransaccion() {
     </>);
 }
 
-export default ResultadoTransaccion;
+export default ResultadoTransaccionPage;

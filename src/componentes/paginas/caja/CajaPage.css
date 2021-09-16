@@ -33,4 +33,6 @@
     margin-bottom: 10px;
     width: 100%;
     text-align: left;
+    font-weight: bold;
+    color:var(--primary-color);
 }

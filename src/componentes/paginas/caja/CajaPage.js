@@ -17,7 +17,7 @@ function Caja() {
             <div className="item-productos-carrito" >
                 <b>Lista productos del carrito</b>
                 <br/>
-                <label className="total-caja">TOTAL: {caja.total}</label>
+                <label className="total-caja">TOTAL: ${caja.total}</label>
                 <br />
                 <ListaItemsCarrito />
             </div>
