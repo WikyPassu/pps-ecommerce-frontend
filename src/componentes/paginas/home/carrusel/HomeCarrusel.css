@@ -1,0 +1,7 @@
+.img-carousel{
+    width: 100vw !important;
+    height: 600px !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

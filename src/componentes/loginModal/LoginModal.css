@@ -1,0 +1,13 @@
+.modal-content{
+    max-width: 380px;
+    margin: auto;
+}
+
+.modal-header{
+    background: var(--primary-color) !important;
+    color: white;
+}
+
+.modal-body{
+    padding: 30px !important;
+}

@@ -1,0 +1,6 @@
+.lista-productos{
+    height:fit-content;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 20px;
+}

@@ -1,0 +1,20 @@
+.title-factura{
+    font-size: 26px;
+    font-weight: bold;
+    float: left !important;
+    margin-bottom: 25px;
+    margin-right: 15px;
+}
+
+.input-formulario{
+    margin-top: 15px;
+}
+
+.contenedor-envios{
+    white-space: nowrap;
+}
+
+.inline{
+    display: flex;
+
+}

@@ -1,0 +1,36 @@
+.card-producto{
+    display: inline-flex !important;
+    width: '18rem';
+    margin:10px;
+    max-width: 300px !important;
+    border-radius: 15px !important;
+}
+.card-producto:hover{
+    box-shadow: 0px 10px 45px -25px rgba(0, 0, 0, 0.787);
+    transition: all 0.3s;
+}
+
+.card-image{
+    width: 300px;
+    height: 180px;
+    border-top-right-radius: 15px !important;
+    border-top-left-radius: 15px;
+}
+
+.card-descripcion{
+    white-space:normal;
+    font-size: 13px;
+    color: grey;
+}
+
+.card-nombre{
+    white-space:normal;
+    font-weight: 700 !important;
+    color:var(--primary-color);
+    text-align: left;
+}
+
+.card-precio{
+    font-weight: 700 !important;
+    font-size: 21px;
+}

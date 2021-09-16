@@ -1,0 +1,31 @@
+.item-carrito-titulo{
+    font-size: 14px;
+    font-weight: bold;
+    background: transparent;
+    float: left;
+}
+.item-carrito-cantidad{
+    font-size: 14px;
+    background: transparent;
+    text-align: left;
+    float: left;
+}
+.item-carrito-precio{
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 10px;
+    background: transparent;
+    text-align: left;
+    float: left;
+
+}
+
+.item-carrito-remover{
+    float: right;
+    font-size: 10px;
+}
+
+.container-carrito-item{
+    text-align: left;
+    float: left;
+}

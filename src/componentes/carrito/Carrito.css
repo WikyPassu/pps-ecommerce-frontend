@@ -1,0 +1,14 @@
+.dropdown-menu {
+    padding: 0 !important;
+    min-width: 250px;
+}
+
+.btn-caja{
+    margin:10px;
+    width: 90%;
+}
+
+.lbl-no-productos{
+    text-align: center;
+    margin-top: 10px;
+}

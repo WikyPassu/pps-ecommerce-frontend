@@ -1,0 +1,15 @@
+.tab-container{
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.titulo-seccion{
+    font-size: 26px;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.btn-agregar{
+    float: right;
+}
