@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './puppyness-theme.css';
-import HomePage from './componentes/paginas/home/HomePage';
-import ProductoPage from './componentes/paginas/producto/ProductoPage';
-import AdminDashboardPage from "./componentes/paginas/admin/AdminDashboard/AdminDashboardPage";
-import LoginAdminPage from "./componentes/paginas/admin/LoginAdmin/LoginAdminPage";
-import CajaPage from "./componentes/paginas/caja/CajaPage";
-import ResultadoTransaccionPage from "./componentes/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
+import HomePage from './code/frontend/paginas/home/HomePage';
+import ProductoPage from './code/frontend/paginas/producto/ProductoPage';
+import LoginAdminPage from "./code/admin/paginas/loginAdmin/LoginAdminPage";
+import AdminHomePage from "./code/admin/paginas/home/AdminHomePage";
+import CajaPage from "./code/frontend/paginas/caja/CajaPage";
+import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
 import SampleProductos from './samples/productos.json';
-import ProductoService from "./componentes/servicios/ProductoService";
+import ProductoService from "./code/servicios/ProductoService";
 
 function App() {
   ProductoService.productos = SampleProductos;
@@ -22,7 +22,7 @@ function App() {
         <Route path="/caja" component={CajaPage}></Route>
         <Route path="/resultado-transaccion" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>
-        <Route path="/admin/dashboard" component={AdminDashboardPage}></Route>
+        <Route path="/admin/home" component={AdminHomePage}></Route>
         <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
       </Router>
     </div>
