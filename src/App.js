@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import './puppyness-theme.css';
 import HomePage from './code/frontend/paginas/home/HomePage';
 import ProductoPage from './code/frontend/paginas/producto/ProductoPage';
