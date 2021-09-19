@@ -13,7 +13,7 @@ function HomePage() {
       <h1 className="titulo-productos-servicios">Nuestros productos</h1>
       <ListaProductos listaProductos={SampleProductos} />
       <h1 className="titulo-productos-servicios">Nuestros Servicios</h1>
-      <ListaProductos listaProductos={SampleProductos} />
+      {/* <ListaProductos listaProductos={SampleProductos} /> */}
     </>
   );
 }

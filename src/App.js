@@ -9,6 +9,7 @@ import CajaPage from "./code/frontend/paginas/caja/CajaPage";
 import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
 import SampleProductos from './samples/productos.json';
 import ProductoService from "./code/servicios/ProductoService";
+import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 
 function App() {
   ProductoService.productos = SampleProductos;
@@ -18,11 +19,12 @@ function App() {
         <Route path="/" exact><Redirect to="/home" /></Route>
         <Route path="/home" component={HomePage}></Route>
         <Route path="/producto" component={ProductoPage} />
-        <Route path="/caja" component={CajaPage}></Route>
-        <Route path="/resultado-transaccion" component={ResultadoTransaccionPage}></Route>
+        <Route exact path="/caja" component={CajaPage}></Route>
+        <Route exact path="/caja/resultado" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>
         <Route path="/admin/home" component={AdminHomePage}></Route>
         <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
+        <Route exact path="/404" component={NotFoundPage}></Route>
       </Router>
     </div>
   );

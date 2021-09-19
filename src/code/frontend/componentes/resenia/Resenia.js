@@ -6,17 +6,15 @@ function fechaParser(timeStamp){
     const date= (new Date(parseInt(timeStamp+"000")));
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 }
-function useResenia({usuario,codigo,comentario,fecha}) {
+
+export default function Resenia(props) {
+    let {usuario,codigo,comentario,fecha} = props.resenia;
     const [resenia] = useState({
-        usuario: usuario,
-        codigo:codigo,
-        comentario:comentario,
+        usuario: usuario??"error",
+        codigo:codigo??"error",
+        comentario:comentario??"error",
         fecha:fechaParser(fecha)
     });
-    return resenia;
-}
-export default function Resenia(props) {
-    const resenia = useResenia(props.resenia);
     return (
         <Card className="card-container">
             <Card.Body>

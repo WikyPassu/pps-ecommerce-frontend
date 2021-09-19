@@ -1,26 +1,32 @@
-.caja-container{
+.caja-container-box{
     max-width: 1200px;
     margin: auto;
     margin-top: 50px;
     display:grid;
     grid-template-columns: repeat(4,1fr);
-    grid-template-rows: repeat(7,2fr);
+    grid-template-rows: repeat(15,50px);
 }
 
 .item-productos-carrito{
     background: #ffffff;
     border-radius: 10px;
     padding: 20px;
+    grid-row: 1/10;
+    grid-column: 4/5;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .item-form-factura{
+    grid-row: 0/10;
     grid-column: 1/4;
+    height: max-content;
     padding-right: 20px;
 }
 
 .item-btn-pagar{
-    grid-row: 2/3;
-    grid-column:1/2 !important;
+    grid-row: 10/11;
+    grid-column:4/5 !important;
     margin-top: 15px;
     float: right !important;
     align-items: right;

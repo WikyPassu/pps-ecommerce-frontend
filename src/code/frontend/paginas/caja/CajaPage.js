@@ -12,13 +12,14 @@ function Caja() {
     })
     return (<>
         <HomeNavbar />
-        <div className="caja-container">
+        <div className="caja-container-box">
             <div className="item-form-factura"><FormularioFactura /></div>
             <div className="item-productos-carrito" >
                 <b>Lista productos del carrito</b>
                 <br/>
                 <label className="total-caja">TOTAL: ${caja.total}</label>
                 <br />
+                <br/>
                 <ListaItemsCarrito />
             </div>
             

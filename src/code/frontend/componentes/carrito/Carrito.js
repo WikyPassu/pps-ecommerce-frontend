@@ -20,10 +20,9 @@ export default function Carrito() {
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown-menu">
                 <ListGroup className="lista-items-carrito">
-                   
-                    {CarritoService.getItems().length ?  <><ListaItemsCarrito/><ListGroup.Item> <b>Total: ${state.total}</b> </ListGroup.Item></> : <ListGroup.Item>No hay productos aun</ListGroup.Item>}
+                    {CarritoService.getItems().length ?  <><ListaItemsCarrito/><ListGroup.Item> <b>Total: ${state.total}</b> </ListGroup.Item></> : <ListGroup.Item>No hay productos en el carrito</ListGroup.Item>}
                 </ListGroup>
-                <Button className="btn-caja" onClick={() => { history.push("/caja") }}>Ir a caja</Button>
+                {CarritoService.getItems().length ? <><Button className="btn-caja" onClick={() => { history.push("/caja") }}>Ir a caja</Button></> : <></>}
             </Dropdown.Menu>
         </Dropdown>
     </>)
