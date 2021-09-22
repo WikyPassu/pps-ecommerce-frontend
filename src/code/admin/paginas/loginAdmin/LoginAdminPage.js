@@ -8,7 +8,7 @@ export default function LoginAdminPage() {
     }
     
     return (<div className="form-login-admin">
-        <Form onSubmit={OnSubmitForm} action="/admin/dashboard">
+        <Form onSubmit={OnSubmitForm} action="/admin/home">
             <b className="title-iniciar-sesion">Iniciar Sesion</b>
             <p>Administracion</p>
             <Row className="mb-3">

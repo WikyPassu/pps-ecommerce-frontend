@@ -1,0 +1,9 @@
+.carrusel-vista-previa{
+    width: 100%;
+    min-height: 400px;
+    height: 100% !important;
+    border: 1px solid black;
+    background: white;
+    background-size: cover;
+    background-position: center;
+}

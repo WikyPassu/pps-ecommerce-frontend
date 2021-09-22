@@ -7,6 +7,12 @@ export default class ProductoService extends React.Component {
 		this.observers.push(callback);
 	}
 
+	static notifySubscribers() {
+		this.state.observers.forEach((current) => {
+			current(this.items_carrito_compras);
+		})
+	}
+
 	static getProductos() {
 		return this.productos;
 	}
@@ -26,9 +32,5 @@ export default class ProductoService extends React.Component {
 		this.notifySubscribers();
 	}
 
-	static notifySubscribers() {
-		this.state.observers.forEach((current) => {
-			current(this.items_carrito_compras);
-		})
-	}
+
 }

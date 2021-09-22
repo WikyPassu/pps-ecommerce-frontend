@@ -8,6 +8,7 @@ import Turnos from './turnos/Turnos'
 import Usuarios from './usuarios/Usuarios'
 import './Secciones.css';
 import { useState } from 'react';
+import Frontend from './frontend/Frontend';
 export default function Secciones() {
   const [modalShowProducto, setModalShowProducto] = useState(false);
   return (
@@ -53,6 +54,11 @@ export default function Secciones() {
           <label className="titulo-seccion">Usuarios</label>
           <span><Button className="btn-agregar">Agregar Usuario</Button></span>
           <Usuarios />
+        </div>
+      </Tab>
+      <Tab eventKey="frontend" title="Frontend">
+        <div className="tab-container">
+          <Frontend />
         </div>
       </Tab>
     </Tabs>
