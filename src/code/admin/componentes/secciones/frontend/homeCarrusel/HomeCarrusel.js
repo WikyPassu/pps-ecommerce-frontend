@@ -1,9 +1,9 @@
-import FrontendConfigService from "../../../../../servicios/ConfiguracionFrontendService"
-import { InputGroup, Form, Button } from 'react-bootstrap';
+//import FrontendConfigService from "../../../../../servicios/ConfiguracionFrontendService"
+import { Form, Button } from 'react-bootstrap';
 import './HomeCarrusel.css';
 import { useState, useEffect } from "react";
 
-function EditoContenidoCarrusel(props) {
+function EditorContenidoCarrusel(props) {
 
     return <>
         <Form>
@@ -19,7 +19,7 @@ function EditoContenidoCarrusel(props) {
 }
 
 export default function HomeCarrusel() {
-    let imagenesCarrusel = FrontendConfigService.getImagenesCarrusel();
+    //let imagenesCarrusel = FrontendConfigService.getImagenesCarrusel();
     const [contenidoCarrusel,setContenidoCarrusel] = useState({
         html:""
     });
@@ -44,7 +44,7 @@ export default function HomeCarrusel() {
 
     return (<>
         <h1>Carrusel Home</h1>
-        <EditoContenidoCarrusel onKeyPress={onKeyPressEditor} onChangeImagen={onChangeImagenEditor} />
+        <EditorContenidoCarrusel onKeyPress={onKeyPressEditor} onChangeImagen={onChangeImagenEditor} />
         <Form.Label>Vista previa</Form.Label>
         <div style={styleCarrusel.imagen} className="carrusel-vista-previa"></div>
         <br/>

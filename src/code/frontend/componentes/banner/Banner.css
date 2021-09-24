@@ -1,0 +1,56 @@
+.banner-container{
+    width: 100%;
+    min-height: 500px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 0px 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 200px 0px black inset;
+}
+
+.banner-search{
+    max-height: 50px;
+    background: none;
+    width: 400px;
+}
+
+.banner-input-search-label{
+    background: none !important;
+    backdrop-filter: blur(10px) brightness(20);
+    border: 2px solid white  !important;
+    box-shadow: none;
+}
+
+.banner-search-input{
+    background: rgb(0 0 0 / 17%)  !important;
+    backdrop-filter: blur(10px);
+    color: white !important;
+    border: 2px solid white  !important;
+}
+.banner-search-input::placeholder {
+    color: white;
+    opacity: 0.6; /* Firefox */
+  }
+
+.banner-titulo{
+    font-weight: bold;
+    color: white;
+}
+
+.banner-input-search-button{
+    background: none !important;
+    backdrop-filter: blur(10px) brightness(20);
+    border: 2px solid white  !important;
+    box-shadow: none;
+    color: black;
+}
+
+.banner-input-search-button:active{
+    color: white;
+}
+.banner-input-search-button:focus{
+    color: black;
+}
