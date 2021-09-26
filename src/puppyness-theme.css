@@ -8,6 +8,8 @@
     --tertiary-color:#f8bbd0;
     --light-color:#fce4ec;
     --dark-color:#880e4f;
+    --white-color:#fff;
+    --black-color:#000;
 }
 /* :root{
     --primary-color:#9b003e;
@@ -102,6 +104,18 @@ html, body{
 }
 
 .form-check-input:checked {
+    transition: all 0.3s;
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+    transition: all 0.3s;
+    box-shadow: 0 0 0 0.25rem var(--tertiary-color);
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem var(--tertiary-color);
 }

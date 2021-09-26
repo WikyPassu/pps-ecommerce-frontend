@@ -33,9 +33,9 @@ function FormularioFactura() {
             <span className="title-factura">Envios</span>
             <div className="inline">
                 <InputGroup>
-                    <InputGroup.Radio name="asd" checked aria-label="Radio button for following text input" />
+                    <InputGroup.Radio name="envio" checked />
                     <InputGroup.Text>Retiro del local</InputGroup.Text>
-                    <InputGroup.Radio name="asd" aria-label="Radio button for following text input" />
+                    <InputGroup.Radio name="envio" />
                     <InputGroup.Text>Envio a Domicilio</InputGroup.Text>
                 </InputGroup>
             </div>

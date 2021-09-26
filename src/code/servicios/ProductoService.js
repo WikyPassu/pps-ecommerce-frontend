@@ -12,7 +12,6 @@ export default class ProductoService extends React.Component {
 			current(this.items_carrito_compras);
 		})
 	}
-
 	static getProductos() {
 		return this.productos;
 	}
@@ -31,6 +30,4 @@ export default class ProductoService extends React.Component {
 		this.productos.pop();
 		this.notifySubscribers();
 	}
-
-
 }

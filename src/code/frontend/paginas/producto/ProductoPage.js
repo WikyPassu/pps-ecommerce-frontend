@@ -12,8 +12,6 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-
-
 function ProductoPage(props) {
   const history = useHistory();
   const now = new Date();

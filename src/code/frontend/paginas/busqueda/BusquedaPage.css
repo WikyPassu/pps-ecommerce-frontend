@@ -1,0 +1,31 @@
+.busqueda-container{
+    
+    display: grid;
+    max-width: 1280px;
+    min-width: 900px;
+    margin: 20px auto auto;
+    height: 90vh;
+    min-height: 850px;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(12,1fr);
+}
+
+
+.busqueda-container .filtros{
+    background: var(--light-color);
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 12;
+    display: grid;
+    padding: 20px;
+}
+
+.busqueda-container .resultados{
+    background: rgb(0, 255, 64);
+    grid-column: 5/13;
+    grid-row-start: 1;
+    grid-row-end: 12;
+    padding: 20px;
+}
+
