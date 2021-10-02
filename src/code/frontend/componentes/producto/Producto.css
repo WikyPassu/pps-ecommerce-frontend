@@ -3,7 +3,7 @@
     width: '18rem';
     margin:10px;
     max-width: 300px !important;
-    border-radius: 15px !important;
+    border-radius: 10px !important;
 }
 .card-producto:hover{
     box-shadow: 0px 10px 45px -25px rgba(0, 0, 0, 0.787);
@@ -13,8 +13,8 @@
 .card-image{
     width: 300px;
     height: 180px;
-    border-top-right-radius: 15px !important;
-    border-top-left-radius: 15px;
+    border-top-right-radius: 10px !important;
+    border-top-left-radius: 10px;
 }
 
 .card-descripcion{

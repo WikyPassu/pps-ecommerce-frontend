@@ -37,7 +37,7 @@ function ProductoPage(props) {
         <HomeNavbar />
         <section>
           <br />
-          <div className="contenedor">
+          <div className="page-container">
             <div className="item-imagen" style={{ backgroundImage: `url("${productoActual.imagen}")` }}></div>
             <div className="item header">
               <h1 className="titulo-producto">{productoActual.nombre}</h1>

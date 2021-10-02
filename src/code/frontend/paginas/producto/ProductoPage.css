@@ -2,7 +2,7 @@ section{
     max-width: 1200px;
     margin: auto;
 }
-.contenedor{
+.page-container{
     display:grid;
     width: 100%;
     height: 100%;
@@ -20,6 +20,10 @@ section{
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
+}
+
+.item .precio{
+    grid-row: 5/6;
 }
 
 .item-titulo-resenia{
@@ -68,4 +72,38 @@ section{
 
 .titulo-producto{
     font-weight: bold;
+}
+
+@media (max-width:700px){
+    .page-container{
+        grid-template-columns: repeat(1,1fr);
+        grid-template-rows: repeat(10,50px);
+        width: 100vw;
+    }
+
+    .item-imagen{
+        grid-column: 1/2;
+        grid-row: 1/4;
+    }
+
+    .btn-agregar-carrito{
+        grid-row: 7/8;
+    }
+
+    .header{
+        grid-column: 1/2;
+        grid-row: 5/6;
+    }
+    .item .precio{
+        grid-row: 5/6;
+    }
+    .cantidad{
+        grid-row: 7/8;
+    }
+
+    .item-titulo-resenia{
+        grid-column: 1/3;
+    }
+    
+    
 }

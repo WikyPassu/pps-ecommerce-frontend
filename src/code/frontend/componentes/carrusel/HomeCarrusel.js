@@ -1,5 +1,9 @@
 import { Carousel } from 'react-bootstrap';
 import './HomeCarrusel.css';
+/**
+ * Se habia decidido quitar el carrusel
+ * @deprecated
+ */
 function HomeCarrusel() {
     return (
         <Carousel>

@@ -31,6 +31,10 @@ export default class CarritoService extends React.Component {
 		this.notifySubscribers();
 	}
 
+	/**
+	 * Devuelve el precio total de todos los items del carrito
+	 * @returns 
+	 */
 	static getTotal(){
 		return parseFloat(this.items_carrito_compras.reduce((anterior, actual) => {
 			return anterior + (actual.producto.precio * actual.cantidad);

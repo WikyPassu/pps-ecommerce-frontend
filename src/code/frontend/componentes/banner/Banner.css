@@ -54,3 +54,34 @@
 .banner-input-search-button:focus{
     color: black;
 }
+@media (max-width: 700px) {
+    .banner-container{
+        min-height: 60vw;
+        box-shadow: 0px 0px 100px 0px black inset;
+    }
+    
+    .banner-search{
+        max-height: 50px;
+        background: none;
+        width: 300px;
+        
+    }
+    
+    .banner-input-search-label{
+        font-size: 12px;
+    }
+    
+    .banner-search-input{
+        font-size: 12px;
+        
+    }
+    
+    .banner-titulo{
+        font-size: 20px;
+    }
+    
+    .banner-input-search-button{
+        font-size: 12px;
+    }
+    
+}

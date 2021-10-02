@@ -1,4 +1,4 @@
-import { InputGroup, Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row, Button } from "react-bootstrap";
 import './Filtros.css';
 export default function Filtros() {
     return <div className="filtros-container">
