@@ -8,8 +8,8 @@ export default class ProductoService extends React.Component {
 	}
 
 	static notifySubscribers() {
-		this.state.observers.forEach((current) => {
-			current(this.items_carrito_compras);
+		this.observers.forEach((current) => {
+			current(this.productos);
 		})
 	}
 	static getProductos() {
@@ -22,6 +22,12 @@ export default class ProductoService extends React.Component {
 
 	static addProducto(newItem) {
 		this.productos.push(newItem);
+		this.notifySubscribers();
+	}
+
+	static modifyProducto(item){
+		console.log("Modificar producto",item);
+		this.productos = this.productos.map((c)=> (c.codigo === item.codigo) ? item : c);
 		this.notifySubscribers();
 	}
 

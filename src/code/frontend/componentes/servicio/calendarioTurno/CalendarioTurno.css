@@ -1,0 +1,9 @@
+.CalendarioTurno .react-calendar{
+  position: absolute;
+  visibility: hidden;
+}
+
+.CalendarioTurno:hover .react-calendar{
+  position: absolute;
+  visibility:visible;
+}

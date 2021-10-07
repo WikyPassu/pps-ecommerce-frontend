@@ -1,7 +1,7 @@
 import { Tab, Button, Tabs } from 'react-bootstrap';
 import Clientes from './clientes/Clientes';
 import Productos from './productos/Productos';
-import AgregarProductoModal from './productos/agregarProducto/AgregarProductoModal';
+import FormProductoModal from './productos/agregarProducto/FormProductoModal';
 import Servicios from './servicios/Servicios';
 import Ventas from './ventas/Ventas';
 import Turnos from './turnos/Turnos'
@@ -10,7 +10,7 @@ import './Secciones.css';
 import { useState } from 'react';
 import Frontend from './frontend/Frontend';
 export default function Secciones() {
-  const [modalShowProducto, setModalShowProducto] = useState(false);
+  const [modalFormProducto, setModalFormProducto] = useState({ mostrar: false });
   return (
     <Tabs defaultActiveKey="ventas" id="uncontrolled-tab-example" className="mb-3">
       <Tab eventKey="ventas" title="Ventas">
@@ -23,9 +23,11 @@ export default function Secciones() {
       <Tab eventKey="productos" title="Productos">
         <div className="tab-container">
           <label className="titulo-seccion">Productos ofrecidos</label>
-          <Button className="btn-agregar" onClick={() => setModalShowProducto(true)}>Agregar Producto</Button>
-          <span><AgregarProductoModal show={modalShowProducto} onHide={() => setModalShowProducto(false)} /></span>
-          <Productos  />
+          <Button className="btn-agregar" onClick={() => setModalFormProducto({ mostrar: true })}>Agregar Producto</Button>
+          <Productos />
+          {modalFormProducto.mostrar && <FormProductoModal
+            show={modalFormProducto.mostrar}
+            onHide={() => { setModalFormProducto({ ...modalFormProducto, mostrar: false }) }} />}
         </div>
       </Tab>
       <Tab eventKey="servicios" title="Servicios">

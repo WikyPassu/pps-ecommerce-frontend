@@ -33,10 +33,18 @@ function FormularioFactura() {
             <span className="title-factura">Envios</span>
             <div className="inline">
                 <InputGroup>
-                    <InputGroup.Radio name="envio" checked />
-                    <InputGroup.Text>Retiro del local</InputGroup.Text>
-                    <InputGroup.Radio name="envio" />
-                    <InputGroup.Text>Envio a Domicilio</InputGroup.Text>
+                    <Form.Check 
+                    className="checkbox"
+                        type="radio"
+                        name="envio"
+                        label="Envio a Domicilio"
+                    />
+                    <Form.Check
+                    className="checkbox"
+                        type="radio"
+                        name="envio"
+                        label="Retiro del local"
+                    />
                 </InputGroup>
             </div>
         </div>

@@ -1,13 +1,13 @@
 import './Banner.css';
 import { BsSearch } from "react-icons/bs";
 import bannerImg from '../../../../assets/home_banner.webp';
+//import bannerImg from '../../../../assets/home_banner.png';
 import { InputGroup, FormControl, Button, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router';
 
 
 export default function Banner() {
     const history = useHistory();
-    
     const buscar = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -17,7 +17,7 @@ export default function Banner() {
     return <div
         className="banner-container"
         style={{ backgroundImage: `url(${bannerImg})` }}>
-        <h1 className="banner-titulo">Productos y servicios para perros</h1>
+        {/* <h1 className="banner-titulo">Productos y servicios para perros</h1> */}
         <br />
         <div>
             <Form noValidate onSubmit={buscar}>

@@ -2,27 +2,36 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
-:root{
-    --primary-color:#c2185b;
+/* :root{
+    --primary-color:#c4004e;
     --secondary-color:#f06292;
     --tertiary-color:#f8bbd0;
     --light-color:#fce4ec;
     --dark-color:#880e4f;
     --white-color:#fff;
     --black-color:#000;
-}
-/* :root{
-    --primary-color:#9b003e;
-    --secondary-color:#380c1b;
-    --tertiary-color:#360716;
-    --light-color:#22000b;
-    --dark-color:#ff0088;
+    --light-grey:#e2e2e2;
 } */
+:root{
+    --primary-color:#db9600;
+    --secondary-color:#f1b636;
+    --tertiary-color:#f0c059;
+    --light-color:#ffe4d0;
+    --dark-color:#793400;
+    --white-color:#fff;
+    --black-color:#000;
+    --light-grey:#e2e2e2;
+}
 
-html, body{
-    width: 100%;
-    height: 100%;
-    background:  var(--tertiary-color);
+html{
+    scroll-behavior: smooth;
+}
+body{
+    /* width: 100vw;
+    height: 100%; */
+    /* background: linear-gradient(50deg,var(--secondary-color),var(--tertiary-color)) ; */
+    background: rgb(255, 255, 255);
+
 }
 *{
     font-family: 'Montserrat', sans-serif !important;
@@ -30,6 +39,10 @@ html, body{
 
 .home-navbar{
     background-color:var(--primary-color);
+}
+
+.btn{
+    padding: 5px 10px;
 }
 
 .btn-primary {
@@ -118,4 +131,8 @@ html, body{
     border-color: var(--primary-color);
     outline: 0;
     box-shadow: 0 0 0 0.25rem var(--tertiary-color);
+}
+
+.full-width{
+    width: 100% !important;
 }

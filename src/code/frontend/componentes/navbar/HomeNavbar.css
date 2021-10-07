@@ -1,0 +1,16 @@
+.home-navbar{
+    background: rgba(0, 0, 0, 0.363);
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    max-width: 70%;
+    margin: 10px auto;
+    box-shadow: 0px 10px 24px -10px rgba(0, 0, 0, 0.418);
+}
+
+@media (max-width:575px) {
+    .home-navbar{
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0px 0px;
+    } 
+}

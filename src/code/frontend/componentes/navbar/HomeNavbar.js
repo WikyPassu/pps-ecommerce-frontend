@@ -10,7 +10,7 @@ export default function HomeNavbar(props) {
     const history = useHistory();
     return (
         <>
-            <Navbar collapseOnSelect className="home-navbar" expand="sm" variant="dark">
+            <Navbar collapseOnSelect fixed="top" className="home-navbar" expand="sm" variant="dark">
                 <Container>
                     <Navbar.Brand onClick={() => { history.push("/") }}>
                         <img alt="logo-img" width="40px" className="logo-img" src={logo} />

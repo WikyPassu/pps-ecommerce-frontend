@@ -1,13 +1,15 @@
 import React from 'react';
 import './AdminNavbar.css';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 
 export default function AdminNavbar() {
+    const history = useHistory()
     return (
         <>
             <Navbar className="home-navbar" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/home">Puppyness Pet Caring</Navbar.Brand>
+                    <Navbar.Brand onClick={()=>{history.push("/home")}}>Puppyness Pet Caring</Navbar.Brand>
                     <Nav className="me-auto">
                         <NavDropdown
                             id="nav-dropdown-dark-example"

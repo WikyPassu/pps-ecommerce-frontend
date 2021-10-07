@@ -1,7 +1,36 @@
+
 .lista-productos{
+    display: flex;
+    align-items: center
+}
+
+.lista-productos .productos{
     height:fit-content;
-    overflow: auto;
+    overflow:hidden;
     white-space: nowrap;
     padding: 20px;
     text-align: center;
+}
+.lista-productos .btn-scroll{
+    font-weight: bold;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    z-index: 10;
+    border-radius: 50%;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+@media (max-width:575px) {
+    .lista-productos .productos{
+        overflow:auto;
+    }
+    .lista-productos .btn-scroll{
+        display: none;
+    }
 }

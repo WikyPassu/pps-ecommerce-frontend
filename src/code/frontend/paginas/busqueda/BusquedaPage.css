@@ -28,3 +28,31 @@
     padding: 20px;
 }
 
+@media (max-width:575px){
+    .busqueda-container{
+        width: 100%;    
+        margin: auto;
+        max-width: auto;
+        min-width: auto;
+        height: auto;
+    }
+    .busqueda-container .filtros{
+        background: var(--light-color);
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 1;
+        grid-row-end: 6;
+        display: grid;
+        padding: 20px;
+    }
+    
+    .busqueda-container .resultados{
+        background: rgb(0, 255, 64);
+        grid-column: 1/12;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 6;
+        grid-row-end: 12;
+        padding: 20px;
+    }
+}

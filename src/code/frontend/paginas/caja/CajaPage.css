@@ -1,4 +1,4 @@
-.caja-container-box{
+.cajaPage{
     max-width: 1200px;
     margin: auto;
     margin-top: 50px;
@@ -7,7 +7,7 @@
     grid-template-rows: repeat(15,50px);
 }
 
-.item-productos-carrito{
+.cajaPage .item-productos-carrito{
     background: #ffffff;
     border-radius: 10px;
     padding: 20px;
@@ -17,23 +17,23 @@
     overflow-y: auto;
 }
 
-.item-form-factura{
+.cajaPage .item-form-factura{
     grid-row: 0/10;
     grid-column: 1/4;
     height: max-content;
     padding-right: 20px;
 }
 
-.item-btn-pagar{
+.cajaPage .item-btn-pagar{
     grid-row: 10/11;
-    grid-column:4/5 !important;
+    grid-column:4/5;
     margin-top: 15px;
-    float: right !important;
+    float: right;
     align-items: right;
     align-items: right;
 }
 
-.total-caja{
+.cajaPage .total-caja{
     float: left;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -41,4 +41,30 @@
     text-align: left;
     font-weight: bold;
     color:var(--primary-color);
+}
+
+@media (max-width:575px) {
+    .cajaPage{
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(19,50px);
+        margin:auto;
+        justify-content: center;
+        padding: 15px;
+    }
+    .cajaPage .item-form-factura{
+        grid-row: 8/11;
+        grid-column: 1/5;
+        padding-right: 0;
+    }
+    .cajaPage .item-btn-pagar{
+        grid-column:1/5;
+        width: 100% ;
+        grid-row: 18/19;
+        margin: auto;
+    }
+    .cajaPage .item-productos-carrito{
+        grid-column: 1/5;
+        grid-row: 1/7;
+    }
+    
 }

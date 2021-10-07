@@ -2,16 +2,34 @@
     display: inline-flex !important;
     width: '18rem';
     margin:10px;
-    max-width: 300px !important;
+    max-width: 280px !important;
     border-radius: 10px !important;
+    
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0);
+}
+
+.card{
+    border: none !important;
+    border-radius: 10px !important;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px !important;
+    border: 2px solid #f0f0f0;
+    height: 430px;
+}
+
+.card-body{
+    background: #ffffff;
+    
+    border-radius: 10px;
 }
 .card-producto:hover{
-    box-shadow: 0px 10px 45px -25px rgba(0, 0, 0, 0.787);
+    box-shadow: 0px 10px 35px -10px rgba(0, 0, 0, 0.787);
     transition: all 0.3s;
+    transform: translateY(-6px);
 }
 
 .card-image{
-    width: 300px;
+    width: 280px;
     height: 180px;
     border-top-right-radius: 10px !important;
     border-top-left-radius: 10px;
@@ -21,6 +39,7 @@
     white-space:normal;
     font-size: 13px;
     color: grey;
+    text-align: justify;
 }
 
 .card-nombre{
@@ -33,4 +52,13 @@
 .card-precio{
     font-weight: 700 !important;
     font-size: 21px;
+}
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background: #f0f0f0;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+
 }

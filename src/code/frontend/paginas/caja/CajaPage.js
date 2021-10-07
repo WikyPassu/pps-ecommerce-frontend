@@ -12,8 +12,9 @@ function Caja() {
     })
     return (<>
         <HomeNavbar />
-        <div className="caja-container-box">
+        <div className="cajaPage">
             <div className="item-form-factura"><FormularioFactura /></div>
+            <div className="item-btn-pagar"><MetodoPago /></div>
             <div className="item-productos-carrito" >
                 <b>Lista productos del carrito</b>
                 <br/>
@@ -23,7 +24,6 @@ function Caja() {
                 <ListaItemsCarrito />
             </div>
             
-            <div className="item-btn-pagar w-100"><MetodoPago /></div>
         </div>
     </>);
 }

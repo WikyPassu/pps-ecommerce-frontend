@@ -3,18 +3,21 @@ import ListaProductos from "../../componentes/producto/listaProductos/ListaProdu
 import SampleProductos from '../../../../samples/productos.json';
 import './HomePage.css';
 import Banner from '../../componentes/banner/Banner';
+import HomeCarrusel from '../../componentes/carrusel/HomeCarrusel';
 function HomePage() {
   return (
-    <>
+    <div className="home-page">
       <HomeNavbar />
-      <Banner/>
+      <Banner />
       <br />
       <br />
-      <h1 className="titulo-productos-servicios">Nuestros productos</h1>
-      <ListaProductos listaProductos={SampleProductos} />
-      <h1 className="titulo-productos-servicios">Nuestros Servicios</h1>
-      {/* <ListaProductos listaProductos={SampleProductos} /> */}
-    </>
+      <div className="hompage-body">
+        <HomeCarrusel />
+        <br />
+        <h1 className="titulo-productos-servicios">Nuestros productos</h1>
+        <ListaProductos listaProductos={SampleProductos} />
+      </div>
+    </div>
   );
 }
 

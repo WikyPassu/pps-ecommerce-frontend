@@ -1,20 +1,38 @@
-.card-container{
+.resenia{
     border-radius: 10px !important;
-    box-shadow: 0px 10px 20px -15px black;
+    box-shadow: 0px 5px 30px -15px black;
     margin-bottom: 20px;
 }
-.card-nombre-usuario{
+.resenia .nombre-usuario {
     font-size: 21px;
-    text-align: left;
     color: var(--primary-color);
     font-weight: 700 !important;
+    display: flex;
+    align-items: center;
 }
-.card-comentario{
+.resenia .card-text{
     font-size: 14px;
-    text-align: left;
+    display: flex;
+    align-items: center;
 }
+.resenia .card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-direction: row;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 
-.card-fecha{
+}
+.resenia .card-fecha{
     font-size: 14px;
     float: right;
+}
+
+.resenia .card-body{
+    height: fit-content;
+}
+
+.resenia .card{
+    height: fit-content;
 }

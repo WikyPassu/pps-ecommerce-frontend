@@ -1,6 +1,6 @@
 .modal-content{
-    max-width: 380px;
     margin: auto;
+    max-width: none;
 }
 
 .modal-header{
