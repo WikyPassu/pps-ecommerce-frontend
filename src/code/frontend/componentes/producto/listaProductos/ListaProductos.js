@@ -3,7 +3,7 @@ import './ListaProductos.css';
 import Producto from '../Producto'
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 import { Button } from 'react-bootstrap';
-export default function ListaProductos(props) {
+export default function ListaProductos({listaProductos}) {
     const listaProductosRef = useRef(null);
     const scrollLeft = (e) => {
         listaProductosRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -16,7 +16,7 @@ export default function ListaProductos(props) {
     return (<div  className="lista-productos">
         <div><Button onClick={scrollLeft} className="btn-scroll"> <BsCaretLeftFill /> </Button></div>
         <div className="productos" ref={listaProductosRef}>
-            {props.listaProductos.map((c) => { return <Producto producto={c} key={c.codigo} /> })}
+            {listaProductos.map((c) => { return <Producto producto={c} key={c.codigo} /> })}
         </div>
         <div><Button onClick={scrollRight} className="btn-scroll"> <BsCaretRightFill /> </Button></div>
     </div>)

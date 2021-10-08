@@ -1,9 +1,9 @@
 .img-carousel{
     width: 100% !important;
-    height: 150px !important;
+    height: 200px !important;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50% 45%;
     border-radius: 10px;
 }
 
@@ -32,6 +32,15 @@
     }
     .home-carrusel .carrusel{
         border-radius: 0 !important;
+    }
+    .home-carrusel .carousel-caption h3{
+        text-align: left;
+        text-shadow: 0px 0px 10px black;
+        font-weight: bold;
+    }
+    .home-carrusel .carousel-caption p{
+        text-align: left;
+        text-shadow: 0px 0px 10px black;
     }
     
 }

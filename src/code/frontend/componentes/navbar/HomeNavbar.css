@@ -7,6 +7,11 @@
     box-shadow: 0px 10px 24px -10px rgba(0, 0, 0, 0.418);
 }
 
+.logo-img{
+    margin-right: 10px; 
+    
+}
+
 @media (max-width:575px) {
     .home-navbar{
         max-width: 100%;

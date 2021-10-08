@@ -13,7 +13,7 @@ export default function HomeNavbar(props) {
             <Navbar collapseOnSelect fixed="top" className="home-navbar" expand="sm" variant="dark">
                 <Container>
                     <Navbar.Brand onClick={() => { history.push("/") }}>
-                        <img alt="logo-img" width="40px" className="logo-img" src={logo} />
+                        <img alt="logo-img" width="30px" className="logo-img" src={logo} />
                         Puppyness Pet Caring
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

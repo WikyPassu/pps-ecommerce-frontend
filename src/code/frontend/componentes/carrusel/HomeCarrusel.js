@@ -11,8 +11,8 @@ function HomeCarrusel() {
                         alt="First slide"
                         ></div>
                     <Carousel.Caption className="label">
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h3>PRODUCTO X</h3>
+                        <p>El producto mejor valorado en CATEGORIA</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -23,8 +23,8 @@ function HomeCarrusel() {
                     ></div>
 
                     <Carousel.Caption>
-                        <h3>Pet-Shop Boys...</h3>
-                        <p>Always on my mind... buen tema</p>
+                        <h3>SERVICIO X</h3>
+                        <p>Pruebe nuestro servicio mejor valorado en CATEGORIA</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

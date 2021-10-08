@@ -28,13 +28,13 @@ export default function Producto(props) {
 
     return (
         <Card className="card-producto">
-            <Card.Img className="card-image" onClick={irAlProducto} variant="top" style={styleImg} />
+            <Card.Img className="image" onClick={irAlProducto} variant="top" style={styleImg} />
             <Card.Body>
-                <Card.Title className="card-nombre">{nombre}</Card.Title>
-                <Card.Text className="card-descripcion">{descripcion}</Card.Text>
+                <Card.Title className="nombre">{nombre}</Card.Title>
+                <Card.Text className="descripcion">{descripcion}</Card.Text>
             </Card.Body>
             <Card.Footer>
-                <Card.Text className="card-precio">${precio}</Card.Text>
+                <Card.Text className="precio">${precio}</Card.Text>
                 <Button onClick={irAlProducto} variant="primary">Ver Detalles</Button>
             </Card.Footer>
         </Card>

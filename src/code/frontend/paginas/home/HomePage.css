@@ -1,3 +1,7 @@
+.hompage-body{
+    max-width: var(--width-container);
+    margin: auto;
+}
 .titulo-productos-servicios{
     border-left: 10px solid var(--primary-color);
     padding-left: 15px;
@@ -5,10 +9,6 @@
     /* margin-left: 50px; */
     font-weight: 600;
     font-size: 30px;
-}
-.hompage-body{
-    max-width: 1280px;
-    margin: auto;
 }
 
 .barra-diagonal{

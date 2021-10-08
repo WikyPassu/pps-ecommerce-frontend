@@ -1,8 +1,8 @@
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import CalendarioTurno from '../../servicio/calendarioTurno/CalendarioTurno';
-
-export default function FormularioCompra({onSubmit,onChange}) {
-    return <Form noValidate onSubmit={onSubmit}>
+import "./FormularioCompra.css";
+export default function FormularioCompra({ onSubmit, onChange }) {
+    return <Form noValidate onSubmit={onSubmit} className="formulario-compra">
         <Form.Group as={Row} controlId="formHorizontalEmail">
             <Row>
                 <Form.Label id="input-cantidad" className="label-cantidad" column sm={4}>
@@ -18,7 +18,7 @@ export default function FormularioCompra({onSubmit,onChange}) {
                 </Form.Label>
                 <Col xs={12} sm={5}>
                     {/* <Form.Control onChange={onChange} name="fecha" min={nowFormated} defaultValue={nowFormated} type="date" /> */}
-                    <CalendarioTurno onChange={onChange}/>
+                    <CalendarioTurno onChange={onChange} />
                 </Col>
             </Row>
             <Row sm={2}>
@@ -29,9 +29,25 @@ export default function FormularioCompra({onSubmit,onChange}) {
                     <Form.Control onChange={onChange} name="hora" type="time" />
                 </Col>
             </Row>
+            <Row sm={2}>
+                <Col>
+                    <Form.Control onChange={onChange} placeholder="Nombre del perro (opcional)" name="nombrePerro" type="text" />
+                </Col>
+                <Col>
+                    <Form.Control onChange={onChange} placeholder="Peso del perro (opcional)" name="presoPerro" type="text" />
+                </Col>
+            </Row>
+            <Row sm={2}>
+                <Col>
+                    <Form.Control onChange={onChange} placeholder="Edad del perro (opcional)" name="edadPerro" type="text" />
+                </Col>
+                <Col>
+                    <Form.Control onChange={onChange} placeholder="Raza del perro (opcional)" name="razaPerro" type="text" />
+                </Col>
+            </Row>
             <Row>
-                <div className="btn-agregar-carrito">
-                    <Button type="submit">Agregar Carrito</Button>
+                <div className="grupo-botones">
+                    <Button type="submit">Agregar al Carrito</Button>
                 </div>
             </Row>
         </Form.Group>

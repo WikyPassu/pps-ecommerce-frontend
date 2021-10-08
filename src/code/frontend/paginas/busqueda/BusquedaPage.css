@@ -1,58 +1,65 @@
 .busqueda-container{
     display: grid;
-    max-width: 1280px;
+    max-width: var(--width-container);
     min-width: 900px;
     margin: 20px auto auto;
-    height: 90vh;
-    min-height: 850px;
+    min-height: 550px;
+    height: 75vh;
+    overflow: hidden;
     grid-template-columns: repeat(12,1fr);
-    grid-template-rows: repeat(12,1fr);
+    grid-template-rows: repeat(11,1fr);
+    margin: 12vh auto;
+    box-shadow: 0px 10px 50px -30px black;
 }
 
 
 .busqueda-container .filtros{
-    background: var(--light-color);
+    background: var(--white-color);
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end:4;
     grid-row-start: 1;
-    grid-row-end: 12;
+    grid-row-end: 13;
     display: grid;
     padding: 20px;
 }
 
 .busqueda-container .resultados{
-    background: rgb(0, 255, 64);
-    grid-column: 5/13;
+    background: var(--light-grey);
+    grid-column: 4/13;
     grid-row-start: 1;
     grid-row-end: 12;
     padding: 20px;
+    overflow: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 @media (max-width:575px){
     .busqueda-container{
-        width: 100%;    
-        margin: auto;
-        max-width: auto;
+        width: 100%;
+        box-shadow:  none;
         min-width: auto;
         height: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
     }
     .busqueda-container .filtros{
-        background: var(--light-color);
+        background:  var(--white-color);
         grid-column-start: 1;
-        grid-column-end: 13;
+        grid-column-end: 3;
         grid-row-start: 1;
-        grid-row-end: 6;
+        grid-row-end: 2;
         display: grid;
         padding: 20px;
     }
     
     .busqueda-container .resultados{
-        background: rgb(0, 255, 64);
-        grid-column: 1/12;
-        grid-column-start: 1;
-        grid-column-end: 13;
-        grid-row-start: 6;
-        grid-row-end: 12;
+        background: var(--light-grey);
         padding: 20px;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
     }
 }

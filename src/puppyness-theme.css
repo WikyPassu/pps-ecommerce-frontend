@@ -21,6 +21,13 @@
     --white-color:#fff;
     --black-color:#000;
     --light-grey:#e2e2e2;
+    --width-container:1329px;
+}
+
+@media (max-width:575px) {
+    :root{
+        --width-container:1329px;
+    }
 }
 
 html{
