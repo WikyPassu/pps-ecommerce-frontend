@@ -1,7 +1,7 @@
 .formulario-compra .row{
     padding: 0;
     justify-content: space-between;
-    margin: auto;
+    margin: auto auto 10px auto;
 }
 
 .formulario-compra .grupo-botones{

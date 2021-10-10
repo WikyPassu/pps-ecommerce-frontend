@@ -34,7 +34,7 @@ export default function Servicio(props) {
                 <Card.Text className="descripcion">{descripcion}</Card.Text>
             </Card.Body>
             <Card.Footer>
-                <Card.Text className="precio">${precio}</Card.Text>
+                {/* <Card.Text className="precio">${precio}</Card.Text> */}
                 <Button onClick={irAlServicio} variant="primary">Ver Detalles</Button>
             </Card.Footer>
         </Card>

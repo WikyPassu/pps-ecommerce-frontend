@@ -1,6 +1,6 @@
 [
     {
-        "codigo":"b1",
+        "_id":"b1",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Servicio Uno",
         "categoria":"Categoria Servicio Uno",
@@ -9,7 +9,7 @@
         "estado":"HABILITADO"
     },
     {
-        "codigo":"b2",
+        "_id":"b2",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Servicio Dos",
         "categoria":"Categoria Servicio Uno",
@@ -18,7 +18,7 @@
         "estado":"HABILITADO"
     },
     {
-        "codigo":"b3",
+        "_id":"b3",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Servicio Tres",
         "categoria":"Categoria Servicio Uno",
@@ -27,7 +27,7 @@
         "estado":"HABILITADO"
     },
     {
-        "codigo":"b4",
+        "_id":"b4",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Servicio Cuatro",
         "categoria":"Categoria Servicio Dos",
@@ -36,7 +36,7 @@
         "estado":"HABILITADO"
     },
     {
-        "codigo":"b5",
+        "_id":"b5",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Servicio Cinco",
         "categoria":"Categoria Servicio Dos",

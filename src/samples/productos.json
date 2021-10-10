@@ -1,127 +1,127 @@
 [
     {
-        "codigo":"a1",
+        "_id":"a1",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Uno",
         "categoria":"Categoria Uno",
         "precio":159.99,
         "imagen":"https://www.hillspet.com.mx/content/dam/cp-sites/hills/hills-pet/global/2020-homepage-redesign/hero-pack-lockup.png",
         "estado":"HABILITADO",
-        "existenica":30,
+        "existencia":30,
         "existenciaMinima":20,
         "existenciaMaxima":60,
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "codigo":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }
         ]
     },
     {
-        "codigo":"a2",
+        "_id":"a2",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Dos",
         "categoria":"Categoria Uno",
         "precio":359.99,
         "imagen":"https://www.hillspet.com.mx/content/dam/pim/hills/es_mx/sd/canned/sd-canine-adult-light-liver-canned-productShot_zoom.jpg",
         "estado":"HABILITADO",
-        "existenica":30,
+        "existencia":30,
         "existenciaMinima":20,
         "existenciaMaxima":60,
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "codigo":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }
         ]
     },
     {
-        "codigo":"a3",
+        "_id":"a3",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Tercero (Titulo Largo)",
         "categoria":"Categoria Dos",
         "precio":759.99,
         "imagen":"https://petiq.com/wp-content/uploads/2020/06/PetProducts_Header_Mobile@2x.jpg",
         "estado":"HABILITADO",
-        "existenica":30,
+        "existencia":30,
         "existenciaMinima":20,
         "existenciaMaxima":60,
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "codigo":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }
         ]
     },
     {
-        "codigo":"a4",
+        "_id":"a4",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Cuarto (Titulo Largo)",
         "categoria":"Categoria Dos",
         "precio":759.99,
         "imagen":"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2020%2F12%2F08%2Fwild-ones-harness.jpg",
         "estado":"HABILITADO",
-        "existenica":30,
+        "existencia":30,
         "existenciaMinima":20,
         "existenciaMaxima":60,
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "codigo":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "codigo":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }

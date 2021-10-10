@@ -34,8 +34,8 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    /* width: 100vw;
-    height: 100%; */
+    /* width: 100vw; */
+    min-height: 100vh;
     background: linear-gradient(360deg,var(--light-grey),var(--white-color) 50%);
     /* background: rgb(255, 255, 255); */
 

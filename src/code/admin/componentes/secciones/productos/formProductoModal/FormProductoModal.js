@@ -28,19 +28,19 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
         if (name === "cantidadMaxima") {
             setProducto({
                 ...producto,
-                stock: { ...producto.stock, maximo: parseInt(value) }
+                stock: { ...producto, existenciaMaxima: parseInt(value) }
             });
         }
         else if (name === "cantidadMinima") {
             setProducto({
                 ...producto,
-                stock: { ...producto.stock, minimo: parseInt(value) }
+                stock: { ...producto, existenciaMinima: parseInt(value) }
             });
         }
         else if (name === "existencia") {
             setProducto({
                 ...producto,
-                stock: { ...producto.stock, existencia: parseInt(value) }
+                stock: { ...producto, existencia: parseInt(value) }
             });
         }
         else if (name === "precio") {
@@ -143,34 +143,34 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                             <Form.Label htmlFor="existencia">Existencia</Form.Label>
                             <Form.Control
                                 name="existencia"
-                                value={producto.stock.existencia}
+                                value={producto.existencia}
                                 onChange={handleChange}
                                 min="0"
                                 type="number"
                                 placeholder="Ingrese existencia del producto" />
-                            {validarInputNumber(producto.stock.existencia)}
+                            {validarInputNumber(producto.existencia)}
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3">
                             <Form.Label htmlFor="cantidadMinima">Stock Minimo</Form.Label>
                             <Form.Control
                                 name="cantidadMinima"
-                                value={producto.stock.minimo}
+                                value={producto.existenciaMinima}
                                 onChange={handleChange}
                                 min="0"
                                 type="number"
                                 placeholder="Ingrese stock minimo del producto" />
-                            {validarInputNumber(producto.stock.minimo)}
+                            {validarInputNumber(producto.existenciaMinima)}
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3">
                             <Form.Label htmlFor="cantidadMaxima">Stock Maximo</Form.Label>
                             <Form.Control
                                 name="cantidadMaxima"
-                                value={producto.stock.maximo}
+                                value={producto.existenciaMaxima}
                                 onChange={handleChange}
                                 min="0"
                                 type="number"
                                 placeholder="Ingrese stock maximo del producto" />
-                            {validarInputNumber(producto.stock.maximo)}
+                            {validarInputNumber(producto.existenciaMaxima)}
                         </Form.Group>
                     </Row>
                     <Row>
@@ -195,7 +195,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Image as={Col} width="150px" src={producto.imagen}/>
+                        <Image as={Col} style={{maxWidth:"300px"}} src={producto.imagen}/>
                     </Row>
                     <br />
                     <Button variant="primary" type="submit">

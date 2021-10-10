@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Form, Button, Row, InputGroup, FormControl } from 'react-bootstrap';
 import { HiKey, HiMail } from 'react-icons/hi';
 import "./LoginAdminPage.css";
 

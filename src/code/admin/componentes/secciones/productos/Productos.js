@@ -1,51 +1,47 @@
 import { useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import ProductoService from '../../../../servicios/ProductoService';
-import FormProductoModal from './agregarProducto/FormProductoModal';
+import Listado from '../../listado/Listado';
+import FormProductoModal from './formProductoModal/FormProductoModal';
+
 export default function Productos() {
-  const [state, setState] = useState({
-    lista: ProductoService.getProductos(),
-    mostrarModalModificar: false,
-    productoModificar: undefined
-  })
+  const [lista, setLista] = useState(ProductoService.getProductos());
+  const [mostrarModalModificar, setMostrarModalModificar] = useState(false);
+  const [productoModificar, setProductoModificar] = useState(undefined);
+  const [modalForm, setModalForm] = useState(false);
+
   ProductoService.subscribe((nuevaLista) => {
-    setState({ lista: nuevaLista, mostrarModalModificar: false, productoModificar: undefined });
+    setLista(nuevaLista);
   });
-  return (<><Table striped bordered hover>
-    <thead>
-      <tr>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Categoria</th>
-        <th>Descripcion</th>
-        <th>Stock Existente</th>
-        <th>Stock Minimo</th>
-        <th>Stock Maximo</th>
-        <th>Precio</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {state.lista.map((p) => {
-        const { codigo, nombre, categoria, descripcion, existencia, existenciaMaxima, existenciaMinima, precio } = p;
-        return <tr key={codigo} onClick={() => { setState({ ...state, mostrarModalModificar: true, productoModificar: p }) }}>
-          <td>{codigo}</td>
-          <td>{nombre}</td>
-          <td>{categoria}</td>
-          <td>{descripcion}</td>
-          <td>{existencia}</td>
-          <td>{existenciaMinima}</td>
-          <td>{existenciaMaxima}</td>
-          <td>${precio}</td>
-        </tr>
-      })}
-
-    </tbody>
-  </Table>
-    {state.mostrarModalModificar&&<FormProductoModal
-      produtoParaModificar={state.productoModificar}
-      show={state.mostrarModalModificar}
-      onHide={() => { setState({ ...state, mostrarModalModificar: false,lista:ProductoService.getProductos() }) }} />}
+  return (<>
+    <label className="titulo-seccion">Productos ofrecidos</label>
+    <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Producto</Button>
+    {modalForm && <FormProductoModal
+      show={modalForm}
+      onHide={() => { setModalForm(false) }} />}
+    <Listado atributos={[
+      "codigo",
+      "nombre",
+      "categoria",
+      "descripcion",
+      "existencia",
+      "existenciaMinima",
+      "existenciaMaxima",
+      "precio"
+    ]}
+      onClick={(e) => {
+        setMostrarModalModificar(true);
+        setProductoModificar(e);
+      }}
+      attrKey="codigo"
+      datos={lista}></Listado>
+    {mostrarModalModificar && <FormProductoModal
+      produtoParaModificar={productoModificar}
+      show={mostrarModalModificar}
+      onHide={() => {
+        setMostrarModalModificar(false);
+        setLista(ProductoService.getProductos());
+      }} />}
 
   </>)
 }

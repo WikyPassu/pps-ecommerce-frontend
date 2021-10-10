@@ -8,16 +8,20 @@ import AdminHomePage from "./code/admin/paginas/home/AdminHomePage";
 import CajaPage from "./code/frontend/paginas/caja/CajaPage";
 import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
 import SampleProductos from './samples/productos.json';
+import SampleFacturas from './samples/facturas.json';
 import SampleServicios from './samples/servicios.json';
 import ProductoService from "./code/servicios/ProductoService";
 import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 import BusquedaPage from "./code/frontend/paginas/busqueda/BusquedaPage";
 import ServicioService from "./code/servicios/ServicioService";
 import ServicioPage from "./code/frontend/paginas/servicio/ServicioPage";
+import VentaService from "./code/servicios/VentasService";
+import FacturasService from "./code/servicios/VentasService";
 
 function App() {
   ProductoService.productos = SampleProductos;
   ServicioService.servicios = SampleServicios;
+  FacturasService.facturas = SampleFacturas;
   return (
     <div className="App">
       <Router>

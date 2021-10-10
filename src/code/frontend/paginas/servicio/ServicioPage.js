@@ -35,10 +35,10 @@ function ServicioPage(props) {
           <div className="item imagen" style={{ backgroundImage: `url("${servicioActual.imagen}")` }}></div>
           <h1 className="item titulo">{servicioActual.nombre}</h1>
           <p className="item descripcion">{servicioActual.descripcion}</p>
-          <div className="item precio">
+          {/* <div className="item precio">
             <label className="label">${servicioActual.precio}</label>
             <br /><hr />
-          </div>
+          </div> */}
           <div className="item form">
             <FormularioCompra onSubmit={handleSubmit} />
           </div>

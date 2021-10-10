@@ -8,7 +8,7 @@ export default function FormularioCompra({ onSubmit, onChange }) {
                 <Form.Label className="label-fecha-turno" column sm={4}>
                     Fecha del turno
                 </Form.Label>
-                <Col xs={12} sm={5}>
+                <Col>
                     {/* <Form.Control onChange={onChange} name="fecha" min={nowFormated} defaultValue={nowFormated} type="date" /> */}
                     <CalendarioTurno onChange={onChange} />
                 </Col>
@@ -17,7 +17,7 @@ export default function FormularioCompra({ onSubmit, onChange }) {
                 <Form.Label className="label-fecha-turno" column sm={4}>
                     Hora del turno
                 </Form.Label>
-                <Col xs={12} sm={5}>
+                <Col>
                     <Form.Control onChange={onChange} name="hora" type="time" />
                 </Col>
             </Row>
