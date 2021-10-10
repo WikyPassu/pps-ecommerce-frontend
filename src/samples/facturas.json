@@ -1,6 +1,6 @@
 [
     {
-        "_id":"fact01",
+        "id":"fact01",
         "total":10200,
         "usuarioRegistrado":{},
         "empelado":{},
@@ -13,7 +13,7 @@
         "estado":"despachado"
     },
     {
-        "_id":"fact02",
+        "id":"fact02",
         "total":1200,
         "usuarioRegistrado":{},
         "empelado":{},
@@ -27,7 +27,7 @@
 
     },
     {
-        "_id":"fact03",
+        "id":"fact03",
         "total":200,
         "usuarioRegistrado":{},
         "empelado":{},

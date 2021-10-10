@@ -16,8 +16,8 @@ export default class ServicioService extends React.Component {
 		return this.servicios;
 	}
 
-    static getSevicioPorCodigo(codigo){
-        return this.servicios.filter(c => c.codigo === codigo)[0];
+    static getSevicioPorId(id){
+        return this.servicios.filter(c => c.id === id)[0];
     }
 
 	static addServicio(newItem) {
@@ -27,7 +27,7 @@ export default class ServicioService extends React.Component {
 
 	static modifyServicio(item){
 		console.warn("Modificar producto",item);
-		this.servicios = this.servicios.map((c)=> (c.codigo === item.codigo) ? item : c);
+		this.servicios = this.servicios.map((c)=> (c.id === item.id) ? item : c);
 		this.notifySubscribers();
 	}
 

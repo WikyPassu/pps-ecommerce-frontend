@@ -12,7 +12,7 @@ function HomeCarrusel() {
                         ></div>
                     <Carousel.Caption className="label">
                         <h3>PRODUCTO X</h3>
-                        <p>El producto mejor valorado en CATEGORIA</p>
+                        <p>El producto mas vendido en CATEGORIA</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>

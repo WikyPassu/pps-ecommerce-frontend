@@ -16,8 +16,8 @@ export default class ProductoService extends React.Component {
 		return this.productos;
 	}
 
-    static getProductoPorCodigo(codigo){
-        return this.productos.filter(c => c.codigo === codigo)[0];
+    static getProductoPorId(id){
+        return this.productos.filter(c => c.id === id)[0];
     }
 
 	static addProducto(newItem) {
@@ -27,7 +27,7 @@ export default class ProductoService extends React.Component {
 
 	static modifyProducto(item){
 		console.log("Modificar producto",item);
-		this.productos = this.productos.map((c)=> (c.codigo === item.codigo) ? item : c);
+		this.productos = this.productos.map((c)=> (c.id === item.id) ? item : c);
 		this.notifySubscribers();
 	}
 

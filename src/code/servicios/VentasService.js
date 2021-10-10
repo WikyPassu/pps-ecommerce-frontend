@@ -16,8 +16,8 @@ export default class FacturasService extends React.Component {
 		return this.facturas;
 	}
 
-    static getFacturaPorNumero(numero){
-        return this.facturas.filter(c => c.numero === numero)[0];
+    static getFacturaPorId(id){
+        return this.facturas.filter(c => c.id === id)[0];
     }
 
 	static addFactura(newItem) {

@@ -20,7 +20,7 @@ export default function Productos() {
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
     <Listado atributos={[
-      "codigo",
+      "id",
       "nombre",
       "categoria",
       "descripcion",
@@ -33,7 +33,7 @@ export default function Productos() {
         setMostrarModalModificar(true);
         setProductoModificar(e);
       }}
-      attrKey="codigo"
+      attrKey="id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormProductoModal
       produtoParaModificar={productoModificar}

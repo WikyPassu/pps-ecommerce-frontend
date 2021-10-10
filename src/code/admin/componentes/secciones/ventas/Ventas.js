@@ -55,9 +55,9 @@ export default function Ventas() {
       ]} titulo="Cantidad de Ventas" />
       <br />
       <Listado
-        columnas={["Numero", "Total", "Fecha", "Estado"]}
-        atributos={["numero", "total", "fecha", "estado"]}
-        attrKey={"numero"}
+        columnas={["ID", "Total", "Fecha", "Estado"]}
+        atributos={["id", "total", "fecha", "estado"]}
+        attrKey={"id"}
         onClick={(e) => {
           setMostrarModalModificar(true);
           setElementoModificar(e);

@@ -16,7 +16,7 @@ export default function ListaProductos({listaProductos}) {
     return (<div  className="lista-productos">
         <div><Button onClick={scrollLeft} className="btn-scroll"> <BsCaretLeftFill /> </Button></div>
         <div className="productos" ref={listaProductosRef}>
-            {listaProductos.map((c) => { return <Producto producto={c} key={c.codigo} /> })}
+            {listaProductos.map((c) => { return <Producto producto={c} key={c.id} /> })}
         </div>
         <div><Button onClick={scrollRight} className="btn-scroll"> <BsCaretRightFill /> </Button></div>
     </div>)

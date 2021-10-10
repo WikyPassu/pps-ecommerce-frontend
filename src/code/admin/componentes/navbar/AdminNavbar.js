@@ -25,6 +25,7 @@ export default function AdminNavbar() {
                             <NavDropdown.Divider/>
                             <NavDropdown.Item>Limpiar todo</NavDropdown.Item>
                         </NavDropdown> */}
+                        <Nav.Link className="ml-auto" href="#productos">[Nombre Usuario]</Nav.Link>
                         <Nav.Link className="ml-auto" href="#productos">Cerrar Sesion</Nav.Link>
                     </Nav>
                 </Container>

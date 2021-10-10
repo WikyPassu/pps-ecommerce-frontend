@@ -20,7 +20,7 @@ function useQuery() {
 function ProductoPage(props) {
   const history = useHistory();
   let query = useQuery();
-  const productoActual = ProductoService.getProductoPorCodigo(query.get("codigo")) ?? history.push("/404");
+  const productoActual = ProductoService.getProductoPorId(query.get("id")) ?? history.push("/404");
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();

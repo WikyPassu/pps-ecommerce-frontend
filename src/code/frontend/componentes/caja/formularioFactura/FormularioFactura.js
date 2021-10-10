@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, InputGroup, FormControl } from 'react-bootstrap';
 import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-icons/bs';
-import { MdLocalShipping } from 'react-icons/md';
+import { MdLocalShipping, MdMail } from 'react-icons/md';
 
 import './FormularioFactura.css';
 function FormularioFactura() {
@@ -29,7 +29,11 @@ function FormularioFactura() {
         </InputGroup>
         <InputGroup className="input-formulario">
             <InputGroup.Text><BsPhone /></InputGroup.Text>
-            <FormControl placeholder="Numero de telefono" />
+            <FormControl placeholder="Numero de teléfono" />
+        </InputGroup>
+        <InputGroup className="input-formulario">
+            <InputGroup.Text><MdMail /></InputGroup.Text>
+            <FormControl placeholder="Correo Electrónico" />
         </InputGroup>
         <InputGroup className="input-formulario">
             <InputGroup.Text><MdLocalShipping /></InputGroup.Text>

@@ -24,6 +24,11 @@ export default function HomeNavbar(props) {
                         </Nav>
                         <Nav>
                             <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">Iniciar Sesion</Nav.Link>
+                            
+                        </Nav>
+                        <Nav>
+                            {/* <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">[Nombre Usuario]</Nav.Link>
+                            <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">Cerrar Sesion</Nav.Link> */}
                         </Nav>
                         <Carrito />
                     </Navbar.Collapse>

@@ -17,7 +17,7 @@ function useQuery() {
 function ServicioPage(props) {
   const history = useHistory();
   let query = useQuery();
-  const servicioActual = ServicioService.getSevicioPorCodigo(query.get("codigo")) ?? history.push("/404");
+  const servicioActual = ServicioService.getSevicioPorId(query.get("id")) ?? history.push("/404");
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
