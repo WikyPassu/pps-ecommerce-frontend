@@ -1,23 +1,28 @@
 .form-login-admin{
     max-width: 400px;
-    background: var(--light-color);
+    background: var(--white-color);
     padding: 30px;
     margin-left:auto;
     margin-right:auto;
     transform: translate(0%,50%);
     top:50%;
     border-radius: 10px;
-    box-shadow: 0px 5px 20px -15px black;
+    box-shadow: 0px 5px 40px -15px black;
 }
 
-.form-label{
+.form-login-admin .form-label{
     text-align: left;
 }
 
-.form-input{
+.form-login-admin .form-input{
     width: 100%;
 }
 
-.title-iniciar-sesion{
+.form-login-admin .title-iniciar-sesion{
     font-size: 24px;
+    color: var(--primary-color);
+}
+
+.form-login-admin .row{
+    margin-top: 20px;
 }

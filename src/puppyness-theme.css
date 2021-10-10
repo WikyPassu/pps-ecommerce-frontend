@@ -36,8 +36,8 @@ html{
 body{
     /* width: 100vw;
     height: 100%; */
-    /* background: linear-gradient(50deg,var(--secondary-color),var(--tertiary-color)) ; */
-    background: rgb(255, 255, 255);
+    background: linear-gradient(360deg,var(--light-grey),var(--white-color) 50%);
+    /* background: rgb(255, 255, 255); */
 
 }
 *{
@@ -133,11 +133,19 @@ body{
     transition: all 0.3s;
     box-shadow: 0 0 0 0.25rem var(--tertiary-color);
 }
-
+.form-control{
+    outline: var(--light-color) !important;
+    border:3px solid var(--light-color) !important;
+    
+}
+.form-select{
+    outline: var(--light-color) !important;
+    border:3px solid var(--light-color) !important;
+}
 .form-select:focus {
-    border-color: var(--primary-color);
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem var(--tertiary-color);
+    outline:none !important;
+    border:3px solid var(--secondary-color) !important;
+    box-shadow: 0px 0px 5px 2px var(--tertiary-color);
 }
 
 .full-width{

@@ -1,53 +1,44 @@
 import React from 'react';
 import { Form, InputGroup, FormControl } from 'react-bootstrap';
+import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-icons/bs';
+import { MdLocalShipping } from 'react-icons/md';
+
 import './FormularioFactura.css';
 function FormularioFactura() {
     return (<Form>
         <label className="title-factura">Datos de la Factura</label><br />
         <InputGroup className="input-formulario">
-            <InputGroup.Text>Nombre</InputGroup.Text>
-            <FormControl />
+            <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+            <FormControl placeholder="Nombres" />
         </InputGroup>
         <InputGroup className="input-formulario">
-            <InputGroup.Text>Apellido</InputGroup.Text>
-            <FormControl />
+            <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+            <FormControl placeholder="Apellido" />
         </InputGroup>
         <InputGroup className="input-formulario">
-            <InputGroup.Text>Localidad</InputGroup.Text>
-            <FormControl />
+            <InputGroup.Text> <BsBuilding /></InputGroup.Text>
+            <FormControl placeholder="Localidad" />
         </InputGroup>
         <InputGroup className="input-formulario">
-            <InputGroup.Text>Direccion</InputGroup.Text>
-            <FormControl />
+            <InputGroup.Text><BsMap /></InputGroup.Text>
+            <FormControl placeholder="Direccion" />
         </InputGroup>
         <InputGroup className="input-formulario">
-            <InputGroup.Text>Codigo Postal</InputGroup.Text>
-            <FormControl />
+            <InputGroup.Text><BsFilePost /></InputGroup.Text>
+            <FormControl placeholder="Codigo Postal" />
         </InputGroup>
         <InputGroup className="input-formulario">
-            <InputGroup.Text>Telefono</InputGroup.Text>
-            <FormControl />
+            <InputGroup.Text><BsPhone /></InputGroup.Text>
+            <FormControl placeholder="Numero de telefono" />
         </InputGroup>
-        <hr />
-        <div className="contenedor-envios">
-            <span className="title-factura">Envios</span>
-            <div className="inline">
-                <InputGroup>
-                    <Form.Check 
-                    className="checkbox"
-                        type="radio"
-                        name="envio"
-                        label="Envio a Domicilio"
-                    />
-                    <Form.Check
-                    className="checkbox"
-                        type="radio"
-                        name="envio"
-                        label="Retiro del local"
-                    />
-                </InputGroup>
-            </div>
-        </div>
+        <InputGroup className="input-formulario">
+            <InputGroup.Text><MdLocalShipping /></InputGroup.Text>
+            <Form.Select>
+                <option>Seleccione forma de envio</option>
+                <option value="retiro_local">Retiro del Local</option>
+                <option value="a_domicilio">A domicilio</option>
+            </Form.Select>
+        </InputGroup>
     </Form>);
 }
 export default FormularioFactura;

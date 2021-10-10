@@ -1,6 +1,5 @@
 
 import HomeNavbar from '../../componentes/navbar/HomeNavbar'
-import SampleResenias from '../../../../samples/resenias.json';
 import './ProductoPage.css';
 import ListaResenias from '../../componentes/resenia/listaResenias/ListaResenias';
 import { useEffect } from 'react';
@@ -20,8 +19,6 @@ function useQuery() {
 
 function ProductoPage(props) {
   const history = useHistory();
-  const now = new Date();
-  //const nowFormated = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, "0")}-${now.getDate()}`;
   let query = useQuery();
   const productoActual = ProductoService.getProductoPorCodigo(query.get("codigo")) ?? history.push("/404");
   const handleSubmit = (e) => {
@@ -56,7 +53,7 @@ function ProductoPage(props) {
             <AgregarResenia />
             <h2 className="item-titulo-resenia">Reseñas del producto</h2>
             <br />
-            <ListaResenias listaResenias={SampleResenias} />
+            <ListaResenias listaResenias={productoActual.resenias} />
           </div>
         </div>
       </div>

@@ -17,10 +17,17 @@ export default class CarritoService extends React.Component {
 		return this.items_carrito_compras;
 	}
 
-	static addItem(producto,cantidad) {
+	/**
+	 * Agrega un item al carrito
+	 * @param {*} producto 
+	 * @param {*} cantidad 
+	 * @param {*} tipoItem producto o servicio
+	 */
+	static addItem(item,cantidad) {
+		console.log("Agregando item")
 		this.items_carrito_compras.push({
 			id:(new Date()).getTime(),
-			producto,
+			item,
 			cantidad
 		});
 		this.notifySubscribers();
@@ -37,7 +44,7 @@ export default class CarritoService extends React.Component {
 	 */
 	static getTotal(){
 		return parseFloat(this.items_carrito_compras.reduce((anterior, actual) => {
-			return anterior + (actual.producto.precio * actual.cantidad);
+			return anterior + (actual.item.precio * actual.cantidad);
 		}, 0).toFixed(2));
 	}
 

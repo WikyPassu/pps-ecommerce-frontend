@@ -3,7 +3,7 @@ import ProductoService from "../../../servicios/ProductoService";
 import Producto from "../producto/Producto";
 
 export default function Resultados({busqueda}){
-    const [lista,setLista] = useState(ProductoService.getProductos())
+    const [lista] = useState(ProductoService.getProductos())
     return <>
         <h2>Resultados de "{busqueda}"</h2>
         <div className="resultados">

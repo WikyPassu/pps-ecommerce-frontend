@@ -58,11 +58,11 @@ export default function Secciones() {
           <Usuarios />
         </div>
       </Tab>
-      <Tab eventKey="frontend" title="Frontend">
+      {/* <Tab eventKey="frontend" title="Frontend">
         <div className="tab-container">
           <Frontend />
         </div>
-      </Tab>
+      </Tab> */}
     </Tabs>
   )
 

@@ -1,0 +1,64 @@
+.card-servicio{
+    display: inline-flex !important;
+    width: '18rem';
+    margin:10px;
+    max-width: 280px !important;
+    border-radius: 10px !important;
+    
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0);
+}
+
+.card-servicio .card{
+    border: none !important;
+    border-radius: 10px !important;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px !important;
+    border: 2px solid #f0f0f0;
+    height: 430px;
+}
+
+.card-servicio .card-body{
+    background: #ffffff;
+    
+    border-radius: 10px;
+}
+.card-servicio:hover{
+    box-shadow: 0px 10px 35px -10px rgba(0, 0, 0, 0.787);
+    transition: all 0.3s;
+    transform: translateY(-6px);
+}
+
+.card-servicio .image{
+    width: 280px;
+    height: 180px;
+    border-top-right-radius: 10px !important;
+    border-top-left-radius: 10px;
+}
+
+.card-servicio .descripcion{
+    white-space:normal;
+    font-size: 13px;
+    color: grey;
+    text-align: justify;
+}
+
+.card-servicio .nombre{
+    white-space:normal;
+    font-weight: 700 !important;
+    color:var(--primary-color);
+    text-align: left;
+    height: 50px;
+}
+
+.card-servicio .precio{
+    font-weight: 700 !important;
+    font-size: 21px;
+}
+.card-servicio .card-footer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background: #f0f0f0;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}

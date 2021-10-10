@@ -2,6 +2,7 @@
     max-width: var(--width-container);
     margin: auto;
 }
+
 .titulo-productos-servicios{
     border-left: 10px solid var(--primary-color);
     padding-left: 15px;

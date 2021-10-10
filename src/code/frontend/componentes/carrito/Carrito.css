@@ -16,3 +16,10 @@
 .lista-items-carrito{
     padding: 15px;
 }
+
+@media (max-width:575px){
+    .lista-items-carrito{
+        overflow: scroll;
+        max-height: 45vh;
+    }
+}

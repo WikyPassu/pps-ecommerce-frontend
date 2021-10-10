@@ -8,12 +8,16 @@ import AdminHomePage from "./code/admin/paginas/home/AdminHomePage";
 import CajaPage from "./code/frontend/paginas/caja/CajaPage";
 import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
 import SampleProductos from './samples/productos.json';
+import SampleServicios from './samples/servicios.json';
 import ProductoService from "./code/servicios/ProductoService";
 import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 import BusquedaPage from "./code/frontend/paginas/busqueda/BusquedaPage";
+import ServicioService from "./code/servicios/ServicioService";
+import ServicioPage from "./code/frontend/paginas/servicio/ServicioPage";
 
 function App() {
   ProductoService.productos = SampleProductos;
+  ServicioService.servicios = SampleServicios;
   return (
     <div className="App">
       <Router>
@@ -21,6 +25,7 @@ function App() {
         <Route path="/home" component={HomePage}></Route>
         <Route path="/busqueda" component={BusquedaPage}></Route>
         <Route path="/producto" component={ProductoPage} />
+        <Route path="/servicio" component={ServicioPage} />
         <Route exact path="/caja" component={CajaPage}></Route>
         <Route exact path="/caja/resultado" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>

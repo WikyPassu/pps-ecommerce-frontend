@@ -1,0 +1,12 @@
+.formulario-compra .row{
+    padding: 0;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.formulario-compra .grupo-botones{
+    display: flex;
+    padding-top:10px;
+    gap:10px;
+    flex-direction: column;
+}

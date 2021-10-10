@@ -1,7 +1,11 @@
 .resenia{
-    border-radius: 10px !important;
+    border-radius: 10px;
     box-shadow: 0px 5px 30px -15px black;
     margin-bottom: 20px;
+}
+
+.resenia .card{
+    border-radius: 10px;
 }
 .resenia .nombre-usuario {
     font-size: 21px;

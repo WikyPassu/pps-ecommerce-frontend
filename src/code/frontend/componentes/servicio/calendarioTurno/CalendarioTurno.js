@@ -7,7 +7,7 @@ import { useState } from 'react';
 function CalendarioTurno({ diasNoDisponibles, onChange }) {
 
     const [fecha, setFecha] = useState(new Date());
-
+    const [visibilidadCalendario,setVisibilidadCalendario] = useState(false);
     const handleChange = (e) => {
         setFecha(e);
         if (onChange) { onChange(e) };
@@ -36,14 +36,15 @@ function CalendarioTurno({ diasNoDisponibles, onChange }) {
     };
 
     return (
-        <div className="CalendarioTurno">
-            <FormControl readOnly value={`${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`} />
-            <Calendar
+        <div onMouseLeave={()=>{setVisibilidadCalendario(false)}} className="CalendarioTurno">
+            <FormControl readOnly onClick={()=>{setVisibilidadCalendario(true)}} value={`${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`} />
+            {visibilidadCalendario&&<Calendar
+                
                 onChange={handleChange}
                 tileDisabled={diasDeshabilitados}
                 view="month"
                 defaultValue={fecha}
-            />
+            />}
         </div>
     );
 }

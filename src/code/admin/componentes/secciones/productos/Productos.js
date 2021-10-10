@@ -27,15 +27,15 @@ export default function Productos() {
 
     <tbody>
       {state.lista.map((p) => {
-        const { codigo, nombre, categoria, descripcion, stock, precio } = p;
+        const { codigo, nombre, categoria, descripcion, existencia, existenciaMaxima, existenciaMinima, precio } = p;
         return <tr key={codigo} onClick={() => { setState({ ...state, mostrarModalModificar: true, productoModificar: p }) }}>
           <td>{codigo}</td>
           <td>{nombre}</td>
           <td>{categoria}</td>
           <td>{descripcion}</td>
-          <td>{stock.existencia}</td>
-          <td>{stock.minimo}</td>
-          <td>{stock.maximo}</td>
+          <td>{existencia}</td>
+          <td>{existenciaMinima}</td>
+          <td>{existenciaMaxima}</td>
           <td>${precio}</td>
         </tr>
       })}

@@ -1,27 +1,34 @@
 import React from 'react';
-import { Form, Button, Row } from 'react-bootstrap';
+import { Form, Button, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { HiKey, HiMail } from 'react-icons/hi';
 import "./LoginAdminPage.css";
 
 export default function LoginAdminPage() {
-    const OnSubmitForm = (e)=>{
+    const handleSubmit = (e) => {
 
     }
-    
+
     return (<div className="form-login-admin">
-        <Form onSubmit={OnSubmitForm} action="/admin/home">
+        <Form onSubmit={handleSubmit} action="/admin/home">
             <b className="title-iniciar-sesion">Iniciar Sesion</b>
             <p>Administracion</p>
-            <Row className="mb-3">
-                <Form.Group as={Row} controlId="formGridEmail">
-                    <Form.Label className="form-label">Email</Form.Label>
-                    <Form.Control className="form-input" type="email" placeholder="Enter email" />
-                </Form.Group>
-                <Form.Group as={Row} controlId="formGridPassword">
-                    <Form.Label className="form-label">Password</Form.Label>
-                    <Form.Control className="form-input" type="password" placeholder="Password" />
-                </Form.Group>
+            <Row>
+                <InputGroup>
+                    <InputGroup.Text><HiMail /></InputGroup.Text>
+                    <FormControl placeholder="Correo" />
+                </InputGroup>
             </Row>
-            <Button variant="primary" type="submit">Continuar</Button>
+            <Row>
+                <InputGroup>
+                    <InputGroup.Text><HiKey /></InputGroup.Text>
+                    <FormControl placeholder="Contraseña" />
+                </InputGroup>
+            </Row>
+            <Row>
+                <InputGroup>
+                    <Button type="submit">Continuar</Button> 
+                </InputGroup>
+            </Row>
         </Form>
     </div>);
 }

@@ -1,18 +1,18 @@
 
-.lista-productos{
+.lista-servicios{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.lista-productos .productos{
+.lista-servicios .servicios{
     height:fit-content;
     overflow:hidden;
     white-space: nowrap;
     padding: 20px;
     text-align: center;
 }
-.lista-productos .btn-scroll{
+.lista-servicios .btn-scroll{
     font-weight: bold;
     font-size: 26px;
     display: flex;
@@ -28,10 +28,10 @@
 }
 
 @media (max-width:575px) {
-    .lista-productos .productos{
+    .lista-servicios .servicios{
         overflow:auto;
     }
-    .lista-productos .btn-scroll{
+    .lista-servicios .btn-scroll{
         display: none;
     }
 }
