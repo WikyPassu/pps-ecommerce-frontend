@@ -3,7 +3,7 @@ import Grafico from '../../grafico/Grafico';
 import { useState } from 'react';
 import { Form, Row, Button, InputGroup, Col } from 'react-bootstrap';
 import FacturasService from '../../../../servicios/VentasService';
-import FormFacturaModal from './formVentaModal/FormFacturaModal';
+import FormFacturaModal from './formFacturaModal/FormFacturaModal';
 
 /**
  * Las ventas son facturas pero con nombre diferente.

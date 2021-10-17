@@ -1,13 +1,13 @@
-.modal-content{
+.login-modal .modal-content{
     max-width: 380px;
     margin: auto;
 }
 
-.modal-header{
+.login-modal .modal-header{
     background: var(--primary-color) !important;
     color: white;
 }
 
-.modal-body{
+.login-modal .modal-body{
     padding: 30px !important;
 }

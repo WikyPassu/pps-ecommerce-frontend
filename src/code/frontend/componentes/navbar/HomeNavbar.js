@@ -19,12 +19,11 @@ export default function HomeNavbar(props) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse>
                         <Nav className="me-auto">
-                            <Nav.Link href="#productos">Productos</Nav.Link>
-                            <Nav.Link href="#servicios">Sevicios</Nav.Link>
+                            {/* <Nav.Link href="#productos">Productos</Nav.Link>
+                            <Nav.Link href="#servicios">Sevicios</Nav.Link> */}
                         </Nav>
                         <Nav>
                             <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">Iniciar Sesion</Nav.Link>
-                            
                         </Nav>
                         <Nav>
                             {/* <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">[Nombre Usuario]</Nav.Link>

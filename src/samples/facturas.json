@@ -5,11 +5,11 @@
         "usuarioRegistrado":{},
         "empelado":{},
         "fecha":"Sun, 10 Oct 2021 15:56:31 GMT",
-        "detalleFactura":{
-            "codigoProducto":"a1",
+        "detalleFactura":[{
+            "idProducto":"a1",
             "cantidad":10,
             "subtotal":102
-        },
+        }],
         "estado":"despachado"
     },
     {
@@ -18,11 +18,11 @@
         "usuarioRegistrado":{},
         "empelado":{},
         "fecha":"Sun, 9 Oct 2021 15:56:31 GMT",
-        "detalleFactura":{
-            "codigoProducto":"a1",
+        "detalleFactura":[{
+            "idProducto":"a1",
             "cantidad":2,
             "subtotal":600
-        },
+        }],
         "estado":"preparando"
 
     },
@@ -32,11 +32,11 @@
         "usuarioRegistrado":{},
         "empelado":{},
         "fecha":"Sun, 9 Oct 2021 12:56:31 GMT",
-        "detalleFactura":{
-            "codigoProducto":"a1",
+        "detalleFactura":[{
+            "idProducto":"a1",
             "cantidad":1,
             "subtotal":200
-        },
+        }],
         "estado":"despachado"
     }
 ]

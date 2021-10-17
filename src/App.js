@@ -10,6 +10,7 @@ import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTran
 import SampleProductos from './samples/productos.json';
 import SampleFacturas from './samples/facturas.json';
 import SampleServicios from './samples/servicios.json';
+import SampleClientes from './samples/clientes.json';
 import ProductoService from "./code/servicios/ProductoService";
 import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 import BusquedaPage from "./code/frontend/paginas/busqueda/BusquedaPage";
@@ -17,11 +18,14 @@ import ServicioService from "./code/servicios/ServicioService";
 import ServicioPage from "./code/frontend/paginas/servicio/ServicioPage";
 import VentaService from "./code/servicios/VentasService";
 import FacturasService from "./code/servicios/VentasService";
+import ClienteService from "./code/servicios/ClienteService";
+
 
 function App() {
   ProductoService.productos = SampleProductos;
   ServicioService.servicios = SampleServicios;
   FacturasService.facturas = SampleFacturas;
+  ClienteService.clientes = SampleClientes;
   return (
     <div className="App">
       <Router>

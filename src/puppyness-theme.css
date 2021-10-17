@@ -17,11 +17,11 @@
     --secondary-color:#f1b636;
     --tertiary-color:#f0c059;
     --light-color:#ffe4d0;
-    --dark-color:#793400;
+    --dark-color:#6d4f0d;
     --white-color:#fff;
     --black-color:#000;
     --light-grey:#e2e2e2;
-    --width-container:1329px;
+    --width-container:1350px;
 }
 
 @media (max-width:575px) {
@@ -56,12 +56,6 @@ body{
     color: #fff;
     background-color: var(--primary-color);
     border-color: var(--secondary-color);
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: var(--primary-color);
-    border-color: var(--secondary-color);
     outline:none;
     box-shadow: none;
 }
@@ -88,6 +82,12 @@ body{
     border-color: var(--secondary-color);
     outline:none;
     box-shadow: 0px 0px 0px 4px var(--tertiary-color);
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: var(--dark-color);
+    border-color: var(--secondary-color);
 }
 .form-control{
     outline: var(--light-color) !important;
@@ -150,4 +150,18 @@ body{
 
 .full-width{
     width: 100% !important;
+}
+
+.modal-content{
+    margin: auto;
+    max-width: none;
+}
+
+.modal-header{
+    background: var(--primary-color) !important;
+    color: white;
+}
+
+.modal-body{
+    padding: 30px !important;
 }

@@ -1,0 +1,48 @@
+[
+    {
+        "id":"cli01",
+        "nombre":"Asdasd Gqwe",
+        "apellido":"Fdsasd",
+        "dni":323232322,
+        "correo":"asdasd@asd.com",
+        "clave":"asdasd123123",
+        "domicilio":"fdsfsd 2332",
+        "localidad":"San Fco Solano",
+        "telefono":"1166669999",
+        "codigoPostal":"5665",
+        "perrito":[
+            {
+                "id":"perr01",
+                "dniDuenio":323232322,
+                "peso":1500,
+                "nombre":"firulais1",
+                "edad":7,
+                "raza":"labrador"
+            }
+        ],
+        "estado":"ACTIVO"
+    },
+    {
+        "id":"cli02",
+        "nombre":"Asdasd2 Gqwe2",
+        "apellido":"Fdsasd2",
+        "dni":323232323,
+        "correo":"asdasd@asd2.com",
+        "clave":"asdasd123123",
+        "domicilio":"fdsfsd 23322",
+        "localidad":"San Fco Solano2",
+        "telefono":11666699992,
+        "codigoPostal":"56652",
+        "perrito":[
+            {
+                "id":"perr02",
+                "dniDuenio":323232323,
+                "peso":2500,
+                "nombre":"firulais2",
+                "edad":8,
+                "raza":"labrador"
+            }
+        ],
+        "estado":"ACTIVO"
+    }
+]

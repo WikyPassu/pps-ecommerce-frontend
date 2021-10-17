@@ -6,8 +6,8 @@ import { MdLocalShipping, MdMail } from 'react-icons/md';
 import './FormularioFactura.css';
 function FormularioFactura() {
     return (<Form>
-        <label className="title-factura">Datos de la Factura</label><br />
-        <InputGroup className="input-formulario">
+        <label className="title-factura">Caja</label><br />
+        {/* <InputGroup className="input-formulario">
             <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
             <FormControl placeholder="Nombres" />
         </InputGroup>
@@ -21,7 +21,7 @@ function FormularioFactura() {
         </InputGroup>
         <InputGroup className="input-formulario">
             <InputGroup.Text><BsMap /></InputGroup.Text>
-            <FormControl placeholder="Direccion" />
+            <FormControl placeholder="Domicilio" />
         </InputGroup>
         <InputGroup className="input-formulario">
             <InputGroup.Text><BsFilePost /></InputGroup.Text>
@@ -34,7 +34,7 @@ function FormularioFactura() {
         <InputGroup className="input-formulario">
             <InputGroup.Text><MdMail /></InputGroup.Text>
             <FormControl placeholder="Correo Electrónico" />
-        </InputGroup>
+        </InputGroup> */}
         <InputGroup className="input-formulario">
             <InputGroup.Text><MdLocalShipping /></InputGroup.Text>
             <Form.Select>

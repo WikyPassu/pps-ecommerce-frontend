@@ -47,7 +47,7 @@ function ProductoPage(props) {
             <FormularioCompra onSubmit={handleSubmit} />
           </div>
         </div>
-        <div>
+        {/* <div>
           <div className="item-lista-resenias">
             <br />
             <AgregarResenia />
@@ -55,7 +55,7 @@ function ProductoPage(props) {
             <br />
             <ListaResenias listaResenias={productoActual.resenias} />
           </div>
-        </div>
+        </div> */}
       </div>
     </> : <></>
   );
