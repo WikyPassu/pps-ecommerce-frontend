@@ -1,6 +1,6 @@
 import React from 'react'
 console.log('Producto Facturas iniciado');
-export default class FacturasService extends React.Component {
+export default class FacturasService{
 	static facturas = [];
 	static observers = [];
 	static subscribe(callback) {
@@ -31,9 +31,11 @@ export default class FacturasService extends React.Component {
 		this.notifySubscribers();
 	}
 
-	static removeFactura() {
-        console.warn("removeItem esta hardcodeado")
-		this.facturas.pop();
+	/**
+	 * @param {*} id ID del objeto
+	 */
+	static removeFactura(id) {
+		this.facturas = this.facturas.filter((c)=> (c.id !== id));
 		this.notifySubscribers();
 	}
 }

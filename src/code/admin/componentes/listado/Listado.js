@@ -1,17 +1,35 @@
 import { Table, Button } from 'react-bootstrap';
 
-function getColumnas(atributos = [],onDeleteClick) {
+function getColumnas(atributos = [],acciones) {
   return (
     <tr key={"trCols"}>
       {atributos.map((c) => <th key={"th" + c}>{c}</th>)}
-      {onDeleteClick&&<th>Acciones</th>}
+      {(acciones)&&<th colSpan="2" style={{textAlign:"center"}}>Acciones</th>}
     </tr>
   )
 }
 
-function getFilas(atributos = [], datos = [], attrKey, onElementClick = () => { }, onDeleteClick) {
-  return datos.map((dato) => <tr onClick={() => { onElementClick(dato); }} key={"tr" + dato[attrKey]}>
-    {atributos.map((atributo) => <td key={"tdAttr" + dato[attrKey] + atributo}>{dato[atributo]}</td>)}
+/**
+ * 
+ * @param {*} value Valor a procesar
+ * @param {*} columnaIndex Indice de la columna a afectar
+ * @param {*} attrFuncs Lista de funciones para atributos
+ * @returns Se devuelve el valor procesado. Si no se encontro ninguna funcion, se devolvera valor tal como ingresó.
+ */
+function changeValuesByFunc(value,columnaIndex,attrFuncs){
+  if(columnaIndex && attrFuncs){
+    let funcList = attrFuncs.filter((c)=>c.columnaIndex == columnaIndex);
+    if(funcList.length){
+      return funcList[0].attrFunc(value);
+    }
+  }
+  return value;
+}
+
+function getFilas(atributos = [], datos = [], attrKey, onEditClick, onDeleteClick,attrFuncs) {
+  return datos.map((dato) => <tr key={"tr" + dato[attrKey]}>
+    {atributos.map((atributo,index) => <td key={"tdAttr" + dato[attrKey] + atributo}>{changeValuesByFunc(dato[atributo],index,attrFuncs)}</td>)}
+    {onEditClick&&<td key={`td${dato[attrKey]}btnEditar`}><Button key={`${dato[attrKey]}btnEditar`} onClick={()=>{onEditClick(dato)}}>Editar</Button></td>}
     {onDeleteClick&&<td key={`td${dato[attrKey]}btnEliminar`}><Button key={`${dato[attrKey]}btnEliminar`} onClick={()=>{onDeleteClick(dato)}}>Eliminar</Button></td>}
   </tr>)
 }
@@ -23,16 +41,17 @@ function getFilas(atributos = [], datos = [], attrKey, onElementClick = () => { 
  * - attrKey: El atributo que se usa como id del objeto.
  * - onClick: Cuando se hace click en una fila pero no en el boton eliminar. Recibe al objeto como parametro.
  * - onDeleteClick: Cuando se hace click en el boton eliminar. El boton eliminar solo aparecera si la funcion esta definida
+ * - attrFuncs: Es un array de nombre de atributos con su funcion. Es para los atributos que deben mostrar valores distintos a los originales. Ejemplo: [{columnaIndex:2,attrFunc:formatoFecha}]
  * @param {columna} asd
  * @returns 
  */
-export default function Listado({ columnas, atributos, datos, attrKey, onClick, onDeleteClick }) {
+export default function Listado({ columnas, atributos, datos, attrKey, onEditClick, onDeleteClick, attrFuncs }) {
   return (<Table striped bordered hover>
     <thead>
-      {getColumnas(columnas || atributos,onDeleteClick)}
+      {getColumnas(columnas || atributos,(onDeleteClick||onEditClick))}
     </thead>
     <tbody>
-      {getFilas(atributos, datos, attrKey, onClick,onDeleteClick)}
+      {getFilas(atributos, datos, attrKey, onEditClick,onDeleteClick,attrFuncs)}
     </tbody>
   </Table>)
 }

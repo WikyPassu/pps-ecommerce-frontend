@@ -20,10 +20,11 @@ export default function Clientes() {
         columnas={["DNI", "Nombre", "Apellido", "Correo", "Estado"]}
         atributos={["dni", "nombre", "apellido", "correo", "estado"]}
         attrKey={"id"}
-        onClick={(e) => {
+        onEditClick={(c) => {
           setMostrarModalModificar(true);
-          setElementoModificar(e);
+          setElementoModificar(c);
         }}
+        onDeleteClick={(c)=>ClienteService.removeCliente(c.id)}
         datos={lista}
       />
       {mostrarModalModificar && <FormClienteModal

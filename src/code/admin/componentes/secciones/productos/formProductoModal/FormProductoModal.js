@@ -3,44 +3,33 @@ import './FormProductoModal.css';
 import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import ProductoService from '../../../../../servicios/ProductoService';
 
+const initialValuesProducto = {
+    id: new Date().getTime(),
+    nombre: "",
+    categoria: "",
+    descripcion: "",
+    imagen: "",
+    existencia: 0,
+    existenciaMinima: 0,
+    existenciaMaxima: 0,
+    estado: "HABILITADO",
+    resenias: [],
+    precio: 0
+};
+
 export default function FormProductoModal({ produtoParaModificar, onHide, show }) {
     const modificar = produtoParaModificar !== undefined;
-    const [producto, setProducto] = useState(produtoParaModificar || {
-        codigo: new Date().getTime(),
-        nombre: "",
-        categoria: "",
-        descripcion: "",
-        imagen:"",
-        stock: {
-            existencia: 0,
-            minimo: 0,
-            maximo: 0
-        },
-        precio: 0
-    });
+    const [producto, setProducto] = useState(produtoParaModificar || initialValuesProducto);
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        //validaciones
-
-
+        //console.log(name);
         //Guardar cambios
-        if (name === "cantidadMaxima") {
+        if (name === "existencia" || name === "existenciaMinima" || name === "existenciaMaxima") {
+            console.log("name",name)
             setProducto({
                 ...producto,
-                stock: { ...producto, existenciaMaxima: parseInt(value) }
-            });
-        }
-        else if (name === "cantidadMinima") {
-            setProducto({
-                ...producto,
-                stock: { ...producto, existenciaMinima: parseInt(value) }
-            });
-        }
-        else if (name === "existencia") {
-            setProducto({
-                ...producto,
-                stock: { ...producto, existencia: parseInt(value) }
+                [name]: parseInt(value)
             });
         }
         else if (name === "precio") {
@@ -49,16 +38,18 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                 [name]: parseFloat(value)
             });
         }
-        else if (name === "imagen") {
-            if(files[0] !== undefined){
-                const reader = new FileReader();
-                console.log("asd112",files[0]);
-                setProducto({
-                    ...producto,
-                    "imagen": reader.readAsDataURL(files[0])
-                });
-            }
-        }
+        // else if (name === "imagen") {
+        //     if (files[0] !== undefined) {
+        //         const reader = new FileReader();
+        //         reader.onloadend = function () {
+        //             setProducto({
+        //                 ...producto,
+        //                 "imagen": reader.result
+        //             });
+        //         }
+        //         reader.readAsDataURL(files[0]);
+        //     }
+        // }
         else {
             setProducto({
                 ...producto,
@@ -67,19 +58,9 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
         }
     }
 
-    const validarInputText = (valor) => {
-        if (!valor.trim()) {
-            return <Form.Text>Este campo no puede estar vacio</Form.Text>;
-        }
-        return;
-    }
+    const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
-    const validarInputNumber = (valor) => {
-        if (valor < 0) {
-            return <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
-        }
-        return;
-    }
+    const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -151,9 +132,9 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                             {validarInputNumber(producto.existencia)}
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3">
-                            <Form.Label htmlFor="cantidadMinima">Stock Minimo</Form.Label>
+                            <Form.Label htmlFor="existenciaMinima">Stock Minimo</Form.Label>
                             <Form.Control
-                                name="cantidadMinima"
+                                name="existenciaMinima"
                                 value={producto.existenciaMinima}
                                 onChange={handleChange}
                                 min="0"
@@ -162,9 +143,9 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                             {validarInputNumber(producto.existenciaMinima)}
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3">
-                            <Form.Label htmlFor="cantidadMaxima">Stock Maximo</Form.Label>
+                            <Form.Label htmlFor="existenciaMaxima">Stock Maximo</Form.Label>
                             <Form.Control
-                                name="cantidadMaxima"
+                                name="existenciaMaxima"
                                 value={producto.existenciaMaxima}
                                 onChange={handleChange}
                                 min="0"
@@ -189,13 +170,23 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                     </Row>
                     <Row>
                         <Form.Group as={Col} className="mb-3">
-                            <Form.Label>Imagen del producto</Form.Label>
-                            <Form.Control name="imagen" onChange={handleChange} type="file" />
-                            
+                            <Form.Label htmlFor="precio">Estado</Form.Label>
+                            <Form.Select name="estado" onChange={handleChange} value={producto.estado}>
+                                <option value="HABILITADO">HABILITADO</option>
+                                <option value="DESHABILITADO">DESHABILITADO</option>
+                                <option value="SIN_STOCK">SIN STOCK</option>
+                            </Form.Select>
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Image as={Col} style={{maxWidth:"300px"}} src={producto.imagen}/>
+                        <Form.Group as={Col} className="mb-3">
+                            <Form.Label>Imagen del producto</Form.Label>
+                            {/* <Form.Control name="imagen" onChange={handleChange} type="file" /> */}
+                            <Form.Control name="imagen" onChange={handleChange} placeholder="Ingrese URL de imagen" />
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        <Image as={Col} style={{ maxWidth: "300px" }} src={producto.imagen} />
                     </Row>
                     <br />
                     <Button variant="primary" type="submit">

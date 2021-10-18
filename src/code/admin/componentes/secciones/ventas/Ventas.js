@@ -6,7 +6,7 @@ import FacturasService from '../../../../servicios/VentasService';
 import FormFacturaModal from './formFacturaModal/FormFacturaModal';
 
 /**
- * Las ventas son facturas pero con nombre diferente.
+ * Las ventas son lo mismo facturas pero con nombre diferente.
  * Queda mejor si lo representamos como ventas en lugar de facturas.
  */
 export default function Ventas() {
@@ -58,10 +58,11 @@ export default function Ventas() {
         columnas={["ID", "Total", "Fecha", "Estado"]}
         atributos={["id", "total", "fecha", "estado"]}
         attrKey={"id"}
-        onClick={(e) => {
+        onEditClick={(e) => {
           setMostrarModalModificar(true);
           setElementoModificar(e);
         }}
+        attrFuncs={[{columnaIndex:2,attrFunc:(e)=>new Date(e).toLocaleString()}]}
         datos={lista}
       />
       {mostrarModalModificar && <FormFacturaModal

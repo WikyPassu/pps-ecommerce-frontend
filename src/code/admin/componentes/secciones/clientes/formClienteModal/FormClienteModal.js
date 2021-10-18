@@ -47,19 +47,9 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
         })
     }, [listaDetalleElemento])
 
-    const validarInputText = (valor) => {
-        if (!valor.trim()) {
-            return <Form.Text>Este campo no puede estar vacio</Form.Text>;
-        }
-        return;
-    }
+    const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
-    const validarInputNumber = (valor) => {
-        if (valor < 0) {
-            return <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
-        }
-        return;
-    }
+    const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -116,7 +106,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                     </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.apellido} name="dni" required placeholder="DNI" />
+                        <FormControl onChange={handleChange} type="number" value={elemento.dni} name="dni" required placeholder="DNI" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text> <BsBuilding /></InputGroup.Text>

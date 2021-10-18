@@ -1,7 +1,7 @@
 import React from 'react'
 console.log('Configuracion Frontend servicios iniciado');
 /**
- * Se habia decidido quitar el carrusel
+ * Se habia decidido quitar el carrusel.
  * @deprecated 
  */
 export default class FrontendConfigService extends React.Component {

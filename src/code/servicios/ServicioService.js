@@ -1,6 +1,5 @@
-import React from 'react'
 console.log('Producto servicios iniciado');
-export default class ServicioService extends React.Component {
+export default class ServicioService{
 	static servicios = [];
 	static observers = [];
 	static subscribe(callback) {
@@ -31,9 +30,11 @@ export default class ServicioService extends React.Component {
 		this.notifySubscribers();
 	}
 
-	static removeServicio() {
-        console.warn("removeItem esta hardcodeado")
-		this.servicios.pop();
+	/**
+	 * @param {*} id ID del objeto
+	 */
+	static removeServicio(id) {
+		this.servicios = this.servicios.filter((c)=> (c.id !== id));
 		this.notifySubscribers();
 	}
 }

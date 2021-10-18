@@ -1,6 +1,5 @@
-import React from 'react'
-console.log("Cliente servicio iniciado");
-export default class ClienteService extends React.Component {
+console.log("Servicio cliente iniciado");
+export default class ClienteService{
 	static clientes = [];
 	static observers = [];
 	static subscribe(callback) {
@@ -16,8 +15,12 @@ export default class ClienteService extends React.Component {
 		return this.clientes;
 	}
 
-    static getClienteId(id){
+    static getClienteById(id){
         return this.clientes.filter(c => c.id === id)[0];
+    }
+
+	static getClienteByDNI(dni){
+        return this.clientes.filter(c => c.dni == dni)[0];
     }
 
 	static addCliente(newItem) {
@@ -31,9 +34,11 @@ export default class ClienteService extends React.Component {
 		this.notifySubscribers();
 	}
 
-	static removeCliente() {
-        console.warn("removeItem esta hardcodeado")
-		this.clientes.pop();
+	/**
+	 * @param {*} id ID del objeto
+	 */
+	 static removeCliente(id) {
+		this.clientes = this.clientes.filter((c)=> (c.id !== id));
 		this.notifySubscribers();
 	}
 

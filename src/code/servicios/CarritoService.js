@@ -1,6 +1,5 @@
-import React from 'react'
 console.log("Carrito servicio iniciado");
-export default class CarritoService extends React.Component {
+export default class CarritoService{
 	static items_carrito_compras = [];
 	static observers = [];
 	static subscribe(callback) {

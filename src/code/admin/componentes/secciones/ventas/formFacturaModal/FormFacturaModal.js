@@ -12,7 +12,7 @@ const initialValuesElemento = {
     id: new Date().getTime(),
     "total": 0,
     "usuarioRegistrado": null,
-    "empelado": null,
+    "empleado": null,
     "fecha": null,
     "detalleFactura": [],
     "estado": "preparando"
@@ -29,8 +29,8 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
     const modificar = elementoParaModificar !== undefined;
     const [listaDetalleFactura, setListaDetalleFactura] = useState([]);
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
-    const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento)
-    console.log("asdasda")
+    const {empleado, usuarioRegistrado} = elemento;
+    const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento);
     const handleChange = (e) => {
         setElemento((elemento) => {
             return { ...elemento, [e.target.name]: e.target.value }
@@ -44,19 +44,10 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
         })
     }, [listaDetalleFactura])
 
-    const validarInputText = (valor) => {
-        if (!valor.trim()) {
-            return <Form.Text>Este campo no puede estar vacio</Form.Text>;
-        }
-        return;
-    }
+    const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
-    const validarInputNumber = (valor) => {
-        if (valor < 0) {
-            return <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
-        }
-        return;
-    }
+    const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -89,6 +80,26 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             return listaDetalleFactura.filter((c) => c.id !== e.id);
         })
     }
+    const handleUsuarioChange = (e) => {
+        const {name,value} = e.target;
+        if(name == "dniEmpleado"){
+
+        }
+        else{
+            const cliente = ClienteService.getClienteByDNI(value);
+            console.log(cliente);
+            if(cliente){
+                setElemento((elemento)=>{
+                    return {...elemento,usuarioRegistrado:cliente}
+                })
+            }
+            else{
+                setElemento((elemento)=>{
+                    return {...elemento,usuarioRegistrado:null}
+                })
+            }
+        }
+    }
     return (
         <Modal
             show={show}
@@ -103,48 +114,16 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             <Modal.Body>
                 <Form noValidate onSubmit={handleSubmit}>
                     <label className="title-factura">Datos de la Factura</label><br />
-                    {/* <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.nombre} name="nombre" required placeholder="Nombre" />
-                    </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.apellido} name="apellido" required placeholder="Apellido" />
+                        <FormControl type="number" onChange={handleUsuarioChange} name="dniEmpleado" required placeholder="DNI de empleado" />
                     </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text> <BsBuilding /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.localidad} name="localidad" required placeholder="Localidad" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsMap /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.domicilio} name="domicilio" required placeholder="Domicilio" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFilePost /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.codigoPostal} name="codigoPostal" required placeholder="Codigo Postal" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsPhone /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.telefono} name="telefono" required placeholder="Numero de telefono" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><MdMail /></InputGroup.Text>
-                        <FormControl onChange={handleChange} name="correo" value={elemento.correo} required placeholder="Correo Electrónico" />
-                    </InputGroup> */}
+                    {empleado?<p>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</p>:<p>No se han encontrado resultados</p>}
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.telefono} name="telefono" required placeholder="DNI de empleado" />
-                        <Button disabled type="submit" size="lg">Buscar</Button>
+                        <FormControl type="number" onChange={handleUsuarioChange} name="dniCliente" required placeholder="DNI del cliente" />
                     </InputGroup>
-                    <p>No se han encontrado resultados</p>
-                    <p>Se ha seleccionado a NOMBRE APELLIDO | DNI: 99999999</p>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl onChange={handleChange} value={elemento.telefono} name="telefono" required placeholder="DNI del cliente" />
-                        <Button disabled type="submit" size="lg">Buscar</Button>
-                    </InputGroup>
-                    <p>No se han encontrado resultados</p>
-                    <p>Se ha seleccionado a NOMBRE APELLIDO | DNI: 99999999</p>
+                    {usuarioRegistrado?<p>Se ha seleccionado a {usuarioRegistrado.nombre} {usuarioRegistrado.apellido}</p>:<p>No se han encontrado resultados</p>}
                     <InputGroup>
                         <label className="title-factura">Detalle</label>
                     </InputGroup>

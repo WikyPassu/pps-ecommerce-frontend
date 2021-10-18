@@ -19,7 +19,19 @@ export default function Productos() {
     {modalForm && <FormProductoModal
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
-    <Listado atributos={[
+    <Listado
+    columnas={[
+          "ID",
+          "Nombre",
+          "Categoria",
+          "Descripción",
+          "Existencia",
+          "Minimo",
+          "Maximo",
+          "Estado",
+          "Precio"
+        ]}
+    atributos={[
       "id",
       "nombre",
       "categoria",
@@ -27,12 +39,14 @@ export default function Productos() {
       "existencia",
       "existenciaMinima",
       "existenciaMaxima",
+      "estado",
       "precio"
     ]}
-      onClick={(e) => {
+      onEditClick={(e) => {
         setMostrarModalModificar(true);
         setProductoModificar(e);
       }}
+      onDeleteClick={(p)=>{ProductoService.removeProducto(p.id)}}
       attrKey="id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormProductoModal
