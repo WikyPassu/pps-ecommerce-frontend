@@ -25,7 +25,6 @@ export default class ServicioService{
 	}
 
 	static modifyServicio(item){
-		console.warn("Modificar producto",item);
 		this.servicios = this.servicios.map((c)=> (c.id === item.id) ? item : c);
 		this.notifySubscribers();
 	}

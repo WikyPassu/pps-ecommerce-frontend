@@ -7,6 +7,7 @@ import { MdLocalShipping, MdMail } from 'react-icons/md';
 import ProductoService from '../../../../../servicios/ProductoService';
 import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
+import EmpleadoService from '../../../../../servicios/EmpleadoService';
 
 const initialValuesElemento = {
     id: new Date().getTime(),
@@ -19,15 +20,15 @@ const initialValuesElemento = {
 };
 
 const initialValuesDetalleElemento = {
-    descripcion: "",
-    precio: 1,
+    id:Date.now(),
+    producto: {precio:0},
     cantidad: 1,
     subtotal: 1
 };
 
 export default function FormFacturaModal({ elementoParaModificar, onHide, show }) {
     const modificar = elementoParaModificar !== undefined;
-    const [listaDetalleFactura, setListaDetalleFactura] = useState([]);
+    const [listaDetalleFactura, setListaDetalleFactura] = useState(elementoParaModificar?elementoParaModificar.detalleFactura:[]);
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
     const {empleado, usuarioRegistrado} = elemento;
     const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento);
@@ -42,7 +43,7 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             let total = listaDetalleFactura.reduce((p, c) => p + c.subtotal, 0);
             return { ...elemento, total: total, detalleFactura: listaDetalleFactura }
         })
-    }, [listaDetalleFactura])
+    }, [listaDetalleFactura,detalleElemento])
 
     const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
@@ -56,7 +57,7 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
     }
 
     const agregarDetalleFactura = (e) => {
-        if (!detalleElemento.descripcion) {
+        if (!detalleElemento.producto) {
             alert(`¡Error! El campo ${e.target.name} no puede estar vacío`);
             return;
         }
@@ -65,15 +66,21 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             return [...listaDetalleFactura, {
                 ...detalleElemento,
                 id: Date.now(),
-                subtotal: (detalleElemento.precio * detalleElemento.cantidad)
+                subtotal: (detalleElemento.producto.precio * detalleElemento.cantidad)
             }];
         })
         setDetalleElemento(initialValuesDetalleElemento);
     }
-    const handleChangeDetalleFactura = (e) => {
+    const handleChangeDetalleFactura = ({target}) => {
+        let {value, name} = target;
+        if(name == "producto"){
+            // console.log("producto",JSON.parse(value))
+            value = JSON.parse(value);
+        }
         setDetalleElemento((detalleElemento) => {
-            return { ...detalleElemento, [e.target.name]: e.target.value };
+            return { ...detalleElemento, [name]: value };
         });
+        // console.log(detalleElemento)
     }
     const handleDeleteClick = (e) => {
         setListaDetalleFactura((listaDetalleFactura) => {
@@ -83,11 +90,20 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
     const handleUsuarioChange = (e) => {
         const {name,value} = e.target;
         if(name == "dniEmpleado"){
-
+            const empleado = EmpleadoService.getEmpleadoByDNI(value);
+            if(empleado){
+                setElemento((elemento)=>{
+                    return {...elemento,empleado:empleado}
+                })
+            }
+            else{
+                setElemento((elemento)=>{
+                    return {...elemento,empleado:null}
+                })
+            }
         }
         else{
             const cliente = ClienteService.getClienteByDNI(value);
-            console.log(cliente);
             if(cliente){
                 setElemento((elemento)=>{
                     return {...elemento,usuarioRegistrado:cliente}
@@ -118,21 +134,25 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
                         <FormControl type="number" onChange={handleUsuarioChange} name="dniEmpleado" required placeholder="DNI de empleado" />
                     </InputGroup>
-                    {empleado?<p>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</p>:<p>No se han encontrado resultados</p>}
+                    {empleado?<b>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</b>:<p>No se han encontrado resultados</p>}
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
                         <FormControl type="number" onChange={handleUsuarioChange} name="dniCliente" required placeholder="DNI del cliente" />
                     </InputGroup>
-                    {usuarioRegistrado?<p>Se ha seleccionado a {usuarioRegistrado.nombre} {usuarioRegistrado.apellido}</p>:<p>No se han encontrado resultados</p>}
+                    {usuarioRegistrado?<b>Se ha seleccionado a {usuarioRegistrado.nombre} {usuarioRegistrado.apellido}</b>:<p>No se han encontrado resultados</p>}
                     <InputGroup>
                         <label className="title-factura">Detalle</label>
                     </InputGroup>
                     <Row>
                         <Col sm={6}>
-                            <FormControl onChange={handleChangeDetalleFactura} value={detalleElemento.descripcion} name="descripcion" placeholder="Descripcion" />
+                            {/* <FormControl onChange={handleChangeDetalleFactura} value={detalleElemento.descripcion} name="descripcion" placeholder="Descripcion" /> */}
+                            <Form.Select onChange={handleChangeDetalleFactura} name="producto" value={detalleElemento.nombre}>
+                            <option>Seleccione un producto</option>
+                            {ProductoService.getProductos().map((p)=><option value={JSON.stringify(p)}>{p.nombre}</option>)}
+                        </Form.Select>
                         </Col>
                         <Col>
-                            <FormControl onChange={handleChangeDetalleFactura} value={detalleElemento.precio} name="precio" type="number" min="1" placeholder="Precio" />
+                            <FormControl value={detalleElemento.producto.precio} readOnly name="precio" type="text"  placeholder="Precio" />
                         </Col>
                         <Col>
                             <FormControl onChange={handleChangeDetalleFactura} value={detalleElemento.cantidad} name="cantidad" placeholder="Cantidad" type="number" min="1" />
@@ -143,7 +163,14 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
                     </Row>
                     <Row className="input-formulario">
                         <Col>
-                            <Listado atributos={["descripcion", "cantidad", "precio", "subtotal"]} attrKey="id" onDeleteClick={handleDeleteClick} datos={listaDetalleFactura} btnEliminar="true"></Listado>
+                            <Listado 
+                            attrFuncs={[
+                                {columnaIndex:0,attrFunc:(p)=>{return p.nombre}},
+                                {columnaIndex:2,attrFunc:(p,obj)=>{return obj.producto.precio}}
+                            ]}
+                            atributos={["producto","cantidad", "precio", "subtotal"]} 
+                            attrKey="id"
+                            onDeleteClick={handleDeleteClick} datos={listaDetalleFactura} btnEliminar="true"></Listado>
                         </Col>
                     </Row>
                     <Row>

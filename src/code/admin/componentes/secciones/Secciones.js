@@ -22,8 +22,6 @@ export default function Secciones() {
       </Tab>
       <Tab eventKey="servicios" title="Servicios">
         <div className="tab-container">
-          <label className="titulo-seccion">Servicios prestados</label>
-          <span><Button className="btn-agregar">Agregar Servicio</Button></span>
           <Servicios />
         </div>
       </Tab>

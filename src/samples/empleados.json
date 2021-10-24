@@ -1,0 +1,20 @@
+[
+    {
+        "id":"emp01",
+        "nombre":"NameEmp01",
+        "apellido":"SurNameEmp01",
+        "dni":43434343,
+        "correo":"emp01@asd.com",
+        "clave":"asdasd123123",
+        "tipo":"ADMINISTRADOR"
+    },
+    {
+        "id":"emp02",
+        "nombre":"NameEmp02",
+        "apellido":"SurNameEmp02",
+        "dni":42424242,
+        "correo":"emp02@asd.com",
+        "clave":"asdasd123123",
+        "tipo":"EMPLEADO"
+    }
+]

@@ -11,6 +11,7 @@ import SampleProductos from './samples/productos.json';
 import SampleFacturas from './samples/facturas.json';
 import SampleServicios from './samples/servicios.json';
 import SampleClientes from './samples/clientes.json';
+import SampleEmpleados from './samples/empleados.json';
 import ProductoService from "./code/servicios/ProductoService";
 import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 import BusquedaPage from "./code/frontend/paginas/busqueda/BusquedaPage";
@@ -19,6 +20,7 @@ import ServicioPage from "./code/frontend/paginas/servicio/ServicioPage";
 import VentaService from "./code/servicios/VentasService";
 import FacturasService from "./code/servicios/VentasService";
 import ClienteService from "./code/servicios/ClienteService";
+import EmpleadoService from "./code/servicios/EmpleadoService";
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
   ServicioService.servicios = SampleServicios;
   FacturasService.facturas = SampleFacturas;
   ClienteService.clientes = SampleClientes;
+  EmpleadoService.empleados = SampleEmpleados;
   return (
     <div className="App">
       <Router>

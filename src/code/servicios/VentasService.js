@@ -26,8 +26,7 @@ export default class FacturasService{
 	}
 
 	static modifyFactura(item){
-		console.warn("Modificar Factura",item);
-		this.facturas = this.facturas.map((c)=> (c.numero === item.numero) ? item : c);
+		this.facturas = this.facturas.map((c)=> (c.id === item.id) ? item : c);
 		this.notifySubscribers();
 	}
 

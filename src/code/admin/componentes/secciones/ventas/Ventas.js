@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Form, Row, Button, InputGroup, Col } from 'react-bootstrap';
 import FacturasService from '../../../../servicios/VentasService';
 import FormFacturaModal from './formFacturaModal/FormFacturaModal';
+import UtilsService from '../../../../servicios/UtilsService';
 
 /**
  * Las ventas son lo mismo facturas pero con nombre diferente.
@@ -62,7 +63,7 @@ export default function Ventas() {
           setMostrarModalModificar(true);
           setElementoModificar(e);
         }}
-        attrFuncs={[{columnaIndex:2,attrFunc:(e)=>new Date(e).toLocaleString()}]}
+        attrFuncs={[{columnaIndex:2,attrFunc:(e)=>UtilsService.timeStampToStringDate(e)}]}
         datos={lista}
       />
       {mostrarModalModificar && <FormFacturaModal

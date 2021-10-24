@@ -2,11 +2,53 @@
     {
         "id":"fact01",
         "total":10200,
-        "usuarioRegistrado":{},
-        "empleado":{},
+        "usuarioRegistrado":{
+            "id":"cli01",
+            "nombre":"Asdasd Gqwe",
+            "apellido":"Fdsasd",
+            "dni":323232322,
+            "correo":"asdasd@asd.com",
+            "clave":"asdasd123123",
+            "domicilio":"fdsfsd 2332",
+            "localidad":"San Fco Solano",
+            "telefono":"1166669999",
+            "codigoPostal":"5665",
+            "perrito":[
+                {
+                    "id":"perr01",
+                    "dniDuenio":323232322,
+                    "peso":1500,
+                    "nombre":"firulais1",
+                    "edad":7,
+                    "raza":"labrador"
+                }
+            ],
+            "estado":"ACTIVO"
+        },
+        "empleado":{
+            "id":"emp01",
+            "nombre":"NameEmp01",
+            "apellido":"SurNameEmp01",
+            "dni":43434343,
+            "correo":"emp01@asd.com",
+            "clave":"asdasd123123",
+            "tipo":"ADMINISTRADOR"
+        },
         "fecha":1634519791265,
         "detalleFactura":[{
-            "idProducto":"a1",
+            "id":"df001",
+            "producto":{
+                "id":"a1",
+                "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "nombre":"El Producto Uno",
+                "categoria":"Categoria Uno",
+                "precio":159.99,
+                "imagen":"https://www.hillspet.com.mx/content/dam/cp-sites/hills/hills-pet/global/2020-homepage-redesign/hero-pack-lockup.png",
+                "estado":"HABILITADO",
+                "existencia":30,
+                "existenciaMinima":20,
+                "existenciaMaxima":60
+            },
             "cantidad":10,
             "subtotal":102
         }],
@@ -15,11 +57,53 @@
     {
         "id":"fact02",
         "total":1200,
-        "usuarioRegistrado":{},
-        "empleado":{},
+        "usuarioRegistrado":{
+            "id":"cli01",
+            "nombre":"Asdasd Gqwe",
+            "apellido":"Fdsasd",
+            "dni":323232322,
+            "correo":"asdasd@asd.com",
+            "clave":"asdasd123123",
+            "domicilio":"fdsfsd 2332",
+            "localidad":"San Fco Solano",
+            "telefono":"1166669999",
+            "codigoPostal":"5665",
+            "perrito":[
+                {
+                    "id":"perr01",
+                    "dniDuenio":323232322,
+                    "peso":1500,
+                    "nombre":"firulais1",
+                    "edad":7,
+                    "raza":"labrador"
+                }
+            ],
+            "estado":"ACTIVO"
+        },
+        "empleado":{
+            "id":"emp01",
+            "nombre":"NameEmp01",
+            "apellido":"SurNameEmp01",
+            "dni":43434343,
+            "correo":"emp01@asd.com",
+            "clave":"asdasd123123",
+            "tipo":"ADMINISTRADOR"
+        },
         "fecha":1634519791265,
         "detalleFactura":[{
-            "idProducto":"a1",
+            "id":"df001",
+            "producto":{
+                "id":"a1",
+                "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "nombre":"El Producto Uno",
+                "categoria":"Categoria Uno",
+                "precio":159.99,
+                "imagen":"https://www.hillspet.com.mx/content/dam/cp-sites/hills/hills-pet/global/2020-homepage-redesign/hero-pack-lockup.png",
+                "estado":"HABILITADO",
+                "existencia":30,
+                "existenciaMinima":20,
+                "existenciaMaxima":60
+            },
             "cantidad":2,
             "subtotal":600
         }],
@@ -29,11 +113,53 @@
     {
         "id":"fact03",
         "total":200,
-        "usuarioRegistrado":{},
-        "empleado":{},
+        "usuarioRegistrado":{
+            "id":"cli01",
+            "nombre":"Asdasd Gqwe",
+            "apellido":"Fdsasd",
+            "dni":323232322,
+            "correo":"asdasd@asd.com",
+            "clave":"asdasd123123",
+            "domicilio":"fdsfsd 2332",
+            "localidad":"San Fco Solano",
+            "telefono":"1166669999",
+            "codigoPostal":"5665",
+            "perrito":[
+                {
+                    "id":"perr01",
+                    "dniDuenio":323232322,
+                    "peso":1500,
+                    "nombre":"firulais1",
+                    "edad":7,
+                    "raza":"labrador"
+                }
+            ],
+            "estado":"ACTIVO"
+        },
+        "empleado":{
+            "id":"emp01",
+            "nombre":"NameEmp01",
+            "apellido":"SurNameEmp01",
+            "dni":43434343,
+            "correo":"emp01@asd.com",
+            "clave":"asdasd123123",
+            "tipo":"ADMINISTRADOR"
+        },
         "fecha":1634519791265,
         "detalleFactura":[{
-            "idProducto":"a1",
+            "id":"df001",
+            "producto":{
+                "id":"a1",
+                "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                "nombre":"El Producto Uno",
+                "categoria":"Categoria Uno",
+                "precio":159.99,
+                "imagen":"https://www.hillspet.com.mx/content/dam/cp-sites/hills/hills-pet/global/2020-homepage-redesign/hero-pack-lockup.png",
+                "estado":"HABILITADO",
+                "existencia":30,
+                "existenciaMinima":20,
+                "existenciaMaxima":60
+            },
             "cantidad":1,
             "subtotal":200
         }],
