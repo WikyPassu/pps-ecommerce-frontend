@@ -4,8 +4,8 @@ import Productos from './productos/Productos';
 import Servicios from './servicios/Servicios';
 import Ventas from './ventas/Ventas';
 import Turnos from './turnos/Turnos'
-import Usuarios from './usuarios/Usuarios'
 import './Secciones.css';
+import Empleados from './empleados/Empleados';
 export default function Secciones() {
 
   return (
@@ -37,11 +37,9 @@ export default function Secciones() {
           <Clientes />
         </div>
       </Tab>
-      <Tab eventKey="usuarios" title="Usuarios">
+      <Tab eventKey="empleados" title="Empleados">
         <div className="tab-container">
-          <label className="titulo-seccion">Usuarios</label>
-          <span><Button className="btn-agregar">Agregar Usuario</Button></span>
-          <Usuarios />
+          <Empleados />
         </div>
       </Tab>
     </Tabs>

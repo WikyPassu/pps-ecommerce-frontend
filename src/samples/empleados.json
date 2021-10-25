@@ -3,7 +3,7 @@
         "id":"emp01",
         "nombre":"NameEmp01",
         "apellido":"SurNameEmp01",
-        "dni":43434343,
+        "dni":"43434343",
         "correo":"emp01@asd.com",
         "clave":"asdasd123123",
         "tipo":"ADMINISTRADOR"
@@ -12,9 +12,18 @@
         "id":"emp02",
         "nombre":"NameEmp02",
         "apellido":"SurNameEmp02",
-        "dni":42424242,
+        "dni":"42424242",
         "correo":"emp02@asd.com",
         "clave":"asdasd123123",
         "tipo":"EMPLEADO"
+    },
+    {
+        "id":"emp03",
+        "nombre":"NameEmp03",
+        "apellido":"SurNameEmp03",
+        "dni":"45454545",
+        "correo":"emp03@asd.com",
+        "clave":"asdasd123123",
+        "tipo":"ADMINISTRADOR"
     }
 ]

@@ -130,6 +130,14 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             <Modal.Body>
                 <Form noValidate onSubmit={handleSubmit}>
                     <label className="title-factura">Datos de la Factura</label><br />
+                    <Form.Group as={Col} sm={4}>
+                            <Form.Label htmlFor="estado">Estado</Form.Label>
+                            <Form.Select name="estado" onChange={handleChange} value={elemento.estado}>
+                                <option value="PENDIENTE">PENDIENTE</option>
+                                <option value="DESPACHADO">DESPACHADO</option>
+                                <option value="ENTREGADO">ENTREGADO</option>
+                            </Form.Select>
+                        </Form.Group>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
                         <FormControl type="number" onChange={handleUsuarioChange} name="dniEmpleado" required placeholder="DNI de empleado" />

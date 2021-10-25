@@ -52,7 +52,7 @@
             "cantidad":10,
             "subtotal":102
         }],
-        "estado":"despachado"
+        "estado":"DESPACHADO"
     },
     {
         "id":"fact02",
@@ -107,7 +107,7 @@
             "cantidad":2,
             "subtotal":600
         }],
-        "estado":"preparando"
+        "estado":"PREPARANDO"
 
     },
     {
@@ -163,6 +163,6 @@
             "cantidad":1,
             "subtotal":200
         }],
-        "estado":"despachado"
+        "estado":"ENTREGADO"
     }
 ]

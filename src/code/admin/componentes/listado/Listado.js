@@ -40,8 +40,8 @@ function getFilas(atributos = [], datos = [], attrKey, onEditClick, onDeleteClic
  * - atributos: Los atributos que se mostraran de cada objeto.
  * - datos: array de objetos.
  * - attrKey: El atributo que se usa como id del objeto.
- * - onClick: Cuando se hace click en una fila pero no en el boton eliminar. Recibe al objeto como parametro.
- * - onDeleteClick: Cuando se hace click en el boton eliminar. El boton eliminar solo aparecera si la funcion esta definida
+ * - onEditClick: Callback de click en boton editar.
+ * - onDeleteClick: Callback de click en boton eliminar.
  * - attrFuncs: Es un array de nombre de atributos con su funcion. Es para los atributos que deben mostrar valores distintos a los originales. Ejemplo: [{columnaIndex:2,attrFunc:formatoFecha}]
  * @param {columna} asd
  * @returns 

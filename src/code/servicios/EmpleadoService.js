@@ -37,6 +37,14 @@ export default class EmpleadoService{
 	 * @param {*} id ID del objeto
 	 */
 	 static removeEmpleado(id) {
+		let empleadoToRemove = this.getEmpleadoById(id);
+		if(empleadoToRemove.tipo == "ADMINISTRADOR"){
+			let cantidadAministradores = this.empleados.filter((c)=> (c.tipo === "ADMINISTRADOR")).length;
+			if(cantidadAministradores == 1){
+				alert("No puede eliminarse a un usuario ADMINISTRADOR si solo queda uno en el sistema");
+				return;
+			}
+		}
 		this.empleados = this.empleados.filter((c)=> (c.id !== id));
 		this.notifySubscribers();
 	}
