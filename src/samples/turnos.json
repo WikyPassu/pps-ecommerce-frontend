@@ -1,6 +1,6 @@
 [
     {
-        "id":"cli01",
+        "id":"turn01",
         "servicio":{
             "id":"b1",
             "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -33,7 +33,7 @@
             ]
         },
         "dniCliente":323232322,
-        "dniEmpelado":43434343,
+        "dniEmpleado":43434343,
         "perrito":{
             "id":"perr01",
             "dniDuenio":323232322,
@@ -45,17 +45,12 @@
         "consumibles":[
             {
                 "cantidad":1,
-                "producto":{
-                    "id":"a4",
-                    "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                    "nombre":"El Producto Cuarto (Titulo Largo)",
-                    "categoria":"Categoria Dos",
-                    "precio":759.99,
-                    "imagen":"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2020%2F12%2F08%2Fwild-ones-harness.jpg",
-                    "estado":"HABILITADO",
-                    "existencia":30,
-                    "existenciaMinima":20,
-                    "existenciaMaxima":60
+                "consumible":{
+                    "id":"c1",
+                    "nombre":"Shampoo",
+                    "existencia":3500,
+                    "existenciaMinima":1000,
+                    "precioUnidad":1.5
                 }
             }
         ],

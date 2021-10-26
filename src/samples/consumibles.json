@@ -1,0 +1,9 @@
+[
+    {
+        "id":"c1",
+        "nombre":"Shampoo",
+        "existencia":3500,
+        "existenciaMinima":1000,
+        "precioUnidad":1.5
+    }
+]

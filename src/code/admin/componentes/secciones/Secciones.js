@@ -3,9 +3,10 @@ import Clientes from './clientes/Clientes';
 import Productos from './productos/Productos';
 import Servicios from './servicios/Servicios';
 import Ventas from './ventas/Ventas';
-import Turnos from './turnos/Turnos'
 import './Secciones.css';
 import Empleados from './empleados/Empleados';
+import Consumibles from './consumibles/Consumibles';
+import Turnos from './turnos/Turnos';
 export default function Secciones() {
 
   return (
@@ -27,8 +28,6 @@ export default function Secciones() {
       </Tab>
       <Tab eventKey="turnos" title="Turnos">
         <div className="tab-container">
-          <label className="titulo-seccion">Turnos</label>
-          <span><Button className="btn-agregar">Agregar Turno</Button></span>
           <Turnos />
         </div>
       </Tab>
@@ -40,6 +39,11 @@ export default function Secciones() {
       <Tab eventKey="empleados" title="Empleados">
         <div className="tab-container">
           <Empleados />
+        </div>
+      </Tab>
+      <Tab eventKey="consumibles" title="Consumibles">
+        <div className="tab-container">
+          <Consumibles/>
         </div>
       </Tab>
     </Tabs>

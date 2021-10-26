@@ -7,20 +7,26 @@ import LoginAdminPage from "./code/admin/paginas/loginAdmin/LoginAdminPage";
 import AdminHomePage from "./code/admin/paginas/home/AdminHomePage";
 import CajaPage from "./code/frontend/paginas/caja/CajaPage";
 import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
+
 import SampleProductos from './samples/productos.json';
 import SampleFacturas from './samples/facturas.json';
 import SampleServicios from './samples/servicios.json';
 import SampleClientes from './samples/clientes.json';
 import SampleEmpleados from './samples/empleados.json';
+import SampleConsumibles from './samples/consumibles.json';
+import SampleTurnos from './samples/turnos.json';
+
+
 import ProductoService from "./code/servicios/ProductoService";
 import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 import BusquedaPage from "./code/frontend/paginas/busqueda/BusquedaPage";
 import ServicioService from "./code/servicios/ServicioService";
 import ServicioPage from "./code/frontend/paginas/servicio/ServicioPage";
-import VentaService from "./code/servicios/VentasService";
 import FacturasService from "./code/servicios/VentasService";
 import ClienteService from "./code/servicios/ClienteService";
 import EmpleadoService from "./code/servicios/EmpleadoService";
+import ConsumibleService from "./code/servicios/ConsumibleService";
+import TurnoService from "./code/servicios/TurnoService";
 
 
 function App() {
@@ -29,6 +35,9 @@ function App() {
   FacturasService.facturas = SampleFacturas;
   ClienteService.clientes = SampleClientes;
   EmpleadoService.empleados = SampleEmpleados;
+  ConsumibleService.consumibles = SampleConsumibles;
+  TurnoService.turnos = SampleTurnos;
+
   return (
     <div className="App">
       <Router>

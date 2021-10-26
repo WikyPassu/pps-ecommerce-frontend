@@ -15,4 +15,5 @@ export default class UtilsService{
         }
         return (new Date(parseInt(timeStampString))).toLocaleString();
     }
+
 }

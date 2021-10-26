@@ -4,6 +4,7 @@ import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Image } from 'r
 import { BsFillPersonFill } from 'react-icons/bs';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
 import ServicioService from '../../../../../servicios/ServicioService';
+import UtilsService from '../../../../../servicios/UtilsService';
 
 const initialValuesElemento = {
     "id": "",

@@ -5,7 +5,7 @@ import Listado from '../../listado/Listado';
 import FormEmpleadoModal from './formEmpleadoModal/FormEmpleadoModal';
 
 export default function Empleados() {
-  const [lista, setLista] = useState(EmpleadoService.getempleados());
+  const [lista, setLista] = useState(EmpleadoService.getEmpleados());
   const [mostrarModalModificar, setMostrarModalModificar] = useState(false);
   const [elementoModificar, setElementoModificar] = useState(undefined);
   const [modalForm, setModalForm] = useState(false);
@@ -48,7 +48,7 @@ export default function Empleados() {
       show={mostrarModalModificar}
       onHide={() => {
         setMostrarModalModificar(false);
-        setLista(EmpleadoService.getempleados());
+        setLista(EmpleadoService.getEmpleados());
       }} />}
 
   </>)

@@ -1,4 +1,4 @@
-console.log('Producto servicios iniciado');
+console.log('Servicio servicios iniciado');
 export default class ServicioService{
 	static servicios = [];
 	static observers = [];
@@ -15,7 +15,7 @@ export default class ServicioService{
 		return this.servicios;
 	}
 
-    static getSevicioPorId(id){
+    static getServicioPorId(id){
         return this.servicios.filter(c => c.id === id)[0];
     }
 

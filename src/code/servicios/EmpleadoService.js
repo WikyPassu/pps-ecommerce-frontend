@@ -11,7 +11,7 @@ export default class EmpleadoService{
 			current(this.empleados);
 		})
 	}
-	static getempleados() {
+	static getEmpleados() {
 		return this.empleados;
 	}
 
