@@ -1,12 +1,10 @@
 
 import HomeNavbar from '../../componentes/navbar/HomeNavbar'
 import './ProductoPage.css';
-import ListaResenias from '../../componentes/resenia/listaResenias/ListaResenias';
 import { useEffect } from 'react';
 import CarritoService from '../../../servicios/CarritoService';
 import { useHistory, useLocation } from 'react-router';
 import ProductoService from '../../../servicios/ProductoService';
-import AgregarResenia from '../../componentes/resenia/agregarResenia/AgregarResenia';
 import FormularioCompra from '../../componentes/producto/formularioCompra/FormularioCompra';
 
 /**

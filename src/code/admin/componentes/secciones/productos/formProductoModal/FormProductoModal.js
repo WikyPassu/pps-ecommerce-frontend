@@ -22,7 +22,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
     const [producto, setProducto] = useState(produtoParaModificar || initialValuesProducto);
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
+        const { name, value } = e.target;
         //console.log(name);
         //Guardar cambios
         if (name === "existencia" || name === "existenciaMinima" || name === "existenciaMaxima") {

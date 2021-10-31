@@ -1,6 +1,6 @@
 import React from 'react';
 import './AdminNavbar.css';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import logo from '../../../../assets/logo.png';
 

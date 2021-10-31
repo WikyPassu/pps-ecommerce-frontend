@@ -1,30 +1,34 @@
 import { Carousel } from 'react-bootstrap';
+import ProductoService from '../../../servicios/ProductoService';
+import ServicioService from '../../../servicios/ServicioService';
 import './HomeCarrusel.css';
 function HomeCarrusel() {
+    const productoMasVendido = ProductoService.getMasVendido();
+    const servicioMasVendido = ServicioService.getMasVendido();
     return (
         <div className="home-carrusel">
             <Carousel className="carrusel">
                 <Carousel.Item>
                     <div
                         className="img-carousel"
-                        style={{backgroundImage:"url(https://free4kwallpapers.com/uploads/originals/2020/03/27/pet-shining-wallpaper.jpg)"}}
-                        alt="First slide"
-                        ></div>
+                        style={{ backgroundImage: "url(" + productoMasVendido.imagen + ")" }}
+                        alt={productoMasVendido.nombre}
+                    ></div>
                     <Carousel.Caption className="label">
-                        <h3>PRODUCTO X</h3>
-                        <p>El producto mas vendido en CATEGORIA</p>
+                        <h3>{productoMasVendido.nombre}</h3>
+                        <p>Nuestro producto mas vendido</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <div
                         className="img-carousel"
-                        style={{backgroundImage:"url(https://windows10wall.com/wp-content/uploads/2013/12/beautiful_puppy_black_background_wallpaper.jpg)"}}
-                        alt="Second slide"
+                        style={{ backgroundImage: "url(" + servicioMasVendido.imagen + ")" }}
+                        alt={servicioMasVendido.nombre}
                     ></div>
 
-                    <Carousel.Caption>
-                        <h3>SERVICIO X</h3>
-                        <p>Pruebe nuestro servicio mejor valorado en CATEGORIA</p>
+                    <Carousel.Caption className="label">
+                        <h3>{servicioMasVendido.nombre}</h3>
+                        <p>Nuestro servicio mas valorado</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

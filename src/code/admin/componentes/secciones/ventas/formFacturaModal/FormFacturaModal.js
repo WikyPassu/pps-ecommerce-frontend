@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './FormFacturaModal.css';
-import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Image } from 'react-bootstrap';
+import { Modal, InputGroup, Form, Button, FormControl, Row, Col } from 'react-bootstrap';
 import FacturasService from '../../../../../servicios/VentasService';
-import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-icons/bs';
-import { MdLocalShipping, MdMail } from 'react-icons/md';
+import { BsFillPersonFill } from 'react-icons/bs';
 import ProductoService from '../../../../../servicios/ProductoService';
 import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
@@ -45,9 +44,9 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
         })
     }, [listaDetalleFactura,detalleElemento])
 
-    const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
+    //const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
-    const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
+    //const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
     
 
     const handleSubmit = (e) => {
@@ -73,7 +72,7 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
     }
     const handleChangeDetalleFactura = ({target}) => {
         let {value, name} = target;
-        if(name == "producto"){
+        if(name === "producto"){
             // console.log("producto",JSON.parse(value))
             value = JSON.parse(value);
         }
@@ -89,7 +88,7 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
     }
     const handleUsuarioChange = (e) => {
         const {name,value} = e.target;
-        if(name == "dniEmpleado"){
+        if(name === "dniEmpleado"){
             const empleado = EmpleadoService.getEmpleadoByDNI(value);
             if(empleado){
                 setElemento((elemento)=>{

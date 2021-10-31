@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './FormConsumibleModal.css';
-import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Image } from 'react-bootstrap';
-import FacturasService from '../../../../../servicios/VentasService';
-import { BsFillPersonFill } from 'react-icons/bs';
-import ProductoService from '../../../../../servicios/ProductoService';
-import Listado from '../../../listado/Listado';
-import ClienteService from '../../../../../servicios/ClienteService';
-import EmpleadoService from '../../../../../servicios/EmpleadoService';
-import UtilsService from '../../../../../servicios/UtilsService';
-import ServicioService from '../../../../../servicios/ServicioService';
+import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import ConsumibleService from '../../../../../servicios/ConsumibleService';
 
 const initialValuesElemento = {
@@ -48,7 +40,7 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
             centered>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    {!modificar ? "Alta Servicio" : "Modificar Servicio"}
+                    {!modificar ? "Alta Consumible" : "Modificar Consumible"}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

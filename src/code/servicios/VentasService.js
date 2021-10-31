@@ -1,5 +1,4 @@
-import React from 'react'
-console.log('Producto Facturas iniciado');
+import samples from "../../samples/facturas.json";
 export default class FacturasService{
 	static facturas = [];
 	static observers = [];
@@ -12,6 +11,19 @@ export default class FacturasService{
 			current(this.facturas);
 		})
 	}
+
+	/**
+	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
+	* @todo TRAER OBJETOS DEL BACKEND.
+	* @returns Array de objetos
+	*/
+	static async iniciarServicio(){
+		console.log('Servicio Facturas iniciado');
+		this.facturas = samples;
+
+		return samples;
+	}
+
 	static getFacturas() {
 		return this.facturas;
 	}
@@ -20,17 +32,26 @@ export default class FacturasService{
         return this.facturas.filter(c => c.id === id)[0];
     }
 
+	/**
+	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * @param {*} newItem 
+	 */
 	static addFactura(newItem) {
 		this.facturas.push(newItem);
 		this.notifySubscribers();
 	}
 
+	/**
+	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * @param {*} item 
+	 */
 	static modifyFactura(item){
 		this.facturas = this.facturas.map((c)=> (c.id === item.id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
+	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} id ID del objeto
 	 */
 	static removeFactura(id) {

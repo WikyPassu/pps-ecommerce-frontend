@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './FormClienteModal.css';
-import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Image } from 'react-bootstrap';
-import FacturasService from '../../../../../servicios/VentasService';
+import { Modal, InputGroup, Form, Button, FormControl, Row, Col } from 'react-bootstrap';
 import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-icons/bs';
-import { MdLocalShipping, MdMail } from 'react-icons/md';
+import { MdMail } from 'react-icons/md';
 import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
 import { HiKey } from 'react-icons/hi';
@@ -47,9 +46,9 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
         })
     }, [listaDetalleElemento])
 
-    const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
+    // const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
-    const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
+    // const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
 
     const handleSubmit = (e) => {
         e.preventDefault();

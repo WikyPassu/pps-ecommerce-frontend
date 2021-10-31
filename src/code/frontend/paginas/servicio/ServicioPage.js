@@ -1,12 +1,13 @@
 
 import HomeNavbar from '../../componentes/navbar/HomeNavbar'
 import './ServicioPage.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import ServicioService from '../../../servicios/ServicioService';
 import FormularioCompra from '../../componentes/servicio/formularioCompra/FormularioCompra';
 import AgregarResenia from '../../componentes/resenia/agregarResenia/AgregarResenia';
 import ListaResenias from '../../componentes/resenia/listaResenias/ListaResenias';
+import ClienteService from '../../../servicios/ClienteService';
 
 /**
  * Obtiene la query de la url
@@ -19,11 +20,28 @@ function useQuery() {
 function ServicioPage() {
   const history = useHistory();
   let query = useQuery();
-  const servicioActual = ServicioService.getSevicioPorId(query.get("id")) ?? history.push("/404");
+  console.log(query.get("id"))
+  const idServicio = ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404")
+  const [servicio, setServicio ] = useState(idServicio) 
+
+  ServicioService.subscribe(()=>{
+    setServicio(ServicioService.getServicioPorId(query.get("id")));
+  })
+
+  //useEffect(()=>{},[]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
+  }
 
+
+  const validarUsuarioParaResenia = ()=>{
+    // return true
+    if(ClienteService.getUsuario()){
+      return ClienteService.isDisponibleParaResenia(ClienteService.getUsuario(),servicio.id);
+    }
+    return false;
   }
 
   useEffect(() => {
@@ -31,15 +49,15 @@ function ServicioPage() {
   })
 
   return (
-    servicioActual ? <>
+    servicio ? <>
       <HomeNavbar />
       <div className="servicio-page">
         <div className="servicio-info-container">
-          <div className="item imagen" style={{ backgroundImage: `url("${servicioActual.imagen}")` }}></div>
-          <h1 className="item titulo">{servicioActual.nombre}</h1>
-          <p className="item descripcion">{servicioActual.descripcion}</p>
+          <div className="item imagen" style={{ backgroundImage: `url("${servicio.imagen}")` }}></div>
+          <h1 className="item titulo">{servicio.nombre}</h1>
+          <p className="item descripcion">{servicio.descripcion}</p>
           <div className="item precio">
-            <label className="label">${servicioActual.precio}</label>
+            {/* <label className="label">${servicio.precio}</label> */}
             <br /><hr />
           </div>
           <div className="item form">
@@ -49,10 +67,10 @@ function ServicioPage() {
         <div>
           <div className="item-lista-resenias">
             <br />
-            <AgregarResenia />
+            { validarUsuarioParaResenia() ? <AgregarResenia idServicio={servicio.id}/>: ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
-            <ListaResenias listaResenias={servicioActual.resenias} />
+            <ListaResenias listaResenias={ServicioService.getResenias(servicio.id)} />
           </div>
         </div>
       </div>

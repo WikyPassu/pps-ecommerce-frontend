@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
+import UtilsService from '../../../servicios/UtilsService';
 import './Resenia.css';
-
-function fechaParser(timeStamp) {
-    const date = (new Date(parseInt(timeStamp + "000")));
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-}
 
 export default function Resenia(props) {
     let { usuario, codigo, comentario, fecha } = props.resenia;
@@ -13,7 +9,7 @@ export default function Resenia(props) {
         usuario: usuario ?? "error",
         codigo: codigo ?? "error",
         comentario: comentario ?? "error",
-        fecha: fechaParser(fecha)
+        fecha: UtilsService.timeStampToStringDate(fecha) //fechaParser(fecha)
     });
     return (
         <div className="resenia">

@@ -14,7 +14,7 @@ function useProducto({ id, nombre, descripcion, precio, imagen }) {
     return servicio;
 }
 export default function Servicio(props) {
-    const { imagen, id, nombre, descripcion, precio } = useProducto(props.servicio);
+    const { imagen, id, nombre, descripcion } = useProducto(props.servicio);
     const styleImg = {
         backgroundImage: `url(${imagen})`,
         backgroundSize: "cover",

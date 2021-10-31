@@ -1,4 +1,4 @@
-import { Tab, Button, Tabs } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 import Clientes from './clientes/Clientes';
 import Productos from './productos/Productos';
 import Servicios from './servicios/Servicios';

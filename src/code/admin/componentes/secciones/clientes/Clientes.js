@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import ClienteService from '../../../../servicios/ClienteService';
 import Listado from '../../listado/Listado';
 import FormClienteModal from './formClienteModal/FormClienteModal';

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import './FormEmpleadoModal.css';
-import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Image } from 'react-bootstrap';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
-import ServicioService from '../../../../../servicios/ServicioService';
-import UtilsService from '../../../../../servicios/UtilsService';
 
 const initialValuesElemento = {
     "id": "",

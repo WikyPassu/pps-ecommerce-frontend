@@ -8,13 +8,13 @@ import AdminHomePage from "./code/admin/paginas/home/AdminHomePage";
 import CajaPage from "./code/frontend/paginas/caja/CajaPage";
 import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
 
-import SampleProductos from './samples/productos.json';
-import SampleFacturas from './samples/facturas.json';
-import SampleServicios from './samples/servicios.json';
-import SampleClientes from './samples/clientes.json';
-import SampleEmpleados from './samples/empleados.json';
-import SampleConsumibles from './samples/consumibles.json';
-import SampleTurnos from './samples/turnos.json';
+// import SampleProductos from './samples/productos.json';
+// import SampleFacturas from './samples/facturas.json';
+// import SampleServicios from './samples/servicios.json';
+// import SampleClientes from './samples/clientes.json';
+// import SampleEmpleados from './samples/empleados.json';
+// import SampleConsumibles from './samples/consumibles.json';
+// import SampleTurnos from './samples/turnos.json';
 
 
 import ProductoService from "./code/servicios/ProductoService";
@@ -27,19 +27,23 @@ import ClienteService from "./code/servicios/ClienteService";
 import EmpleadoService from "./code/servicios/EmpleadoService";
 import ConsumibleService from "./code/servicios/ConsumibleService";
 import TurnoService from "./code/servicios/TurnoService";
+import Loading from "./code/frontend/componentes/loading/Loading";
+
 
 
 function App() {
-  ProductoService.productos = SampleProductos;
-  ServicioService.servicios = SampleServicios;
-  FacturasService.facturas = SampleFacturas;
-  ClienteService.clientes = SampleClientes;
-  EmpleadoService.empleados = SampleEmpleados;
-  ConsumibleService.consumibles = SampleConsumibles;
-  TurnoService.turnos = SampleTurnos;
+  ProductoService.iniciarServicio();
+  ServicioService.iniciarServicio();
+  FacturasService.iniciarServicio();
+  ClienteService.iniciarServicio();
+  EmpleadoService.iniciarServicio();
+  ConsumibleService.iniciarServicio();
+  TurnoService.iniciarServicio();
 
   return (
     <div className="App">
+
+      <Loading/>
       <Router>
         <Route path="/" exact><Redirect to="/home" /></Route>
         <Route path="/home" component={HomePage}></Route>

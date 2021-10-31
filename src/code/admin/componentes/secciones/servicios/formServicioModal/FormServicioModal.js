@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './FormServicioModal.css';
-import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Image } from 'react-bootstrap';
-import FacturasService from '../../../../../servicios/VentasService';
-import { BsFillPersonFill } from 'react-icons/bs';
-import ProductoService from '../../../../../servicios/ProductoService';
+import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import Listado from '../../../listado/Listado';
-import ClienteService from '../../../../../servicios/ClienteService';
-import EmpleadoService from '../../../../../servicios/EmpleadoService';
 import UtilsService from '../../../../../servicios/UtilsService';
 import ServicioService from '../../../../../servicios/ServicioService';
 
@@ -48,7 +43,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
 
     const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
 
-    const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
+    //const validarInputNumber = (valor) => (valor < 0) && <Form.Text>Este campo no puede tener valores negativos</Form.Text>;
 
 
     const handleSubmit = (e) => {
@@ -75,7 +70,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
     const editarDetalleElemento = () => {
         setListaDetalleElemento((listaDetalleElemento) => {
             return listaDetalleElemento.map((r) => {
-                return (r.id == detalleElemento.id) ? detalleElemento : r;
+                return (r.id === detalleElemento.id) ? detalleElemento : r;
             });
         })
         setElemento((elemento) => {
@@ -153,7 +148,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             </Form.Select>
                         </Form.Group>
                     </Row>
-                    {elemento.imagen && <><br /> <img src={elemento.imagen} height="150" /><br /></>}
+                    {elemento.imagen && <><br /> <img src={elemento.imagen} alt={elemento.nombre} height="150" /><br /></>}
                     {elementoParaModificar && <>
                         <br />
                         <Row>

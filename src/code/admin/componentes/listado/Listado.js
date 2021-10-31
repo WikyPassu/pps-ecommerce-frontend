@@ -18,8 +18,8 @@ function getColumnas(atributos = [],acciones) {
  * @returns Se devuelve el valor procesado. Si no se encontro ninguna funcion, se devolvera valor tal como ingresó.
  */
 function changeValuesByFunc(value,object,columnaIndex,attrFuncs){
-  if(columnaIndex != undefined && attrFuncs){
-    let funcList = attrFuncs.filter((c)=>c.columnaIndex == columnaIndex);
+  if(columnaIndex !== undefined && attrFuncs){
+    let funcList = attrFuncs.filter((c)=>c.columnaIndex === columnaIndex);
     if(funcList.length){
       return funcList[0].attrFunc(value,object);
     }
