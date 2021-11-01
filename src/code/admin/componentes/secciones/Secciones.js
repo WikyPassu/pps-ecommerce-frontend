@@ -7,6 +7,7 @@ import './Secciones.css';
 import Empleados from './empleados/Empleados';
 import Consumibles from './consumibles/Consumibles';
 import Turnos from './turnos/Turnos';
+import Storefront from './storefront/Storefront';
 export default function Secciones() {
 
   return (
@@ -44,6 +45,11 @@ export default function Secciones() {
       <Tab eventKey="consumibles" title="Consumibles">
         <div className="tab-container">
           <Consumibles/>
+        </div>
+      </Tab>
+      <Tab eventKey="storefront" title="Storefront">
+        <div className="tab-container">
+          <Storefront/>
         </div>
       </Tab>
     </Tabs>

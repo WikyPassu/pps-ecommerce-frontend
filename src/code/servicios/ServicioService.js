@@ -52,6 +52,15 @@ export default class ServicioService {
 	}
 
 	/**
+	 * @todo Obtener servicios ordenados con los servicios cargados en el servicio. No usar backend
+	 * @param {*} tipoOrden RECIENTES | MAYOR_PRECIO | MENOR_PRECIO
+	 * @returns 
+	 */
+	static getServiciosOrdenados(tipoOrden){
+		return this.servicios;
+	}
+
+	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
@@ -88,7 +97,6 @@ export default class ServicioService {
 		console.log("Servicio Encontrado: ", servicio);
 		console.log("Resenia a agregar: ", resenia);
 		if (servicio) {
-
 			servicio.resenias.push(resenia);
 			this.modifyServicio(servicio);
 			this.notifySubscribers();

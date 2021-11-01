@@ -12,6 +12,8 @@
     padding: 30px;
     text-align: center;
     font-weight: bold;
+    animation-duration: 0.3s;
+    animation-name: slidein;
 }
 .loading .svg{
     display:block;
@@ -20,6 +22,12 @@
     height: 200px;
 }
 
-@media (max-width:575px) {
-    
+@keyframes slidein {
+    from {
+        opacity: 0;
+    }
+  
+    to {
+        opacity: 1;
+    }
 }

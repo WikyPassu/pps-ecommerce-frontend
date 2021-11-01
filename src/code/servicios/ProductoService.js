@@ -45,8 +45,17 @@ export default class ProductoService {
 	 * @todo Obtener mas vendido. Si el numero de ventas son iguales, agarrar cualquiera
 	 * @returns 
 	 */
-	static getMasVendido(){
+	static getMasVendido() {
 		return this.productos[0];
+	}
+
+	/**
+	 * @todo Obtener productos ordenados con los productos cargados en el servicio. No usar backend
+	 * @param {*} tipoOrden RECIENTES | MAYOR_PRECIO | MENOR_PRECIO
+	 * @returns 
+	 */
+	static getProductosOrdenados(tipoOrden) {
+		return this.productos;
 	}
 
 	/**

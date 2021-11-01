@@ -21,32 +21,30 @@ function ServicioPage() {
   const history = useHistory();
   let query = useQuery();
   console.log(query.get("id"))
-  const idServicio = ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404")
-  const [servicio, setServicio ] = useState(idServicio) 
+  const servicioEncontrado = ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
+  const [servicio, setServicio ] = useState(servicioEncontrado);
 
   ServicioService.subscribe(()=>{
-    setServicio(ServicioService.getServicioPorId(query.get("id")));
+    const servicioActualizado = ServicioService.getServicioPorId(query.get("id"));
+    //console.log("servicioa ctualizado",servicioActualizado.resenias)
+    setServicio(servicioActualizado);
   })
 
-  //useEffect(()=>{},[]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
   }
 
-
   const validarUsuarioParaResenia = ()=>{
-    // return true
     if(ClienteService.getUsuario()){
       return ClienteService.isDisponibleParaResenia(ClienteService.getUsuario(),servicio.id);
     }
     return false;
   }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  })
 
   return (
     servicio ? <>
@@ -57,7 +55,6 @@ function ServicioPage() {
           <h1 className="item titulo">{servicio.nombre}</h1>
           <p className="item descripcion">{servicio.descripcion}</p>
           <div className="item precio">
-            {/* <label className="label">${servicio.precio}</label> */}
             <br /><hr />
           </div>
           <div className="item form">
@@ -70,7 +67,7 @@ function ServicioPage() {
             { validarUsuarioParaResenia() ? <AgregarResenia idServicio={servicio.id}/>: ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
-            <ListaResenias listaResenias={ServicioService.getResenias(servicio.id)} />
+            <ListaResenias listaResenias={servicio.resenias} />
           </div>
         </div>
       </div>

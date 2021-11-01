@@ -35,6 +35,30 @@
     /* background: rgba(0, 0, 0, 0.568); */
 }
 
+.home-carrusel .carousel-control-next{
+    background: linear-gradient(270deg, black, transparent 80%);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.home-carrusel .carousel-control-next:hover{
+    opacity: .7;
+}
+.home-carrusel .carousel-control-next:focus{
+    opacity: .7;
+}
+
+.home-carrusel .carousel-control-prev{
+    background: linear-gradient(90deg, black, transparent 80%);
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.home-carrusel .carousel-control-prev:hover{
+    opacity: .7;
+}
+.home-carrusel .carousel-control-prev:focus{
+    opacity: .7;
+}
+
 @media (max-width:575px) {
     .home-carrusel .carrusel{
         border-radius: 0 !important;

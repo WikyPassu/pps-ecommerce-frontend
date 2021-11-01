@@ -42,7 +42,6 @@ function App() {
 
   return (
     <div className="App">
-
       <Loading/>
       <Router>
         <Route path="/" exact><Redirect to="/home" /></Route>
