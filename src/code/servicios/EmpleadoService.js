@@ -79,22 +79,34 @@ export default class EmpleadoService {
  * @param {*} clave 
  * @returns 
  */
-	static login(correo, clave) {
+	static async login(correo, clave) {
+		return true;
+	}
+
+
+	/**
+	 * @todo Contecar con el backend y guardar usuario en las cookies y la DB. Guardar usuario en la variable usuario
+	 * @param {*} newUser 
+	 * @returns true si el logeo fue exitoso. False en caso contrario
+	 */
+	static async signUp(newUser) {
+		this.usuario = newUser;
 		return true;
 	}
 
 	/**
 	 * @todo QUE LO VERIFIQUE BUSCANDO SI ESTA EL USUARIO EN LAS COOKIES.
-	 * @returns 
+	 * @returns El usuario de empelado o null.
 	 */
-	static isLogged() {
-		return true;
-	}
+	static getUsuario() {
+		return this.usuario;
+	};
 
 	/**
 	  * @todo Destruye la cookie de la sesion y recarga la pagina
 	  */
-	static cerrarSesion() {
+	static async cerrarSesion() {
+		this.usuario = null;
 
 	}
 

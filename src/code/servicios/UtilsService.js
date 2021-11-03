@@ -1,5 +1,5 @@
 console.log('Utils service iniciado');
-
+const URLAPI = "https://api-ppc.herokuapp.com";
 /**
  * Contiene un conjunto de herramientas para propositos generales.
  */
@@ -44,6 +44,16 @@ export default class UtilsService{
             }
         }
         return (new Date(parseInt(timeStampString))).toLocaleString();
+    }
+
+    /**
+     * @todo Agregar todas las urls que faltan. Asegurarse de que tengan un nombre de atributo acorde.
+     * @returns Devuelve un objeto con todas las url de la api.
+     */
+    static getUrlsApi(){
+        return {
+            realizarPago:URLAPI+"/metodoPago/realizarPago"
+        }
     }
 
 }

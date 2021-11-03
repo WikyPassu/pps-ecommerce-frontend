@@ -58,4 +58,31 @@ export default class FacturasService{
 		this.facturas = this.facturas.filter((c)=> (c.id !== id));
 		this.notifySubscribers();
 	}
+
+	// static async realizarPago(items = []){
+	// 	if(items.length > 0){
+	// 		fetch(urlPago,{
+	// 			method: 'POST', // *GET, POST, PUT, DELETE, etc.
+	// 			//mode: 'cors', // no-cors, *cors, same-origin
+	// 			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+	// 			credentials: 'same-origin', // include, *same-origin, omit
+	// 			headers: {
+	// 				'Accept': 'application/json',
+	// 			  'Content-Type': 'application/json'
+	// 			},
+	// 			body:JSON.stringify({productos:CarritoService.getItems()})
+	// 		})
+	// 		.then(async (res)=>{
+	// 			if(res.ok){
+	// 				let jsonData = await res.json();
+	// 				console.log(jsonData);
+	// 				window.location.href = jsonData.mercadoPago.response.init_point;
+	// 			}
+	// 			else{
+	// 				console.log(res);
+	// 			}
+	// 		})
+	// 	}
+	// 	Promise.reject({message:"No puede realizarse un pago si no se ha seleccionado al menos un item"});
+	// }
 }

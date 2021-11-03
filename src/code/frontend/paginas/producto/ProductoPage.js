@@ -6,6 +6,7 @@ import CarritoService from '../../../servicios/CarritoService';
 import { useHistory, useLocation } from 'react-router';
 import ProductoService from '../../../servicios/ProductoService';
 import FormularioCompra from '../../componentes/producto/formularioCompra/FormularioCompra';
+import ClienteService from '../../../servicios/ClienteService';
 
 /**
  * Obtiene la query de la url
@@ -22,7 +23,7 @@ function ProductoPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    CarritoService.addItem(productoActual, e.target.cantidad.value);
+    CarritoService.addItem(productoActual, parseInt(e.target.cantidad.value) );
   }
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function ProductoPage(props) {
             <br /><hr />
           </div>
           <div className="item form">
-            <FormularioCompra onSubmit={handleSubmit} />
+            {ClienteService.getUsuario() ? <FormularioCompra onSubmit={handleSubmit} /> : <p style={{color:"red"}}>Deberá iniciar sesión o registrarse para poder comprar un producto</p>}
           </div>
         </div>
         {/* <div>

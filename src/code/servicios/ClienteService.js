@@ -81,18 +81,9 @@ export default class ClienteService{
 	 * @todo Contecar con el backend y guardar usuario en las cookies. Guardar usuario en la variable usuario
 	 * @param {*} correo 
 	 * @param {*} clave 
-	 * @returns 
+	 * @returns true si el logeo fue exitoso. False en caso contrario
 	 */
-	static login(correo, clave){
-		return true;
-	}
-	
-	/**
-	 * @todo QUE LO VERIFIQUE BUSCANDO SI ESTA EL USUARIO EN LAS COOKIES.
-	 * @returns El usuario de cliente o null.
-	 */
-	static getUsuario(){
-		//HARDCODEADO
+	static async login(correo, clave){
 		this.usuario = {
 			"id":"cli02",
 			"nombre":"John",
@@ -116,14 +107,33 @@ export default class ClienteService{
 			],
 			"estado":"ACTIVO"
 		};
+		
+		return true;
+	}
+
+	/**
+	 * @todo Contecar con el backend y guardar usuario en las cookies y la DB. Guardar usuario en la variable usuario
+	 * @param {*} newUser 
+	 * @returns true si el logeo fue exitoso. False en caso contrario
+	 */
+	static async signUp(newUser){
+		this.usuario = newUser;
+		return true;
+	}
+	
+	/**
+	 * @todo QUE LO VERIFIQUE BUSCANDO SI ESTA EL USUARIO EN LAS COOKIES.
+	 * @returns El usuario de cliente o null.
+	 */
+	static getUsuario(){
 		return this.usuario;
 	};
 
 	/**
 	 * @todo Destruye la cookie de la sesion y recarga la pagina
 	 */
-	static cerrarSesion(){
-
+	static async cerrarSesion(){
+		this.usuario = null;
 	}
 
 }

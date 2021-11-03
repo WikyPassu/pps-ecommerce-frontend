@@ -20,7 +20,6 @@ export default class ServicioService {
 	static async iniciarServicio() {
 		console.log('Servicio servicios iniciado');
 		this.servicios = samples;
-
 		return samples;
 	}
 
@@ -53,7 +52,7 @@ export default class ServicioService {
 
 	/**
 	 * @todo Obtener servicios ordenados con los servicios cargados en el servicio. No usar backend
-	 * @param {*} tipoOrden RECIENTES | MAYOR_PRECIO | MENOR_PRECIO
+	 * @param {*} tipoOrden MAS_VENDIDOS | MAYOR_PRECIO | MENOR_PRECIO
 	 * @returns 
 	 */
 	static getServiciosOrdenados(tipoOrden){

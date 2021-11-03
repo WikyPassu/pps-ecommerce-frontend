@@ -29,6 +29,8 @@
     text-shadow: 1px 1px 8px black;
     backdrop-filter: blur(10px) brightness(0.7);
     padding-left: 30px;
+    padding-right: 30px;
+    width: fit-content;
     margin-bottom: 20px;
     border-radius: 15px;
     

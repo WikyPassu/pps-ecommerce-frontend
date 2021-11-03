@@ -51,7 +51,7 @@ export default class ProductoService {
 
 	/**
 	 * @todo Obtener productos ordenados con los productos cargados en el servicio. No usar backend
-	 * @param {*} tipoOrden RECIENTES | MAYOR_PRECIO | MENOR_PRECIO
+	 * @param {*} tipoOrden MAS_VENDIDOS | MAYOR_PRECIO | MENOR_PRECIO
 	 * @returns 
 	 */
 	static getProductosOrdenados(tipoOrden) {

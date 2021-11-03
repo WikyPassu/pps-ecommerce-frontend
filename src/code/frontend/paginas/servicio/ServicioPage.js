@@ -26,17 +26,17 @@ function ServicioPage() {
 
   ServicioService.subscribe(()=>{
     const servicioActualizado = ServicioService.getServicioPorId(query.get("id"));
-    //console.log("servicioa ctualizado",servicioActualizado.resenias)
-    setServicio(servicioActualizado);
+    setServicio((servicio)=>{
+      return {...servicio,resenias:servicioActualizado.resenias};
+  });
   })
 
   useEffect(() => {
     window.scrollTo(0, 0);
   })
 
-  const handleSubmit = (e) => {
+  const handlerSubmit = (e) => {
     e.preventDefault();
-    e.stopPropagation();
   }
 
   const validarUsuarioParaResenia = ()=>{
@@ -44,6 +44,12 @@ function ServicioPage() {
       return ClienteService.isDisponibleParaResenia(ClienteService.getUsuario(),servicio.id);
     }
     return false;
+  }
+
+  const handlerSubmitResenia = (resenia)=>{
+    resenia.usuario = ClienteService.getUsuario();
+    ServicioService.addResenia(resenia,servicio.id);
+
   }
 
   return (
@@ -58,13 +64,13 @@ function ServicioPage() {
             <br /><hr />
           </div>
           <div className="item form">
-            <FormularioCompra onSubmit={handleSubmit} />
+            {ClienteService.getUsuario() ? <FormularioCompra onSubmit={handlerSubmit} /> : <p style={{color:"red"}}>Deberá iniciar sesión o registrarse para poder pedir un turno de este servicio</p>}
           </div>
         </div>
         <div>
           <div className="item-lista-resenias">
             <br />
-            { validarUsuarioParaResenia() ? <AgregarResenia idServicio={servicio.id}/>: ""}
+            { validarUsuarioParaResenia() ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio.id}/>: ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
             <ListaResenias listaResenias={servicio.resenias} />

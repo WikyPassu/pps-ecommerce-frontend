@@ -1,6 +1,6 @@
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import "./FormularioCompra.css";
-export default function FormularioCompra({ onSubmit, onChange }) {
+export default function     FormularioCompra({ onSubmit, onChange }) {
     return <Form noValidate onSubmit={onSubmit} className="formulario-compra">
         <Form.Group as={Row} controlId="formHorizontalEmail">
             <Row sm={2}>
@@ -12,6 +12,7 @@ export default function FormularioCompra({ onSubmit, onChange }) {
                 </Col>
             </Row>
             <Row>
+
                 <div className="grupo-botones">
                     <Button type="submit" size="lg">Agregar al Carrito</Button>
                 </div>

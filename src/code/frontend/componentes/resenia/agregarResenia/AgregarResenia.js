@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import ClienteService from '../../../../servicios/ClienteService';
-import ServicioService from '../../../../servicios/ServicioService';
-//import UtilsService from '../../../../servicios/UtilsService';
 import './AgregarResenia.css';
 
 const initialValuesElemento = {
-    "usuario": ClienteService.getUsuario(),
     "id":Date.now(),
     "comentario":"",
     "fecha":Date.now(),
     "estado":"PENDIENTE"
 };
 
-export default function AgregarResenia({idServicio, onUpdate}) {
+export default function AgregarResenia({idServicio, onSubmit}) {
     const [resenia, setResenia] = useState(initialValuesElemento);
-
     const handlerChange = ({target}) => {
         let {value} = target;
         setResenia((resenia)=>{
@@ -24,14 +19,9 @@ export default function AgregarResenia({idServicio, onUpdate}) {
     }
 
     const handlerSubmit = (e) => {
-        // UtilsService.setLoading(true);
         e.preventDefault();
-        setResenia(initialValuesElemento);
-        ServicioService.addResenia(resenia,idServicio);
-		// setTimeout(()=>{
-		// 	UtilsService.setLoading(false);
-		// },2000);
-        //onUpdate();
+        onSubmit(resenia);
+        
     }
     return (
         <Form onSubmit={handlerSubmit}>

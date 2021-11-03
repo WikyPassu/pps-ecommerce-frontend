@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, InputGroup, FormControl } from 'react-bootstrap';
 import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-icons/bs';
 import { MdLocalShipping, MdMail } from 'react-icons/md';
+import { useHistory } from 'react-router';
 import CarritoService from '../../../../servicios/CarritoService';
 import ClienteService from '../../../../servicios/ClienteService';
 import './FormularioFactura.css';
@@ -9,7 +10,7 @@ import './FormularioFactura.css';
 const initialValuesElemento = {
     id: new Date().getTime(),
     "total": 0,
-    "usuarioRegistrado": ClienteService.getUsuario(),
+    "usuarioRegistrado": ClienteService.getUsuario() ?? {},
     "empleado": null,
     "fecha": null,
     "detalleFactura": [],
@@ -18,8 +19,21 @@ const initialValuesElemento = {
 
 function FormularioFactura() {
     
-    const [factura] = useState(initialValuesElemento); //useState(ClienteService.getUsuario());
+    const [factura,setFactura] = useState(initialValuesElemento); //useState(ClienteService.getUsuario());
+    const history = useHistory();
 
+    useEffect(()=>{
+        const usuarioLogeado = ClienteService.getUsuario();
+        if(initialValuesElemento.usuarioRegistrado == null){
+            history.push("/");
+        }
+        else{
+            setFactura((factura)=>{
+                return {...factura,usuarioRegistrado:usuarioLogeado};
+            })
+        }
+
+    },[history])
     const handlerChange = ({target})=>{
         let {value} = target;
         if(value === "a_domicilio"){

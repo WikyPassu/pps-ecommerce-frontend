@@ -38,7 +38,7 @@ export default class CarritoService{
 		this.items_carrito_compras.push({
 			id: (new Date()).getTime(),
 			item,
-			cantidad
+			cantidad:parseInt(cantidad) 
 		});
 
 		this.notifySubscribers();

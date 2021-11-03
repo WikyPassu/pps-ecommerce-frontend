@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import './HomeNavbar.css';
@@ -10,14 +10,23 @@ import UtilsService from '../../../servicios/UtilsService';
 
 export default function HomeNavbar() {
     const [modalShow, setModalShow] = React.useState(false);
-    const usuarioLogeado = ClienteService.getUsuario();
+    const [usuarioLogeado, setUsuarioLogeado] = useState(ClienteService.getUsuario());//ClienteService.getUsuario();
     const history = useHistory();
+
+    // useEffect(() => {
+    //     usuarioLogeado = ClienteService.getUsuario();
+    // })
 
     const cerrarSesion = ()=>{
         UtilsService.setLoading(true);
-        setTimeout(()=>{
-            UtilsService.setLoading(false);
-        },5000)
+        ClienteService.cerrarSesion()
+        .then(()=>{
+            setUsuarioLogeado(ClienteService.getUsuario());
+            setTimeout(()=>{
+                UtilsService.setLoading(false);
+                history.push("/")
+            },5000)
+        })
         //ClienteService.cerrarSesion()
     }
     return (
@@ -43,6 +52,7 @@ export default function HomeNavbar() {
                                     <Nav>
                                         <Nav.Link variant="end" onClick={cerrarSesion} href="#login">Cerrar Sesion</Nav.Link>
                                     </Nav>
+                                    <Carrito />
                                 </>
                                 :
                                 <Nav>
@@ -50,11 +60,8 @@ export default function HomeNavbar() {
                                 </Nav>
                         }
 
-                        <Nav>
-                            {/* <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">[Nombre Usuario]</Nav.Link>
-                            <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">Cerrar Sesion</Nav.Link> */}
-                        </Nav>
-                        <Carrito />
+
+                        
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

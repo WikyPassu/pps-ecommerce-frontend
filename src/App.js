@@ -50,7 +50,7 @@ function App() {
         <Route path="/producto" component={ProductoPage} />
         <Route path="/servicio" component={ServicioPage} />
         <Route exact path="/caja" component={CajaPage}></Route>
-        <Route exact path="/caja/resultado" component={ResultadoTransaccionPage}></Route>
+        <Route exact path="/caja/resultado/:resultado" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>
         <Route path="/admin/home" component={AdminHomePage}></Route>
         <Route exact path="/admin"><Redirect to="/admin/login" /></Route>

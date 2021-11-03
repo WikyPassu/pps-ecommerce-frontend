@@ -1,13 +1,70 @@
 import React, { useState } from 'react';
 import './LoginModal.css';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
+import { useHistory } from 'react-router';
+import ClienteService from '../../../servicios/ClienteService';
 
+const initialValuesFormLogin = {
+    correo:"",
+    clave:""
+}
+
+const initialValuesFormRegistracion = {
+    //"id":"cli02",
+    "nombre":"",
+    "apellido":"",
+    "dni":null,
+    "correo":"",
+    "clave":"",
+    "domicilio":"",
+    "localidad":"",
+    "telefono":null,
+    "codigoPostal":"",
+    "perrito":[],
+    "estado":"ACTIVO"
+}
 
 export default function LoginModal(props) {
     const [modoRegistracion, setModoRegistracion] = useState(false);
+    const [formLogin, setFormLogin] = useState(initialValuesFormLogin);
+    const [formRegistracion, setFormRegistracion] = useState(initialValuesFormRegistracion);
+
+    const history = useHistory();
 
     const cambiarModo = () => {
         setModoRegistracion(!modoRegistracion);
+    }
+
+    const handlerChangeLogin = (e) => {
+        e.preventDefault();
+        const {value,name} = e.target;
+
+        setFormLogin((formLogin)=>{
+            return {...formLogin, [name]:value};
+        })
+    }
+
+    const handlerChangeRegistracion = (e) => {
+        e.preventDefault();
+        const {value,name} = e.target;
+
+        setFormRegistracion((formRegistracion)=>{
+            return {...formRegistracion, [name]:value};
+        })
+    }
+
+    const handlerSubmitLogin = () => {
+        ClienteService.login(formLogin.correo,formLogin.clave)
+        .then(()=>{
+            history.push("/");
+        });
+    }
+
+    const handlerSubmitRegistracion = ()=>{
+        ClienteService.signUp(formRegistracion)
+        .then(()=>{
+            history.push("/");
+        })
     }
     return (
         <Modal
@@ -22,12 +79,12 @@ export default function LoginModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={modoRegistracion ? handlerSubmitRegistracion : handlerSubmitLogin}>
                     <Row>
                         <Col>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Correo</Form.Label>
-                                <Form.Control type="email" placeholder="Ingrese correo" />
+                                <Form.Control type="email" onChange={modoRegistracion? handlerChangeRegistracion : handlerChangeLogin} name="correo" placeholder="Ingrese correo" />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -35,7 +92,7 @@ export default function LoginModal(props) {
                         <Col>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label varaint="pink">Contraseña</Form.Label>
-                                <Form.Control type="password" placeholder="Ingrese contraseña" />
+                                <Form.Control type="password" onChange={modoRegistracion? handlerChangeRegistracion : handlerChangeLogin} name="clave" placeholder="Ingrese contraseña" />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -51,51 +108,51 @@ export default function LoginModal(props) {
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>Nombre</Form.Label>
-                                        <Form.Control type="text" placeholder="Ingrese correo" />
+                                        <Form.Control name="nombre" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>Apellido</Form.Label>
-                                        <Form.Control type="text" placeholder="Ingrese correo" />
+                                        <Form.Control name="apellido" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>DNI</Form.Label>
-                                        <Form.Control type="number" placeholder="Ingrese correo" />
+                                        <Form.Control name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>Domicilio</Form.Label>
-                                        <Form.Control type="text" placeholder="Ingrese correo" />
+                                        <Form.Control name="domicilio" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>Localidad</Form.Label>
-                                        <Form.Control type="text" placeholder="Ingrese correo" />
+                                        <Form.Control name="localidad" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>Codigo Postal</Form.Label>
-                                        <Form.Control type="text" placeholder="Ingrese correo" />
+                                        <Form.Control name="codigoPostal" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Label>Telefono</Form.Label>
-                                        <Form.Control type="number" placeholder="Ingrese correo" />
+                                        <Form.Control name="telefono" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -114,8 +171,6 @@ export default function LoginModal(props) {
                             </Row>
                         </>
                     }
-
-
                     <br />
                     <Button onClick={props.onHide} variant="primary" type="submit">
                         Enviar
