@@ -10,12 +10,12 @@ import ConsumibleService from '../../../../../servicios/ConsumibleService';
 import TurnoService from '../../../../../servicios/TurnoService';
 
 const initialValuesElemento = {
-    "id": Date.now(),
-    "servicio": {id:""},
+    "_id": Date.now(),
+    "servicio": {_id:""},
     "dniCliente": 0,
     "dniEmpleado": 0,
     "perrito": {
-        id:""
+        _id:""
     },
     "consumibles": [],
     "fecha": Date.now(),
@@ -24,10 +24,10 @@ const initialValuesElemento = {
 };
 
 const initialValuesDetalleElemento = {
-    "id": Date.now(),
+    "_id": Date.now(),
     "cantidad": 0,
     "consumible": {
-        "id": "",
+        "_id": "",
         "nombre": ""
     }
 };
@@ -122,7 +122,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     }
     const handleDeleteClick = (e) => {
         setListaDetalleElemento((listaDetalleElemento) => {
-            return listaDetalleElemento.filter((c) => c.id !== e.id);
+            return listaDetalleElemento.filter((c) => c._id !== e._id);
         });
         setElemento((elemento) => {
             elemento.listaDetalleElemento = listaDetalleElemento;
@@ -133,7 +133,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     // const editarDetalleElemento = () => {
     //     setListaDetalleElemento((listaDetalleElemento) => {
     //         return listaDetalleElemento.map((r) => {
-    //             return (r.id === detalleElemento.id) ? detalleElemento : r;
+    //             return (r._id === detalleElemento._id) ? detalleElemento : r;
     //         });
     //     })
     //     setElemento((elemento) => {
@@ -169,18 +169,18 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                     {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <Row>
                         <Col sm={12}>
-                            <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio.id}>
+                            <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id}>
                                 <option>Seleccione un Servicio</option>
-                                {ServicioService.getServicios().map((p) => <option value={p.id}>{p.nombre}</option>)}
+                                {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
                             </Form.Select>
                             <br/>
                         </Col>
                     </Row>
                     <Row>
                         <Col sm={6}>
-                            <Form.Select onChange={handleChangeDetalleElemento} name="consumible" value={detalleElemento.consumible.id}>
+                            <Form.Select onChange={handleChangeDetalleElemento} name="consumible" value={detalleElemento.consumible._id}>
                                 <option>Seleccione un Consumible</option>
-                                {ConsumibleService.getConsumibles().map((p) => <option value={p.id}>{p.nombre}</option>)}
+                                {ConsumibleService.getConsumibles().map((p) => <option value={p._id}>{p.nombre}</option>)}
                             </Form.Select>
                         </Col>
                         <Col>

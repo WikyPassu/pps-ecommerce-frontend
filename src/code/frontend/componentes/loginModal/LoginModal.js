@@ -10,7 +10,7 @@ const initialValuesFormLogin = {
 }
 
 const initialValuesFormRegistracion = {
-    //"id":"cli02",
+    //"_id":"cli02",
     "nombre":"",
     "apellido":"",
     "dni":null,

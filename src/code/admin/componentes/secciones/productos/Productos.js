@@ -11,7 +11,9 @@ export default function Productos() {
   const [modalForm, setModalForm] = useState(false);
 
   ProductoService.subscribe((nuevaLista) => {
-    setLista(nuevaLista);
+    setLista(()=>{
+      return ProductoService.getProductos();
+    });
   });
   return (<>
     <label className="titulo-seccion">Productos ofrecidos</label>
@@ -32,7 +34,7 @@ export default function Productos() {
           "Precio"
         ]}
     atributos={[
-      "id",
+      "_id",
       "nombre",
       "categoria",
       "descripcion",
@@ -46,8 +48,8 @@ export default function Productos() {
         setMostrarModalModificar(true);
         setProductoModificar(e);
       }}
-      onDeleteClick={(p)=>{ProductoService.removeProducto(p.id)}}
-      attrKey="id"
+      onDeleteClick={(p)=>{ProductoService.removeProducto(p._id)}}
+      attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormProductoModal
       produtoParaModificar={productoModificar}

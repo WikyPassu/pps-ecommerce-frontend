@@ -8,7 +8,7 @@ import ClienteService from '../../../../servicios/ClienteService';
 import './FormularioFactura.css';
 
 const initialValuesElemento = {
-    id: new Date().getTime(),
+    _id: new Date().getTime(),
     "total": 0,
     "usuarioRegistrado": ClienteService.getUsuario() ?? {},
     "empleado": null,

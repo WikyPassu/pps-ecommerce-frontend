@@ -8,15 +8,6 @@ import AdminHomePage from "./code/admin/paginas/home/AdminHomePage";
 import CajaPage from "./code/frontend/paginas/caja/CajaPage";
 import ResultadoTransaccionPage from "./code/frontend/paginas/caja/resultadoTransaccion/ResultadoTransaccionPage";
 
-// import SampleProductos from './samples/productos.json';
-// import SampleFacturas from './samples/facturas.json';
-// import SampleServicios from './samples/servicios.json';
-// import SampleClientes from './samples/clientes.json';
-// import SampleEmpleados from './samples/empleados.json';
-// import SampleConsumibles from './samples/consumibles.json';
-// import SampleTurnos from './samples/turnos.json';
-
-
 import ProductoService from "./code/servicios/ProductoService";
 import NotFoundPage from "./code/frontend/paginas/notFound/NotFoundPage";
 import BusquedaPage from "./code/frontend/paginas/busqueda/BusquedaPage";
@@ -28,8 +19,6 @@ import EmpleadoService from "./code/servicios/EmpleadoService";
 import ConsumibleService from "./code/servicios/ConsumibleService";
 import TurnoService from "./code/servicios/TurnoService";
 import Loading from "./code/frontend/componentes/loading/Loading";
-
-
 
 function App() {
   ProductoService.iniciarServicio();

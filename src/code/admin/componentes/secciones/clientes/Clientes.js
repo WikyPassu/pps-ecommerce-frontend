@@ -19,7 +19,7 @@ export default function Clientes() {
       <Listado
         columnas={["DNI", "Nombre", "Apellido", "Correo", "Estado"]}
         atributos={["dni", "nombre", "apellido", "correo", "estado"]}
-        attrKey={"id"}
+        attrKey={"_id"}
         onEditClick={(c) => {
           setMostrarModalModificar(true);
           setElementoModificar(c);

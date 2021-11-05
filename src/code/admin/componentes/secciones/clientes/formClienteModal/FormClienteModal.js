@@ -8,7 +8,7 @@ import ClienteService from '../../../../../servicios/ClienteService';
 import { HiKey } from 'react-icons/hi';
 
 const initialValuesElemento = {
-    id: new Date().getTime(),//El id lo debe crear mongito
+    _id: new Date().getTime(),//El id lo debe crear mongito
     "nombre": "",
     "apellido": "",
     "dni": 0,
@@ -65,7 +65,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
         setListaDetalleElemento((listaDetalleElemento) => {
             return [...listaDetalleElemento, {
                 ...detalleElemento,
-                id: Date.now()
+                _id: Date.now()
             }];
         })
         setDetalleElemento(initialValuesDetalleElemento);
@@ -77,7 +77,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
     }
     const handleDeleteClick = (e) => {
         setListaDetalleElemento((listaDetalleElemento) => {
-            return listaDetalleElemento.filter((c) => c.id !== e.id);
+            return listaDetalleElemento.filter((c) => c._id !== e._id);
         })
     }
     return (

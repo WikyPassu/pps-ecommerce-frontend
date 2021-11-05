@@ -4,10 +4,10 @@ import UtilsService from '../../../servicios/UtilsService';
 import './Resenia.css';
 
 export default function Resenia(props) {
-    let { usuario, codigo, comentario, fecha } = props.resenia;
+    let { usuario, _id, comentario, fecha } = props.resenia;
     const [resenia] = useState({
         usuario: usuario ?? "error",
-        codigo: codigo ?? "error",
+        _id: _id ?? "error",
         comentario: comentario ?? "error",
         fecha: UtilsService.timeStampToStringDate(fecha) //fechaParser(fecha)
     });

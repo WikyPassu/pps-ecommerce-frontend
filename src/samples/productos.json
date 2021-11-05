@@ -1,6 +1,6 @@
 [
     {
-        "id":"a1",
+        "_id":"a1",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Uno",
         "categoria":"Categoria Uno",
@@ -13,26 +13,26 @@
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "id":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }
         ]
     },
     {
-        "id":"a2",
+        "_id":"a2",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Dos",
         "categoria":"Categoria Uno",
@@ -45,26 +45,26 @@
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "id":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }
         ]
     },
     {
-        "id":"a3",
+        "_id":"a3",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Tercero (Titulo Largo)",
         "categoria":"Categoria Dos",
@@ -77,26 +77,26 @@
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "id":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }
         ]
     },
     {
-        "id":"a4",
+        "_id":"a4",
         "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         "nombre":"El Producto Cuarto (Titulo Largo)",
         "categoria":"Categoria Dos",
@@ -109,19 +109,19 @@
         "resenias":[
             {
                 "usuario": {"nombre":"Juan","apellido":"Perez"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                "id":"a1",
+                "_id":"a1",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             },
             {
                 "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                "id":"a2",
+                "_id":"a2",
                 "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                 "fecha":1631154882
             }

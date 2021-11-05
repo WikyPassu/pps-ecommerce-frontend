@@ -7,7 +7,7 @@ export default function Resultados({busqueda}){
     return <>
         <h2>Resultados de "{busqueda}"</h2>
         <div className="resultados">
-            {lista.map((c) => { return <Producto producto={c} key={c.codigo} /> })}
+            {lista.map((c) => { return <Producto producto={c} key={c._id} /> })}
         </div>
     </>
 }

@@ -29,8 +29,8 @@ export default class ServicioService {
 		return this.servicios;
 	}
 
-	static getServicioPorId(id) {
-		return this.servicios.filter(c => c.id === id)[0];
+	static getServicioPorId(_id) {
+		return this.servicios.filter(c => c._id === _id)[0];
 	}
 
 	/**
@@ -38,7 +38,7 @@ export default class ServicioService {
 	 * @param {*} consulta 
 	 * @returns 
 	 */
-	static getServiciosPorBusqueda(consulta) {
+	static async getServiciosPorBusqueda(consulta) {
 		return this.servicios;
 	}
 
@@ -63,7 +63,7 @@ export default class ServicioService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addServicio(newItem) {
+	static async addServicio(newItem) {
 		this.servicios.push(newItem);
 		this.notifySubscribers();
 	}
@@ -72,17 +72,17 @@ export default class ServicioService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyServicio(item) {
-		this.servicios = this.servicios.map((c) => (c.id === item.id) ? item : c);
+	static async modifyServicio(item) {
+		this.servicios = this.servicios.map((c) => (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	static removeServicio(id) {
-		this.servicios = this.servicios.filter((c) => (c.id !== id));
+	static async removeServicio(_id) {
+		this.servicios = this.servicios.filter((c) => (c._id !== _id));
 		this.notifySubscribers();
 	}
 
@@ -91,7 +91,7 @@ export default class ServicioService {
 	 * @param {*} resenia 
 	 * @param {*} idServicio 
 	 */
-	static addResenia(resenia, idServicio) {
+	static async addResenia(resenia, idServicio) {
 		let servicio = this.getServicioPorId(idServicio);
 		console.log("Servicio Encontrado: ", servicio);
 		console.log("Resenia a agregar: ", resenia);
@@ -117,9 +117,9 @@ export default class ServicioService {
 	 * @param {*} idResenia 
 	 * @param {*} idServicio 
 	 */
-	static removeResenia(idResenia, idServicio) {
+	static async removeResenia(idResenia, idServicio) {
 		let servicio = this.getServicioPorId(idServicio);
-		servicio.resenias = servicio.resenias.filter(r => r.id !== idResenia);
+		servicio.resenias = servicio.resenias.filter(r => r._id !== idResenia);
 		this.modifyServicio(servicio);
 		this.notifySubscribers();
 	}

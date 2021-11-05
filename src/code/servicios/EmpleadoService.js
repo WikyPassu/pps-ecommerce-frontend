@@ -30,8 +30,8 @@ export default class EmpleadoService {
 		return this.empleados;
 	}
 
-	static getEmpleadoById(id) {
-		return this.empleados.filter(c => c.id === id)[0];
+	static getEmpleadoById(_id) {
+		return this.empleados.filter(c => c._id === _id)[0];
 	}
 
 	static getEmpleadoByDNI(dni) {
@@ -42,7 +42,7 @@ export default class EmpleadoService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addEmpleado(newItem) {
+	static async addEmpleado(newItem) {
 		this.empleados.push(newItem);
 		this.notifySubscribers();
 	}
@@ -51,17 +51,17 @@ export default class EmpleadoService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyEmpleado(item) {
-		this.empleados = this.empleados.map((c) => (c.id === item.id) ? item : c);
+	static async modifyEmpleado(item) {
+		this.empleados = this.empleados.map((c) => (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	static removeEmpleado(id) {
-		let empleadoToRemove = this.getEmpleadoById(id);
+	static async removeEmpleado(_id) {
+		let empleadoToRemove = this.getEmpleadoById(_id);
 		if (empleadoToRemove.tipo === "ADMINISTRADOR") {
 			let cantidadAministradores = this.empleados.filter((c) => (c.tipo === "ADMINISTRADOR")).length;
 			if (cantidadAministradores === 1) {
@@ -69,7 +69,7 @@ export default class EmpleadoService {
 				return;
 			}
 		}
-		this.empleados = this.empleados.filter((c) => (c.id !== id));
+		this.empleados = this.empleados.filter((c) => (c._id !== _id));
 		this.notifySubscribers();
 	}
 

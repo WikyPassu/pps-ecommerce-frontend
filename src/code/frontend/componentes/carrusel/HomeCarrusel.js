@@ -10,17 +10,19 @@ function HomeCarrusel() {
     return (
         <div className="home-carrusel">
             <Carousel className="carrusel">
-                <Carousel.Item >
+                {productoMasVendido?<Carousel.Item >
                     <div
                         className="img-carousel"
                         style={{ backgroundImage: "url(" + productoMasVendido.imagen + ")" }}
                         alt={productoMasVendido.nombre}
                     ></div>
-                    <Carousel.Caption onClick={()=>history.push("producto?id="+productoMasVendido.id)} className="label">
+                    <Carousel.Caption onClick={()=>history.push("producto?id="+productoMasVendido._id)} className="label">
                         <h3>{productoMasVendido.nombre}</h3>
                         <p>Nuestro producto mas vendido</p>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item>:""}
+                {servicioMasVendido?
+                
                 <Carousel.Item >
                     <div
                         className="img-carousel"
@@ -28,11 +30,11 @@ function HomeCarrusel() {
                         alt={servicioMasVendido.nombre}
                     ></div>
 
-                    <Carousel.Caption onClick={()=>history.push("servicio?id="+servicioMasVendido.id)} className="label">
+                    <Carousel.Caption onClick={()=>history.push("servicio?id="+servicioMasVendido._id)} className="label">
                         <h3>{servicioMasVendido.nombre}</h3>
                         <p>Pruebe nuestro servicio mas valorado</p>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item>:""}
             </Carousel>
         </div>
     );

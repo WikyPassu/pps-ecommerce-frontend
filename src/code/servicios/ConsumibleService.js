@@ -28,8 +28,8 @@ export default class ConsumibleService {
 		return this.consumibles;
 	}
 
-	static getConsumiblePorId(id) {
-		return this.consumibles.filter(c => c.id === id)[0];
+	static getConsumiblePorId(_id) {
+		return this.consumibles.filter(c => c._id === _id)[0];
 	}
 
 	/**
@@ -46,16 +46,16 @@ export default class ConsumibleService {
 	 * @param {*} item 
 	 */
 	static modifyConsumible(item) {
-		this.consumibles = this.consumibles.map((c) => (c.id === item.id) ? item : c);
+		this.consumibles = this.consumibles.map((c) => (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	static removeConsumible(id) {
-		this.consumibles = this.consumibles.filter((c) => (c.id !== id));
+	static removeConsumible(_id) {
+		this.consumibles = this.consumibles.filter((c) => (c._id !== _id));
 		this.notifySubscribers();
 	}
 

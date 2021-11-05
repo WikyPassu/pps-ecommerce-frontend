@@ -4,7 +4,7 @@ import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import ProductoService from '../../../../../servicios/ProductoService';
 
 const initialValuesProducto = {
-    id: new Date().getTime(),
+    _id: new Date().getTime(),
     nombre: "",
     categoria: "",
     descripcion: "",
@@ -23,7 +23,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        //console.log(name);
+        //console.log(name,value);
         //Guardar cambios
         if (name === "existencia" || name === "existenciaMinima" || name === "existenciaMaxima") {
             console.log("name",name)
@@ -38,6 +38,12 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                 [name]: parseFloat(value)
             });
         }
+        else {
+            setProducto({
+                ...producto,
+                [name]: value
+            });
+        }
         // else if (name === "imagen") {
         //     if (files[0] !== undefined) {
         //         const reader = new FileReader();
@@ -50,12 +56,6 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
         //         reader.readAsDataURL(files[0]);
         //     }
         // }
-        else {
-            setProducto({
-                ...producto,
-                [name]: value
-            });
-        }
     }
 
     const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
@@ -112,7 +112,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                             <Form.Label htmlFor="descripcion">Descripcion</Form.Label>
                             <Form.Control
                                 name="descripcion"
-                                maxLength="50"
+                                maxLength="100"
                                 value={producto.descripcion}
                                 onChange={handleChange}
                                 as="textarea"

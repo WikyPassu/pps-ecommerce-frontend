@@ -36,7 +36,7 @@ export default class CarritoService{
 	static addItem(item,cantidad = 1) {
 		console.log("Agregando item")
 		this.items_carrito_compras.push({
-			id: (new Date()).getTime(),
+			_id: (new Date()).getTime(),
 			item,
 			cantidad:parseInt(cantidad) 
 		});
@@ -46,10 +46,10 @@ export default class CarritoService{
 
 	/**
 	 * @todo SE DEBERA GUARDAR LOS CAMBIOS EN LAS COOKIES
-	 * @param {*} id 
+	 * @param {*} _id 
 	 */
-	static removeItem(id) {
-		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c.id !== id);
+	static removeItem(_id) {
+		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c._id !== _id);
 		this.notifySubscribers();
 	}
 
@@ -59,10 +59,10 @@ export default class CarritoService{
 	 */
 	static addEnvios(precio) {
 		console.log("Agregando item")
-		let existeEnvio = this.items_carrito_compras.filter(i => i.id === "envios")[0];
+		let existeEnvio = this.items_carrito_compras.filter(i => i._id === "envios")[0];
 		if(existeEnvio == null){
 			this.items_carrito_compras.push({
-				id: "envios",
+				_id: "envios",
 				item:{
 					precio:precio,
 					nombre:"Servicio de Envios"
@@ -77,7 +77,7 @@ export default class CarritoService{
 	 * @todo SE DEBERA GUARDAR LOS CAMBIOS EN LAS COOKIES
 	 */
 	static removeEnvios(){
-		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c.id !== "envios");
+		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c._id !== "envios");
 		this.notifySubscribers();
 	}
 
@@ -89,6 +89,5 @@ export default class CarritoService{
 			return anterior + (actual.item.precio * actual.cantidad);
 		}, 0).toFixed(2));
 	}
-
 
 }

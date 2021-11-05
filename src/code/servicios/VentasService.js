@@ -28,15 +28,15 @@ export default class FacturasService{
 		return this.facturas;
 	}
 
-    static getFacturaPorId(id){
-        return this.facturas.filter(c => c.id === id)[0];
+    static getFacturaPorId(_id){
+        return this.facturas.filter(c => c._id === _id)[0];
     }
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addFactura(newItem) {
+	static async addFactura(newItem) {
 		this.facturas.push(newItem);
 		this.notifySubscribers();
 	}
@@ -45,17 +45,17 @@ export default class FacturasService{
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyFactura(item){
-		this.facturas = this.facturas.map((c)=> (c.id === item.id) ? item : c);
+	static async modifyFactura(item){
+		this.facturas = this.facturas.map((c)=> (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	static removeFactura(id) {
-		this.facturas = this.facturas.filter((c)=> (c.id !== id));
+	static async removeFactura(_id) {
+		this.facturas = this.facturas.filter((c)=> (c._id !== _id));
 		this.notifySubscribers();
 	}
 

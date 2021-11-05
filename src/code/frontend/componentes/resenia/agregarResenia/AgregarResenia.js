@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import './AgregarResenia.css';
 
 const initialValuesElemento = {
-    "id":Date.now(),
+    "_id":Date.now(),
     "comentario":"",
     "fecha":Date.now(),
     "estado":"PENDIENTE"

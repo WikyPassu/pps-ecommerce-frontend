@@ -28,7 +28,7 @@ export default function Servicios() {
           "Estado"
         ]}
     atributos={[
-      "id",
+      "_id",
       "nombre",
       "categoria",
       "descripcion",
@@ -38,8 +38,8 @@ export default function Servicios() {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p)=>{ServicioService.removeServicio(p.id)}}
-      attrKey="id"
+      onDeleteClick={(p)=>{ServicioService.removeServicio(p._id)}}
+      attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormServicioModal
       elementoParaModificar={elementoModificar}

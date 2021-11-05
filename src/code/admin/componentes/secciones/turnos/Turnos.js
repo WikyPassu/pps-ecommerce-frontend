@@ -30,7 +30,7 @@ export default function Turnos() {
           "Estado"
         ]}
     atributos={[
-      "id",
+      "_id",
       "servicio",
       "dniCliente",
       "dniEmpleado",
@@ -45,8 +45,8 @@ export default function Turnos() {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p)=>{TurnoService.removeTurno(p.id)}}
-      attrKey="id"
+      onDeleteClick={(p)=>{TurnoService.removeTurno(p._id)}}
+      attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormTurnoModal
       elementoParaModificar={elementoModificar}

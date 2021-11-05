@@ -6,7 +6,7 @@ import UtilsService from '../../../../../servicios/UtilsService';
 import ServicioService from '../../../../../servicios/ServicioService';
 
 const initialValuesElemento = {
-    id: new Date().getTime(),
+    _id: new Date().getTime(),
     nombre: "",
     categoria: "",
     descripcion: "",
@@ -17,7 +17,7 @@ const initialValuesElemento = {
 
 const initialValuesDetalleElemento = {
     "usuario": "",
-    "id": "",
+    "_id": "",
     "comentario": "",
     "estado": "",
     "fecha": Date.now()
@@ -59,7 +59,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
     }
     const handleDeleteClick = (e) => {
         setListaDetalleElemento((listaDetalleElemento) => {
-            return listaDetalleElemento.filter((c) => c.id !== e.id);
+            return listaDetalleElemento.filter((c) => c._id !== e._id);
         });
         setElemento((elemento) => {
             elemento.resenias = listaDetalleElemento;
@@ -70,7 +70,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
     const editarDetalleElemento = () => {
         setListaDetalleElemento((listaDetalleElemento) => {
             return listaDetalleElemento.map((r) => {
-                return (r.id === detalleElemento.id) ? detalleElemento : r;
+                return (r._id === detalleElemento._id) ? detalleElemento : r;
             });
         })
         setElemento((elemento) => {
@@ -154,7 +154,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                         <Row>
                             <Col className="campos-modificar-resenia">
                                 <Form.Group as={Col} className="mb-3">
-                                    <Form.Label>Reseña Seleccionada (ID): {detalleElemento.id}</Form.Label>
+                                    <Form.Label>Reseña Seleccionada (ID): {detalleElemento._id}</Form.Label>
                                 </Form.Group>
                             </Col>
                             <Col className="campos-modificar-resenia" sm={4}>
@@ -181,8 +181,8 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                     onEditClick={(e) => {
                                         setDetalleElemento(e);
                                     }}
-                                    atributos={["id", "usuario", "comentario", "fecha", "estado"]}
-                                    attrKey="id"
+                                    atributos={["_id", "usuario", "comentario", "fecha", "estado"]}
+                                    attrKey="_id"
                                     onDeleteClick={handleDeleteClick} datos={listaDetalleElemento} btnEliminar="true"></Listado>
                             </Col>
                         </Row></>}

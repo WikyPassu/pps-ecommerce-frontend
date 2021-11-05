@@ -1,6 +1,6 @@
 [
     {
-        "id":"c1",
+        "_id":"c1",
         "nombre":"Shampoo",
         "existencia":3500,
         "existenciaMinima":1000,

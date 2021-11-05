@@ -30,8 +30,8 @@ export default class ClienteService{
 		return this.clientes;
 	}
 
-    static getClienteById(id){
-        return this.clientes.filter(c => c.id === id)[0];
+    static getClienteById(_id){
+        return this.clientes.filter(c => c._id === _id)[0];
     }
 
 	static getClienteByDNI(dni){
@@ -42,7 +42,7 @@ export default class ClienteService{
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addCliente(newItem) {
+	static async addCliente(newItem) {
 		this.clientes.push(newItem);
 		this.notifySubscribers();
 	}
@@ -51,18 +51,18 @@ export default class ClienteService{
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyCliente(item){
+	static async modifyCliente(item){
 		console.log("Modificar item",item);
-		this.clientes = this.clientes.map((c)=> (c.id === item.id) ? item : c);
+		this.clientes = this.clientes.map((c)=> (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	 static removeCliente(id) {
-		this.clientes = this.clientes.filter((c)=> (c.id !== id));
+	 static async removeCliente(_id) {
+		this.clientes = this.clientes.filter((c)=> (c._id !== _id));
 		this.notifySubscribers();
 	}
 
@@ -85,7 +85,7 @@ export default class ClienteService{
 	 */
 	static async login(correo, clave){
 		this.usuario = {
-			"id":"cli02",
+			"_id":"cli02",
 			"nombre":"John",
 			"apellido":"Smith",
 			"dni":323232323,

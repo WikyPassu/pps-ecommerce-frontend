@@ -1,6 +1,6 @@
 [
     {
-        "id":"emp01",
+        "_id":"emp01",
         "nombre":"NameEmp01",
         "apellido":"SurNameEmp01",
         "dni":"43434343",
@@ -9,7 +9,7 @@
         "tipo":"ADMINISTRADOR"
     },
     {
-        "id":"emp02",
+        "_id":"emp02",
         "nombre":"NameEmp02",
         "apellido":"SurNameEmp02",
         "dni":"42424242",
@@ -18,7 +18,7 @@
         "tipo":"EMPLEADO"
     },
     {
-        "id":"emp03",
+        "_id":"emp03",
         "nombre":"NameEmp03",
         "apellido":"SurNameEmp03",
         "dni":"45454545",

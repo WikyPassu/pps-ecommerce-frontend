@@ -28,7 +28,7 @@ export default function Consumibles() {
           "Precio Unidad"
         ]}
     atributos={[
-      "id",
+      "_id",
       "nombre",
       "existencia",
       "existenciaMinima",
@@ -39,7 +39,7 @@ export default function Consumibles() {
         setElementoModificar(e);
       }}
       onDeleteClick={(p)=>{ConsumibleService.removeConsumible(p.id)}}
-      attrKey="id"
+      attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormConsumibleModal
       elementoParaModificar={elementoModificar}

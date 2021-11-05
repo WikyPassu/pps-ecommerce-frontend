@@ -3,9 +3,9 @@ import { Card, Button } from 'react-bootstrap';
 import './Producto.css';
 import { useHistory } from "react-router-dom";
 
-function useProducto({ id, nombre, descripcion, precio, imagen }) {
+function useProducto({ _id, nombre, descripcion, precio, imagen }) {
     const [producto] = useState({
-        id: id || -1,
+        _id: _id || -1,
         nombre: nombre || "Ejemplo Nombre",
         imagen: imagen || "https://miro.medium.com/max/880/0*H3jZONKqRuAAeHnG.jpg",
         descripcion: descripcion || "Una breve descripcion...",
@@ -14,7 +14,7 @@ function useProducto({ id, nombre, descripcion, precio, imagen }) {
     return producto;
 }
 export default function Producto(props) {
-    const { imagen, id, nombre, descripcion, precio } = useProducto(props.producto);
+    const { imagen, _id, nombre, descripcion, precio } = useProducto(props.producto);
     const styleImg = {
         backgroundImage: `url(${imagen})`,
         backgroundSize: "cover",
@@ -23,7 +23,7 @@ export default function Producto(props) {
     const history = useHistory();
 
     const irAlProducto = () => {
-        history.push(`/producto?id=${id}`);
+        history.push(`/producto?id=${_id}`);
     }
 
     return (

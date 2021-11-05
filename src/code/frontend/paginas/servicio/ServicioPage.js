@@ -41,14 +41,14 @@ function ServicioPage() {
 
   const validarUsuarioParaResenia = ()=>{
     if(ClienteService.getUsuario()){
-      return ClienteService.isDisponibleParaResenia(ClienteService.getUsuario(),servicio.id);
+      return ClienteService.isDisponibleParaResenia(ClienteService.getUsuario(),servicio._id);
     }
     return false;
   }
 
   const handlerSubmitResenia = (resenia)=>{
     resenia.usuario = ClienteService.getUsuario();
-    ServicioService.addResenia(resenia,servicio.id);
+    ServicioService.addResenia(resenia,servicio._id);
 
   }
 
@@ -70,7 +70,7 @@ function ServicioPage() {
         <div>
           <div className="item-lista-resenias">
             <br />
-            { validarUsuarioParaResenia() ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio.id}/>: ""}
+            { validarUsuarioParaResenia() ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio._id}/>: ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
             <ListaResenias listaResenias={servicio.resenias} />

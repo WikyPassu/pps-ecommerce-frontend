@@ -9,7 +9,7 @@ import ClienteService from '../../../../../servicios/ClienteService';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
 
 const initialValuesElemento = {
-    id: new Date().getTime(),
+    _id: new Date().getTime(),
     "total": 0,
     "usuarioRegistrado": null,
     "empleado": null,
@@ -19,7 +19,7 @@ const initialValuesElemento = {
 };
 
 const initialValuesDetalleElemento = {
-    id:Date.now(),
+    _id:Date.now(),
     producto: {precio:0},
     cantidad: 1,
     subtotal: 1
@@ -83,7 +83,7 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
     }
     const handleDeleteClick = (e) => {
         setListaDetalleFactura((listaDetalleFactura) => {
-            return listaDetalleFactura.filter((c) => c.id !== e.id);
+            return listaDetalleFactura.filter((c) => c._id !== e._id);
         })
     }
     const handleUsuarioChange = (e) => {

@@ -3,9 +3,9 @@ import { Card, Button } from 'react-bootstrap';
 import './Servicio.css';
 import { useHistory } from "react-router-dom";
 
-function useProducto({ id, nombre, descripcion, precio, imagen }) {
+function useProducto({ _id, nombre, descripcion, precio, imagen }) {
     const [servicio] = useState({
-        id: id || -1,
+        _id: _id || -1,
         nombre: nombre || "Ejemplo Nombre",
         imagen: imagen || "https://miro.medium.com/max/880/0*H3jZONKqRuAAeHnG.jpg",
         descripcion: descripcion || "Una breve descripcion...",
@@ -14,7 +14,7 @@ function useProducto({ id, nombre, descripcion, precio, imagen }) {
     return servicio;
 }
 export default function Servicio(props) {
-    const { imagen, id, nombre, descripcion } = useProducto(props.servicio);
+    const { imagen, _id, nombre, descripcion } = useProducto(props.servicio);
     const styleImg = {
         backgroundImage: `url(${imagen})`,
         backgroundSize: "cover",
@@ -23,7 +23,7 @@ export default function Servicio(props) {
     const history = useHistory();
 
     const irAlServicio = () => {
-        history.push(`/servicio?id=${id}`);
+        history.push(`/servicio?id=${_id}`);
     }
 
     return (

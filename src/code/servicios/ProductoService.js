@@ -1,4 +1,5 @@
 import samples from "../../samples/productos.json";
+//import UtilsService from "./UtilsService";
 export default class ProductoService {
 	static productos = [];
 	static observers = [];
@@ -21,6 +22,29 @@ export default class ProductoService {
 		console.log('Servicio productos iniciado');
 		this.productos = samples;
 		return samples;
+		// try {
+		// 	let res = await fetch(UtilsService.getUrlsApi().productos.traerTodos, {
+		// 		method: 'POST',
+		// 		cache: 'no-cache',
+		// 		credentials: 'same-origin',
+		// 		headers: {
+		// 			'Accept': 'application/json',
+		// 			'Content-Type': 'application/json'
+		// 		}
+		// 	})
+		// 	if (res.ok) {
+		// 		let jsonData = await res.json();
+		// 		console.log("data", jsonData);
+		// 		this.productos = samples;// jsonData.productos
+		// 		return this.productos;
+		// 	}
+		// 	else {
+		// 		//console.log(res);
+		// 		Promise.reject("Error al traer los productos: "+res.statusText);
+		// 	}
+		// } catch (error) {
+		// 	Promise.reject("Error al traer los productos: "+error.message);
+		// }
 	}
 
 
@@ -28,8 +52,8 @@ export default class ProductoService {
 		return this.productos;
 	}
 
-	static getProductoPorId(id) {
-		return this.productos.filter(c => c.id === id)[0];
+	static getProductoPorId(_id) {
+		return this.productos.filter(c => c._id === _id)[0];
 	}
 
 	/**
@@ -37,7 +61,7 @@ export default class ProductoService {
  * @param {*} consulta 
  * @returns 
  */
-	static getProductosPorBusqueda(consulta) {
+	static async getProductosPorBusqueda(consulta) {
 		return this.productos;
 	}
 
@@ -62,7 +86,7 @@ export default class ProductoService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addProducto(newItem) {
+	static async addProducto(newItem) {
 		this.productos.push(newItem);
 		this.notifySubscribers();
 	}
@@ -71,18 +95,18 @@ export default class ProductoService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyProducto(item) {
+	static async modifyProducto(item) {
 		console.log("Modificar producto", item);
-		this.productos = this.productos.map((c) => (c.id === item.id) ? item : c);
+		this.productos = this.productos.map((c) => (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	static removeProducto(id) {
-		this.productos = this.productos.filter((c) => (c.id !== id));
+	static async removeProducto(_id) {
+		this.productos = this.productos.filter((c) => (c._id !== _id));
 		this.notifySubscribers();
 	}
 

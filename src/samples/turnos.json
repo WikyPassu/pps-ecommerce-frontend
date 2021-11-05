@@ -1,8 +1,8 @@
 [
     {
-        "id":"turn01",
+        "_id":"turn01",
         "servicio":{
-            "id":"b1",
+            "_id":"b1",
             "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
             "nombre":"El Servicio Uno",
             "categoria":"Categoria Servicio Uno",
@@ -11,21 +11,21 @@
             "resenias":[
                 {
                     "usuario": {"nombre":"Juan","apellido":"Perez"},
-                    "id":"a1",
+                    "_id":"a1",
                     "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                     "fecha":1631154882,
                     "estado":"ACEPTADA"
                 },
                 {
                     "usuario": {"nombre":"Natalio","apellido":"Ruiz"},
-                    "id":"a2",
+                    "_id":"a2",
                     "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                     "fecha":1631154882,
                     "estado":"ACEPTADA"
                 },
                 {
                     "usuario": {"nombre":"Ricardo","apellido":"Mollo"},
-                    "id":"a2",
+                    "_id":"a2",
                     "comentario":"Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor",
                     "fecha":1631154882,
                     "estado":"ACEPTADA"
@@ -35,7 +35,7 @@
         "dniCliente":323232322,
         "dniEmpleado":43434343,
         "perrito":{
-            "id":"perr01",
+            "_id":"perr01",
             "dniDuenio":323232322,
             "peso":1500,
             "nombre":"firulais1",
@@ -46,7 +46,7 @@
             {
                 "cantidad":1,
                 "consumible":{
-                    "id":"c1",
+                    "_id":"c1",
                     "nombre":"Shampoo",
                     "existencia":3500,
                     "existenciaMinima":1000,

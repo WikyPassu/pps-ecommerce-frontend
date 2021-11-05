@@ -1,9 +1,9 @@
 [
     {
-        "id":"fact01",
+        "_id":"fact01",
         "total":10200,
         "usuarioRegistrado":{
-            "id":"cli01",
+            "_id":"cli01",
             "nombre":"Asdasd Gqwe",
             "apellido":"Fdsasd",
             "dni":323232322,
@@ -15,7 +15,7 @@
             "codigoPostal":"5665",
             "perrito":[
                 {
-                    "id":"perr01",
+                    "_id":"perr01",
                     "dniDuenio":323232322,
                     "peso":1500,
                     "nombre":"firulais1",
@@ -26,7 +26,7 @@
             "estado":"ACTIVO"
         },
         "empleado":{
-            "id":"emp01",
+            "_id":"emp01",
             "nombre":"NameEmp01",
             "apellido":"SurNameEmp01",
             "dni":43434343,
@@ -36,9 +36,9 @@
         },
         "fecha":1634519791265,
         "detalleFactura":[{
-            "id":"df001",
+            "_id":"df001",
             "producto":{
-                "id":"a1",
+                "_id":"a1",
                 "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 "nombre":"El Producto Uno",
                 "categoria":"Categoria Uno",
@@ -55,10 +55,10 @@
         "estado":"DESPACHADO"
     },
     {
-        "id":"fact02",
+        "_id":"fact02",
         "total":1200,
         "usuarioRegistrado":{
-            "id":"cli01",
+            "_id":"cli01",
             "nombre":"Asdasd Gqwe",
             "apellido":"Fdsasd",
             "dni":323232322,
@@ -70,7 +70,7 @@
             "codigoPostal":"5665",
             "perrito":[
                 {
-                    "id":"perr01",
+                    "_id":"perr01",
                     "dniDuenio":323232322,
                     "peso":1500,
                     "nombre":"firulais1",
@@ -81,7 +81,7 @@
             "estado":"ACTIVO"
         },
         "empleado":{
-            "id":"emp01",
+            "_id":"emp01",
             "nombre":"NameEmp01",
             "apellido":"SurNameEmp01",
             "dni":43434343,
@@ -91,9 +91,9 @@
         },
         "fecha":1634519791265,
         "detalleFactura":[{
-            "id":"df001",
+            "_id":"df001",
             "producto":{
-                "id":"a1",
+                "_id":"a1",
                 "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 "nombre":"El Producto Uno",
                 "categoria":"Categoria Uno",
@@ -111,10 +111,10 @@
 
     },
     {
-        "id":"fact03",
+        "_id":"fact03",
         "total":200,
         "usuarioRegistrado":{
-            "id":"cli01",
+            "_id":"cli01",
             "nombre":"Asdasd Gqwe",
             "apellido":"Fdsasd",
             "dni":323232322,
@@ -126,7 +126,7 @@
             "codigoPostal":"5665",
             "perrito":[
                 {
-                    "id":"perr01",
+                    "_id":"perr01",
                     "dniDuenio":323232322,
                     "peso":1500,
                     "nombre":"firulais1",
@@ -137,7 +137,7 @@
             "estado":"ACTIVO"
         },
         "empleado":{
-            "id":"emp01",
+            "_id":"emp01",
             "nombre":"NameEmp01",
             "apellido":"SurNameEmp01",
             "dni":43434343,
@@ -147,9 +147,9 @@
         },
         "fecha":1634519791265,
         "detalleFactura":[{
-            "id":"df001",
+            "_id":"df001",
             "producto":{
-                "id":"a1",
+                "_id":"a1",
                 "descripcion":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 "nombre":"El Producto Uno",
                 "categoria":"Categoria Uno",

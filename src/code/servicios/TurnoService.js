@@ -29,15 +29,15 @@ export default class TurnoService{
 		return this.turnos;
 	}
 
-    static getTurnoPorId(id){
-        return this.turnos.filter(c => c.id === id)[0];
+    static getTurnoPorId(_id){
+        return this.turnos.filter(c => c._id === _id)[0];
     }
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addTurno(newItem) {
+	static async addTurno(newItem) {
 		this.turnos.push(newItem);
 		this.notifySubscribers();
 	}
@@ -47,16 +47,16 @@ export default class TurnoService{
 	 * @param {*} item 
 	 */
 	static modifyTurno(item){
-		this.turnos = this.turnos.map((c)=> (c.id === item.id) ? item : c);
+		this.turnos = this.turnos.map((c)=> (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
-	 * @param {*} id ID del objeto
+	 * @param {*} _id ID del objeto
 	 */
-	static removeTurno(id) {
-		this.turnos = this.turnos.filter((c)=> (c.id !== id));
+	static removeTurno(_id) {
+		this.turnos = this.turnos.filter((c)=> (c._id !== _id));
 		this.notifySubscribers();
 	}
 }

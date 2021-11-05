@@ -5,7 +5,7 @@ import SampleServicios from '../../../../samples/servicios.json';
 import './HomePage.css';
 import Banner from '../../componentes/banner/Banner';
 import HomeCarrusel from '../../componentes/carrusel/HomeCarrusel';
-import ListaServicios from '../../componentes/servicio/listaProductos/ListaServicios';
+import ListaServicios from '../../componentes/servicio/listaServicios/ListaServicios';
 function HomePage() {
   return (
     <div className="home-page">

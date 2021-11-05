@@ -39,9 +39,9 @@ export default function Empleados() {
         setElementoModificar(e);
       }}
       onDeleteClick={(p) => {
-        EmpleadoService.removeEmpleado(p.id);
+        EmpleadoService.removeEmpleado(p._id);
       }}
-      attrKey="id"
+      attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormEmpleadoModal
       elementoParaModificar={elementoModificar}
