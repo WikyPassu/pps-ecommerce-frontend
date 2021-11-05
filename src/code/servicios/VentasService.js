@@ -35,10 +35,12 @@ export default class FacturasService{
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
+	 * @return Factura creada y guardada en la bd
 	 */
 	static async addFactura(newItem) {
 		this.facturas.push(newItem);
 		this.notifySubscribers();
+		return; //facturaGenerada;
 	}
 
 	/**

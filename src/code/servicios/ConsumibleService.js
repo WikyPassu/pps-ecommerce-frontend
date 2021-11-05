@@ -36,7 +36,7 @@ export default class ConsumibleService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static addConsumible(newItem) {
+	static async addConsumible(newItem) {
 		this.consumibles.push(newItem);
 		this.notifySubscribers();
 	}
@@ -45,7 +45,7 @@ export default class ConsumibleService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyConsumible(item) {
+	static async modifyConsumible(item) {
 		this.consumibles = this.consumibles.map((c) => (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
@@ -54,7 +54,7 @@ export default class ConsumibleService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} _id ID del objeto
 	 */
-	static removeConsumible(_id) {
+	static async removeConsumible(_id) {
 		this.consumibles = this.consumibles.filter((c) => (c._id !== _id));
 		this.notifySubscribers();
 	}
@@ -64,7 +64,7 @@ export default class ConsumibleService {
 	 * @param {*} idConsumible 
 	 * @param {*} cantidadUsada 
 	 */
-	static registrarConsumibleUsado(idConsumible, cantidadUsada){
+	static async registrarConsumibleUsado(idConsumible, cantidadUsada){
 		//Basicamente es un modify consumible pero mas amigable
 	}
 }

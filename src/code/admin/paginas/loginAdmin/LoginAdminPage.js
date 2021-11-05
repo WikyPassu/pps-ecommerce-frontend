@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row, InputGroup, FormControl } from 'react-bootstrap';
 import { HiKey, HiMail } from 'react-icons/hi';
 import "./LoginAdminPage.css";
 import logo from '../../../../assets/logo.png';
-export default function LoginAdminPage() {
-    const handleSubmit = (e) => {
+import EmpleadoService from '../../../servicios/EmpleadoService';
+import { useHistory } from 'react-router';
 
+const initialValues = {
+    correo:"",
+    clave:""
+}
+export default function LoginAdminPage() {
+    const [usuario, setUsuario] = useState(initialValues);
+    const history = useHistory()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let res = await EmpleadoService.login(usuario.correo,usuario.clave);
+        if(res){
+            history.push("/admin/home");
+        }
+        else{
+            alert("Usuario o clave incorrecta");
+        }
+        setUsuario(initialValues);
+    }
+
+    const handlerChange = ({target}) => {
+        
+        const {value,name} = target;
+
+        setUsuario((usuario)=>{
+            return {...usuario, [name]:value};
+        })
     }
 
     return (
@@ -15,18 +41,18 @@ export default function LoginAdminPage() {
                     <b className="title-iniciar-sesion">Iniciar Sesion</b>
                     <img alt="logo-img" width="25px" className="logo-img" src={logo} />
                 </div>
-                <Form onSubmit={handleSubmit} action="/admin/home">
+                <Form onSubmit={handleSubmit}>
                     <p>Administracion</p>
                     <Row>
                         <InputGroup>
                             <InputGroup.Text><HiMail /></InputGroup.Text>
-                            <FormControl placeholder="Correo" />
+                            <FormControl onChange={handlerChange} name="correo" type="email" required placeholder="Correo" />
                         </InputGroup>
                     </Row>
                     <Row>
                         <InputGroup>
                             <InputGroup.Text><HiKey /></InputGroup.Text>
-                            <FormControl placeholder="Contraseña" />
+                            <FormControl onChange={handlerChange} name="clave" type="password" required placeholder="Contraseña" />
                         </InputGroup>
                     </Row>
                     <Row>

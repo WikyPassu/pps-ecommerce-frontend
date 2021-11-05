@@ -46,7 +46,7 @@ export default class TurnoService{
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static modifyTurno(item){
+	static async modifyTurno(item){
 		this.turnos = this.turnos.map((c)=> (c._id === item._id) ? item : c);
 		this.notifySubscribers();
 	}
@@ -55,7 +55,7 @@ export default class TurnoService{
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} _id ID del objeto
 	 */
-	static removeTurno(_id) {
+	static async removeTurno(_id) {
 		this.turnos = this.turnos.filter((c)=> (c._id !== _id));
 		this.notifySubscribers();
 	}

@@ -1,5 +1,5 @@
-import samples from "../../samples/productos.json";
-//import UtilsService from "./UtilsService";
+// import samples from "../../samples/productos.json";
+import UtilsService from "./UtilsService";
 export default class ProductoService {
 	static productos = [];
 	static observers = [];
@@ -19,32 +19,34 @@ export default class ProductoService {
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio() {
-		console.log('Servicio productos iniciado');
-		this.productos = samples;
-		return samples;
-		// try {
-		// 	let res = await fetch(UtilsService.getUrlsApi().productos.traerTodos, {
-		// 		method: 'POST',
-		// 		cache: 'no-cache',
-		// 		credentials: 'same-origin',
-		// 		headers: {
-		// 			'Accept': 'application/json',
-		// 			'Content-Type': 'application/json'
-		// 		}
-		// 	})
-		// 	if (res.ok) {
-		// 		let jsonData = await res.json();
-		// 		console.log("data", jsonData);
-		// 		this.productos = samples;// jsonData.productos
-		// 		return this.productos;
-		// 	}
-		// 	else {
-		// 		//console.log(res);
-		// 		Promise.reject("Error al traer los productos: "+res.statusText);
-		// 	}
-		// } catch (error) {
-		// 	Promise.reject("Error al traer los productos: "+error.message);
-		// }
+		
+		try {
+			let res = await fetch(UtilsService.getUrlsApi().productos.traerTodos, {
+				method: 'GET',
+				cache: 'no-cache',
+				credentials: 'same-origin',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				}
+			})
+			if (res.ok) {
+				let jsonData = await res.json();
+				this.productos = jsonData.productos;
+				console.log('Servicio productos iniciado');
+				this.notifySubscribers();
+				return this.productos;
+			}
+			else {
+				//console.log(res);
+				Promise.reject("Error al traer los productos: "+res.statusText);
+				return this.productos;
+			}
+		} catch (error) {
+			Promise.reject("Error al traer los productos: "+error.message);
+			return this.productos;
+		}
+		
 	}
 
 
