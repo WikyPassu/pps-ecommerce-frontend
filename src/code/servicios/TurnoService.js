@@ -1,4 +1,5 @@
 import samples from "../../samples/turnos.json";
+import UtilsService from "./UtilsService";
 export default class TurnoService{
 	static turnos = [];
 	static observers = [];
@@ -14,14 +15,22 @@ export default class TurnoService{
 
 	/**
 	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
-	* @todo TRAER OBJETOS DEL BACKEND.
+	*  TRAER OBJETOS DEL BACKEND.
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio(){
-		console.log('Servicio turnos iniciado');
-		this.turnos = samples;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.turnos = data.turnos;
+			this.notifySubscribers();
+			return this.turnos;
+		} catch (err) {
+			console.log(err);
+		}
 
-		return samples;
+		return this.turnos;
 	}
 
 
@@ -29,6 +38,11 @@ export default class TurnoService{
 		return this.turnos;
 	}
 
+	/**
+	 * @todo LUCAS: inconsistencia, alan lo hace por dni
+	 * @param {*} _id 
+	 * @returns 
+	 */
     static getTurnoPorId(_id){
         return this.turnos.filter(c => c._id === _id)[0];
     }
@@ -38,8 +52,21 @@ export default class TurnoService{
 	 * @param {*} newItem 
 	 */
 	static async addTurno(newItem) {
-		this.turnos.push(newItem);
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().turno.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ turno: newItem })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.turnos.push(newItem);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
