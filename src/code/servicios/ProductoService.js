@@ -19,34 +19,16 @@ export default class ProductoService {
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio() {
-		
-		try {
-			let res = await fetch(UtilsService.getUrlsApi().productos.traerTodos, {
-				method: 'GET',
-				cache: 'no-cache',
-				credentials: 'same-origin',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				}
-			})
-			if (res.ok) {
-				let jsonData = await res.json();
-				this.productos = jsonData.productos;
-				console.log('Servicio productos iniciado');
-				this.notifySubscribers();
-				return this.productos;
-			}
-			else {
-				//console.log(res);
-				Promise.reject("Error al traer los productos: "+res.statusText);
-				return this.productos;
-			}
-		} catch (error) {
-			Promise.reject("Error al traer los productos: "+error.message);
+		try{
+			const res = await fetch(UtilsService.getUrlsApi().productos.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.productos = data.productos;
+			this.notifySubscribers();
 			return this.productos;
+		}catch(err){
+			console.log(err);
 		}
-		
 	}
 
 
@@ -63,16 +45,67 @@ export default class ProductoService {
  * @param {*} consulta 
  * @returns 
  */
-	static async getProductosPorBusqueda(consulta) {
-		return this.productos;
-	}
+	 static async getProductosPorBusqueda(consulta) {
+		// try {
+		// 	let res = await fetch(UtilsService.getUrlsApi().productos.buscar, {
+		// 		method: 'GET',
+		// 		cache: 'no-cache',
+		// 		credentials: 'same-origin',
+		// 		headers: {
+		// 			'Accept': 'application/json',
+		// 			'Content-Type': 'application/json'
+		// 		},
+		// 		body: consulta,
+		// 	})
+		// 	if (res.ok) {
+		// 		let jsonData = await res.json();
+		// 		this.productos = jsonData.productos;
+		// 		console.log(jsonData.mensaje);
+		// 		this.notifySubscribers();
+		// 		return this.productos;
+		// 	}
+		// 	else {
+		// 		//console.log(jsonData);
+		// 		Promise.reject(res.statusText);
+		// 		return this.productos;
+		// 	}
+		// } catch (error) {
+		// 	Promise.reject(error.message);
+		// 	return this.productos;
+		// }
+	 }
 
 	/**
 	 * @todo Obtener mas vendido. Si el numero de ventas son iguales, agarrar cualquiera
 	 * @returns 
 	 */
-	static getMasVendido() {
-		return this.productos[0];
+	 static async getMasVendido() {
+		//console.info("HERE");
+		// try {
+		// 	let res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendido, {
+		// 		method: 'GET',
+		// 		cache: 'no-cache',
+		// 		credentials: 'same-origin',
+		// 		headers: {
+		// 			'Accept': 'application/json',
+		// 			'Content-Type': 'application/json'
+		// 		},
+		// 	})
+		// 	if (res.ok){
+		// 		let jsonData = await res.json();
+		// 		console.log(jsonData.mensaje);
+				
+		// 		//console.info(jsonData);
+		// 		this.notifySubscribers();
+		// 		return jsonData;
+		// 	}
+		// 	else {
+		// 		//console.log(res);
+		// 		Promise.reject(res.statusText);
+		// 	}
+		// } catch (error) {
+		// 	Promise.reject(error.message);
+		// }
 	}
 
 	/**
@@ -88,19 +121,75 @@ export default class ProductoService {
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
-	static async addProducto(newItem) {
-		this.productos.push(newItem);
-		this.notifySubscribers();
-	}
+	 static async addProducto(newItem) 
+	 {
+		//console.log(newItem);
+		// fetch(UtilsService.getUrlsApi().productos.agregar, {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({producto: newItem})
+		// })
+		// .then(res => res.json())
+		// .then(data => console.log(data))
+		// .catch(err => console.log(err));
+
+		 //console.info(newItem);
+		 //try {
+		// 	 let res = await fetch(UtilsService.getUrlsApi().productos.agregar, {
+		// 		 method: 'POST',
+		// 		 cache: 'no-cache',
+		// 		 mode: 'no-cors',
+		// 		 credentials: 'same-origin',
+		// 		 headers: {
+		// 			 'Accept': 'application/json',
+		// 			 'Content-Type': 'application/json'
+		// 		 },
+		// 		 body: JSON.stringify({ producto: newItem })
+		// 	 })
+		// 	 if (res.ok){
+		// 		 let jsonData = await res.json();
+		// 		 console.log(jsonData.mensaje);
+		// 		 console.info(jsonData);
+		// 		 this.productos.push(newItem);
+		// 		 this.notifySubscribers();
+		// 		 return jsonData;
+		// 	 }
+		// 	 else {
+		// 		let jsonData = await res.json();
+		// 		 console.info(jsonData);
+		// 		 //Promise.reject(res.statusText);
+		// 	 }
+		//  } catch (error) {
+		// 	 console.info(error);
+		// 	 //Promise.reject(error.message);
+		//  }
+	 }
 
 	/**
 	 * @todo GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
 	static async modifyProducto(item) {
-		console.log("Modificar producto", item);
-		this.productos = this.productos.map((c) => (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		// let _id = JSON.stringify(item);
+		// delete item._id;
+		// _id = JSON.parse(_id);
+		// _id = _id._id;
+		// console.log(_id);
+		// fetch(UtilsService.getUrlsApi().productos.modificar, {
+		// 	method: 'PUT',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+		// 		_id: _id,
+		// 		producto: item
+		// 	})
+		// })
+		// .then(res => res.json())
+		// .then(data => console.log(data))
+		// .catch(err => console.log(err));
 	}
 
 	/**
@@ -108,8 +197,8 @@ export default class ProductoService {
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeProducto(_id) {
-		this.productos = this.productos.filter((c) => (c._id !== _id));
-		this.notifySubscribers();
+		// this.productos = this.productos.filter((c) => (c._id !== _id));
+		// this.notifySubscribers();
 	}
 
 

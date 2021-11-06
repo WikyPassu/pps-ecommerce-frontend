@@ -4,7 +4,6 @@ import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import ProductoService from '../../../../../servicios/ProductoService';
 
 const initialValuesProducto = {
-    _id: new Date().getTime(),
     nombre: "",
     categoria: "",
     descripcion: "",
@@ -13,7 +12,6 @@ const initialValuesProducto = {
     existenciaMinima: 0,
     existenciaMaxima: 0,
     estado: "HABILITADO",
-    resenias: [],
     precio: 0
 };
 
@@ -65,6 +63,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("SEN ENVIO FORMULARIO", producto);
+        //console.log(ProductoService.modifyProducto(producto));
         (modificar === true) ? ProductoService.modifyProducto(producto) : ProductoService.addProducto(producto);
         onHide();
     }
