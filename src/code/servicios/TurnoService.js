@@ -1,4 +1,3 @@
-import samples from "../../samples/turnos.json";
 import UtilsService from "./UtilsService";
 export default class TurnoService{
 	static turnos = [];
@@ -48,7 +47,8 @@ export default class TurnoService{
     }
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo CULAS: no se guardan los dnis del empleado ni del cliente, creo que lo dejaste sin terminar
 	 * @param {*} newItem 
 	 */
 	static async addTurno(newItem) {
@@ -70,20 +70,52 @@ export default class TurnoService{
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
 	static async modifyTurno(item){
-		this.turnos = this.turnos.map((c)=> (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		let _id = JSON.stringify(item);
+		delete item._id;
+		_id = JSON.parse(_id);
+		_id = _id._id;
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().turno.modificar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id, producto: item })
+			});
+			const data = await res.json();
+			console.log(data);
+			item._id = _id;
+			this.turnos = this.turnos.map((c)=> (c._id === _id) ? item : c);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: tira error de id no encontrado
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeTurno(_id) {
-		this.turnos = this.turnos.filter((c)=> (c._id !== _id));
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().turno.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.turnos = this.turnos.filter((c)=> (c._id !== _id));
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 }

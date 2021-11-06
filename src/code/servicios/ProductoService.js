@@ -1,4 +1,3 @@
-// import samples from "../../samples/productos.json";
 import UtilsService from "./UtilsService";
 export default class ProductoService {
 	static productos = [];
