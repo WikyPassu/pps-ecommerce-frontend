@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ProductoService from '../../../../servicios/ProductoService';
+import UtilsService from '../../../../servicios/UtilsService';
 import Listado from '../../listado/Listado';
 import FormProductoModal from './formProductoModal/FormProductoModal';
 
@@ -22,6 +23,11 @@ export default function Productos() {
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
     <Listado
+    attrFuncs={[
+      {columnaIndex:3,attrFunc:(value)=>{
+        return UtilsService.stringFormatter(value,50);
+      }}
+    ]}
     columnas={[
           "ID",
           "Nombre",

@@ -6,7 +6,6 @@ import UtilsService from '../../../../../servicios/UtilsService';
 import ServicioService from '../../../../../servicios/ServicioService';
 
 const initialValuesElemento = {
-    _id: new Date().getTime(),
     nombre: "",
     categoria: "",
     descripcion: "",

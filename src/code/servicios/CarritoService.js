@@ -65,7 +65,8 @@ export default class CarritoService{
 				_id: "envios",
 				item:{
 					precio:precio,
-					nombre:"Servicio de Envios"
+					nombre:"Traslado",
+					categoria:"TRASLADO"
 				},
 				cantidad:1
 			});

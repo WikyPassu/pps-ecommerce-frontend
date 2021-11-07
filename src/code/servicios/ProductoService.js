@@ -51,11 +51,13 @@ export default class ProductoService {
 
 
 	static getProductos() {
+
 		return this.productos;
 	}
 
 	static getProductoPorId(_id) {
-		return this.productos.filter(c => c._id === _id)[0];
+		// eslint-disable-next-line
+		return this.productos.filter(c => c._id == _id)[0];
 	}
 
 	/**

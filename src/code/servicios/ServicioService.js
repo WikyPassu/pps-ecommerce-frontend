@@ -20,6 +20,7 @@ export default class ServicioService {
 	static async iniciarServicio() {
 		console.log('Servicio servicios iniciado');
 		this.servicios = samples;
+		this.notifySubscribers();
 		return samples;
 	}
 
@@ -30,7 +31,8 @@ export default class ServicioService {
 	}
 
 	static getServicioPorId(_id) {
-		return this.servicios.filter(c => c._id === _id)[0];
+		// eslint-disable-next-line
+		return this.servicios.filter(c => c._id == _id)[0];
 	}
 
 	/**

@@ -4,7 +4,6 @@ import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import ProductoService from '../../../../../servicios/ProductoService';
 
 const initialValuesProducto = {
-    _id: new Date().getTime(),
     nombre: "",
     categoria: "",
     descripcion: "",

@@ -9,14 +9,20 @@ import ListaServicios from '../../componentes/servicio/listaServicios/ListaServi
 import ProductoService from '../../../servicios/ProductoService';
 import ServicioService from '../../../servicios/ServicioService';
 import { useState } from 'react';
+import { useEffect } from 'react';
 function HomePage() {
-  const [productos, setProductos] = useState(ProductoService.getProductos());
-  const [servicio, setServicios] = useState(ProductoService.getProductos());
+  const [productos, setProductos] = useState();
+  const [servicios, setServicios] = useState();
 
   ProductoService.subscribe(()=>{
     setProductos(ProductoService.getProductos());
     setServicios(ServicioService.getServicios());
   })
+
+  useEffect(()=>{
+    setProductos(ProductoService.getProductos());
+    setServicios(ServicioService.getServicios());
+  },[])
   return (
     <div className="home-page">
       <HomeNavbar />
@@ -27,9 +33,9 @@ function HomePage() {
         <HomeCarrusel />
         <br />
         <h1 className="titulo-productos-servicios">Nuestros productos</h1>
-        <ListaProductos listaProductos={productos} />
+        {productos&&<ListaProductos listaProductos={productos} />}
         <h1 className="titulo-productos-servicios">Nuestros Servicios</h1>
-        <ListaServicios lista={servicio} />
+        {servicios && <ListaServicios lista={servicios} />}
       </div>
     </div>
   );

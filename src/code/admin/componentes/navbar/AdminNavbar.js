@@ -16,7 +16,7 @@ export default function AdminNavbar() {
                     </Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link className="ml-auto" href="#productos">[Nombre Usuario]</Nav.Link>
-                        <Nav.Link className="ml-auto" href="#productos">Cerrar Sesion</Nav.Link>
+                        <Nav.Link className="ml-auto" href="#productos" onClick={() => { history.push("/admin") }}>Cerrar Sesion</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

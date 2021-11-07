@@ -3,10 +3,22 @@ import ProductoService from '../../../servicios/ProductoService';
 import ServicioService from '../../../servicios/ServicioService';
 import { useHistory } from 'react-router';
 import './HomeCarrusel.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
 function HomeCarrusel() {
-    const productoMasVendido = ProductoService.getMasVendido();
-    const servicioMasVendido = ServicioService.getMasVendido();
+    const [productoMasVendido, setProductoMasVendido] = useState(null)
+    const [servicioMasVendido, setServicioMasVendido] = useState(null)
     const history = useHistory();
+    useEffect(()=>{
+        const getMasVendidos = async () =>{
+            let producto = await ProductoService.getMasVendido();
+            let servicio = await ServicioService.getMasVendido();
+            setProductoMasVendido(producto);
+            setServicioMasVendido(servicio);
+        }
+        getMasVendidos();
+    },[]);
+
     return (
         <div className="home-carrusel">
             <Carousel className="carrusel">

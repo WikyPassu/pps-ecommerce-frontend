@@ -1,9 +1,8 @@
 .img-carousel{
     width: 100% !important;
     height: 200px !important;
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position: 90% 50%;
+    background-position: 100% 50%;
     border-radius: 10px;
     background-size: cover;
     
@@ -28,6 +27,7 @@
     align-content: flex-start;
     text-shadow: 1px 1px 8px black;
     backdrop-filter: blur(10px) brightness(0.7);
+    /* background-color: var(--primary-color) ; */
     padding-left: 30px;
     padding-right: 30px;
     width: fit-content;
