@@ -1,6 +1,5 @@
 console.log('Utils service iniciado');
 const URLAPI = "https://api-ppc.herokuapp.com";
-//const URLAPI = "http://localhost:8080";
 /**
  * Contiene un conjunto de herramientas para propositos generales.
  */
@@ -53,9 +52,6 @@ export default class UtilsService{
      */
     static getUrlsApi(){
         return {
-            metodoPago:{
-                realizarPago:URLAPI+"/metodoPago/realizarPago"
-            },
             productos:{
                 agregar:URLAPI+"/producto/agregar", 
                 modificar:URLAPI+"/producto/modificar", 
@@ -63,14 +59,16 @@ export default class UtilsService{
                 buscar:URLAPI+"/producto/buscar", 
                 traerTodos:URLAPI+"/producto/traerTodos", 
                 traerMasVendido:URLAPI+"/producto/traerMasVendido", 
-            },
-            servicios:{
+                traerMasVendidos:URLAPI+"/producto/traerMasVendidos",
+            }, 
+            servicio:{
                 agregar:URLAPI+"/servicio/agregar", 
                 modificar:URLAPI+"/servicio/modificar", 
                 eliminar:URLAPI+"/servicio/eliminar", 
                 traerTodos:URLAPI+"/servicio/traerTodos",
                 buscar:URLAPI+"/servicio/buscar",
                 traerMasVendido:URLAPI+"/servicio/traerMasVendido",
+                traerMasVendidos:URLAPI+"/servicio/traerMasVendidos",
             },
             turno:{
                 agregar:URLAPI+"/turno/agregar", 
@@ -113,8 +111,12 @@ export default class UtilsService{
                 eliminar:URLAPI+"/resenia/eliminar", 
                 verificarCompraPrevia:URLAPI+"/resenia/verificarCompraPrevia", 
             },
+            metodoPago:{
+                //@todo alan (falta back)
+                realizarPago:URLAPI+"/metodoPago/realizarPago",                                
+            },
             storefront:{
-                //todo (falta back)
+                //@todo alan (falta back)
                 modificarOrdenProductos:URLAPI+"", 
                 modificarOrdenServicios:URLAPI+"",                 
             },

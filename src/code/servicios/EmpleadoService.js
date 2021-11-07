@@ -1,4 +1,4 @@
-import samples from "../../samples/empleados.json";
+import UtilsService from "./UtilsService";
 export default class EmpleadoService {
 	static empleados = [];
 	static observers = [];
@@ -15,14 +15,20 @@ export default class EmpleadoService {
 
 	/**
 	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
-	  * @todo TRAER OBJETOS DEL BACKEND.
+	  * TRAER OBJETOS DEL BACKEND.
 	  * @returns Array de objetos
 	  */
 	static async iniciarServicio() {
-		console.log("Servicio empelado iniciado");
-		this.empleados = samples;
-
-		return samples;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().empleado.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.empleados = data.empleados;
+			this.notifySubscribers();
+			return this.empleados;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 
@@ -39,25 +45,61 @@ export default class EmpleadoService {
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 500
+	 * @todo CULAS: no actualiza la parte visual
 	 * @param {*} newItem 
 	 */
 	static async addEmpleado(newItem) {
-		this.empleados.push(newItem);
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().empleado.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ empleado: newItem })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.empleados.push(newItem);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 400
 	 * @param {*} item 
 	 */
 	static async modifyEmpleado(item) {
-		this.empleados = this.empleados.map((c) => (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		let _id = JSON.stringify(item);
+		delete item._id;
+		_id = JSON.parse(_id);
+		_id = _id._id;
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().empleado.modificar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id, empleado: item })
+			});
+			const data = await res.json();
+			console.log(data);
+			item._id = _id;
+			this.empleados = this.empleados.map((c) => (c._id === item._id) ? item : c);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 500
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeEmpleado(_id) {
@@ -69,8 +111,25 @@ export default class EmpleadoService {
 				return;
 			}
 		}
-		this.empleados = this.empleados.filter((c) => (c._id !== _id));
-		this.notifySubscribers();
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().empleado.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id })
+			});
+			const data = await res.json();
+			console.info(data);
+			this.empleados = this.empleados.filter((c) => (c._id !== _id));
+		} catch (err) {
+			console.log(err);
+		}
+
+
+
+
 	}
 
 	/**

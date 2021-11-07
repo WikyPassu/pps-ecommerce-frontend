@@ -1,4 +1,4 @@
-import samples from "../../samples/consumibles.json";
+import UtilsService from "./UtilsService";
 export default class ConsumibleService {
 	static consumibles = [];
 	static observers = [];
@@ -14,14 +14,20 @@ export default class ConsumibleService {
 
 	/**
 	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
- 	* @todo TRAER OBJETOS DEL BACKEND.
+ 	* TRAER OBJETOS DEL BACKEND.
  	* @returns Array de consumibles
  	*/
 	 static async iniciarServicio(){
-		console.log('Servicio consumibles iniciado');
-		this.consumibles = samples;
-
-		return samples;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().consumible.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.consumibles = data.consumibles;
+			this.notifySubscribers();
+			return this.consumibles;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	static getConsumibles() {
@@ -33,34 +39,83 @@ export default class ConsumibleService {
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 500
 	 * @param {*} newItem 
 	 */
 	static async addConsumible(newItem) {
-		this.consumibles.push(newItem);
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().consumible.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ consumible: newItem })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.consumibles.push(newItem);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 500
 	 * @param {*} item 
 	 */
 	static async modifyConsumible(item) {
-		this.consumibles = this.consumibles.map((c) => (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		let _id = JSON.stringify(item);
+		delete item._id;
+		_id = JSON.parse(_id);
+		_id = _id._id;
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().consumible.modificar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id, consumible: item })
+			});
+			const data = await res.json();
+			console.log(data);
+			item._id = _id;
+			this.consumibles = this.consumibles.map((c) => (c._id === item._id) ? item : c);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 500
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeConsumible(_id) {
-		this.consumibles = this.consumibles.filter((c) => (c._id !== _id));
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().consumible.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.consumibles = this.consumibles.filter((c) => (c._id !== _id));
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: crear peticion
 	 * @param {*} idConsumible 
 	 * @param {*} cantidadUsada 
 	 */

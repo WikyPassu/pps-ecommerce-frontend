@@ -19,6 +19,7 @@ import EmpleadoService from "./code/servicios/EmpleadoService";
 import ConsumibleService from "./code/servicios/ConsumibleService";
 import TurnoService from "./code/servicios/TurnoService";
 import Loading from "./code/frontend/componentes/loading/Loading";
+import CarritoService from "./code/servicios/CarritoService";
 
 function App() {
   ProductoService.iniciarServicio();
@@ -28,6 +29,7 @@ function App() {
   EmpleadoService.iniciarServicio();
   ConsumibleService.iniciarServicio();
   TurnoService.iniciarServicio();
+  CarritoService.iniciarServicio();
 
   return (
     <div className="App">

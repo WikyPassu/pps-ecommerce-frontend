@@ -10,7 +10,6 @@ import ConsumibleService from '../../../../../servicios/ConsumibleService';
 import TurnoService from '../../../../../servicios/TurnoService';
 
 const initialValuesElemento = {
-    "_id": Date.now(),
     "servicio": {_id:""},
     "dniCliente": 0,
     "dniEmpleado": 0,
@@ -24,7 +23,6 @@ const initialValuesElemento = {
 };
 
 const initialValuesDetalleElemento = {
-    "_id": Date.now(),
     "cantidad": 0,
     "consumible": {
         "_id": "",
