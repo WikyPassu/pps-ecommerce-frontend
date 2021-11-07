@@ -4,7 +4,6 @@ import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import ConsumibleService from '../../../../../servicios/ConsumibleService';
 
 const initialValuesElemento = {
-    _id: Date.now(),
     nombre: "",
     existencia: 0,
     existenciaMinima: 0,

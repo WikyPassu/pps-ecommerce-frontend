@@ -4,7 +4,6 @@ import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
 
 const initialValuesElemento = {
-    "_id": "",
     "nombre": "",
     "apellido": "",
     "dni": "",

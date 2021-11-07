@@ -49,7 +49,7 @@ export default class ProductoService {
 	static async getProductosPorBusqueda(busqueda) {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().productos.buscar, {
-				method: 'GET',
+				method: 'POST',
 				cache: 'no-cache',
 				credentials: 'same-origin',
 				headers: {

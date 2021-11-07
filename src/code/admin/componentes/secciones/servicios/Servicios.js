@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ServicioService from '../../../../servicios/ServicioService';
+import UtilsService from '../../../../servicios/UtilsService';
 import Listado from '../../listado/Listado';
 import FormServicioModal from './formServicioModal/FormServicioModal';
 
@@ -20,25 +21,32 @@ export default function Servicios() {
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
     <Listado
-    columnas={[
-          "ID",
-          "Nombre",
-          "Categoria",
-          "Descripción",
-          "Estado"
-        ]}
-    atributos={[
-      "_id",
-      "nombre",
-      "categoria",
-      "descripcion",
-      "estado"
-    ]}
+      attrFuncs={[
+        {
+          columnaIndex: 3, attrFunc: (value) => {
+            return UtilsService.stringFormatter(value, 50);
+          }
+        }
+      ]}
+      columnas={[
+        "ID",
+        "Nombre",
+        "Categoria",
+        "Descripción",
+        "Estado"
+      ]}
+      atributos={[
+        "_id",
+        "nombre",
+        "categoria",
+        "descripcion",
+        "estado"
+      ]}
       onEditClick={(e) => {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p)=>{ServicioService.removeServicio(p._id)}}
+      onDeleteClick={(p) => { ServicioService.removeServicio(p._id) }}
       attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormServicioModal

@@ -9,7 +9,6 @@ import ClienteService from '../../../../../servicios/ClienteService';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
 
 const initialValuesElemento = {
-    _id: new Date().getTime(),
     "total": 0,
     "usuarioRegistrado": null,
     "empleado": null,

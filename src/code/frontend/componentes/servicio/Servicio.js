@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import './Servicio.css';
 import { useHistory } from "react-router-dom";
+import UtilsService from '../../../servicios/UtilsService';
 
 function useProducto({ _id, nombre, descripcion, precio, imagen }) {
     const [servicio] = useState({
@@ -30,8 +31,8 @@ export default function Servicio(props) {
         <Card className="card-servicio">
             <Card.Img className="image" onClick={irAlServicio} variant="top" style={styleImg} />
             <Card.Body>
-                <Card.Title className="nombre">{nombre}</Card.Title>
-                <Card.Text className="descripcion">{descripcion}</Card.Text>
+                <Card.Title className="nombre">{UtilsService.stringFormatter(nombre,36)}</Card.Title>
+                <Card.Text className="descripcion">{UtilsService.stringFormatter(descripcion,95)}</Card.Text>
             </Card.Body>
             <Card.Footer>
                 {/* <Card.Text className="precio">${precio}</Card.Text> */}

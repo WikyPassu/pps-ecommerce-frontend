@@ -49,7 +49,7 @@ export default class ServicioService {
 	static async getServiciosPorBusqueda(busqueda) {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.buscar, {
-				method: 'GET',
+				method: 'POST',
 				cache: 'no-cache',
 				credentials: 'same-origin',
 				headers: {

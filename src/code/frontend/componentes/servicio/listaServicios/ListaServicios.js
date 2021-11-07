@@ -16,7 +16,7 @@ export default function ListaServicios({lista}) {
     return (<div  className="lista-servicios">
         <div><Button onClick={scrollLeft} className="btn-scroll"> <BsCaretLeftFill /> </Button></div>
         <div className="servicios" ref={listaRef}>
-            {lista.map((c) => { return <Servicio servicio={c} key={c.id} /> })}
+            {lista.map((c) => { return <Servicio servicio={c} key={c._id} /> })}
         </div>
         <div><Button onClick={scrollRight} className="btn-scroll"> <BsCaretRightFill /> </Button></div>
     </div>)

@@ -8,7 +8,6 @@ import ClienteService from '../../../../../servicios/ClienteService';
 import { HiKey } from 'react-icons/hi';
 
 const initialValuesElemento = {
-    _id: new Date().getTime(),//El id lo debe crear mongito
     "nombre": "",
     "apellido": "",
     "dni": 0,

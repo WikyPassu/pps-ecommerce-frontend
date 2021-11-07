@@ -1,4 +1,3 @@
-
 import HomeNavbar from '../../componentes/navbar/HomeNavbar'
 import './ProductoPage.css';
 import { useEffect } from 'react';
@@ -7,6 +6,8 @@ import { useHistory, useLocation } from 'react-router';
 import ProductoService from '../../../servicios/ProductoService';
 import FormularioCompra from '../../componentes/producto/formularioCompra/FormularioCompra';
 import ClienteService from '../../../servicios/ClienteService';
+import UtilsService from '../../../servicios/UtilsService';
+import { useState } from 'react';
 
 /**
  * Obtiene la query de la url
@@ -16,19 +17,31 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-function ProductoPage(props) {
+function ProductoPage() {
   const history = useHistory();
   let query = useQuery();
-  const productoActual = ProductoService.getProductoPorId(query.get("id")) ?? history.push("/404");
+  const [productoActual, setProductoActual] = useState() ;
+
+  ProductoService.subscribe(()=>{
+    setProductoActual(()=>{
+      return ProductoService.getProductoPorId(query.get("id")) ?? history.push("/404");
+    })
+  })
+
+  useEffect(() => {
+    if(ProductoService.getProductos().length){
+      setProductoActual(()=>{
+        return ProductoService.getProductoPorId(query.get("id")) ?? history.push("/404");
+      })
+    }
+    window.scrollTo(0, 0);
+  },[history, query])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
     CarritoService.addItem(productoActual, parseInt(e.target.cantidad.value) );
   }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  })
 
   return (
     productoActual ? <>
@@ -36,8 +49,8 @@ function ProductoPage(props) {
       <div className="producto-page">
         <div className="producto-info-container">
           <div className="item imagen" style={{ backgroundImage: `url("${productoActual.imagen}")` }}></div>
-          <h1 className="item titulo">{productoActual.nombre}</h1>
-          <p className="item descripcion">{productoActual.descripcion}</p>
+          <h1 className="item titulo">{UtilsService.stringFormatter(productoActual.nombre,105)}</h1>
+          <p className="item descripcion">{UtilsService.stringFormatter(productoActual.descripcion,400)}</p>
           <div className="item precio">
             <label className="label">${productoActual.precio}</label>
             <br /><hr />

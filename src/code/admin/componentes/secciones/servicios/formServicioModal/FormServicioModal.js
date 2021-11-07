@@ -6,9 +6,8 @@ import UtilsService from '../../../../../servicios/UtilsService';
 import ServicioService from '../../../../../servicios/ServicioService';
 
 const initialValuesElemento = {
-    _id: new Date().getTime(),
     nombre: "",
-    categoria: "",
+    categoria: "banio",
     descripcion: "",
     imagen: "",
     estado: "",
@@ -33,7 +32,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
         setElemento((elemento) => {
             return { ...elemento, resenias: listaDetalleElemento }
         })
-    }, [listaDetalleElemento,detalleElemento])
+    }, [listaDetalleElemento, detalleElemento])
 
     const handleChange = (e) => {
         setElemento((elemento) => {
@@ -107,14 +106,12 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label htmlFor="categoria">Categoria</Form.Label>
-                            <Form.Control
-                                name="categoria"
-                                maxLength="20"
-                                value={elemento.categoria}
-                                onChange={handleChange}
-                                type="text"
-                                placeholder="Ingrese categoria del servicio" />
-                            {validarInputText(elemento.categoria)}
+                            <Form.Select name="categoria" onChange={handleChange} value={elemento.categoria}>
+                                <option value="banio">Baño</option>
+                                <option value="guarderia">Guarderia</option>
+                                <option value="corte_de_cabello">Corte de Cabello</option>
+                                <option value="traslado">Traslado</option>
+                            </Form.Select>
                         </Form.Group>
                     </Row>
 
