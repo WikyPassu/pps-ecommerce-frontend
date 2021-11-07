@@ -5,14 +5,13 @@ import ProductoService from '../../../../../servicios/ProductoService';
 
 const initialValuesProducto = {
     nombre: "",
-    categoria: "",
+    categoria: "comida",
     descripcion: "",
     imagen: "",
     existencia: 0,
     existenciaMinima: 0,
     existenciaMaxima: 0,
     estado: "HABILITADO",
-    resenias: [],
     precio: 0
 };
 
@@ -25,7 +24,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
         //console.log(name,value);
         //Guardar cambios
         if (name === "existencia" || name === "existenciaMinima" || name === "existenciaMaxima") {
-            console.log("name",name)
+            console.log("name", name)
             setProducto({
                 ...producto,
                 [name]: parseInt(value)
@@ -95,15 +94,13 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
 
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3">
+
                             <Form.Label htmlFor="categoria">Categoria</Form.Label>
-                            <Form.Control
-                                name="categoria"
-                                maxLength="20"
-                                value={producto.categoria}
-                                onChange={handleChange}
-                                type="text"
-                                placeholder="Ingrese categoria del producto" />
-                            {validarInputText(producto.categoria)}
+                            <Form.Select name="categoria" onChange={handleChange} value={producto.categoria}>
+                                <option value="comida">Comida</option>
+                                <option value="cama">Cama</option>
+                                <option value="higiene">Higiene</option>
+                            </Form.Select>
                         </Form.Group>
                     </Row>
                     <Row>
@@ -181,7 +178,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                         <Form.Group as={Col} className="mb-3">
                             <Form.Label>Imagen del producto</Form.Label>
                             {/* <Form.Control name="imagen" onChange={handleChange} type="file" /> */}
-                            <Form.Control name="imagen" onChange={handleChange} placeholder="Ingrese URL de imagen" />
+                            <Form.Control name="imagen" value={producto.imagen} onChange={handleChange} placeholder="Ingrese URL de imagen" />
                         </Form.Group>
                     </Row>
                     <Row>

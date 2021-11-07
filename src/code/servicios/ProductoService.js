@@ -1,4 +1,3 @@
-// import samples from "../../samples/productos.json";
 import UtilsService from "./UtilsService";
 export default class ProductoService {
 	static productos = [];
@@ -9,109 +8,230 @@ export default class ProductoService {
 
 	static notifySubscribers() {
 		this.observers.forEach((current) => {
-			current(this.productos);
+			current(ProductoService.productos);
 		})
 	}
 
 	/**
 	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
-	* @todo TRAER OBJETOS DEL BACKEND.
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio() {
-		
 		try {
-			let res = await fetch(UtilsService.getUrlsApi().productos.traerTodos, {
-				method: 'GET',
-				cache: 'no-cache',
-				credentials: 'same-origin',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				}
-			})
-			if (res.ok) {
-				let jsonData = await res.json();
-				this.productos = jsonData.productos;
-				console.log('Servicio productos iniciado');
-				this.notifySubscribers();
-				return this.productos;
-			}
-			else {
-				//console.log(res);
-				Promise.reject("Error al traer los productos: "+res.statusText);
-				return this.productos;
-			}
-		} catch (error) {
-			Promise.reject("Error al traer los productos: "+error.message);
+			const res = await fetch(UtilsService.getUrlsApi().productos.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.productos = data.productos;
+			this.notifySubscribers();
 			return this.productos;
+		} catch (err) {
+			console.log(err);
 		}
-		
 	}
 
 
 	static getProductos() {
-
 		return this.productos;
 	}
 
 	static getProductoPorId(_id) {
-		// eslint-disable-next-line
-		return this.productos.filter(c => c._id == _id)[0];
+		return this.productos.filter(c => c._id === _id)[0];
 	}
 
 	/**
- * @todo PROCESAR BUSQUEDA UTILIZANDO EL BACKEND (Index de MongoDB)
- * @param {*} consulta 
+ *  PROCESAR BUSQUEDA UTILIZANDO EL BACKEND (Index de MongoDB)
+ * @todo CULAS: NUNCA SE LLAMA
+ * 
+ * @param {*} busqueda 
  * @returns 
  */
-	static async getProductosPorBusqueda(consulta) {
-		return this.productos;
+	static async getProductosPorBusqueda(busqueda) {
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().productos.buscar, {
+				method: 'POST',
+				cache: 'no-cache',
+				credentials: 'same-origin',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ busqueda: busqueda }),
+			});
+			const data = await res.json();
+			console.log(data);
+			Promise.resolve(data.productos)
+			return data;
+			
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo Obtener mas vendido. Si el numero de ventas son iguales, agarrar cualquiera
+	 *  Obtener mas vendido. Si el numero de ventas son iguales, agarrar cualquiera
 	 * @returns 
 	 */
-	static getMasVendido() {
-		return this.productos[0];
+	static async getMasVendido() {
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendido);
+			const data = await res.json();
+			console.log(data);
+			this.notifySubscribers();
+
+			return data.producto;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo Obtener productos ordenados con los productos cargados en el servicio. No usar backend
+	 * Obtener productos ordenados con los productos cargados en el servicio. No usar BACKEND
+	 * @todo LUCAS: no se llama desde ningun lado, testear y avisar si funciona o no...
 	 * @param {*} tipoOrden MAS_VENDIDOS | MAYOR_PRECIO | MENOR_PRECIO
 	 * @returns 
 	 */
-	static getProductosOrdenados(tipoOrden) {
+	static async getProductosOrdenados(tipoOrden) {
+		console.info(this.productos);
+		switch (tipoOrden) {
+			case "MAS_VENDIDOS":
+				try {
+					const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendidos);
+					const data = await res.json();
+					console.log(data);
+					this.productos = data.productos;
+					this.notifySubscribers();
+
+					return data.producto;
+				} catch (err) {
+					console.log(err);
+				}
+				break;
+			case "MAYOR_PRECIO":
+				this.productos = this.productos.sort((prodUno, prodDos) => {
+					if (prodUno.precio > prodDos.precio) {
+						return 1;
+					}
+					if (prodUno.precio < prodDos.precio) {
+						return -1;
+					}
+					return 0
+				});
+				break;
+			case "MENOR_PRECIO":
+				this.productos = this.productos.sort((prodUno, prodDos) => {
+					if (prodUno.precio > prodDos.precio) {
+						return -1;
+					}
+					if (prodUno.precio < prodDos.precio) {
+						return 1;
+					}
+					return 0
+				});
+				break;
+			default:
+				console.error("ERROR: codigo inalcanzable");
+				break;
+		}
+		console.info(this.productos);
 		return this.productos;
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} newItem 
 	 */
 	static async addProducto(newItem) {
-		this.productos.push(newItem);
-		this.notifySubscribers();
+		UtilsService.setLoading(true);
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().productos.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ producto: newItem })
+			});
+			const data = await res.json();
+			if(data.status === 200){
+				this.productos.push(newItem);
+				this.iniciarServicio();
+			}
+			else{
+				console.log(data);
+				alert("Error. No se pudo agregar el producto");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+		finally{
+			UtilsService.setLoading(false);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
 	static async modifyProducto(item) {
-		console.log("Modificar producto", item);
-		this.productos = this.productos.map((c) => (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		UtilsService.setLoading(true);
+		let _id = JSON.parse(JSON.stringify(item))._id;
+		delete item._id;
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().productos.modificar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id, producto: item })
+			});
+			const data = await res.json();
+			if(data.status === 200){
+				this.productos = this.productos.map((c) => (c._id === item._id) ? item : c);
+				this.iniciarServicio();
+			}
+			else{
+				console.log(data);
+				alert("Error al modificar el producto");
+			}
+
+		} catch (err) {
+			console.log(err);
+			alert("Error. No pudo eliminar el producto");
+		}
+		finally{
+			UtilsService.setLoading(false);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeProducto(_id) {
-		this.productos = this.productos.filter((c) => (c._id !== _id));
-		this.notifySubscribers();
+		UtilsService.setLoading(true);
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().productos.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id })
+			});
+			const data = await res.json();
+			if(data.status === 200){
+				this.productos = this.productos.filter((c) => (c._id !== _id));
+				this.notifySubscribers();
+			}
+			else{
+				console.error(data);
+				alert("Error. No pudo eliminar el producto");
+			}
+		} catch (err) {
+			console.log(err);
+			alert("Error. No pudo eliminar el producto");
+		}
+		finally{
+			UtilsService.setLoading(false);
+		}
 	}
 
 
