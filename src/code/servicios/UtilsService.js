@@ -64,13 +64,14 @@ export default class UtilsService{
                 traerMasVendido:URLAPI+"/producto/traerMasVendido", 
                 traerMasVendidos:URLAPI+"/producto/traerMasVendidos",
             }, 
-            servicios:{
+            servicio:{
                 agregar:URLAPI+"/servicio/agregar", 
                 modificar:URLAPI+"/servicio/modificar", 
                 eliminar:URLAPI+"/servicio/eliminar", 
                 traerTodos:URLAPI+"/servicio/traerTodos",
                 buscar:URLAPI+"/servicio/buscar",
                 traerMasVendido:URLAPI+"/servicio/traerMasVendido",
+                traerMasVendidos:URLAPI+"/servicio/traerMasVendidos",
             },
             turno:{
                 agregar:URLAPI+"/turno/agregar", 

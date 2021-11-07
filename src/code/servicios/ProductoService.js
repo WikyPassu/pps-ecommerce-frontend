@@ -75,7 +75,6 @@ export default class ProductoService {
 	 * @returns 
 	 */
 	static async getMasVendido() {
-
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendido);
 			const data = await res.json();

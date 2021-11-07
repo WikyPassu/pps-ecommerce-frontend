@@ -16,7 +16,7 @@ export default class StorefrontService {
 			current(this.imagenesCarrusel);
 		})
 	}
-
+	
 	static async iniciarServicio() {
 		console.log('Servicio Storefront iniciado');
 		this.configuracion = samples[0];//SOLO DEBE HACER UN SOLO OBJETO DE CONFIGURACION
@@ -26,6 +26,8 @@ export default class StorefrontService {
 
 	/**
 	 * @todo Registrar cambios en el backend
+	 * 
+	 * @todo ALAN : avisame cuando hagas la peti
 	 * @param {*} ordenamiento MAS_VENDIDOS | MAYOR_PRECIO | MENOR_PRECIO
 	 */
 	static setOrdenListadoProductos(ordenamiento) {
@@ -40,6 +42,7 @@ export default class StorefrontService {
 
 	/**
  	* @todo Registrar cambios en el backend
+	  * @todo ALAN : avisame cuando hagas la peti
  	* @param {*} ordenamiento MAS_VENDIDOS | MAYOR_PRECIO | MENOR_PRECIO
  	*/
 	static setOrdenListadoServicios(ordenamiento) {
