@@ -114,11 +114,11 @@ export default class UtilsService{
                 verificarCompraPrevia:URLAPI+"/resenia/verificarCompraPrevia", 
             },
             metodoPago:{
-                //todo (falta testear)
+                //@todo alan (falta back)
                 realizarPago:URLAPI+"/metodoPago/realizarPago",                                
             },
             storefront:{
-                //todo (falta back)
+                //@todo alan (falta back)
                 modificarOrdenProductos:URLAPI+"", 
                 modificarOrdenServicios:URLAPI+"",                 
             },
