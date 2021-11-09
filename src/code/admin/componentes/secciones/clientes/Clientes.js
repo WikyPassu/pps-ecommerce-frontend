@@ -24,7 +24,7 @@ export default function Clientes() {
           setMostrarModalModificar(true);
           setElementoModificar(c);
         }}
-        onDeleteClick={(c)=>ClienteService.removeCliente(c.id)}
+        onDeleteClick={(c)=>ClienteService.removeCliente(c._id)}
         datos={lista}
       />
       {mostrarModalModificar && <FormClienteModal

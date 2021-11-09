@@ -38,7 +38,7 @@ export default function Consumibles() {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p)=>{ConsumibleService.removeConsumible(p.id)}}
+      onDeleteClick={(p)=>{ConsumibleService.removeConsumible(p._id)}}
       attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormConsumibleModal

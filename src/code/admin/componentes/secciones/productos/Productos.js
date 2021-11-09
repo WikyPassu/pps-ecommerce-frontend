@@ -26,6 +26,9 @@ export default function Productos() {
     attrFuncs={[
       {columnaIndex:3,attrFunc:(value)=>{
         return UtilsService.stringFormatter(value,50);
+      }},
+      {columnaIndex:1,attrFunc:(value)=>{
+        return UtilsService.stringFormatter(value,50);
       }}
     ]}
     columnas={[

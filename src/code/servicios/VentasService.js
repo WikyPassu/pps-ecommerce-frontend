@@ -20,7 +20,6 @@ export default class FacturasService{
 	static async iniciarServicio(){
 		console.log('Servicio Facturas iniciado');
 		this.facturas = samples;
-
 		return samples;
 	}
 

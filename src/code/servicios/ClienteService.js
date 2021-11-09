@@ -1,4 +1,4 @@
-import samples from "../../samples/clientes.json";
+import UtilsService from "./UtilsService";
 export default class ClienteService{
 	static clientes = [];
 	static observers = [];
@@ -15,13 +15,21 @@ export default class ClienteService{
 
 	/**
 	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
-	 * @todo TRAER OBJETOS DEL BACKEND.
+	 * TRAER OBJETOS DEL BACKEND.
 	 * @returns Array de servicios
 	 */
 	static async iniciarServicio(){
-		console.log("Servicio cliente iniciado");
-		this.clientes = samples;
-		return samples;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.clientes = data.usuariosRegistrados;
+			this.notifySubscribers();
+			return this.clientes;
+		} catch (err) {
+			console.log(err);
+		}
+		return this.clientes;
 	}
 
 
@@ -39,42 +47,102 @@ export default class ClienteService{
     }
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN: error 500
 	 * @param {*} newItem 
 	 */
 	static async addCliente(newItem) {
-		this.clientes.push(newItem);
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ usuarioRegistrado: newItem })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.clientes.push(newItem);
+			// this.notifySubscribers();
+			this.iniciarServicio();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN error 500
 	 * @param {*} item 
 	 */
 	static async modifyCliente(item){
-		console.log("Modificar item",item);
-		this.clientes = this.clientes.map((c)=> (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		let _id = JSON.stringify(item);
+		delete item._id;
+		_id = JSON.parse(_id);
+		_id = _id._id;
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.modificar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id, usuarioRegistrado: item })
+			});
+			const data = await res.json();
+			console.log(data);
+			item._id = _id;
+			this.clientes = this.clientes.map((c)=> (c._id === item._id) ? item : c);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 *  GUARDAR CAMBIOS EN BACKEND
+	 * @todo ALAN inconsistencia de parametros
 	 * @param {*} _id ID del objeto
 	 */
 	 static async removeCliente(_id) {
-		this.clientes = this.clientes.filter((c)=> (c._id !== _id));
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.clientes = this.clientes.filter((c)=> (c._id !== _id));
+			this.iniciarServicio();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * Se verifica que el cliente haya comprado el producto que se muestra en pagina de un producto para poder habilitar las reseñas.
+	 * Se verifica que el cliente haya -comprado el producto que se muestra en pagina de un producto- ADQUIRIDO EL SERVICIO para poder habilitar las reseñas.
 	 * @todo CONECTAR CON EL BACKEND o en su defecto hacerlo con los objetos guardados en el servicio.
-	 * @param {*} idCliente 
-	 * @param {*} idProducto 
+	 * @param {*} dniCliente NEW 
+	 * @param {*} idServicio 
 	 * @returns 
 	 */
-	static isDisponibleParaResenia(idCliente, idProducto){
-		return true;
+	static async isDisponibleParaResenia(dniCliente, idServicio){
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().resenia.verificarCompraPrevia, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ dniUsuario: dniCliente, idServicio: idServicio})
+			});
+			const data = await res.json();
+			return data.exito;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**

@@ -186,7 +186,8 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                     <Row>
                         <Col>
                             <br />
-                            {listaDetalleElemento.length ? <Button type="submit" size="lg">Guardar</Button> : <Button disabled type="submit" size="lg">Guardar</Button>}
+                            <Button type="submit" size="lg">Guardar</Button>
+                            {/* {listaDetalleElemento.length ? <Button type="submit" size="lg">Guardar</Button> : <Button disabled type="submit" size="lg">Guardar</Button>} */}
                         </Col>
                     </Row>
                 </Form>

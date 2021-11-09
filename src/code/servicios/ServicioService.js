@@ -1,4 +1,4 @@
-import samples from "../../samples/servicios.json";
+import UtilsService from "./UtilsService";
 export default class ServicioService {
 	static servicios = [];
 	static observers = [];
@@ -14,14 +14,20 @@ export default class ServicioService {
 
 	/**
 	 * Inicia el servicio con todos los datos que se necesitan para que funcione. Se ejecutaria cada vez que se refresque la pagina.
-	* @todo TRAER OBJETOS DEL BACKEND.
+	* TRAER OBJETOS DEL BACKEND.
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio() {
-		console.log('Servicio servicios iniciado');
-		this.servicios = samples;
-		this.notifySubscribers();
-		return samples;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().servicio.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.servicios = data.servicios;
+			this.notifySubscribers();
+			return this.servicios;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 
@@ -31,65 +37,162 @@ export default class ServicioService {
 	}
 
 	static getServicioPorId(_id) {
-		// eslint-disable-next-line
-		return this.servicios.filter(c => c._id == _id)[0];
+		return this.servicios.filter(c => c._id === _id)[0];
 	}
 
 	/**
-	 * @todo PROCESAR BUSQUEDA UTILIZANDO EL BACKEND (Index de MongoDB)
-	 * @param {*} consulta 
+	 *  PROCESAR BUSQUEDA UTILIZANDO EL BACKEND (Index de MongoDB)
+	 * @todo CULAS: se rompe en front. avisame si lo arreglas y tengo algo mal xq no pude testear
+	 * @param {*} busqueda 
 	 * @returns 
 	 */
-	static async getServiciosPorBusqueda(consulta) {
+	static async getServiciosPorBusqueda(busqueda) {
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().servicio.buscar, {
+				method: 'POST',
+				cache: 'no-cache',
+				credentials: 'same-origin',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ busqueda: busqueda }),
+			});
+			const data = await res.json();
+			console.log(data);
+			this.notifySubscribers();
+
+			return data.servicios;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	/**
+	  * Obtener mas vendido. Si el numero de ventas son iguales, agarrar cualquiera
+	  * @returns 
+	  */
+	static async getMasVendido() {
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().servicio.traerMasVendido);
+			const data = await res.json();
+			console.log(data);
+			this.notifySubscribers();
+
+			return data.producto;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	/**
+	 * Obtener servicios ordenados con los servicios cargados en el servicio. No usar backend
+	 * @todo CULAS: los servicios no tienen mayor precio y menor precio porque dependen del perro
+	 * @param {*} tipoOrden MAS_VENDIDOS | ?MAYOR_PRECIO | ?MENOR_PRECIO
+	 * @returns 
+	 */
+	static async getServiciosOrdenados(tipoOrden) {
+		console.info(this.servicios);
+
+		switch (tipoOrden) {
+			case "MAS_VENDIDOS":
+				try {
+					const res = await fetch(UtilsService.getUrlsApi().servicios.traerMasVendidos);
+					const data = await res.json();
+					console.log(data);
+					this.servicios = data.servicios;
+					this.notifySubscribers();
+
+					return data.servicios;
+				} catch (err) {
+					console.log(err);
+				}
+				break;
+			default:
+				console.error("ERROR: codigo inalcanzable");
+				break;
+		}
+		console.info(this.servicios);
 		return this.servicios;
 	}
 
 	/**
- 	* @todo Obtener mas vendido. Si el numero de ventas son iguales, agarrar cualquiera
- 	* @returns 
- 	*/
-	static getMasVendido() {
-		return this.servicios[0];
-	}
-
-	/**
-	 * @todo Obtener servicios ordenados con los servicios cargados en el servicio. No usar backend
-	 * @param {*} tipoOrden MAS_VENDIDOS | MAYOR_PRECIO | MENOR_PRECIO
-	 * @returns 
-	 */
-	static getServiciosOrdenados(tipoOrden){
-		return this.servicios;
-	}
-
-	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo CULAS: el front no permite cargar servicio, no toma las imagenes? no lo se. si cargo la imagen a una pagina y uso ese link si funciona..
+	 * @todo CULAS: de todas formas no me permite apretar el boton guardar q isistes por favor testealo 
 	 * @param {*} newItem 
 	 */
 	static async addServicio(newItem) {
-		this.servicios.push(newItem);
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().servicio.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ servicio: newItem })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.servicios.push(newItem);
+			//this.notifySubscribers();
+			this.iniciarServicio();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
 	static async modifyServicio(item) {
-		this.servicios = this.servicios.map((c) => (c._id === item._id) ? item : c);
-		this.notifySubscribers();
+		let _id = JSON.stringify(item);
+		delete item._id;
+		_id = JSON.parse(_id);
+		_id = _id._id;
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().servicio.modificar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id, servicio: item })
+			});
+			const data = await res.json();
+			console.log(data);
+			item._id = _id;
+			this.servicios = this.servicios.map((c) => (c._id === item._id) ? item : c);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeServicio(_id) {
-		this.servicios = this.servicios.filter((c) => (c._id !== _id));
-		this.notifySubscribers();
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().servicio.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: _id })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.servicios = this.servicios.filter((c) => (c._id !== _id));
+			this.iniciarServicio();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo CULAS: testear
 	 * @param {*} resenia 
 	 * @param {*} idServicio 
 	 */
@@ -98,14 +201,27 @@ export default class ServicioService {
 		console.log("Servicio Encontrado: ", servicio);
 		console.log("Resenia a agregar: ", resenia);
 		if (servicio) {
-			servicio.resenias.push(resenia);
-			this.modifyServicio(servicio);
-			this.notifySubscribers();
+			try {
+				const res = await fetch(UtilsService.getUrlsApi().resenia.agregar, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ resenia: resenia })
+				});
+				const data = await res.json();
+				console.log(data);
+				servicio.resenias.push(resenia);
+				this.modifyServicio(servicio);
+				this.notifySubscribers();
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * @todo GUARDAR CAMBIOS EN BACKEND // culas dijo que es un error y que ignore esta funcion
 	 * @param {*} idServicio 
 	 * @returns 
 	 */
@@ -115,14 +231,30 @@ export default class ServicioService {
 	}
 
 	/**
-	 * @todo GUARDAR CAMBIOS EN BACKEND
+	 * GUARDAR CAMBIOS EN BACKEND
+	 * @todo CULAS: testear
 	 * @param {*} idResenia 
 	 * @param {*} idServicio 
 	 */
 	static async removeResenia(idResenia, idServicio) {
 		let servicio = this.getServicioPorId(idServicio);
-		servicio.resenias = servicio.resenias.filter(r => r._id !== idResenia);
-		this.modifyServicio(servicio);
-		this.notifySubscribers();
+
+
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().resenia.eliminar, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: idResenia })
+			});
+			const data = await res.json();
+			console.log(data);
+			servicio.resenias = servicio.resenias.filter(r => r._id !== idResenia);
+			this.modifyServicio(servicio);
+			this.notifySubscribers();
+		} catch (err) {
+			console.log(err);
+		}
 	}
 }
