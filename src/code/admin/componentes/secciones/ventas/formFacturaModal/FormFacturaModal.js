@@ -138,12 +138,12 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
                         </Form.Group>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} name="dniEmpleado" required placeholder="DNI de empleado" />
+                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={empleado?empleado.dni:"DNI de empleado"} name="dniEmpleado" required  />
                     </InputGroup>
                     {empleado?<b>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</b>:<p>No se han encontrado resultados</p>}
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} name="dniCliente" required placeholder="DNI del cliente" />
+                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={usuarioRegistrado?usuarioRegistrado.dni:"DNI del cliente"}  name="dniCliente" required  />
                     </InputGroup>
                     {usuarioRegistrado?<b>Se ha seleccionado a {usuarioRegistrado.nombre} {usuarioRegistrado.apellido}</b>:<p>No se han encontrado resultados</p>}
                     <InputGroup>

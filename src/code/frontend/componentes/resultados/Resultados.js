@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import ProductoService from "../../../servicios/ProductoService";
+import ServicioService from "../../../servicios/ServicioService";
 import Producto from "../producto/Producto";
 
-export default function Resultados({ busqueda }) {
+export default function Resultados({ busqueda, tipo }) {
     const [lista, setLista] = useState([]);
 
     useEffect(() => {
         const realizarBusqueda = async () => {
-            let newList = await ProductoService.getProductosPorBusqueda(busqueda);
+            let newList;
+            if(tipo === "SERVICIO"){
+                newList = await ServicioService.getServiciosPorBusqueda(busqueda);
+            }
+            else{
+                newList = await ProductoService.getProductosPorBusqueda(busqueda);
+            }
             console.log("lista",newList);
             if(newList){
                 console.log("new List",newList)

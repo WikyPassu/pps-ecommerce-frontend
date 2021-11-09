@@ -39,7 +39,7 @@ export default function Storefront() {
           <InputGroup.Text>Orden de listado de productos</InputGroup.Text>
           {/* <FormControl onChange={handleChange} value={elemento.nombre} name="ordenListadoProductos" required placeholder="Ordern de listado de productos" /> */}
           <Form.Select name="ordenListadoProductos">
-            <option value="PENDIENTE">RECIENTES</option>
+            <option value="MAS_VENDIDOS">MAS_VENDIDOS</option>
             <option value="MAYOR_PRECIO">MAYOR PRECIO</option>
             <option value="MENOR_PRECIO">MENOR PRECIO</option>
           </Form.Select>
@@ -48,7 +48,7 @@ export default function Storefront() {
           <InputGroup.Text>Orden de listado de servicios</InputGroup.Text>
           {/* <FormControl onChange={handleChange} value={elemento.nombre} name="ordenListadoProductos" required placeholder="Ordern de listado de productos" /> */}
           <Form.Select name="ordenListadoServicios">
-            <option value="PENDIENTE">RECIENTES</option>
+            <option value="MAS_VENDIDOS">MAS_VENDIDOS</option>
             <option value="MAYOR_PRECIO">MAYOR PRECIO</option>
             <option value="MENOR_PRECIO">MENOR PRECIO</option>
           </Form.Select>

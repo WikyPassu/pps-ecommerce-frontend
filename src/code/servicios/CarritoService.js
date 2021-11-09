@@ -12,7 +12,13 @@ export default class CarritoService{
 	 */
 	static async iniciarServicio(){
 		console.log("Carrito servicio iniciado");
-		return [];
+		let cookies = document.cookie.split("items=");
+		cookies = JSON.parse(cookies[1]);
+		console.log(cookies);
+		if(!cookies){
+			return [];
+		}
+		return cookies;
 	}
 
 	static notifySubscribers() {
@@ -35,12 +41,13 @@ export default class CarritoService{
 	 */
 	static addItem(item,cantidad = 1) {
 		console.log("Agregando item")
-		this.items_carrito_compras.push({
+		let unItem = {
 			_id: (new Date()).getTime(),
 			item,
 			cantidad:parseInt(cantidad) 
-		});
-
+		};
+		this.items_carrito_compras.push(unItem);
+		document.cookie = "items=" + JSON.stringify(unItem);
 		this.notifySubscribers();
 	}
 
@@ -65,8 +72,7 @@ export default class CarritoService{
 				_id: "envios",
 				item:{
 					precio:precio,
-					nombre:"Traslado",
-					categoria:"TRASLADO"
+					nombre:"Servicio de Envios"
 				},
 				cantidad:1
 			});

@@ -9,6 +9,8 @@ function useQuery() {
 }
 export default function BusquedaPage(){
     const query = useQuery().get("q");
+    const tipo = useQuery().get("type");
+
     useEffect(()=>{
         window.scrollTo(0,0);
     })
@@ -19,7 +21,7 @@ export default function BusquedaPage(){
             <Filtros/>
         </div>
         <div className="resultados">
-            <Resultados busqueda={query}/>
+            <Resultados busqueda={query} tipo={tipo}/>
         </div>
     </div>
     
