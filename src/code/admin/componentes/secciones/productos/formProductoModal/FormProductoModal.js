@@ -89,6 +89,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                                 type="text"
                                 value={producto.nombre}
                                 onChange={handleChange}
+                                required
                                 placeholder="Ingrese nombre del producto" />
                             {validarInputText(producto.nombre)}
 
@@ -96,7 +97,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                         <Form.Group as={Col} className="mb-3">
 
                             <Form.Label htmlFor="categoria">Categoria</Form.Label>
-                            <Form.Select name="categoria" onChange={handleChange} value={producto.categoria}>
+                            <Form.Select required name="categoria" onChange={handleChange} value={producto.categoria}>
                                 <option value="comida">Comida</option>
                                 <option value="cama">Cama</option>
                                 <option value="higiene">Higiene</option>
@@ -108,7 +109,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                             <Form.Label htmlFor="descripcion">Descripcion</Form.Label>
                             <Form.Control
                                 name="descripcion"
-                                maxLength="100"
+                                maxLength="250"
                                 value={producto.descripcion}
                                 onChange={handleChange}
                                 as="textarea"
@@ -123,6 +124,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                                 value={producto.existencia}
                                 onChange={handleChange}
                                 min="0"
+                                required
                                 type="number"
                                 placeholder="Ingrese existencia del producto" />
                             {validarInputNumber(producto.existencia)}
@@ -134,6 +136,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                                 value={producto.existenciaMinima}
                                 onChange={handleChange}
                                 min="0"
+                                required
                                 type="number"
                                 placeholder="Ingrese stock minimo del producto" />
                             {validarInputNumber(producto.existenciaMinima)}
@@ -145,6 +148,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                                 value={producto.existenciaMaxima}
                                 onChange={handleChange}
                                 min="0"
+                                required
                                 type="number"
                                 placeholder="Ingrese stock maximo del producto" />
                             {validarInputNumber(producto.existenciaMaxima)}
@@ -158,6 +162,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                                 value={producto.precio}
                                 onChange={handleChange}
                                 min="0"
+                                required
                                 step=".01"
                                 type="number"
                                 placeholder="Ingrese precio del producto" />

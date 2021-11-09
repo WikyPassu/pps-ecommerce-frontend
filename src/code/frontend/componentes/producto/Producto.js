@@ -18,7 +18,8 @@ export default function Producto(props) {
     const { imagen, _id, nombre, descripcion, precio } = useProducto(props.producto);
     const styleImg = {
         backgroundImage: `url(${imagen})`,
-        backgroundSize: "cover",
+        backgroundSize: "contain",
+        backgroundRepeat:"no-repeat",
         backgroundPosition: "center"
     }
     const history = useHistory();

@@ -20,7 +20,6 @@ export default class ProductoService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().productos.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			this.productos = data.productos;
 			this.notifySubscribers();
 			return this.productos;
@@ -40,7 +39,6 @@ export default class ProductoService {
 
 	/**
  *  PROCESAR BUSQUEDA UTILIZANDO EL BACKEND (Index de MongoDB)
- * @todo CULAS: NUNCA SE LLAMA
  * 
  * @param {*} busqueda 
  * @returns 
@@ -57,10 +55,8 @@ export default class ProductoService {
 				body: JSON.stringify({ busqueda: busqueda }),
 			});
 			const data = await res.json();
-			console.log(data);
-			Promise.resolve(data.productos)
-			return data;
-			
+			return data.productos;
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -74,9 +70,7 @@ export default class ProductoService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendido);
 			const data = await res.json();
-			console.log(data);
 			this.notifySubscribers();
-
 			return data.producto;
 		} catch (err) {
 			console.log(err);
@@ -96,7 +90,6 @@ export default class ProductoService {
 				try {
 					const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendidos);
 					const data = await res.json();
-					console.log(data);
 					this.productos = data.productos;
 					this.notifySubscribers();
 
@@ -150,18 +143,18 @@ export default class ProductoService {
 				body: JSON.stringify({ producto: newItem })
 			});
 			const data = await res.json();
-			if(data.status === 200){
+			if (data.status === 200) {
 				this.productos.push(newItem);
 				this.iniciarServicio();
 			}
-			else{
+			else {
 				console.log(data);
 				alert("Error. No se pudo agregar el producto");
 			}
 		} catch (err) {
 			console.log(err);
 		}
-		finally{
+		finally {
 			UtilsService.setLoading(false);
 		}
 	}
@@ -184,11 +177,11 @@ export default class ProductoService {
 				body: JSON.stringify({ _id: _id, producto: item })
 			});
 			const data = await res.json();
-			if(data.status === 200){
+			if (data.status === 200) {
 				this.productos = this.productos.map((c) => (c._id === item._id) ? item : c);
 				this.iniciarServicio();
 			}
-			else{
+			else {
 				console.log(data);
 				alert("Error al modificar el producto");
 			}
@@ -197,7 +190,7 @@ export default class ProductoService {
 			console.log(err);
 			alert("Error. No pudo eliminar el producto");
 		}
-		finally{
+		finally {
 			UtilsService.setLoading(false);
 		}
 	}
@@ -217,11 +210,11 @@ export default class ProductoService {
 				body: JSON.stringify({ _id: _id })
 			});
 			const data = await res.json();
-			if(data.status === 200){
+			if (data.status === 200) {
 				this.productos = this.productos.filter((c) => (c._id !== _id));
 				this.notifySubscribers();
 			}
-			else{
+			else {
 				console.error(data);
 				alert("Error. No pudo eliminar el producto");
 			}
@@ -229,7 +222,7 @@ export default class ProductoService {
 			console.log(err);
 			alert("Error. No pudo eliminar el producto");
 		}
-		finally{
+		finally {
 			UtilsService.setLoading(false);
 		}
 	}

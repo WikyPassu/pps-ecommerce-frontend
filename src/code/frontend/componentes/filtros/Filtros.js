@@ -9,8 +9,14 @@ export default function Filtros() {
         <Form>
             <Form.Label>Tipo</Form.Label>
             <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" id="op-chk-producto" label="Producto" />
-                <Form.Check type="checkbox" id="op-chk-servicio" label="Servicios" />
+                <Row>
+                    <Col>
+                        <Form.Check type="radio" name="tipo" id="op-chk-producto" checked label="Producto" />
+                    </Col>
+                    <Col>
+                        <Form.Check type="radio" name="tipo" id="op-chk-servicio" label="Servicios" />
+                    </Col>
+                </Row>
             </Form.Group>
             <hr />
             <Form.Label>Categoria</Form.Label>
