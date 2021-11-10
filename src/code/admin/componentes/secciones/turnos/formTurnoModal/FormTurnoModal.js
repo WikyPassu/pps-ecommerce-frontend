@@ -82,11 +82,12 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
             }
         }
         else {
-            let empleadoEncontrado = ClienteService.getClienteByDNI(value);
-            if (empleadoEncontrado) {
-                setCliente(empleadoEncontrado);
+            let clienteEncontrado = ClienteService.getClienteByDNI(value);
+            console.log(clienteEncontrado)
+            if (clienteEncontrado) {
+                setCliente(clienteEncontrado);
                 setElemento((elemento) => {
-                    return { ...elemento, dniCliente: empleadoEncontrado.dni }
+                    return { ...elemento, dniCliente: clienteEncontrado.dni }
                 })
             }
             else {
@@ -158,12 +159,12 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                 <Form noValidate onSubmit={handleSubmit}>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} name="dniEmpleado" required placeholder="DNI de empleado" />
+                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={empleado?empleado.dni:"DNI de empleado"} name="dniEmpleado" required />
                     </InputGroup>
                     {empleado ? <b>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} name="dniCliente" required placeholder="DNI del cliente" />
+                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={cliente?cliente.dni:"DNI de cliente"} name="dniCliente" required />
                     </InputGroup>
                     {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <Row>
@@ -171,6 +172,16 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                             <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id}>
                                 <option>Seleccione un Servicio</option>
                                 {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
+                            </Form.Select>
+                            <br/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
+                            <Form.Select onChange={handleChange} name="estado" value={elemento.estado}>
+                                <option value="PENDIENTE">Pendiente</option>
+                                <option value="CANCELADO">Cancelado</option>
+                                <option value="FINALIZADO">Finalizado</option>
                             </Form.Select>
                             <br/>
                         </Col>

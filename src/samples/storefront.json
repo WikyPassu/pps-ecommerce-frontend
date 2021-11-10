@@ -1,6 +1,14 @@
 [
     {
         "ordenListadoProductos":"MENOR_PRECIO",
-        "ordenListadoServicios":"MAYOR_PRECIO"
+        "ordenListadoServicios":"MAYOR_PRECIO",
+        "consumibles":{
+            "costos":[
+                {
+                    "nombre":"shampoo",
+                    "unidadesPorGramo":5000
+                }
+            ]
+        }
     }
 ]

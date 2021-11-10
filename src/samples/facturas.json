@@ -45,6 +45,7 @@
                 "precio":159.99,
                 "imagen":"https://www.hillspet.com.mx/content/dam/cp-sites/hills/hills-pet/global/2020-homepage-redesign/hero-pack-lockup.png",
                 "estado":"HABILITADO",
+                "unidadPorGramoPerro":0.4,
                 "existencia":30,
                 "existenciaMinima":20,
                 "existenciaMaxima":60

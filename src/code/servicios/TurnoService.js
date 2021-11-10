@@ -1,5 +1,5 @@
 import UtilsService from "./UtilsService";
-export default class TurnoService{
+export default class TurnoService {
 	static turnos = [];
 	static observers = [];
 	static subscribe(callback) {
@@ -17,7 +17,7 @@ export default class TurnoService{
 	*  TRAER OBJETOS DEL BACKEND.
 	* @returns Array de objetos
 	*/
-	static async iniciarServicio(){
+	static async iniciarServicio() {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodos);
 			const data = await res.json();
@@ -42,9 +42,9 @@ export default class TurnoService{
 	 * @param {*} _id 
 	 * @returns 
 	 */
-    static getTurnoPorId(_id){
-        return this.turnos.filter(c => c._id === _id)[0];
-    }
+	static getTurnoPorId(_id) {
+		return this.turnos.filter(c => c._id === _id)[0];
+	}
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
@@ -73,7 +73,7 @@ export default class TurnoService{
 	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static async modifyTurno(item){
+	static async modifyTurno(item) {
 		let _id = JSON.stringify(item);
 		delete item._id;
 		_id = JSON.parse(_id);
@@ -90,7 +90,7 @@ export default class TurnoService{
 			const data = await res.json();
 			console.log(data);
 			item._id = _id;
-			this.turnos = this.turnos.map((c)=> (c._id === _id) ? item : c);
+			this.turnos = this.turnos.map((c) => (c._id === _id) ? item : c);
 			this.notifySubscribers();
 		} catch (err) {
 			console.log(err);
@@ -112,7 +112,7 @@ export default class TurnoService{
 			});
 			const data = await res.json();
 			console.log(data);
-			this.turnos = this.turnos.filter((c)=> (c._id !== _id));
+			this.turnos = this.turnos.filter((c) => (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);

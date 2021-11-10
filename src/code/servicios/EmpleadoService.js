@@ -41,7 +41,8 @@ export default class EmpleadoService {
 	}
 
 	static getEmpleadoByDNI(dni) {
-		return this.empleados.filter(c => c.dni === dni)[0];
+		// eslint-disable-next-line
+		return this.empleados.filter(c => c.dni == dni)[0];
 	}
 
 	/**

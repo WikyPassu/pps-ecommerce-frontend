@@ -38,6 +38,48 @@ export default class ConsumibleService {
 		return this.consumibles.filter(c => c._id === _id)[0];
 	}
 
+	static getConsumiblePorNombre(nombre) {
+		return this.consumibles.filter(c => c.nombre.toLowerCase() === nombre)[0];
+	}
+
+	/**
+	 * Calcula los consumibles en funcion del peso del perrito.
+	 * @param {*} perrito 
+	 * @returns Array de los  consumibles calculados
+	 */
+	 static calcularConsumibles(perrito,categoria) {
+		if(categoria === "banio"){
+			// Se gastara un shampoo cada 5000 gramos de perro
+			let consumible = ConsumibleService.getConsumiblePorNombre("shampoo");
+			let cantidadConsumibleUtilizar = perrito.peso * 1 / 5000;
+			return  [{
+                "cantidad":cantidadConsumibleUtilizar,
+                "consumible":{
+                    "_id":consumible._id,
+                    "nombre":consumible.nombre,
+                    "existencia":consumible.existencia,
+                    "existenciaMinima":consumible.existenciaMinima,
+                    "precioUnidad":consumible.precioUnidad
+                }
+            }]
+		}
+		else if(categoria === "guarderia"){
+			
+		}
+		else if(categoria === "corte_de_cabello"){
+
+		}
+		else if(categoria === "traslado"){
+
+		}
+		// <option value="banio">Baño</option>
+		// <option value="guarderia">Guarderia</option>
+		// <option value="corte_de_cabello">Corte de Cabello</option>
+		// <option value="traslado">Traslado</option>
+
+		return [];
+	}
+
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
 	 * @todo ALAN: error 500

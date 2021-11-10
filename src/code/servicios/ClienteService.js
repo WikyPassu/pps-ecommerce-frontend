@@ -43,7 +43,8 @@ export default class ClienteService{
     }
 
 	static getClienteByDNI(dni){
-        return this.clientes.filter(c => c.dni === dni)[0];
+		// eslint-disable-next-line
+        return this.clientes.filter(c => c.dni == dni)[0];
     }
 
 	/**

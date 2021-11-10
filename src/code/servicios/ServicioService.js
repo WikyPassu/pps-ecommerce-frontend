@@ -75,10 +75,10 @@ export default class ServicioService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.traerMasVendido);
 			const data = await res.json();
-			console.log(data);
+			console.log("SERVICIO MAS VENDIDO",data);
 			this.notifySubscribers();
 
-			return data.producto;
+			return data.servicio;
 		} catch (err) {
 			console.log(err);
 		}
@@ -256,5 +256,9 @@ export default class ServicioService {
 		} catch (err) {
 			console.log(err);
 		}
+	}
+
+	static calcularCostoDelServicio(idServicio,perrito){
+		return perrito.peso * 0.8;
 	}
 }
