@@ -1,3 +1,5 @@
+import Cookies from "universal-cookie/es6";
+
 export default class CarritoService{
 	static items_carrito_compras = [];
 	static observers = [];
@@ -12,13 +14,17 @@ export default class CarritoService{
 	 */
 	static async iniciarServicio(){
 		console.log("Carrito servicio iniciado");
-		let cookies = document.cookie.split("items=");
-		cookies = JSON.parse(cookies[1]);
-		console.log(cookies);
-		if(!cookies){
+		const cookies = new Cookies();
+		let items = cookies.get("items");
+		if(!items){
+			cookies.set("items", []);
 			return [];
 		}
-		return cookies;
+		else{
+			items.forEach(item => this.items_carrito_compras.push(item));
+			this.notifySubscribers();
+			return items;
+		}
 	}
 
 	static notifySubscribers() {
@@ -39,16 +45,20 @@ export default class CarritoService{
 	 * @param {*} tipoItem Producto
 	 * 
 	 */
-	static addItem(item,cantidad = 1) {
+	static addItem(item, cantidad = 1) {
 		console.log("Agregando item")
 		let unItem = {
 			_id: (new Date()).getTime(),
 			item,
-			cantidad:parseInt(cantidad) 
+			cantidad: parseInt(cantidad) 
 		};
 		this.items_carrito_compras.push(unItem);
-		document.cookie = "items=" + JSON.stringify(unItem);
 		this.notifySubscribers();
+		
+		const cookies = new Cookies();
+		let items = cookies.get("items");
+		items.push(unItem);
+		cookies.set("items", items);
 	}
 
 	/**
