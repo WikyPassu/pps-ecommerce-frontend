@@ -40,9 +40,8 @@ export default class CarritoService{
 	/**
 	 * Agrega un item al carrito
 	 * @todo SE DEBERA GUARDAR LOS CAMBIOS EN LAS COOKIES
-	 * @param {*} producto 
-	 * @param {*} cantidad 
-	 * @param {*} tipoItem Producto
+	 * @param {*} item 
+	 * @param {*} cantidad
 	 * 
 	 */
 	static addItem(item, cantidad = 1) {
@@ -66,8 +65,12 @@ export default class CarritoService{
 	 * @param {*} _id 
 	 */
 	static removeItem(_id) {
-		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c._id !== _id);
+		this.items_carrito_compras = this.items_carrito_compras.filter(c => c._id !== _id);
 		this.notifySubscribers();
+		const cookies = new Cookies();
+		let items = cookies.get("items");
+		items = items.filter(item => item._id !== _id);
+		cookies.set("items", items);
 	}
 
 	/**
@@ -78,15 +81,20 @@ export default class CarritoService{
 		console.log("Agregando item")
 		let existeEnvio = this.items_carrito_compras.filter(i => i._id === "envios")[0];
 		if(existeEnvio == null){
-			this.items_carrito_compras.push({
+			let itemEnvio = {
 				_id: "envios",
 				item:{
 					precio:precio,
 					nombre:"Servicio de Envios"
 				},
 				cantidad:1
-			});
+			};
+			this.items_carrito_compras.push(itemEnvio);
 			this.notifySubscribers();
+			const cookies = new Cookies();
+			let items = cookies.get("items");
+			items.push(itemEnvio);
+			cookies.set("items", items);
 		}
 	}
 
@@ -96,6 +104,10 @@ export default class CarritoService{
 	static removeEnvios(){
 		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c._id !== "envios");
 		this.notifySubscribers();
+		const cookies = new Cookies();
+		let items = cookies.get("items");
+		items = items.filter(item => item._id !== "envios");
+		cookies.set("items", items);
 	}
 
 	/**

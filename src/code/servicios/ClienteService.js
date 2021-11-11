@@ -1,4 +1,6 @@
 import UtilsService from "./UtilsService";
+import Cookies from "universal-cookie/es6";
+
 export default class ClienteService{
 	static clientes = [];
 	static observers = [];
@@ -49,7 +51,6 @@ export default class ClienteService{
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @param {*} newItem 
 	 */
 	static async addCliente(newItem) {
@@ -73,7 +74,6 @@ export default class ClienteService{
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN error 500
 	 * @param {*} item 
 	 */
 	static async modifyCliente(item){
@@ -102,7 +102,6 @@ export default class ClienteService{
 
 	/**
 	 *  GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN inconsistencia de parametros
 	 * @param {*} _id ID del objeto
 	 */
 	 static async removeCliente(_id) {
@@ -153,31 +152,23 @@ export default class ClienteService{
 	 * @returns true si el logeo fue exitoso. False en caso contrario
 	 */
 	static async login(correo, clave){
-		this.usuario = {
-			"_id":"cli02",
-			"nombre":"John",
-			"apellido":"Smith",
-			"dni":323232323,
-			"correo":"asdasd@asd2.com",
-			"clave":"asdasd123123",
-			"domicilio":"fdsfsd 23322",
-			"localidad":"San Fco Solano2",
-			"telefono":11666699992,
-			"codigoPostal":"56652",
-			"perrito":[
-				{
-					"id":"perr02",
-					"dniDuenio":323232323,
-					"peso":2500,
-					"nombre":"firulais2",
-					"edad":8,
-					"raza":"labrador"
-				}
-			],
-			"estado":"ACTIVO"
-		};
-		
-		return true;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.login, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ correo: correo, clave: clave })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.usuario = data.usuario;
+			const cookies = new Cookies();
+			cookies.set("usuario", data.usuario);
+			return data.exito;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	/**
