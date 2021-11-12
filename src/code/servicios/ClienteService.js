@@ -162,9 +162,9 @@ export default class ClienteService{
 			});
 			const data = await res.json();
 			console.log(data);
-			this.usuario = data.usuario;
+			this.usuario = data.usuario[0];
 			const cookies = new Cookies();
-			cookies.set("usuario", data.usuario);
+			cookies.set("usuario", data.usuario[0]);
 			return data.exito;
 		} catch (err) {
 			console.log(err);
