@@ -97,7 +97,8 @@ export default class UtilsService {
                 agregar:URLAPI+"/consumible/agregar", 
                 modificar:URLAPI+"/consumible/modificar", 
                 eliminar:URLAPI+"/consumible/eliminar", 
-                traerTodos:URLAPI+"/consumible/traerTodos", 
+                traerTodos:URLAPI+"/consumible/traerTodos",
+                actualizar:URLAPI+"/consumible/actualizar"
             },
             factura:{
                 agregar:URLAPI+"/factura/agregar", 

@@ -82,7 +82,6 @@ export default class ConsumibleService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @param {*} newItem 
 	 */
 	static async addConsumible(newItem) {
@@ -96,7 +95,7 @@ export default class ConsumibleService {
 			});
 			const data = await res.json();
 			console.log(data);
-			this.consumibles.push(newItem);
+			this.consumibles.push(data.consumible);
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
@@ -105,7 +104,6 @@ export default class ConsumibleService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @param {*} item 
 	 */
 	static async modifyConsumible(item) {
@@ -134,7 +132,6 @@ export default class ConsumibleService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeConsumible(_id) {
@@ -157,11 +154,23 @@ export default class ConsumibleService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: crear peticion
 	 * @param {*} idConsumible 
 	 * @param {*} cantidadUsada 
 	 */
 	static async registrarConsumibleUsado(idConsumible, cantidadUsada){
 		//Basicamente es un modify consumible pero mas amigable
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().consumible.actualizar, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id: idConsumible, cantidadUsada })
+			});
+			const data = await res.json();
+			console.log(data);
+		} catch (err) {
+			console.log(err);
+		}
 	}
 }
