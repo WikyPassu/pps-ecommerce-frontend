@@ -162,9 +162,9 @@ export default class ClienteService{
 			});
 			const data = await res.json();
 			console.log(data);
-			this.usuario = data.usuario[0];
+			this.usuario = data.usuario;
 			const cookies = new Cookies();
-			cookies.set("usuario", data.usuario[0]);
+			cookies.set("usuario", data.usuario);
 			return data.exito;
 		} catch (err) {
 			console.log(err);
@@ -177,8 +177,23 @@ export default class ClienteService{
 	 * @returns true si el logeo fue exitoso. False en caso contrario
 	 */
 	static async signUp(newUser){
-		this.usuario = newUser;
-		return true;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.agregar, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(newUser)
+			});
+			const data = await res.json();
+			console.log(data);
+			this.usuario = data.usuario;
+			const cookies = new Cookies();
+			cookies.set("usuario", data.usuario);
+			return data.exito;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 	
 	/**
@@ -186,13 +201,20 @@ export default class ClienteService{
 	 * @returns El usuario de cliente o null.
 	 */
 	static getUsuario(){
-		return this.usuario;
+		const cookies = new Cookies();
+		const usuario = cookies.get("usuario");
+		if(usuario){
+			return usuario;
+		}
+		return null;
 	};
 
 	/**
 	 * @todo Destruye la cookie de la sesion y recarga la pagina
 	 */
 	static async cerrarSesion(){
+		const cookies = new Cookies();
+		cookies.remove("usuario");
 		this.usuario = null;
 	}
 
