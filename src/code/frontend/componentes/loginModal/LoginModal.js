@@ -1,35 +1,50 @@
 import React, { useState } from 'react';
 import './LoginModal.css';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+//import { useHistory } from 'react-router';
 import ClienteService from '../../../servicios/ClienteService';
+import UtilsService from '../../../servicios/UtilsService';
 
 const initialValuesFormLogin = {
     correo:"",
     clave:""
 }
 
+// const initialValuesFormRegistracion = {
+//     //"_id":"cli02",
+//     "nombre":"",
+//     "apellido":"",
+//     "dni":null,
+//     "correo":"",
+//     "clave":"",
+//     "domicilio":"",
+//     "localidad":"",
+//     "telefono":null,
+//     "codigoPostal":"",
+//     "perrito":[],
+//     "estado":"ACTIVO"
+// }
+
 const initialValuesFormRegistracion = {
-    //"_id":"cli02",
-    "nombre":"",
-    "apellido":"",
-    "dni":null,
-    "correo":"",
-    "clave":"",
-    "domicilio":"",
-    "localidad":"",
-    "telefono":null,
-    "codigoPostal":"",
-    "perrito":[],
-    "estado":"ACTIVO"
-}
+    "nombre": "",
+    "apellido": "",
+    "dni": 0,
+    "correo": "",
+    "clave": "",
+    "domicilio": "",
+    "localidad": "",
+    "telefono": 0,
+    "codigoPostal": 0,
+    "perrito": [],
+    "estado": "ACTIVO"
+};
 
 export default function LoginModal(props) {
     const [modoRegistracion, setModoRegistracion] = useState(false);
     const [formLogin, setFormLogin] = useState(initialValuesFormLogin);
     const [formRegistracion, setFormRegistracion] = useState(initialValuesFormRegistracion);
 
-    const history = useHistory();
+    //const history = useHistory();
 
     const cambiarModo = () => {
         setModoRegistracion(!modoRegistracion);
@@ -53,17 +68,23 @@ export default function LoginModal(props) {
         })
     }
 
-    const handlerSubmitLogin = () => {
+    const handlerSubmitLogin = (e) => {
+        e.preventDefault();
+        UtilsService.setLoading(true);
         ClienteService.login(formLogin.correo,formLogin.clave)
         .then(()=>{
-            history.push("/");
+            UtilsService.setLoading(false);
+            window.location.reload();
         });
     }
 
-    const handlerSubmitRegistracion = ()=>{
+    const handlerSubmitRegistracion = (e)=>{
+        e.preventDefault();
+        console.log("forRegistracion",formRegistracion)
         ClienteService.signUp(formRegistracion)
         .then(()=>{
-            history.push("/");
+            console.log("usuarioLogeado",ClienteService.getUsuario())
+            window.location.reload();
         })
     }
     return (
@@ -71,8 +92,7 @@ export default function LoginModal(props) {
             {...props}
             size="lg"
             centered
-            className="login-modal"
-        >
+            className="login-modal">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {modoRegistracion ? "Registrarse" : "Iniciar Sesión"}

@@ -10,24 +10,15 @@ import UtilsService from '../../../servicios/UtilsService';
 
 export default function HomeNavbar() {
     const [modalShow, setModalShow] = React.useState(false);
-    const [usuarioLogeado, setUsuarioLogeado] = useState(ClienteService.getUsuario());//ClienteService.getUsuario();
+    const [usuarioLogeado] = useState(ClienteService.getUsuario());//ClienteService.getUsuario();
     const history = useHistory();
-
-    // useEffect(() => {
-    //     usuarioLogeado = ClienteService.getUsuario();
-    // })
 
     const cerrarSesion = ()=>{
         UtilsService.setLoading(true);
         ClienteService.cerrarSesion()
         .then(()=>{
-            setUsuarioLogeado(ClienteService.getUsuario());
-            setTimeout(()=>{
-                UtilsService.setLoading(false);
-                history.push("/")
-            },5000)
-        })
-        //ClienteService.cerrarSesion()
+            window.location.reload();
+        });
     }
     return (
         <>
@@ -40,8 +31,6 @@ export default function HomeNavbar() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse>
                         <Nav className="me-auto">
-                            {/* <Nav.Link href="#productos">Productos</Nav.Link>
-                            <Nav.Link href="#servicios">Sevicios</Nav.Link> */}
                         </Nav>
                         {
                             usuarioLogeado ?
@@ -59,13 +48,9 @@ export default function HomeNavbar() {
                                     <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">Iniciar Sesion</Nav.Link>
                                 </Nav>
                         }
-
-
-                        
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-
             <LoginModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

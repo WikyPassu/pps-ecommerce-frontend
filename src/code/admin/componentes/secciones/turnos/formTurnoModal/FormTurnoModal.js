@@ -6,7 +6,7 @@ import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
 import ServicioService from '../../../../../servicios/ServicioService';
-import ConsumibleService from '../../../../../servicios/ConsumibleService';
+//import ConsumibleService from '../../../../../servicios/ConsumibleService';
 import TurnoService from '../../../../../servicios/TurnoService';
 
 const initialValuesElemento = {
@@ -34,24 +34,45 @@ const initialValuesDetalleElemento = {
 export default function FormTurnoModal({ elementoParaModificar, onHide, show }) {
     const modificar = elementoParaModificar !== undefined;
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
-    const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento);
+    const [detalleElemento] = useState(initialValuesDetalleElemento);
     const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.consumibles : []);
     const [empleado, setEmpleado] = useState(EmpleadoService.getEmpleadoByDNI(elemento.dniEmpleado));
     const [cliente, setCliente] = useState(ClienteService.getClienteByDNI(elemento.dniCliente));
 
     useEffect(() => {
         setElemento((elemento) => {
-            return { ...elemento, consumibles: listaDetalleElemento }
+            return { 
+                ...elemento, 
+                consumibles: listaDetalleElemento,
+
+            }
         })
     }, [listaDetalleElemento, detalleElemento])
 
     const handleChange = (e) => {
         let {name,value} = e.target;
-        if (name === "servicio") { value = ServicioService.getServicioPorId(value); }
-        //console.log(name,value);
-        setElemento((elemento) => {
-            return { ...elemento, [name]: value }
-        });
+        if (name === "servicio") {
+            if(value){
+                value = ServicioService.getServicioPorId(value); 
+                let {precio, consumibles} = ServicioService.calcularCostoDelServicio(value,elemento.perrito)
+                setElemento((elemento) => {
+                    return { ...elemento, [name]: value,precio,consumibles }
+                });
+                setListaDetalleElemento(consumibles)
+            }
+            else{
+                setElemento((elemento) => {
+                    return { ...elemento, [name]: {_id:""},precio:0,consumibles:[] }
+                });
+                setListaDetalleElemento([])
+            }
+        }
+        else{
+            setElemento((elemento) => {
+                return { ...elemento, [name]: value }
+            });
+        }
+        
     }
 
     //const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
@@ -98,37 +119,38 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
         }
     }
 
-    const agregarDetalleElemento = (e) => {
-        if (!detalleElemento.consumible) {
-            alert(`¡Error! El campo ${e.target.name} no puede estar vacío`);
-            return;
-        }
+    // const agregarDetalleElemento = (e) => {
+    //     if (!detalleElemento.consumible) {
+    //         alert(`¡Error! El campo ${e.target.name} no puede estar vacío`);
+    //         return;
+    //     }
 
-        setListaDetalleElemento((listaDetalleElemento) => {
-            return [...listaDetalleElemento, detalleElemento];
-        })
-        setDetalleElemento(initialValuesDetalleElemento);
-    }
 
-    const handleChangeDetalleElemento = (e) => {
-        let { value, name } = e.target;
-        if (name === "consumible") { value = ConsumibleService.getConsumiblePorId(value); }
-        console.log("Lista consumibles", ConsumibleService.getConsumibles());
-        console.log(name, value);
-        setDetalleElemento((detalleElemento) => {
-            return { ...detalleElemento, [name]: value };
-        });
+    //     setListaDetalleElemento((listaDetalleElemento) => {
+    //         return [...listaDetalleElemento, detalleElemento];
+    //     })
+    //     setDetalleElemento(initialValuesDetalleElemento);
+    // }
 
-    }
-    const handleDeleteClick = (e) => {
-        setListaDetalleElemento((listaDetalleElemento) => {
-            return listaDetalleElemento.filter((c) => c._id !== e._id);
-        });
-        setElemento((elemento) => {
-            elemento.listaDetalleElemento = listaDetalleElemento;
-            return elemento;
-        });
-    }
+    // const handleChangeDetalleElemento = (e) => {
+    //     let { value, name } = e.target;
+    //     if (name === "consumible") { value = ConsumibleService.getConsumiblePorId(value); }
+    //     console.log("Lista consumibles", ConsumibleService.getConsumibles());
+    //     console.log(name, value);
+    //     setDetalleElemento((detalleElemento) => {
+    //         return { ...detalleElemento, [name]: value };
+    //     });
+
+    // }
+    // const handleDeleteClick = (e) => {
+    //     setListaDetalleElemento((listaDetalleElemento) => {
+    //         return listaDetalleElemento.filter((c) => c._id !== e._id);
+    //     });
+    //     setElemento((elemento) => {
+    //         elemento.listaDetalleElemento = listaDetalleElemento;
+    //         return elemento;
+    //     });
+    // }
 
     // const editarDetalleElemento = () => {
     //     setListaDetalleElemento((listaDetalleElemento) => {
@@ -152,7 +174,10 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
             <Modal.Header closeButton>
                 <Modal.Title className="titulo">
                     {!modificar ? "Alta Turno" : "Modificar Turno"}
-                    <label >Total: ${listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)}</ label>
+                    <label >Total: ${
+                        elemento.precio.toFixed(2)
+                    // listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)
+                    }</ label>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -170,7 +195,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                     <Row>
                         <Col sm={12}>
                             <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id}>
-                                <option>Seleccione un Servicio</option>
+                                <option value="">Seleccione un Servicio</option>
                                 {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
                             </Form.Select>
                             <br/>
@@ -186,7 +211,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                             <br/>
                         </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Col sm={6}>
                             <Form.Select onChange={handleChangeDetalleElemento} name="consumible" value={detalleElemento.consumible._id}>
                                 <option>Seleccione un Consumible</option>
@@ -199,7 +224,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                         <Col>
                             <Button type="button" onClick={agregarDetalleElemento} size="lg">Agregar</Button>
                         </Col>
-                    </Row>
+                    </Row> */}
                     
                     <Row className="input-formulario">
                         <Col>
@@ -207,11 +232,24 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                                 attrFuncs={[
                                     { columnaIndex: 0, attrFunc: (p) => { return p.nombre } },
                                     { columnaIndex: 1, attrFunc: (p, obj) => { return obj.consumible.precioUnidad } },
-                                    { columnaIndex: 3, attrFunc: (p, obj) => { return obj.cantidad * obj.consumible.precioUnidad } }
+                                    { columnaIndex: 2, attrFunc: (p, obj) => { return p.toFixed(2) } },
+                                    { columnaIndex: 3, attrFunc: (p, obj) => { return (obj.cantidad * obj.consumible.precioUnidad).toFixed(2) } }
                                 ]}
                                 atributos={["consumible", "Precio Unidad", "cantidad", "precio"]}
                                 attrKey="id"
-                                onDeleteClick={handleDeleteClick} datos={listaDetalleElemento} btnEliminar="true" />
+                                // onDeleteClick={handleDeleteClick} 
+                                datos={listaDetalleElemento} 
+                                />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                        Costo en Consumibles: ${listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0).toFixed(2)}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                        Ganancia:  ${(elemento.precio - listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)).toFixed(2)}
                         </Col>
                     </Row>
                     <Row>

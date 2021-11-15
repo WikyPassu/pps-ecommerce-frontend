@@ -1,6 +1,26 @@
 import { Form, Col, Row, Button } from "react-bootstrap";
+import React, { useEffect, useState } from 'react'
 import './Filtros.css';
-export default function Filtros() {
+
+const initialState = {
+    tipo: "PRODUCTO",
+    minimo: 0,
+    maximo: 0,
+    categoria: ""
+}
+
+export default function Filtros({ onChange = ()=>{}, defaultType = "PRODUCTO" }) {
+    const [filtros, setFiltros] = useState({...initialState,tipo:defaultType});
+    const handlerChange = ({ target }) => {
+        let { name, value } = target;
+        setFiltros((filtros) => {
+            return { ...filtros, [name]: value }
+        })
+    }
+
+    useEffect(()=>{
+        onChange(filtros);
+    })
     return <div className="filtros-container">
         <div>
             <h1>Filtros</h1>
@@ -11,30 +31,38 @@ export default function Filtros() {
             <Form.Group controlId="formBasicCheckbox">
                 <Row>
                     <Col>
-                        <Form.Check type="radio" name="tipo" id="op-chk-producto" checked label="Producto" />
+                        <Form.Check type="radio" value="PRODUCTO" onChange={handlerChange} name="tipo" id="op-chk-producto" checked={filtros.tipo === "PRODUCTO"} label="Producto" />
                     </Col>
                     <Col>
-                        <Form.Check type="radio" name="tipo" id="op-chk-servicio" label="Servicios" />
+                        <Form.Check type="radio" value="SERVICIO" onChange={handlerChange} name="tipo" id="op-chk-servicio" checked={filtros.tipo === "SERVICIO"} label="Servicios" />
                     </Col>
                 </Row>
             </Form.Group>
             <hr />
             <Form.Label>Categoria</Form.Label>
-            <Form.Select>
-                <option>Seleccionar categoria</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </Form.Select>
+            {filtros.tipo === "PRODUCTO" ?
+                <Form.Select onChange={handlerChange}>
+                    <option>Seleccionar categoria</option>
+                    <option value="comida">Comida</option>
+                    <option value="cama">Cama</option>
+                    <option value="higiene">Higiene</option>
+                </Form.Select> :
+                <Form.Select onChange={handlerChange}>
+                    <option>Seleccionar categoria</option>
+                    <option value="banio">Baño</option>
+                    <option value="guarderia">Guardería</option>
+                    <option value="corte_de_pelo">Corte de Pelo</option>
+                </Form.Select>
+            }
             <hr />
             <Form.Label>Rango precio</Form.Label>
             <Form.Group controlId="rangoPrecio">
                 <Row>
                     <Col>
-                        <Form.Control checked type="number" placeholder="minimo" />
+                        <Form.Control onChange={handlerChange} checked type="number" placeholder="minimo" />
                     </Col>
                     <Col>
-                        <Form.Control checked type="number" placeholder="maximo" />
+                        <Form.Control onChange={handlerChange} checked type="number" placeholder="maximo" />
                     </Col>
                 </Row>
             </Form.Group>

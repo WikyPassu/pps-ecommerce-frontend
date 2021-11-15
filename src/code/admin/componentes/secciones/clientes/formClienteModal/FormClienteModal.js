@@ -3,7 +3,7 @@ import './FormClienteModal.css';
 import { Modal, InputGroup, Form, Button, FormControl, Row, Col } from 'react-bootstrap';
 import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-icons/bs';
 import { MdMail } from 'react-icons/md';
-import Listado from '../../../listado/Listado';
+// import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
 import { HiKey } from 'react-icons/hi';
 
@@ -21,17 +21,20 @@ const initialValuesElemento = {
     "estado": "ACTIVO"
 };
 
-const initialValuesDetalleElemento = {
-    nombre: "",
-    peso: 0,
-    edad: 0,
-    raza: ""
-};
+// const initialValuesDetalleElemento = {
+//     nombre: "",
+//     peso: 0,
+//     edad: 0,
+//     raza: ""
+// };
 
 export default function FormClienteModal({ elementoParaModificar, onHide, show }) {
     const modificar = elementoParaModificar !== undefined;
-    const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.perrito : []);
-    const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento)
+    const [
+        listaDetalleElemento, 
+        //setListaDetalleElemento
+    ] = useState(elementoParaModificar ? elementoParaModificar.perrito : []);
+    //const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento)
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
     const handleChange = (e) => {
         setElemento((elemento) => {
@@ -55,30 +58,30 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
         onHide();
     }
 
-    const agregarDetalleElemento = (e) => {
-        if (!detalleElemento.nombre || !detalleElemento.peso || !detalleElemento.raza || !detalleElemento.edad) {
-            alert(`¡Error! El campo ${e.target.name} no puede estar vacío`);
-            return;
-        }
+    // const agregarDetalleElemento = (e) => {
+    //     if (!detalleElemento.nombre || !detalleElemento.peso || !detalleElemento.raza || !detalleElemento.edad) {
+    //         alert(`¡Error! El campo ${e.target.name} no puede estar vacío`);
+    //         return;
+    //     }
 
-        setListaDetalleElemento((listaDetalleElemento) => {
-            return [...listaDetalleElemento, {
-                ...detalleElemento,
-                _id: Date.now()
-            }];
-        })
-        setDetalleElemento(initialValuesDetalleElemento);
-    }
-    const handleChangeDetalleElemento = (e) => {
-        setDetalleElemento((detalleElemento) => {
-            return { ...detalleElemento, [e.target.name]: e.target.value };
-        });
-    }
-    const handleDeleteClick = (e) => {
-        setListaDetalleElemento((listaDetalleElemento) => {
-            return listaDetalleElemento.filter((c) => c._id !== e._id);
-        })
-    }
+    //     setListaDetalleElemento((listaDetalleElemento) => {
+    //         return [...listaDetalleElemento, {
+    //             ...detalleElemento,
+    //             _id: Date.now()
+    //         }];
+    //     })
+    //     setDetalleElemento(initialValuesDetalleElemento);
+    // }
+    // const handleChangeDetalleElemento = (e) => {
+    //     setDetalleElemento((detalleElemento) => {
+    //         return { ...detalleElemento, [e.target.name]: e.target.value };
+    //     });
+    // }
+    // const handleDeleteClick = (e) => {
+    //     setListaDetalleElemento((listaDetalleElemento) => {
+    //         return listaDetalleElemento.filter((c) => c._id !== e._id);
+    //     })
+    // }
     return (
         <Modal
             show={show}
@@ -139,7 +142,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                             <option value="BAJA">BAJA</option>
                         </Form.Select>
                     </InputGroup>
-                    <InputGroup>
+                    {/* <InputGroup>
                         <label className="title">Sus perros</label>
                     </InputGroup>
                     <InputGroup className="input-formulario">
@@ -170,7 +173,8 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                         <Col>
                             <Listado atributos={["peso", "nombre", "edad", "raza"]} attrKey="id" onDeleteClick={handleDeleteClick} datos={listaDetalleElemento} btnEliminar="true"></Listado>
                         </Col>
-                    </Row>
+                    </Row> */}
+                    <br/>
                     <Row>
                         <Col>
                             <Button type="submit" size="lg">Guardar</Button>

@@ -110,7 +110,6 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                 <option value="banio">Baño</option>
                                 <option value="guarderia">Guarderia</option>
                                 <option value="corte_de_cabello">Corte de Cabello</option>
-                                <option value="traslado">Traslado</option>
                             </Form.Select>
                         </Form.Group>
                     </Row>

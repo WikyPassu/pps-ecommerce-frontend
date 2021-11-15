@@ -4,11 +4,13 @@ import './ServicioPage.css';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import ServicioService from '../../../servicios/ServicioService';
-import FormularioCompra from '../../componentes/servicio/formularioCompra/FormularioCompra';
+import FormularioTurno from '../../componentes/servicio/formularioTurno/FormularioTurno';
 import AgregarResenia from '../../componentes/resenia/agregarResenia/AgregarResenia';
 import ListaResenias from '../../componentes/resenia/listaResenias/ListaResenias';
 import ClienteService from '../../../servicios/ClienteService';
 import UtilsService from '../../../servicios/UtilsService';
+import TurnoService from '../../../servicios/TurnoService';
+
 
 /**
  * Obtiene la query de la url
@@ -23,35 +25,61 @@ function ServicioPage() {
   let query = useQuery();
   //const servicioEncontrado = ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
   const [servicio, setServicio] = useState();
+  const [permitirReseñar, setPermitirReseñar] = useState(false);
+  const [precio, setPrecio] = useState(0);
 
   ServicioService.subscribe(() => {
     setServicio(() => {
-      console.log("servicio encontrado",ServicioService.getServicioPorId(query.get("id")))
-      return ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404")
+      //console.log("servicio encontrado",ServicioService.getServicioPorId(query.get("id")))
+      return ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
     });
   })
 
   useEffect(() => {
+
+    const validarUsuarioParaResenia = async (serv) => {
+      if (serv) {
+        const usuarioLogeado = ClienteService.getUsuario();
+        if (ClienteService.getUsuario()) {
+          if (servicio) {
+            let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicio._id);
+            setPermitirReseñar(() => {
+              return resultado;
+            });
+          }
+        }
+      }
+      setPermitirReseñar(false);
+    }
+
     if (ServicioService.getServicios().length) {
+      const servicioEncontrado = ServicioService.getServicioPorId(query.get("id"))
+      if (servicioEncontrado) {
+        validarUsuarioParaResenia(servicioEncontrado);
+      }
       setServicio(() => {
-        console.log("servicio encotnrado1: ",ServicioService.getServicioPorId(query.get("id")))
-        return ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
+        return servicioEncontrado ?? history.push("/404");
       })
     }
     window.scrollTo(0, 0);
-  }, [query,history])
+  }, [query, history, precio, servicio])
 
 
   const handlerSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
+    UtilsService.setLoading(true);
+    TurnoService.addTurno(e).finally(() => {
+      UtilsService.setLoading(false);
+      history.push("/servicio/resultado/exitoso");
+    })
+    //console.log("Turno a guardar: ",e);
   }
 
-  const validarUsuarioParaResenia = () => {
-    if (ClienteService.getUsuario()) {
-      return ClienteService.isDisponibleParaResenia(ClienteService.getUsuario(), servicio._id);
-    }
-    return false;
+  const handlerChange = e => {
+    setPrecio(e.precio?.toFixed(2));
   }
+
+
 
   const handlerSubmitResenia = (resenia) => {
     resenia.usuario = ClienteService.getUsuario();
@@ -64,19 +92,20 @@ function ServicioPage() {
       <div className="servicio-page">
         <div className="servicio-info-container">
           <div className="item imagen" style={{ backgroundImage: `url("${servicio.imagen}")` }}></div>
-          <h1 className="item titulo">{UtilsService.stringFormatter(servicio.nombre,50)}</h1>
-          <p className="item descripcion">{UtilsService.stringFormatter(servicio.descripcion,300)}</p>
+          <h1 className="item titulo">{UtilsService.stringFormatter(servicio.nombre, 50)}</h1>
+          <p className="item descripcion">{UtilsService.stringFormatter(servicio.descripcion, 300)}</p>
           <div className="item precio">
+            {precio?"$"+precio:""}
             <br /><hr />
           </div>
           <div className="item form">
-            {ClienteService.getUsuario() ? <FormularioCompra onSubmit={handlerSubmit} /> : <p style={{ color: "red" }}>Deberá iniciar sesión o registrarse para poder pedir un turno de este servicio</p>}
+            {ClienteService.getUsuario() ? <FormularioTurno servicio={servicio} onSubmit={handlerSubmit} onChange={handlerChange} /> : <p style={{ color: "red" }}>Deberá iniciar sesión o registrarse para poder pedir un turno de este servicio</p>}
           </div>
         </div>
         <div>
           <div className="item-lista-resenias">
             <br />
-            {validarUsuarioParaResenia() ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio._id} /> : ""}
+            {permitirReseñar ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio._id} /> : ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
             <ListaResenias listaResenias={servicio.resenias} />

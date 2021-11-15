@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+//import { Button } from 'react-bootstrap';
 import TurnoService from '../../../../servicios/TurnoService';
 import UtilsService from '../../../../servicios/UtilsService';
 import Listado from '../../listado/Listado';
@@ -16,7 +16,7 @@ export default function Turnos() {
   });
   return (<>
     <label className="titulo-seccion">Turnos</label>
-    <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Turno</Button>
+    {/* <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Turno</Button> */}
     {modalForm && <FormTurnoModal
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}

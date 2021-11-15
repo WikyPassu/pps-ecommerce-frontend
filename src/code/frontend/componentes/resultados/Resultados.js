@@ -5,7 +5,7 @@ import Producto from "../producto/Producto";
 import Servicio from "../servicio/Servicio";
 
 
-export default function Resultados({ busqueda, tipo }) {
+export default function Resultados({ busqueda, tipo, filtros }) {
     const [lista, setLista] = useState([]);
     const [tipoArticulo, setTipoArticulo] = useState(tipo)
     useEffect(() => {

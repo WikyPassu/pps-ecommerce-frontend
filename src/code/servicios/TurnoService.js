@@ -22,8 +22,10 @@ export default class TurnoService {
 			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodos);
 			const data = await res.json();
 			console.log(data);
-			this.turnos = data.turnos;
-			this.notifySubscribers();
+			if(data.exito){
+				this.turnos = data.turnos;
+				this.notifySubscribers();
+			}
 			return this.turnos;
 		} catch (err) {
 			console.log(err);
@@ -74,10 +76,8 @@ export default class TurnoService {
 	 * @param {*} item 
 	 */
 	static async modifyTurno(item) {
-		let _id = JSON.stringify(item);
+		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
-		_id = JSON.parse(_id);
-		_id = _id._id;
 
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().turno.modificar, {
@@ -85,7 +85,7 @@ export default class TurnoService {
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ _id: _id, producto: item })
+				body: JSON.stringify({ _id: _id, turno: item })
 			});
 			const data = await res.json();
 			console.log(data);
