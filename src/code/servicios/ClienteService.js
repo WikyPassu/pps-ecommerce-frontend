@@ -177,7 +177,6 @@ export default class ClienteService{
 	 * @returns true si el logeo fue exitoso. False en caso contrario
 	 */
 	static async signUp(newUser){
-		
 		try {
 			await this.addCliente(newUser);
 			return this.login(newUser.correo,newUser.clave);

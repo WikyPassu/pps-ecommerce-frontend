@@ -1,4 +1,6 @@
 import UtilsService from "./UtilsService";
+import Cookies from "universal-cookie/es6";
+
 export default class EmpleadoService {
 	static empleados = [];
 	static observers = [];
@@ -47,7 +49,6 @@ export default class EmpleadoService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @todo CULAS: no actualiza la parte visual
 	 * @param {*} newItem 
 	 */
@@ -62,7 +63,7 @@ export default class EmpleadoService {
 			});
 			const data = await res.json();
 			console.log(data);
-			this.empleados.push(newItem);
+			this.empleados.push(data.empleado);
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
@@ -71,7 +72,6 @@ export default class EmpleadoService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 400
 	 * @param {*} item 
 	 */
 	static async modifyEmpleado(item) {
@@ -79,7 +79,8 @@ export default class EmpleadoService {
 		delete item._id;
 		_id = JSON.parse(_id);
 		_id = _id._id;
-
+		console.log(_id);
+		console.log(item);
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().empleado.modificar, {
 				method: 'PUT',
@@ -100,7 +101,6 @@ export default class EmpleadoService {
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @param {*} _id ID del objeto
 	 */
 	static async removeEmpleado(_id) {
@@ -128,10 +128,6 @@ export default class EmpleadoService {
 		} catch (err) {
 			console.log(err);
 		}
-
-
-
-
 	}
 
 	/**
@@ -141,7 +137,24 @@ export default class EmpleadoService {
  * @returns 
  */
 	static async login(correo, clave) {
-		return true;
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.login, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ correo: correo, clave: clave })
+			});
+			const data = await res.json();
+			console.log(data);
+			this.usuario = data.empleado;
+			const cookies = new Cookies();
+			cookies.set("usuario", data.empleado);
+			Promise.resolve(data.exito);
+		} catch (err) {
+			console.log(err);
+			Promise.reject(err);
+		}
 	}
 
 
@@ -151,8 +164,13 @@ export default class EmpleadoService {
 	 * @returns true si el logeo fue exitoso. False en caso contrario
 	 */
 	static async signUp(newUser) {
-		this.usuario = newUser;
-		return true;
+		try {
+			await this.addEmpleado(newUser);
+			return this.login(newUser.correo,newUser.clave);
+		} catch (err) {
+			console.log(err);
+			Promise.reject(true);
+		}
 	}
 
 	/**
@@ -160,15 +178,21 @@ export default class EmpleadoService {
 	 * @returns El usuario de empelado o null.
 	 */
 	static getUsuario() {
-		return this.usuario;
+		const cookies = new Cookies();
+		const usuario = cookies.get("usuario");
+		if(usuario){
+			return usuario;
+		}
+		return null;
 	};
 
 	/**
 	  * @todo Destruye la cookie de la sesion y recarga la pagina
 	  */
 	static async cerrarSesion() {
+		const cookies = new Cookies();
+		cookies.remove("usuario");
 		this.usuario = null;
-
 	}
 
 }
