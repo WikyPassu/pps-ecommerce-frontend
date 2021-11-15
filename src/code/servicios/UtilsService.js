@@ -91,7 +91,7 @@ export default class UtilsService {
                 modificar:URLAPI+"/turno/modificar", 
                 eliminar:URLAPI+"/turno/eliminar", 
                 traerTodos:URLAPI+"/turno/traerTodos",
-                traerTodosDniUsuario:URLAPI+"/turno/traerTodosUsuario",
+                traerTodosIdUsuario:URLAPI+"/turno/traerTodosUsuario",
             },
             consumible:{
                 agregar:URLAPI+"/consumible/agregar", 

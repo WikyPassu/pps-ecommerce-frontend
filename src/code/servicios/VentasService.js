@@ -43,7 +43,6 @@ export default class FacturasService{
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: api devuelve error 500
 	 * @param {*} newItem 
 	 * @return Factura creada y guardada en la bd ?? revisalo culas 
 	 */
@@ -67,7 +66,6 @@ export default class FacturasService{
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
-	 * @todo ALAN: error 500
 	 * @param {*} item 
 	 */
 	static async modifyFactura(item){

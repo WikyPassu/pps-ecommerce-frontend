@@ -40,12 +40,29 @@ export default class TurnoService {
 	}
 
 	/**
-	 * @todo LUCAS: inconsistencia, alan lo hace por dni
+	 * @todo LUCAS: inconsistencia, alan lo hace por dni -> alan lo cambio por _id
 	 * @param {*} _id 
 	 * @returns 
 	 */
-	static getTurnoPorId(_id) {
-		return this.turnos.filter(c => c._id === _id)[0];
+	static async getTurnoPorDni(_id) {
+		try {
+			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodosIdUsuario, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ _id })
+			});
+			const data = await res.json();
+			console.log(data);
+			if(data.exito){
+				return this.data.turnos;	
+			}
+			return [];
+		} catch(err){
+			console.log(err);
+		}
+		
 	}
 
 	/**
