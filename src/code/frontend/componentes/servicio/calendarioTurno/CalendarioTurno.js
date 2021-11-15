@@ -3,14 +3,21 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { FormControl } from 'react-bootstrap';
 import { useState } from 'react';
+//import UtilsService from '../../../../servicios/UtilsService';
 
-function CalendarioTurno({ diasNoDisponibles, onChange }) {
+function CalendarioTurno({ diasNoDisponibles, onChange, name, value = new Date() }) {
 
-    const [fecha, setFecha] = useState(new Date());
+    const [fecha, setFecha] = useState(new Date(value));
     const [visibilidadCalendario,setVisibilidadCalendario] = useState(false);
     const handleChange = (e) => {
         setFecha(e);
-        if (onChange) { onChange(e) };
+
+        if (onChange) { onChange({
+            target:{
+                value:e,
+                name:name
+            }
+        }) };
     }
 
     const isDisabled = (date) => {

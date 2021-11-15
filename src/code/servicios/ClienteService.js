@@ -65,7 +65,6 @@ export default class ClienteService{
 			const data = await res.json();
 			console.log(data);
 			this.clientes.push(newItem);
-			// this.notifySubscribers();
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
@@ -165,9 +164,10 @@ export default class ClienteService{
 			this.usuario = data.usuario;
 			const cookies = new Cookies();
 			cookies.set("usuario", data.usuario);
-			return data.exito;
+			Promise.resolve(data.exito);
 		} catch (err) {
 			console.log(err);
+			Promise.reject(err);
 		}
 	}
 
@@ -177,22 +177,13 @@ export default class ClienteService{
 	 * @returns true si el logeo fue exitoso. False en caso contrario
 	 */
 	static async signUp(newUser){
+		
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.agregar, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(newUser)
-			});
-			const data = await res.json();
-			console.log(data);
-			this.usuario = data.usuario;
-			const cookies = new Cookies();
-			cookies.set("usuario", data.usuario);
-			return data.exito;
+			await this.addCliente(newUser);
+			return this.login(newUser.correo,newUser.clave);
 		} catch (err) {
 			console.log(err);
+			Promise.reject(true);
 		}
 	}
 	

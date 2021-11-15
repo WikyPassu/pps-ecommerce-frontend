@@ -22,6 +22,7 @@ import CarritoService from "./code/servicios/CarritoService";
 
 import Loading from "./code/frontend/componentes/loading/Loading";
 import { useEffect } from "react";
+import ResultadoTurnoPage from "./code/frontend/paginas/servicio/resultadoTurno/ResultadoTurnoPage";
 
 function App() {
   useEffect(() => {
@@ -43,7 +44,8 @@ function App() {
         <Route path="/home" component={HomePage}></Route>
         <Route path="/busqueda" component={BusquedaPage}></Route>
         <Route path="/producto" component={ProductoPage} />
-        <Route path="/servicio" component={ServicioPage} />
+        <Route exact path="/servicio" component={ServicioPage} />
+        <Route exact path="/servicio/resultado/:resultado" component={ResultadoTurnoPage}></Route>
         <Route exact path="/caja" component={CajaPage}></Route>
         <Route exact path="/caja/resultado/:resultado" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>

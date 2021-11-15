@@ -1,4 +1,5 @@
 import UtilsService from "./UtilsService";
+import ComsumiblesService from "./ConsumibleService";
 export default class ServicioService {
 	static servicios = [];
 	static observers = [];
@@ -258,7 +259,47 @@ export default class ServicioService {
 		}
 	}
 
-	static calcularCostoDelServicio(idServicio,perrito){
-		return perrito.peso * 0.8;
+	static calcularCostoDelServicio(servicio,perrito){
+		let costo = {
+			precio:0,
+			consumibles:[]
+		};
+		console.log("servicio a calcular",servicio)
+		if(servicio.categoria === "banio"){
+			//Se utilizara un shampoo cada 8000g de perro
+			let consumible = ComsumiblesService.getConsumiblePorNombre("shampoo");
+			let costoComsumible = {
+				cantidad:0,
+				consumible:consumible
+			}
+			costoComsumible.cantidad = perrito.peso / 8000;
+			costo.precio = (costoComsumible.cantidad * consumible.precioUnidad) * 1.3; //Ganancia del 30%
+			costo.consumibles.push(costoComsumible)
+		}
+		else if(servicio.categoria === "corte_de_cabello"){
+			//Se consume lo mismo que banio solo que se aumenta mas la ganancia
+			let consumible = ComsumiblesService.getConsumiblePorNombre("shampoo");
+			let costoComsumible = {
+				cantidad:0,
+				consumible:consumible
+			}
+			costoComsumible.cantidad = perrito.peso / 12000;
+			costo.precio = (costoComsumible.cantidad * consumible.precioUnidad) * 1.5; //Ganancia del 50%
+			costo.consumibles.push(costoComsumible)
+		}
+		else if(servicio.categoria === "guarderia"){
+			//Se utilizara una bolsa de comida por cada 15000g de perro
+			let consumible = ComsumiblesService.getConsumiblePorNombre("comida");
+			let costoComsumible = {
+				cantidad:0,
+				consumible:consumible
+			}
+			costoComsumible.cantidad = perrito.peso / 15000;
+			costo.precio = (costoComsumible.cantidad * consumible.precioUnidad) * 1.3; //Ganancia del 30%
+			costo.consumibles.push(costoComsumible)
+		}
+		console.log("Costo resultande",costo)
+
+		return costo;
 	}
 }
