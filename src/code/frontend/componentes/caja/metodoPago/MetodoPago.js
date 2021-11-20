@@ -2,6 +2,7 @@ import {Button} from 'react-bootstrap'
 import React from 'react';
 import CarritoService from "../../../../servicios/CarritoService";
 import UtilsService from '../../../../servicios/UtilsService';
+import ClienteService from '../../../../servicios/ClienteService';
 //const urlPago = "http://127.0.0.1:8080/metodoPago/realizarPago";
 function MetodoPago(){
     const realizarPago = () => {
@@ -15,7 +16,10 @@ function MetodoPago(){
                 'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body:JSON.stringify({productos:CarritoService.getItems()})
+            body:JSON.stringify({
+                productos:CarritoService.getItems(),
+                cliente:ClienteService.getUsuario()
+            })
         })
         .then(async (res)=>{
             if(res.ok){

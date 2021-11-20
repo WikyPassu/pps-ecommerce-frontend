@@ -1,6 +1,7 @@
 import Cookies from "universal-cookie/es6";
-
-export default class CarritoService{
+import ClienteService from "./ClienteService";
+import EnviosService from "./EnviosService";
+export default class CarritoService {
 	static items_carrito_compras = [];
 	static observers = [];
 	static subscribe(callback) {
@@ -12,15 +13,15 @@ export default class CarritoService{
 	 * @todo OBTENER ARRAY DE ITEMS DESDE LA COOKIES.
 	 * @returns Array de items del carrito guardado en las cookies. Si no existe, devuelve array vacio.
 	 */
-	static async iniciarServicio(){
+	static async iniciarServicio() {
 		console.log("Carrito servicio iniciado");
 		const cookies = new Cookies();
 		let items = cookies.get("items");
-		if(!items){
+		if (!items) {
 			cookies.set("items", []);
 			return [];
 		}
-		else{
+		else {
 			items.forEach(item => this.items_carrito_compras.push(item));
 			this.notifySubscribers();
 			return items;
@@ -49,11 +50,11 @@ export default class CarritoService{
 		let unItem = {
 			_id: (new Date()).getTime(),
 			item,
-			cantidad: parseInt(cantidad) 
+			cantidad: parseInt(cantidad)
 		};
 		this.items_carrito_compras.push(unItem);
 		this.notifySubscribers();
-		
+
 		const cookies = new Cookies();
 		let items = cookies.get("items");
 		items.push(unItem);
@@ -77,17 +78,19 @@ export default class CarritoService{
 	 * @todo SE DEBERA GUARDAR LOS CAMBIOS EN LAS COOKIES
 	 * @param {*} precio 
 	 */
-	static addEnvios(precio) {
+	static addEnvios() {
 		console.log("Agregando item")
 		let existeEnvio = this.items_carrito_compras.filter(i => i._id === "envios")[0];
-		if(existeEnvio == null){
+		if (existeEnvio == null) {
+			let localidad = ClienteService.getUsuario().localidad;
+			let precio = EnviosService.getPrecioPorLocalidad(localidad);
 			let itemEnvio = {
 				_id: "envios",
-				item:{
-					precio:precio,
-					nombre:"Servicio de Envios"
+				item: {
+					precio: precio,
+					nombre: `Servicio de Envios (${localidad})`
 				},
-				cantidad:1
+				cantidad: 1
 			};
 			this.items_carrito_compras.push(itemEnvio);
 			this.notifySubscribers();
@@ -101,8 +104,8 @@ export default class CarritoService{
 	/**
 	 * @todo SE DEBERA GUARDAR LOS CAMBIOS EN LAS COOKIES
 	 */
-	static removeEnvios(){
-		this.items_carrito_compras = this.items_carrito_compras.filter((c)=>c._id !== "envios");
+	static removeEnvios() {
+		this.items_carrito_compras = this.items_carrito_compras.filter((c) => c._id !== "envios");
 		this.notifySubscribers();
 		const cookies = new Cookies();
 		let items = cookies.get("items");
@@ -113,10 +116,9 @@ export default class CarritoService{
 	/**
 	 * @returns El precio total de todos los items del carrito
 	 */
-	static getTotal(){
+	static getTotal() {
 		return parseFloat(this.items_carrito_compras.reduce((anterior, actual) => {
 			return anterior + (actual.item.precio * actual.cantidad);
 		}, 0).toFixed(2));
 	}
-
 }

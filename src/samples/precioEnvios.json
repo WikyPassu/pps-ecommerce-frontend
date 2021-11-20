@@ -1,0 +1,22 @@
+[
+    {
+        "_id":"asd123",
+        "localidad":"La Plata",
+        "precio":200
+    },
+    {
+        "_id":"asd121",
+        "localidad":"Quilmes",
+        "precio":600
+    },
+    {
+        "_id":"asd120",
+        "localidad":"Avellaneda",
+        "precio":900
+    },
+    {
+        "_id":"1",
+        "localidad":"*",
+        "precio":1800
+    }
+]

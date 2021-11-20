@@ -23,14 +23,12 @@ function useQuery() {
 function ServicioPage() {
   const history = useHistory();
   let query = useQuery();
-  //const servicioEncontrado = ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
   const [servicio, setServicio] = useState();
   const [permitirReseñar, setPermitirReseñar] = useState(false);
   const [precio, setPrecio] = useState(0);
 
   ServicioService.subscribe(() => {
     setServicio(() => {
-      //console.log("servicio encontrado",ServicioService.getServicioPorId(query.get("id")))
       return ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
     });
   })
@@ -66,20 +64,16 @@ function ServicioPage() {
 
 
   const handlerSubmit = (e) => {
-    //e.preventDefault();
     UtilsService.setLoading(true);
     TurnoService.addTurno(e).finally(() => {
       UtilsService.setLoading(false);
       history.push("/servicio/resultado/exitoso");
     })
-    //console.log("Turno a guardar: ",e);
   }
 
   const handlerChange = e => {
     setPrecio(e.precio?.toFixed(2));
   }
-
-
 
   const handlerSubmitResenia = (resenia) => {
     resenia.usuario = ClienteService.getUsuario();

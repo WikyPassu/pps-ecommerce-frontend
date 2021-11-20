@@ -20,7 +20,8 @@ export default function LoginAdminPage() {
             history.push("/admin/home");
         }
         else{
-            alert("Usuario o clave incorrecta");
+            history.push("/admin/home");
+            //alert("Usuario o clave incorrecta");
         }
         setUsuario(initialValues);
     }

@@ -4,7 +4,7 @@ function getColumnas(atributos = [],acciones) {
   return (
     <tr key={"trCols"}>
       {atributos.map((c) => <th key={"th" + c}>{c}</th>)}
-      {(acciones)&&<th colSpan="2" style={{textAlign:"center"}}>Acciones</th>}
+      {(acciones)&&<th colSpan="3" style={{textAlign:"center"}}>Acciones</th>}
     </tr>
   )
 }
@@ -27,11 +27,12 @@ function changeValuesByFunc(value,object,columnaIndex,attrFuncs){
   return value;
 }
 
-function getFilas(atributos = [], datos = [], attrKey, onEditClick, onDeleteClick,attrFuncs) {
+function getFilas(atributos = [], datos = [], attrKey, onEditClick, onDeleteClick, onShowClick,attrFuncs) {
   return datos.map((dato) => <tr key={"tr" + dato[attrKey]}>
     {atributos.map((atributo,index) => <td key={"tdAttr" + dato[attrKey] + atributo}>{changeValuesByFunc(dato[atributo],dato,index,attrFuncs)}</td>)}
     {onEditClick&&<td key={`td${dato[attrKey]}btnEditar`}><Button key={`${dato[attrKey]}btnEditar`} onClick={()=>{onEditClick(dato)}}>Editar</Button></td>}
     {onDeleteClick&&<td key={`td${dato[attrKey]}btnEliminar`}><Button key={`${dato[attrKey]}btnEliminar`} onClick={()=>{onDeleteClick(dato)}}>Eliminar</Button></td>}
+    {onShowClick&&<td key={`td${dato[attrKey]}btnMostrar`}><Button key={`${dato[attrKey]}btnMostrar`} onClick={()=>{onShowClick(dato)}}>Ver</Button></td>}
   </tr>)
 }
 
@@ -42,17 +43,18 @@ function getFilas(atributos = [], datos = [], attrKey, onEditClick, onDeleteClic
  * - attrKey: El atributo que se usa como id del objeto.
  * - onEditClick: Callback de click en boton editar.
  * - onDeleteClick: Callback de click en boton eliminar.
+ * - onShowClick: Callback para solo mostrar informacion
  * - attrFuncs: Es un array de nombre de atributos con su funcion. Es para los atributos que deben mostrar valores distintos a los originales. Ejemplo: [{columnaIndex:2,attrFunc:formatoFecha}]
  * @param {columna} asd
  * @returns 
  */
-export default function Listado({ columnas, atributos, datos, attrKey, onEditClick, onDeleteClick, attrFuncs }) {
+export default function Listado({ columnas, atributos, datos, attrKey, onEditClick, onDeleteClick,onShowClick, attrFuncs }) {
   return (<Table striped bordered hover>
     <thead>
-      {getColumnas(columnas || atributos,(onDeleteClick||onEditClick))}
+      {getColumnas(columnas || atributos,(onDeleteClick||onEditClick||onShowClick))}
     </thead>
     <tbody>
-      {getFilas(atributos, datos, attrKey, onEditClick,onDeleteClick,attrFuncs)}
+      {getFilas(atributos, datos, attrKey, onEditClick,onDeleteClick,onShowClick,attrFuncs)}
     </tbody>
   </Table>)
 }

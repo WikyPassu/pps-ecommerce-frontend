@@ -16,6 +16,8 @@ function HomePage() {
 
   ProductoService.subscribe(()=>{
     setProductos(ProductoService.getProductos());
+  })
+  ServicioService.subscribe(()=>{
     setServicios(ServicioService.getServicios());
   })
 

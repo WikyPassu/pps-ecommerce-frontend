@@ -79,8 +79,6 @@ export default class EmpleadoService {
 		delete item._id;
 		_id = JSON.parse(_id);
 		_id = _id._id;
-		console.log(_id);
-		console.log(item);
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().empleado.modificar, {
 				method: 'PUT',

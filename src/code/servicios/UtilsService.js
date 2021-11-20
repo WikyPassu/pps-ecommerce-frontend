@@ -127,6 +127,12 @@ export default class UtilsService {
                 modificar:URLAPI+"/resenia/modificar", 
                 eliminar:URLAPI+"/resenia/eliminar", 
                 verificarCompraPrevia:URLAPI+"/resenia/verificarCompraPrevia", 
+            },
+            precioEnvios:{
+                agregar:URLAPI+"/precioEnvios/agregar", 
+                modificar:URLAPI+"/precioEnvios/modificar", 
+                eliminar:URLAPI+"/precioEnvios/eliminar",
+                traerTodos:URLAPI+"/precioEnvios/traerTodos",  
             }
 
         }

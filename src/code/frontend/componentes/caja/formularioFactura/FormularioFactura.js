@@ -37,7 +37,7 @@ function FormularioFactura() {
     const handlerChange = ({target})=>{
         let {value} = target;
         if(value === "a_domicilio"){
-            CarritoService.addEnvios(500);
+            CarritoService.addEnvios();
         }
         else{
             CarritoService.removeEnvios();

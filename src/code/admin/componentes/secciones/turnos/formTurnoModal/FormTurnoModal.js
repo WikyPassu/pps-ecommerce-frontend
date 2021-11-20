@@ -10,11 +10,11 @@ import ServicioService from '../../../../../servicios/ServicioService';
 import TurnoService from '../../../../../servicios/TurnoService';
 
 const initialValuesElemento = {
-    "servicio": {_id:""},
+    "servicio": { _id: "" },
     "dniCliente": 0,
     "dniEmpleado": 0,
     "perrito": {
-        _id:""
+        _id: ""
     },
     "consumibles": [],
     "fecha": Date.now(),
@@ -41,8 +41,8 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
 
     useEffect(() => {
         setElemento((elemento) => {
-            return { 
-                ...elemento, 
+            return {
+                ...elemento,
                 consumibles: listaDetalleElemento,
 
             }
@@ -50,29 +50,29 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     }, [listaDetalleElemento, detalleElemento])
 
     const handleChange = (e) => {
-        let {name,value} = e.target;
+        let { name, value } = e.target;
         if (name === "servicio") {
-            if(value){
-                value = ServicioService.getServicioPorId(value); 
-                let {precio, consumibles} = ServicioService.calcularCostoDelServicio(value,elemento.perrito)
+            if (value) {
+                value = ServicioService.getServicioPorId(value);
+                let { precio, consumibles } = ServicioService.calcularCostoDelServicio(value, elemento.perrito)
                 setElemento((elemento) => {
-                    return { ...elemento, [name]: value,precio,consumibles }
+                    return { ...elemento, [name]: value, precio, consumibles }
                 });
                 setListaDetalleElemento(consumibles)
             }
-            else{
+            else {
                 setElemento((elemento) => {
-                    return { ...elemento, [name]: {_id:""},precio:0,consumibles:[] }
+                    return { ...elemento, [name]: { _id: "" }, precio: 0, consumibles: [] }
                 });
                 setListaDetalleElemento([])
             }
         }
-        else{
+        else {
             setElemento((elemento) => {
                 return { ...elemento, [name]: value }
             });
         }
-        
+
     }
 
     //const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
@@ -176,7 +176,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                     {!modificar ? "Alta Turno" : "Modificar Turno"}
                     <label >Total: ${
                         elemento.precio.toFixed(2)
-                    // listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)
+                        // listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)
                     }</ label>
                 </Modal.Title>
             </Modal.Header>
@@ -184,12 +184,12 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                 <Form noValidate onSubmit={handleSubmit}>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={empleado?empleado.dni:"DNI de empleado"} name="dniEmpleado" required />
+                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={empleado ? empleado.dni : "DNI de empleado"} name="dniEmpleado" required />
                     </InputGroup>
                     {empleado ? <b>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={cliente?cliente.dni:"DNI de cliente"} name="dniCliente" required />
+                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={cliente ? cliente.dni : "DNI de cliente"} name="dniCliente" required />
                     </InputGroup>
                     {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <Row>
@@ -198,7 +198,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                                 <option value="">Seleccione un Servicio</option>
                                 {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
                             </Form.Select>
-                            <br/>
+                            <br />
                         </Col>
                     </Row>
                     <Row>
@@ -208,9 +208,20 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                                 <option value="CANCELADO">Cancelado</option>
                                 <option value="FINALIZADO">Finalizado</option>
                             </Form.Select>
-                            <br/>
+                            <br />
                         </Col>
                     </Row>
+                    <Row>
+                        <Col sm={12}>
+                            Datos del Perro
+                        </Col>
+                    </Row>
+               
+                    <li><b>Nombre:</b> {elemento.perrito.nombre}</li>
+                    <li><b>Peso:</b> {elemento.perrito.peso} g</li>
+                    <li><b>Edad:</b> {elemento.perrito.edad} Años</li>
+                    <li><b>Raza:</b> {elemento.perrito.raza}</li>
+                        
                     {/* <Row>
                         <Col sm={6}>
                             <Form.Select onChange={handleChangeDetalleElemento} name="consumible" value={detalleElemento.consumible._id}>
@@ -225,7 +236,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                             <Button type="button" onClick={agregarDetalleElemento} size="lg">Agregar</Button>
                         </Col>
                     </Row> */}
-                    
+
                     <Row className="input-formulario">
                         <Col>
                             <Listado
@@ -238,18 +249,18 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                                 atributos={["consumible", "Precio Unidad", "cantidad", "precio"]}
                                 attrKey="id"
                                 // onDeleteClick={handleDeleteClick} 
-                                datos={listaDetalleElemento} 
-                                />
+                                datos={listaDetalleElemento}
+                            />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                        Costo en Consumibles: ${listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0).toFixed(2)}
+                            Costo en Consumibles: ${listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0).toFixed(2)}
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                        Ganancia:  ${(elemento.precio - listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)).toFixed(2)}
+                            Ganancia:  ${(elemento.precio - listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)).toFixed(2)}
                         </Col>
                     </Row>
                     <Row>

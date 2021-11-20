@@ -1,6 +1,7 @@
 import UtilsService from "./UtilsService";
 export default class FacturasService{
 	static facturas = [];
+	static pagos = [];
 	static observers = [];
 	static subscribe(callback) {
 		this.observers.push(callback);
@@ -22,8 +23,9 @@ export default class FacturasService{
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().factura.traerTodas);
 			const data = await res.json();
-			console.log(data);
 			this.facturas = data.facturas;
+			await this.getPagosFromMercadoPago();
+			console.log(this.pagos)
 			this.notifySubscribers();
 			return this.facturas;
 		} catch (err) {
@@ -115,30 +117,90 @@ export default class FacturasService{
 		}
 	}
 
-	// static async realizarPago(items = []){
-	// 	if(items.length > 0){
-	// 		fetch(urlPago,{
-	// 			method: 'POST', // *GET, POST, PUT, DELETE, etc.
-	// 			//mode: 'cors', // no-cors, *cors, same-origin
-	// 			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-	// 			credentials: 'same-origin', // include, *same-origin, omit
-	// 			headers: {
-	// 				'Accept': 'application/json',
-	// 			  'Content-Type': 'application/json'
-	// 			},
-	// 			body:JSON.stringify({productos:CarritoService.getItems()})
-	// 		})
-	// 		.then(async (res)=>{
-	// 			if(res.ok){
-	// 				let jsonData = await res.json();
-	// 				console.log(jsonData);
-	// 				window.location.href = jsonData.mercadoPago.response.init_point;
-	// 			}
-	// 			else{
-	// 				console.log(res);
-	// 			}
-	// 		})
-	// 	}
-	// 	Promise.reject({message:"No puede realizarse un pago si no se ha seleccionado al menos un item"});
-	// }
+	static async getPagosFromMercadoPago(){
+		try {
+			let res = await fetch("https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc",{
+				headers:{
+					"Authorization":"Bearer TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854",
+					'Content-Type': 'application/json'
+				}
+			});
+			let data = await res.json();
+			this.pagos = data.results
+			.map(({
+				id, 
+				date_created, 
+				date_approved, 
+				payment_type_id,
+				status,
+				status_detail,
+				description,
+				currency_id,
+				payer,
+				additional_info,
+				transaction_amount
+			})=>{
+				return {
+					id, 
+					date_created, 
+					date_approved, 
+					payment_type_id,
+					status,
+					status_detail,
+					description,
+					currency_id,
+					amount:transaction_amount,
+					payer:{
+						id:payer.id,
+						email:payer.email,
+						dni:payer.identification.number,
+						type:payer.type
+					},
+					items:additional_info.items.map(({quantity,title,unit_price})=>{
+						return {
+							quantity,
+							price:parseFloat(unit_price),
+							title
+						}
+					})
+				}
+			})
+			.filter((c)=>{
+				return c.status === "pending" || c.status === "approved" || c.status === "authorized" || c.status === "in_process" || c.status === "refunded";
+			});
+			return this.pagos;
+		} catch (error) {
+			Promise.reject(error);
+		}
+	}
+
+	static getPagos(){
+		return this.pagos;
+	}
+
+	static getPagosPorMes(anio = (new Date()).getFullYear()){
+		let pagosEsteAnio = this.pagos.filter((c)=>{
+			let fechaPago = new Date(c.date_created);
+			return fechaPago.getFullYear() === anio;
+		});
+		return pagosEsteAnio.reduce((prev,curr)=>{
+			let fechaPago = new Date(curr.date_created);
+			prev[fechaPago.getMonth()].y++;
+			return prev;
+		},[
+			{ x: "Enero", y: 0 },
+			{ x: "Febrero", y: 0 },
+			{ x: "Marzo", y: 0 },
+			{ x: "Abril", y: 0 },
+			{ x: "Mayo", y: 0 },
+			{ x: "Junio", y: 0 },
+			{ x: "Julio", y: 0 },
+			{ x: "Agosto", y: 0 },
+			{ x: "Septiembre", y: 0 },
+			{ x: "Octubre", y: 0 },
+			{ x: "Noviembre", y: 0 },
+			{ x: "Diciembre", y: 0 }
+		])
+	}
+	
 }
