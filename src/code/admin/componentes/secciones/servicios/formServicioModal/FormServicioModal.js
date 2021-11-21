@@ -109,7 +109,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             <Form.Select name="categoria" onChange={handleChange} value={elemento.categoria}>
                                 <option value="banio">Baño</option>
                                 <option value="guarderia">Guarderia</option>
-                                <option value="corte_de_cabello">Corte de Cabello</option>
+                                <option value="corte_de_pelo">Corte de Pelo</option>
                             </Form.Select>
                         </Form.Group>
                     </Row>

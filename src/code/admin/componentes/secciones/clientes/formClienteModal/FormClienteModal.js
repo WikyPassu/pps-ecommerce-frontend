@@ -6,37 +6,34 @@ import { MdMail } from 'react-icons/md';
 // import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
 import { HiKey } from 'react-icons/hi';
+import EnviosService from '../../../../../servicios/EnviosService';
 
 const initialValuesElemento = {
     "nombre": "",
     "apellido": "",
-    "dni": 0,
+    "dni": null,
     "correo": "",
     "clave": "",
     "domicilio": "",
     "localidad": "",
-    "telefono": 0,
-    "codigoPostal": 0,
+    "telefono": null,
+    "codigoPostal": null,
     "perrito": [],
     "estado": "ACTIVO"
 };
 
-// const initialValuesDetalleElemento = {
-//     nombre: "",
-//     peso: 0,
-//     edad: 0,
-//     raza: ""
-// };
-
 export default function FormClienteModal({ elementoParaModificar, onHide, show }) {
     const modificar = elementoParaModificar !== undefined;
     const [
-        listaDetalleElemento, 
+        listaDetalleElemento,
         //setListaDetalleElemento
     ] = useState(elementoParaModificar ? elementoParaModificar.perrito : []);
     //const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento)
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
     const handleChange = (e) => {
+        if (e.target.name === "telefono") {
+            e.target.value = parseInt(e.target.value)
+        }
         setElemento((elemento) => {
             return { ...elemento, [e.target.name]: e.target.value }
         })
@@ -112,6 +109,18 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                     <InputGroup className="input-formulario">
                         <InputGroup.Text> <BsBuilding /></InputGroup.Text>
                         <FormControl onChange={handleChange} value={elemento.localidad} name="localidad" required placeholder="Localidad" />
+                        <Form.Select name="localidad" value={elemento.localidad} onChange={handleChange}>
+                            <option value="">Otra localidad</option>
+                            {EnviosService.getPrecioEnvios()
+                            .filter((c)=>{
+                                return c.localidad !== "*";
+                            })
+                            .map((c) => {
+                                return <option
+                                value={c.localidad}
+                                key={c._id}>{c.localidad}</option>
+                            })}
+                        </Form.Select>
                     </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsMap /></InputGroup.Text>
@@ -174,7 +183,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                             <Listado atributos={["peso", "nombre", "edad", "raza"]} attrKey="id" onDeleteClick={handleDeleteClick} datos={listaDetalleElemento} btnEliminar="true"></Listado>
                         </Col>
                     </Row> */}
-                    <br/>
+                    <br />
                     <Row>
                         <Col>
                             <Button type="submit" size="lg">Guardar</Button>

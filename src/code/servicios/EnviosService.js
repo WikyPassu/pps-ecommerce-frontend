@@ -9,16 +9,17 @@ export default class EnviosService {
 
 	static async iniciarServicio() {
 		console.log("Servicio Envios iniciado");
-		this.precioEnvios = precioEnviosSample;
-        // try {
-		// 	const res = await fetch(UtilsService.getUrlsApi().precioEnvios.traerTodos);
-		// 	const data = await res.json();
-		// 	this.precioEnvios = data.precioEnvios;
-		// 	this.notifySubscribers();
-		// 	return this.precioEnvios;
-		// } catch (err) {
-		// 	console.log(err);
-		// }
+        try {
+			const res = await fetch(UtilsService.getUrlsApi().precioEnvios.traerTodos);
+			const data = await res.json();
+			console.log(data);
+			this.precioEnvios = data.precioEnvioss;
+			console.log("PRECIO ENVIOS",this.precioEnvios);
+			this.notifySubscribers();
+			return this.precioEnvios;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	static notifySubscribers() {
@@ -34,7 +35,7 @@ export default class EnviosService {
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ precioEnvio: newPrecioEnvio })
+				body: JSON.stringify({ precioEnvios: newPrecioEnvio })
 			});
 			const data = await res.json();
 			this.precioEnvios.push(data.newPrecioEnvio);
@@ -53,7 +54,7 @@ export default class EnviosService {
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ _id: _id, precioEnvio: precioEnvio })
+				body: JSON.stringify({ _id: _id, precioEnvios: precioEnvio })
 			});
 			precioEnvio._id = _id;
 			this.precioEnvios = this.precioEnvios.map((c) => (c._id === precioEnvio._id) ? precioEnvio : c);
@@ -63,7 +64,7 @@ export default class EnviosService {
 		}
 	}
 
-	static async getPrecioEnvios() {
+	static getPrecioEnvios() {
         return this.precioEnvios;
 	}
 
@@ -96,7 +97,4 @@ export default class EnviosService {
         }
         return precio;
     }
-
-
-
 }

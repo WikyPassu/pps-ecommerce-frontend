@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormularioFactura from '../../componentes/caja/formularioFactura/FormularioFactura';
 import MetodoPago from '../../componentes/caja/metodoPago/MetodoPago';
 import "./CajaPage.css";
 import HomeNavbar from '../../componentes/navbar/HomeNavbar';
 import ListaItemsCarrito from '../../componentes/carrito/listaItemsCarrito/ListaItemsCarrito';
 import CarritoService from '../../../servicios/CarritoService';
+import ClienteService from '../../../servicios/ClienteService';
 
 function Caja() {
     const [caja, setCaja] = useState({ total: CarritoService.getTotal() })
     CarritoService.subscribe(() => { setCaja({ total: CarritoService.getTotal() }) })
+    useEffect(()=>{
+        if(ClienteService.getUsuario()){
+            window.location.href = "/";
+        }
+    })
     return (<>
         <HomeNavbar />
         <div className="cajaPage">

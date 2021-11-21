@@ -24,7 +24,6 @@ export default class EmpleadoService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().empleado.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			this.empleados = data.empleados;
 			this.notifySubscribers();
 			return this.empleados;
@@ -62,7 +61,6 @@ export default class EmpleadoService {
 				body: JSON.stringify({ empleado: newItem })
 			});
 			const data = await res.json();
-			console.log(data);
 			this.empleados.push(data.empleado);
 			this.iniciarServicio();
 		} catch (err) {
@@ -88,10 +86,14 @@ export default class EmpleadoService {
 				body: JSON.stringify({ _id: _id, empleado: item })
 			});
 			const data = await res.json();
-			console.log(data);
-			item._id = _id;
-			this.empleados = this.empleados.map((c) => (c._id === item._id) ? item : c);
-			this.notifySubscribers();
+			if(data.exito){
+				item._id = _id;
+				this.empleados = this.empleados.map((c) => (c._id === item._id) ? item : c);
+				this.notifySubscribers();
+			}
+			else{
+				throw data;
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -120,9 +122,13 @@ export default class EmpleadoService {
 				body: JSON.stringify({ _id: _id })
 			});
 			const data = await res.json();
-			console.info(data);
-			this.empleados = this.empleados.filter((c) => (c._id !== _id));
-			this.iniciarServicio();
+			if(data.exito){
+				this.empleados = this.empleados.filter((c) => (c._id !== _id));
+				this.iniciarServicio();
+			}
+			else{
+				throw data;
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -136,7 +142,8 @@ export default class EmpleadoService {
  */
 	static async login(correo, clave) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.login, {
+			console.log(correo,clave)
+			const res = await fetch(UtilsService.getUrlsApi().empleado.login, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -144,13 +151,11 @@ export default class EmpleadoService {
 				body: JSON.stringify({ correo: correo, clave: clave })
 			});
 			const data = await res.json();
-			console.log(data);
 			this.usuario = data.empleado;
 			const cookies = new Cookies();
-			cookies.set("usuario", data.empleado);
-			Promise.resolve(data.exito);
+			cookies.set("usuario-empleado", data.empleado);
+			return data.exito;
 		} catch (err) {
-			console.log(err);
 			Promise.reject(err);
 		}
 	}
@@ -166,7 +171,6 @@ export default class EmpleadoService {
 			await this.addEmpleado(newUser);
 			return this.login(newUser.correo,newUser.clave);
 		} catch (err) {
-			console.log(err);
 			Promise.reject(true);
 		}
 	}
@@ -177,7 +181,7 @@ export default class EmpleadoService {
 	 */
 	static getUsuario() {
 		const cookies = new Cookies();
-		const usuario = cookies.get("usuario");
+		const usuario = cookies.get("usuario-empleado");
 		if(usuario){
 			return usuario;
 		}
@@ -189,7 +193,7 @@ export default class EmpleadoService {
 	  */
 	static async cerrarSesion() {
 		const cookies = new Cookies();
-		cookies.remove("usuario");
+		cookies.remove("usuario-empleado");
 		this.usuario = null;
 	}
 

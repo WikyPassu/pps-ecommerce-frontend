@@ -13,14 +13,33 @@ export default function Resultados({ busqueda, tipo, filtros }) {
             let newList;
             if(tipo === "SERVICIO"){
                 newList = await ServicioService.getServiciosPorBusqueda(busqueda);
+
                 setTipoArticulo("servicio")
             }
             else{
                 newList = await ProductoService.getProductosPorBusqueda(busqueda);
                 setTipoArticulo("producto")
             }
-            console.log("lista",newList);
-            if(newList){
+            console.log("Filtros: ",filtros);
+            console.log("resultados: ", newList);
+            if(filtros){
+                if(filtros.categoria){
+                    newList = newList?.filter((c)=>{
+                        return c.categoria === filtros.categoria;
+                    })
+                }
+                if(filtros.maximo){
+                    newList = newList?.filter((c)=>{
+                        return c.precio <= filtros.maximo;
+                    })
+                }
+                if(filtros.minimo){
+                    newList = newList?.filter((c)=>{
+                        return c.precio >= filtros.minimo;
+                    })
+                }
+            }
+            if(newList && newList.length){
                 console.log("new List",newList)
                 setLista(newList);
             }
@@ -30,7 +49,7 @@ export default function Resultados({ busqueda, tipo, filtros }) {
         }
         realizarBusqueda();
         
-    }, [busqueda,tipo]);
+    }, [busqueda,filtros,tipo]);
     return <>
         <h2>Resultados de "{busqueda}"</h2>
         {lista && lista.length === 0 ? 

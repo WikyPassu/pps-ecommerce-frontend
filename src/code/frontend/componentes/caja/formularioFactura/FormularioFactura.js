@@ -19,12 +19,12 @@ const initialValuesElemento = {
 
 function FormularioFactura() {
     
-    const [factura,setFactura] = useState(initialValuesElemento); //useState(ClienteService.getUsuario());
+    const [factura,setFactura] = useState(initialValuesElemento);
     const history = useHistory();
 
     useEffect(()=>{
         const usuarioLogeado = ClienteService.getUsuario();
-        if(initialValuesElemento.usuarioRegistrado == null){
+        if(usuarioLogeado == null){
             history.push("/");
         }
         else{
@@ -49,31 +49,31 @@ function FormularioFactura() {
                 <label className="title-factura">Caja</label><br />
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.nombre}  placeholder="Nombres" />
+                    <FormControl readOnly value={factura.usuarioRegistrado?.nombre}  placeholder="Nombres" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.apellido} placeholder="Apellido" />
+                    <FormControl readOnly value={factura?.usuarioRegistrado?.apellido} placeholder="Apellido" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text> <BsBuilding /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.localidad} placeholder="Localidad" />
+                    <FormControl readOnly value={factura.usuarioRegistrado?.localidad} placeholder="Localidad" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><BsMap /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.domicilio} placeholder="Domicilio" />
+                    <FormControl readOnly value={factura.usuarioRegistrado?.domicilio} placeholder="Domicilio" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><BsFilePost /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.codigoPostal} placeholder="Codigo Postal" />
+                    <FormControl readOnly value={factura.usuarioRegistrado?.codigoPostal} placeholder="Codigo Postal" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><BsPhone /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.telefono} placeholder="Numero de teléfono" />
+                    <FormControl readOnly value={factura.usuarioRegistrado?.telefono} placeholder="Numero de teléfono" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><MdMail /></InputGroup.Text>
-                    <FormControl readOnly value={factura.usuarioRegistrado.correo} placeholder="Correo Electrónico" />
+                    <FormControl readOnly value={factura.usuarioRegistrado?.correo} placeholder="Correo Electrónico" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><MdLocalShipping /></InputGroup.Text>

@@ -4,10 +4,11 @@ import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 //import { useHistory } from 'react-router';
 import ClienteService from '../../../servicios/ClienteService';
 import UtilsService from '../../../servicios/UtilsService';
+import EnviosService from '../../../servicios/EnviosService';
 
 const initialValuesFormLogin = {
-    correo:"",
-    clave:""
+    correo: "",
+    clave: ""
 }
 
 // const initialValuesFormRegistracion = {
@@ -52,40 +53,49 @@ export default function LoginModal(props) {
 
     const handlerChangeLogin = (e) => {
         e.preventDefault();
-        const {value,name} = e.target;
+        const { value, name } = e.target;
 
-        setFormLogin((formLogin)=>{
-            return {...formLogin, [name]:value};
+        setFormLogin((formLogin) => {
+            return { ...formLogin, [name]: value };
         })
     }
 
     const handlerChangeRegistracion = (e) => {
         e.preventDefault();
-        const {value,name} = e.target;
-
-        setFormRegistracion((formRegistracion)=>{
-            return {...formRegistracion, [name]:value};
+        let { value, name } = e.target;
+        if (name === "telefono") {
+            value = parseInt(value)
+        }
+        setFormRegistracion((formRegistracion) => {
+            return { ...formRegistracion, [name]: value };
         })
     }
 
     const handlerSubmitLogin = (e) => {
         e.preventDefault();
         UtilsService.setLoading(true);
-        ClienteService.login(formLogin.correo,formLogin.clave)
-        .then(()=>{
-            UtilsService.setLoading(false);
-            window.location.reload();
-        });
+        ClienteService.login(formLogin.correo, formLogin.clave)
+            .then(() => {
+                UtilsService.setLoading(false);
+                window.location.reload();
+                props.onHide();
+            })
     }
 
-    const handlerSubmitRegistracion = (e)=>{
+    const handlerSubmitRegistracion = (e) => {
         e.preventDefault();
-        console.log("forRegistracion",formRegistracion)
+        console.log("forRegistracion", formRegistracion)
         ClienteService.signUp(formRegistracion)
-        .then(()=>{
-            console.log("usuarioLogeado",ClienteService.getUsuario())
-            window.location.reload();
-        })
+            .then(() => {
+                console.log("usuarioLogeado", ClienteService.getUsuario())
+                window.location.reload();
+                props.onHide();
+            })
+    }
+    const existeLocalidad = (localidad) => {
+        return EnviosService.getPrecioEnvios().find((c) => {
+            return c.localidad === localidad;
+        });
     }
     return (
         <Modal
@@ -104,7 +114,7 @@ export default function LoginModal(props) {
                         <Col>
                             <Form.Group className="mb-3">
                                 <Form.Label>Correo</Form.Label>
-                                <Form.Control type="email" onChange={modoRegistracion? handlerChangeRegistracion : handlerChangeLogin} name="correo" placeholder="Ingrese correo" />
+                                <Form.Control required type="email" onChange={modoRegistracion ? handlerChangeRegistracion : handlerChangeLogin} name="correo" placeholder="Ingrese correo" />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -112,7 +122,7 @@ export default function LoginModal(props) {
                         <Col>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label varaint="pink">Contraseña</Form.Label>
-                                <Form.Control type="password" onChange={modoRegistracion? handlerChangeRegistracion : handlerChangeLogin} name="clave" placeholder="Ingrese contraseña" />
+                                <Form.Control required type="password" onChange={modoRegistracion ? handlerChangeRegistracion : handlerChangeLogin} name="clave" placeholder="Ingrese contraseña" />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -122,7 +132,7 @@ export default function LoginModal(props) {
                                 <Col>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label varaint="pink">Confirmar contraseña</Form.Label>
-                                        <Form.Control type="password" placeholder="Ingrese contraseña" />
+                                        <Form.Control required type="password" placeholder="Ingrese contraseña" />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -130,13 +140,13 @@ export default function LoginModal(props) {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Nombre</Form.Label>
-                                        <Form.Control name="nombre" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="nombre" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Apellido</Form.Label>
-                                        <Form.Control name="apellido" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="apellido" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -144,35 +154,51 @@ export default function LoginModal(props) {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>DNI</Form.Label>
-                                        <Form.Control name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
+                                        <Form.Control required name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Domicilio</Form.Label>
-                                        <Form.Control name="domicilio" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="domicilio" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Localidad</Form.Label>
-                                        <Form.Control name="localidad" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
-                                    </Form.Group>
+                                    <Form.Label>Localidad</Form.Label>
+                                    <Form.Select name="localidad" value={formRegistracion.localidad} onChange={handlerChangeRegistracion}>
+                                        <option value="">Otra localidad</option>
+                                        {EnviosService.getPrecioEnvios()
+                                            .filter((c) => {
+                                                return c.localidad !== "*";
+                                            })
+                                            .map((c) => {
+                                                return <option
+                                                value={c.localidad}
+                                                key={c._id}>{c.localidad}</option>
+
+                                            })}
+                                    </Form.Select>
                                 </Col>
+                                {!existeLocalidad(formRegistracion.localidad) ? <Col>
+                                    <Form.Label>Otra localidad</Form.Label>
+                                    <Form.Group className="mb-3">
+                                        <Form.Control required name="localidad" minLength="3" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese su localidad" />
+                                    </Form.Group>
+                                </Col> : ""}
+                            </Row>
+                            <Row>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Codigo Postal</Form.Label>
-                                        <Form.Control name="codigoPostal" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="codigoPostal" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
-                            </Row>
-                            <Row>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Telefono</Form.Label>
-                                        <Form.Control name="telefono" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
+                                        <Form.Control required name="telefono" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese Telefono" />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -192,7 +218,7 @@ export default function LoginModal(props) {
                         </>
                     }
                     <br />
-                    <Button onClick={props.onHide} variant="primary" type="submit">
+                    <Button variant="primary" type="submit">
                         Enviar
                     </Button>
                 </Form>

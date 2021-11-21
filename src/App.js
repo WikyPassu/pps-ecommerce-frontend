@@ -23,6 +23,7 @@ import CarritoService from "./code/servicios/CarritoService";
 import Loading from "./code/frontend/componentes/loading/Loading";
 import { useEffect } from "react";
 import ResultadoTurnoPage from "./code/frontend/paginas/servicio/resultadoTurno/ResultadoTurnoPage";
+import EnviosService from "./code/servicios/EnviosService";
 
 function App() {
   useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
     ClienteService.iniciarServicio();
     EmpleadoService.iniciarServicio();
     ConsumibleService.iniciarServicio();
+    EnviosService.iniciarServicio();
     TurnoService.iniciarServicio();
     CarritoService.iniciarServicio();
   }, [])

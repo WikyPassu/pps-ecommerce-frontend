@@ -15,24 +15,22 @@ export default function LoginAdminPage() {
     const history = useHistory()
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("correo:"+usuario.correo,"clave: "+usuario.clave)
         let res = await EmpleadoService.login(usuario.correo,usuario.clave);
         if(res){
             history.push("/admin/home");
         }
         else{
-            history.push("/admin/home");
-            //alert("Usuario o clave incorrecta");
+            alert("Usuario o clave incorrecta");
         }
         setUsuario(initialValues);
     }
 
     const handlerChange = ({target}) => {
-        
         const {value,name} = target;
-
         setUsuario((usuario)=>{
             return {...usuario, [name]:value};
-        })
+        });
     }
 
     return (

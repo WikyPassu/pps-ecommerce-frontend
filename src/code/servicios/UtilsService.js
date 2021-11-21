@@ -1,6 +1,6 @@
 console.log('Utils service iniciado');
-//const URLAPI = "http://localhost:8080";
-const URLAPI = "https://api-ppc.herokuapp.com";
+const URLAPI = "http://localhost:8080";
+//const URLAPI = "https://api-ppc.herokuapp.com";
 
 /**
  * Contiene un conjunto de herramientas para propositos generales.

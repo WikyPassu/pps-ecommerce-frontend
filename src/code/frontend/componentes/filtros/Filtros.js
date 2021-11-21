@@ -6,11 +6,12 @@ const initialState = {
     tipo: "PRODUCTO",
     minimo: 0,
     maximo: 0,
-    categoria: ""
+    categoria: "",
+    busqueda: ""
 }
 
-export default function Filtros({ onChange = ()=>{}, defaultType = "PRODUCTO" }) {
-    const [filtros, setFiltros] = useState({...initialState,tipo:defaultType});
+export default function Filtros({ onSumbit = () => { }, onReset = () => { }, defaultType = "PRODUCTO" }) {
+    const [filtros, setFiltros] = useState({ ...initialState, tipo: defaultType });
     const handlerChange = ({ target }) => {
         let { name, value } = target;
         setFiltros((filtros) => {
@@ -18,15 +19,26 @@ export default function Filtros({ onChange = ()=>{}, defaultType = "PRODUCTO" })
         })
     }
 
-    useEffect(()=>{
-        onChange(filtros);
+    const handlerReset = () => {
+        setFiltros({ ...initialState, tipo: defaultType });
+        onReset();
+    }
+
+    const handlerSumit = (e) => {
+        e.preventDefault();
+        onSumbit(filtros);
+        setFiltros({ ...initialState, tipo: defaultType });
+    }
+
+    useEffect(() => {
+
     })
     return <div className="filtros-container">
         <div>
             <h1>Filtros</h1>
         </div>
         <hr />
-        <Form>
+        <Form onSubmit={handlerSumit} onReset={handlerReset}>
             <Form.Label>Tipo</Form.Label>
             <Form.Group controlId="formBasicCheckbox">
                 <Row>
@@ -41,33 +53,38 @@ export default function Filtros({ onChange = ()=>{}, defaultType = "PRODUCTO" })
             <hr />
             <Form.Label>Categoria</Form.Label>
             {filtros.tipo === "PRODUCTO" ?
-                <Form.Select onChange={handlerChange}>
-                    <option>Seleccionar categoria</option>
+                <Form.Select name="categoria" value={filtros.categoria} onChange={handlerChange}>
+                    <option value="">Seleccionar categoria</option>
                     <option value="comida">Comida</option>
                     <option value="cama">Cama</option>
                     <option value="higiene">Higiene</option>
                 </Form.Select> :
-                <Form.Select onChange={handlerChange}>
-                    <option>Seleccionar categoria</option>
+                <Form.Select name="categoria" value={filtros.categoria} onChange={handlerChange}>
+                    <option value="">Seleccionar categoria</option>
                     <option value="banio">Baño</option>
                     <option value="guarderia">Guardería</option>
                     <option value="corte_de_pelo">Corte de Pelo</option>
                 </Form.Select>
             }
+            {filtros.tipo === "PRODUCTO" ?
+                <>
+                    <hr />
+                    <Form.Label>Rango precio</Form.Label>
+                    <Form.Group controlId="rangoPrecio">
+                        <Row>
+                            <Col>
+                                <Form.Control name="minimo" value={filtros.minimo} onChange={handlerChange} checked type="number" placeholder="minimo" />
+                            </Col>
+                            <Col>
+                                <Form.Control name="maximo" value={filtros.maximo} onChange={handlerChange} checked type="number" placeholder="maximo" />
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                </> : ""}
             <hr />
-            <Form.Label>Rango precio</Form.Label>
-            <Form.Group controlId="rangoPrecio">
-                <Row>
-                    <Col>
-                        <Form.Control onChange={handlerChange} checked type="number" placeholder="minimo" />
-                    </Col>
-                    <Col>
-                        <Form.Control onChange={handlerChange} checked type="number" placeholder="maximo" />
-                    </Col>
-                </Row>
-            </Form.Group>
-            <hr />
-            <Button type="reset">Borrar Filtros</Button>
+            <Button style={{ width: "100%" }} type="reset">Borrar Filtros</Button>
+            <Button style={{ width: "100%", marginTop: "10px" }} type="submit">Aplicar</Button>
+
         </Form>
     </div>
 }

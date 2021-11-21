@@ -1,9 +1,10 @@
 import Listado from '../../listado/Listado';
 import Grafico from '../../grafico/Grafico';
 import { useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import FacturasService from '../../../../servicios/VentasService';
 import FormFacturaDetallesModal from './formFacturaDetallesModal/FormFacturaDetallesModal';
+import FormFacturaModal from './formFacturaModal/FormFacturaModal';
 
 /**
  * Las ventas son lo mismo facturas pero con nombre diferente.
@@ -17,7 +18,7 @@ export default function Ventas() {
   const [mostrarDetalleModal, setMostrarDetalleModal] = useState(false);
 
 
-  // const [modalForm, setModalForm] = useState(false);
+  const [modalForm, setModalForm] = useState(false);
   const [pagos, setPagos] = useState(FacturasService.getPagos());
   FacturasService.subscribe((nuevaLista) => {
     // setLista(nuevaLista);
@@ -39,12 +40,12 @@ export default function Ventas() {
           </InputGroup>
         </Col> */}
         <Col>
-          {/* <Button
+          <Button
             className="btn-agregar"
             onClick={() => setModalForm(true)}>Agregar Venta</Button>
           {modalForm && <FormFacturaModal
             show={modalForm}
-            onHide={() => { setModalForm(false) }} />} */}
+            onHide={() => { setModalForm(false) }} />}
         </Col>
       </Row>
 

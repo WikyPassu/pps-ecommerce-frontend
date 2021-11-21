@@ -8,10 +8,9 @@ function MetodoPago(){
     const realizarPago = () => {
         UtilsService.setLoading(true);
         fetch(UtilsService.getUrlsApi().metodoPago.realizarPago,{
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            //mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+            method: 'POST',
+            cache: 'no-cache',
+            credentials: 'same-origin',
             headers: {
                 'Accept': 'application/json',
               'Content-Type': 'application/json'

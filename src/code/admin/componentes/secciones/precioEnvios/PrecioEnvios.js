@@ -1,44 +1,41 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import ConsumibleService from '../../../../servicios/ConsumibleService';
+import EnviosService from '../../../../servicios/EnviosService';
 import Listado from '../../listado/Listado';
-import FormConsumibleModal from './formConsumibleModal/FormConsumibleModal';
+import FormConsumibleModal from './formPrecioEnvios/FormPrecioEnvioModal';
 
-export default function Consumibles() {
-  const [lista, setLista] = useState(ConsumibleService.getConsumibles());
+export default function PrecioEnvios() {
+  const [lista, setLista] = useState(EnviosService.getPrecioEnvios());
   const [mostrarModalModificar, setMostrarModalModificar] = useState(false);
   const [elementoModificar, setElementoModificar] = useState(undefined);
   const [modalForm, setModalForm] = useState(false);
 
-  ConsumibleService.subscribe((nuevaLista) => {
+  EnviosService.subscribe((nuevaLista) => {
     setLista(nuevaLista);
   });
   return (<>
-    <label className="titulo-seccion">Consumibles</label>
-    <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Consumible</Button>
+    <label className="titulo-seccion">Precios de Envio</label>
+    <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Localidad</Button>
     {modalForm && <FormConsumibleModal
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
     <Listado
-    columnas={[
-          "ID",
-          "Nombre",
-          "Existencia",
-          "Existencia Minima",
-          "Precio Unidad"
-        ]}
     atributos={[
-      "_id",
-      "nombre",
-      "existencia",
-      "existenciaMinima",
-      "precioUnidad"
+      "localidad",
+      "precio"
     ]}
+    attrFuncs={[{columnaIndex:0,attrFunc:(v)=>v === "*"?"(Otras Localidades)" : v}]}
       onEditClick={(e) => {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p)=>{ConsumibleService.removeConsumible(p._id)}}
+      onDeleteClick={(p)=>{
+        if(p.localidad === "*"){
+          alert("No está permitido borrar el precio genérico")
+          return;
+        }
+        EnviosService.removePrecioEnvios(p._id)
+      }}
       attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormConsumibleModal
@@ -46,7 +43,7 @@ export default function Consumibles() {
       show={mostrarModalModificar}
       onHide={() => {
         setMostrarModalModificar(false);
-        setLista(ConsumibleService.getConsumibles());
+        setLista(EnviosService.getPrecioEnvios());
       }} />}
 
   </>)
