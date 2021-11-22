@@ -113,6 +113,16 @@ export default class CarritoService {
 		cookies.set("items", items);
 	}
 
+		/**
+	 * @todo SE DEBERA GUARDAR LOS CAMBIOS EN LAS COOKIES
+	 */
+		 static removeAllItems() {
+			this.items_carrito_compras = [];
+			const cookies = new Cookies();
+			cookies.set("items", []);
+			this.notifySubscribers();
+		}
+
 	/**
 	 * @returns El precio total de todos los items del carrito
 	 */

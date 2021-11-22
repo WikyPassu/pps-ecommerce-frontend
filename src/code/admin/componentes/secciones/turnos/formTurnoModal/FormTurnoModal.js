@@ -6,8 +6,8 @@ import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
 import EmpleadoService from '../../../../../servicios/EmpleadoService';
 import ServicioService from '../../../../../servicios/ServicioService';
-//import ConsumibleService from '../../../../../servicios/ConsumibleService';
 import TurnoService from '../../../../../servicios/TurnoService';
+
 
 const initialValuesElemento = {
     "servicio": { _id: "" },
@@ -38,7 +38,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.consumibles : []);
     const [empleado, setEmpleado] = useState(EmpleadoService.getEmpleadoByDNI(elemento.dniEmpleado));
     const [cliente, setCliente] = useState(ClienteService.getClienteByDNI(elemento.dniCliente));
-
+    const [descontarStockConsumibles, setDescontarStockConsumibles] = useState(false)
     useEffect(() => {
         setElemento((elemento) => {
             return {
@@ -82,8 +82,10 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        (modificar === true) ? TurnoService.modifyTurno(elemento) : TurnoService.addTurno(elemento);
-        onHide();
+        if (window.confirm("¿Esta seguro que sea modificar el turno?")) {
+            (modificar === true) ? TurnoService.modifyTurno(elemento,descontarStockConsumibles) : TurnoService.addTurno(elemento);
+            onHide();
+        }
     }
 
     const handleUsuarioChange = (e) => {
@@ -184,18 +186,18 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                 <Form noValidate onSubmit={handleSubmit}>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={empleado ? empleado.dni : "DNI de empleado"} name="dniEmpleado" required />
+                        <FormControl type="number"  min="1000000" max="99999999" onChange={handleUsuarioChange} placeholder={empleado ? empleado.dni : "DNI de empleado"} name="dniEmpleado" required />
                     </InputGroup>
                     {empleado ? <b>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" onChange={handleUsuarioChange} placeholder={cliente ? cliente.dni : "DNI de cliente"} name="dniCliente" required />
+                        <FormControl type="number" min="1000000" max="99999999" onChange={handleUsuarioChange} placeholder={cliente ? cliente.dni : "DNI de cliente"} name="dniCliente" required />
                     </InputGroup>
                     {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>}
                     <Row>
                         <Col sm={12}>
-                            <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id}>
-                                <option value="">Seleccione un Servicio</option>
+                            <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id} required>
+                                <option>Seleccione un Servicio</option>
                                 {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
                             </Form.Select>
                             <br />
@@ -216,12 +218,12 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                             Datos del Perro
                         </Col>
                     </Row>
-               
+
                     <li><b>Nombre:</b> {elemento.perrito.nombre}</li>
                     <li><b>Peso:</b> {elemento.perrito.peso} g</li>
                     <li><b>Edad:</b> {elemento.perrito.edad} Años</li>
                     <li><b>Raza:</b> {elemento.perrito.raza}</li>
-                        
+
                     {/* <Row>
                         <Col sm={6}>
                             <Form.Select onChange={handleChangeDetalleElemento} name="consumible" value={detalleElemento.consumible._id}>
@@ -250,6 +252,18 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                                 attrKey="id"
                                 // onDeleteClick={handleDeleteClick} 
                                 datos={listaDetalleElemento}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Check
+                                type="checkbox"
+                                label={`Descontar stock de consumibles`}
+                                value={descontarStockConsumibles}
+                                onChange={({ target }) => {
+                                    setDescontarStockConsumibles(target.checked)
+                                }}
                             />
                         </Col>
                     </Row>

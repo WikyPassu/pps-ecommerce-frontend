@@ -89,7 +89,7 @@ function ServicioPage() {
           <h1 className="item titulo">{UtilsService.stringFormatter(servicio.nombre, 50)}</h1>
           <p className="item descripcion">{UtilsService.stringFormatter(servicio.descripcion, 300)}</p>
           <div className="item precio">
-            {precio?"$"+precio:""}
+            {precio ? "$" + precio : ""}
             <br /><hr />
           </div>
           <div className="item form">
@@ -102,7 +102,10 @@ function ServicioPage() {
             {permitirReseñar ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio._id} /> : ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
-            <ListaResenias listaResenias={servicio.resenias} />
+            {servicio.resenias.length ?
+              <ListaResenias listaResenias={servicio.resenias} /> :
+              "No hay reseñas aún"
+            }
           </div>
         </div>
       </div>

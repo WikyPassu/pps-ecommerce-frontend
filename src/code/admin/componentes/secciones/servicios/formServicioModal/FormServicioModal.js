@@ -100,13 +100,14 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                 type="text"
                                 value={elemento.nombre}
                                 onChange={handleChange}
-                                placeholder="Ingrese nombre del servicio" />
+                                placeholder="Ingrese nombre del servicio"
+                                required />
                             {validarInputText(elemento.nombre)}
 
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label htmlFor="categoria">Categoria</Form.Label>
-                            <Form.Select name="categoria" onChange={handleChange} value={elemento.categoria}>
+                            <Form.Select name="categoria" onChange={handleChange} value={elemento.categoria} >
                                 <option value="banio">Baño</option>
                                 <option value="guarderia">Guarderia</option>
                                 <option value="corte_de_pelo">Corte de Pelo</option>
@@ -119,7 +120,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             <Form.Label htmlFor="descripcion">Descripcion</Form.Label>
                             <Form.Control
                                 name="descripcion"
-                                maxLength="50"
+                                maxLength="100"
                                 value={elemento.descripcion}
                                 onChange={handleChange}
                                 as="textarea"
@@ -156,7 +157,6 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             <Col className="campos-modificar-resenia" sm={4}>
                                 <Form.Group as={Col} className="mb-3">
                                     <Form.Select name="estado" onChange={handleChangeDetalleElemento} value={detalleElemento.estado}>
-                                        <option>Seleccionar Estado de Reseña</option>
                                         <option value="ACEPTADA">ACEPTADA</option>
                                         <option value="PENDIENTE">PENDIENTE</option>
                                         <option value="RECHAZADA">RECHAZADA</option>

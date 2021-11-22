@@ -31,7 +31,7 @@ function getFilas(atributos = [], datos = [], attrKey, onEditClick, onDeleteClic
   return datos.map((dato) => <tr key={"tr" + dato[attrKey]}>
     {atributos.map((atributo,index) => <td key={"tdAttr" + dato[attrKey] + atributo}>{changeValuesByFunc(dato[atributo],dato,index,attrFuncs)}</td>)}
     {onEditClick&&<td key={`td${dato[attrKey]}btnEditar`}><Button key={`${dato[attrKey]}btnEditar`} onClick={()=>{onEditClick(dato)}}>Editar</Button></td>}
-    {onDeleteClick&&<td key={`td${dato[attrKey]}btnEliminar`}><Button key={`${dato[attrKey]}btnEliminar`} onClick={()=>{onDeleteClick(dato)}}>Eliminar</Button></td>}
+    {onDeleteClick&&<td key={`td${dato[attrKey]}btnEliminar`}><Button key={`${dato[attrKey]}btnEliminar`} onClick={()=>{if(window.confirm("¿Está seguro que quiere eliminar este elemento?")){onDeleteClick(dato)}}}>Eliminar</Button></td>}
     {onShowClick&&<td key={`td${dato[attrKey]}btnMostrar`}><Button key={`${dato[attrKey]}btnMostrar`} onClick={()=>{onShowClick(dato)}}>Ver</Button></td>}
   </tr>)
 }

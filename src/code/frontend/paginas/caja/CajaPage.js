@@ -11,7 +11,7 @@ function Caja() {
     const [caja, setCaja] = useState({ total: CarritoService.getTotal() })
     CarritoService.subscribe(() => { setCaja({ total: CarritoService.getTotal() }) })
     useEffect(()=>{
-        if(ClienteService.getUsuario()){
+        if(!ClienteService.getUsuario()){
             window.location.href = "/";
         }
     })

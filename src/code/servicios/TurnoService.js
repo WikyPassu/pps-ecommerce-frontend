@@ -1,3 +1,4 @@
+import ConsumibleService from "./ConsumibleService";
 import UtilsService from "./UtilsService";
 export default class TurnoService {
 	static turnos = [];
@@ -92,7 +93,8 @@ export default class TurnoService {
 	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static async modifyTurno(item) {
+	static async modifyTurno(item, descontarStockConsumibles) {
+		console.log(item,descontarStockConsumibles)
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
 
@@ -105,9 +107,16 @@ export default class TurnoService {
 				body: JSON.stringify({ _id: _id, turno: item })
 			});
 			const data = await res.json();
-			console.log(data);
-			item._id = _id;
-			this.turnos = this.turnos.map((c) => (c._id === _id) ? item : c);
+			if(data.exito){
+				if(descontarStockConsumibles){
+					item.consumibles.forEach(async (c)=>{
+						await ConsumibleService.registrarConsumibleUsado(c.consumible._id,c.cantidad);
+					})
+				}
+				console.log(data);
+				item._id = _id;
+				this.turnos = this.turnos.map((c) => (c._id === _id) ? item : c);
+			}
 			this.notifySubscribers();
 		} catch (err) {
 			console.log(err);

@@ -6,7 +6,7 @@ import LoginModal from '../../componentes/loginModal/LoginModal';
 import Carrito from '../../componentes/carrito/Carrito';
 import logo from '../../../../assets/logo.png';
 import ClienteService from '../../../servicios/ClienteService';
-import UtilsService from '../../../servicios/UtilsService';
+//import UtilsService from '../../../servicios/UtilsService';
 
 export default function HomeNavbar() {
     const [modalShow, setModalShow] = React.useState(false);
@@ -14,11 +14,9 @@ export default function HomeNavbar() {
     const history = useHistory();
 
     const cerrarSesion = ()=>{
-        UtilsService.setLoading(true);
+        //UtilsService.setLoading(true);
         ClienteService.cerrarSesion()
-        .then(()=>{
-            window.location.reload();
-        });
+        window.location.reload();
     }
     return (
         <>

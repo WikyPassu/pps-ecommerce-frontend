@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './FormFacturaDetallesModal.css';
 import { Modal } from 'react-bootstrap';
 import Listado from '../../../listado/Listado';
+//import FacturasService from '../../../../../servicios/VentasService';
 
 const initialValuesElemento = {
     amount: 0,
@@ -27,12 +28,43 @@ export default function FormFacturaDetallesModal({ elementoParaMostrar, onHide, 
         description,
         id,
         items,
-        payer,
         payment_type_id,
         status,
-        status_detail
+        status_detail,
+        payer,
+        //orderId
     } = elemento;
+    //const [payerData, setPayerData] = useState({})
+
+    // const getPayerByOrderId = async (orderId)=>{
+	// 	const token = "TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854"
+	// 	try {
+	// 		const orderRes = await fetch("https://api.mercadopago.com/merchant_orders/search",{
+	// 			method:"GET",
+	// 			headers:{
+	// 				"Authorization":"Bearer "+token,
+	// 				'Content-Type': 'application/json'
+	// 			}
+	// 		})
+	// 		//const order = await orderRes.json();
+			
+	// 		const preferenceRes = await fetch("https://api.mercadopago.com/checkout/preferences/",{
+	// 			headers:{
+	// 				"Authorization":"Bearer "+token,
+	// 				'Content-Type': 'application/json'
+	// 			}
+	// 		})
+	// 		const preference = await preferenceRes.json()
+	// 		return preference.payer;
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
     useEffect(() => {
+        // getPayerByOrderId(orderId)
+        // .then((data)=>{
+        //     console.log("PAYER",data);
+        // })
     }, [])
 
     return (

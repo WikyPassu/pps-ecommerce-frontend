@@ -26,7 +26,7 @@ export default function AdminNavbar() {
                         Puppyness Pet Caring
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link  variant="end" className="ml-auto">{usuario?.nombre} {usuario?.apellido}</Nav.Link>
+                        <Nav.Link  variant="end" className="ml-auto">{usuario?.nombre} {usuario?.apellido} ({usuario?.tipo})</Nav.Link>
                         <Nav.Link  variant="end" className="ml-auto" onClick={() => { 
                             EmpleadoService.cerrarSesion();
                             history.push("/admin");

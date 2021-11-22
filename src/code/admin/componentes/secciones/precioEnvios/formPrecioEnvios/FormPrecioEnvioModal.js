@@ -50,6 +50,7 @@ export default function FormPrecioEnvioModal({ elementoParaModificar, onHide, sh
                                 maxLength="30"
                                 type="text"
                                 value={elemento.localidad}
+                                required
                                 onChange={handleChange}
                                 placeholder="Localidad" />
                             {validarInputText(elemento.localidad)}
@@ -60,9 +61,9 @@ export default function FormPrecioEnvioModal({ elementoParaModificar, onHide, sh
                             <Form.Label htmlFor="existencia">Precio</Form.Label>
                             <Form.Control
                                 name="precio"
-                                min="0"
                                 value={elemento.precio}
                                 onChange={handleChange}
+                                required
                                 type="number"
                                 placeholder="Precio" />
                             {validarInputNumber(elemento.precio)}

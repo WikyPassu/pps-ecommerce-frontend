@@ -135,7 +135,7 @@ export default class ClienteService{
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ dniUsuario: dniCliente, idServicio: idServicio})
+				body: JSON.stringify({ dniCliente: dniCliente, idServicio: idServicio})
 			});
 			const data = await res.json();
 			return data.exito;
@@ -191,18 +191,18 @@ export default class ClienteService{
 	 * @returns El usuario de cliente o null.
 	 */
 	static getUsuario(){
-		const cookies = new Cookies();
-		const usuario = cookies.get("usuario");
-		if(usuario){
-			return usuario;
+		if(!this.usuario){
+			const cookies = new Cookies();
+			const usuario = cookies.get("usuario");
+			this.usuario = usuario;
 		}
-		return null;
+		return this.usuario;
 	};
 
 	/**
 	 * @todo Destruye la cookie de la sesion y recarga la pagina
 	 */
-	static async cerrarSesion(){
+	static cerrarSesion(){
 		const cookies = new Cookies();
 		cookies.remove("usuario");
 		this.usuario = null;

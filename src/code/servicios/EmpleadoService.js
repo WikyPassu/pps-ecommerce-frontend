@@ -191,7 +191,7 @@ export default class EmpleadoService {
 	/**
 	  * @todo Destruye la cookie de la sesion y recarga la pagina
 	  */
-	static async cerrarSesion() {
+	static cerrarSesion() {
 		const cookies = new Cookies();
 		cookies.remove("usuario-empleado");
 		this.usuario = null;

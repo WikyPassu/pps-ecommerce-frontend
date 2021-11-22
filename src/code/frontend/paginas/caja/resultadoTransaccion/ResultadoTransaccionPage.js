@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import "./ResultadoTransaccionPage.css";
 import { useHistory, useParams } from 'react-router-dom';
 import HomeNavbar from '../../../componentes/navbar/HomeNavbar';
+import CarritoService from '../../../../servicios/CarritoService';
 function ResultadoTransaccionPage() {
     const history = useHistory();
     const params = useParams();
     useEffect(() => {
-        
+        if(CarritoService.removeAllItems())
         setTimeout(() => {
             history.push("/");
         }, 5000)
-    })
+    },[history])
 
     return (<>
             <HomeNavbar />

@@ -18,7 +18,7 @@ export default function BusquedaPage() {
 
     const handlerSubmitFiltros = (e) => {
         if (filtros && filtros.tipo !== e.tipo) {
-            history.push("/busqueda?q=cama&type=" + e.tipo);
+            history.push("/busqueda?q="+query+"&type=" + e.tipo);
         }
         console.log(e);
         setFiltros(e);

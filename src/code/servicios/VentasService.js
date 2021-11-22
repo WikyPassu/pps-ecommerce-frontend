@@ -1,4 +1,5 @@
 import UtilsService from "./UtilsService";
+const token = "TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854"
 export default class FacturasService{
 	static facturas = [];
 	static pagos = [];
@@ -121,7 +122,7 @@ export default class FacturasService{
 		try {
 			let res = await fetch("https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc",{
 				headers:{
-					"Authorization":"Bearer TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854",
+					"Authorization":"Bearer "+token,
 					'Content-Type': 'application/json'
 				}
 			});
@@ -138,7 +139,8 @@ export default class FacturasService{
 				currency_id,
 				payer,
 				additional_info,
-				transaction_amount
+				transaction_amount,
+				order
 			})=>{
 				return {
 					id, 
@@ -150,6 +152,7 @@ export default class FacturasService{
 					description,
 					currency_id,
 					amount:transaction_amount,
+					orderId:order.id,
 					payer:{
 						id:payer.id,
 						email:payer.email,
@@ -201,6 +204,36 @@ export default class FacturasService{
 			{ x: "Noviembre", y: 0 },
 			{ x: "Diciembre", y: 0 }
 		])
+	}
+
+	/**
+	 * @todo NO FUNCIONA. TIRA ERROR DE CORS. POSIBLEMENTE SEA CULPA DE MELI
+	 * @param {*} orderId 
+	 * @returns 
+	 */
+	static async getPayerByOrderId(orderId){
+		const token = "TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854"
+		try {
+			const orderRes = await fetch("https://api.mercadopago.com/merchant_orders/"+orderId,{
+				method:"GET",
+				headers:{
+					"Authorization":"Bearer "+token,
+					'Content-Type': 'application/json'
+				}
+			})
+			const order = await orderRes.json();
+			
+			const preferenceRes = await fetch("https://api.mercadopago.com/checkout/preferences/"+order.preference_id,{
+				headers:{
+					"Authorization":"Bearer "+token,
+					'Content-Type': 'application/json'
+				}
+			})
+			const preference = await preferenceRes.json()
+			return preference.payer;
+		} catch (error) {
+			console.error(error);
+		}
 	}
 	
 }

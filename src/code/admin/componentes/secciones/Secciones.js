@@ -9,7 +9,13 @@ import Consumibles from './consumibles/Consumibles';
 import Turnos from './turnos/Turnos';
 // import Storefront from './storefront/Storefront';
 import PrecioEnvios from './precioEnvios/PrecioEnvios';
+import { useEffect, useState } from 'react';
+import EmpleadoService from '../../../servicios/EmpleadoService';
 export default function Secciones() {
+  const [tipoUsuario,setTipoUsuario] = useState("EMPLEADO")
+  useEffect(()=>{
+    setTipoUsuario(EmpleadoService.getUsuario()?.tipo);
+  },[])
 
   return (
     <Tabs defaultActiveKey="ventas">
@@ -38,11 +44,11 @@ export default function Secciones() {
           <Clientes />
         </div>
       </Tab>
-      <Tab eventKey="empleados" title="Empleados">
+      {tipoUsuario?<Tab eventKey="empleados" title="Empleados">
         <div className="tab-container">
           <Empleados />
         </div>
-      </Tab>
+      </Tab>:""}
       <Tab eventKey="consumibles" title="Consumibles">
         <div className="tab-container">
           <Consumibles/>

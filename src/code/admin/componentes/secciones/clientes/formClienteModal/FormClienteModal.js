@@ -104,7 +104,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                     </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl onChange={handleChange} type="number" value={elemento.dni} name="dni" required placeholder="DNI" />
+                        <FormControl onChange={handleChange} min="1000000" max="99999999" type="number" value={elemento.dni} name="dni" required placeholder="DNI" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text> <BsBuilding /></InputGroup.Text>

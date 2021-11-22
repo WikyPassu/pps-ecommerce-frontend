@@ -49,10 +49,11 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
                             <Form.Label htmlFor="nombre">Nombre</Form.Label>
                             <Form.Control
                                 name="nombre"
-                                maxLength="20"
+                                maxLength="30"
                                 type="text"
                                 value={elemento.nombre}
                                 onChange={handleChange}
+                                required
                                 placeholder="Nombre del consumible" />
                             {validarInputText(elemento.nombre)}
 
@@ -61,7 +62,7 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
                             <Form.Label htmlFor="existencia">Existencia</Form.Label>
                             <Form.Control
                                 name="existencia"
-                                min="0"
+                                required
                                 value={elemento.existencia}
                                 onChange={handleChange}
                                 type="number"
@@ -74,7 +75,7 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
                             <Form.Label htmlFor="existencia">Existencia Minima</Form.Label>
                             <Form.Control
                                 name="existenciaMinima"
-                                min="0"
+                                required
                                 value={elemento.existenciaMinima}
                                 onChange={handleChange}
                                 type="number"
@@ -85,7 +86,7 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
                             <Form.Label htmlFor="existencia">Precio Unidad</Form.Label>
                             <Form.Control
                                 name="precioUnidad"
-                                min="0"
+                                required
                                 value={elemento.precioUnidad}
                                 onChange={handleChange}
                                 type="number"
