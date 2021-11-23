@@ -130,6 +130,7 @@ export default class ClienteService{
 	 */
 	static async isDisponibleParaResenia(dniCliente, idServicio){
 		try {
+			console.log("Buscando resnias de: ",dniCliente, idServicio)
 			const res = await fetch(UtilsService.getUrlsApi().resenia.verificarCompraPrevia, {
 				method: 'POST',
 				headers: {
@@ -138,6 +139,7 @@ export default class ClienteService{
 				body: JSON.stringify({ dniCliente: dniCliente, idServicio: idServicio})
 			});
 			const data = await res.json();
+			console.log(data);
 			return data.exito;
 		} catch (err) {
 			console.log(err);

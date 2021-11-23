@@ -1,5 +1,6 @@
 .no-resenias{
     padding: 20px;
-    background-color: var(--light-color);
+    background-color: var(--white-color);
     border-radius: 15px;
+    text-align: center;
 }

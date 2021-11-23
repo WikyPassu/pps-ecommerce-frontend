@@ -22,45 +22,66 @@ function useQuery() {
 
 function ServicioPage() {
   const history = useHistory();
-  let query = useQuery();
+  const query = useQuery();
   const [servicio, setServicio] = useState();
   const [permitirReseñar, setPermitirReseñar] = useState(false);
   const [precio, setPrecio] = useState(0);
+  
+  // const validarUsuarioParaResenia = async (serv) => {
+  //   if (serv) {
+  //     const usuarioLogeado = ClienteService.getUsuario();
+  //     if (usuarioLogeado) {
+  //       if (servicio) {
+  //         let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicio._id);
+  //         console.log("Resultado verificacion de resenias; ",resultado);
+  //         setPermitirReseñar(() => {
+  //           return resultado;
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
 
-  ServicioService.subscribe(() => {
-    setServicio(() => {
-      return ServicioService.getServicioPorId(query.get("id")) ?? history.push("/404");
-    });
-  })
+  // ServicioService.subscribe(() => {
+  //   const servicioEncontrado = ServicioService.getServicioPorId(query.get("id"));
+  //   console.log("servicio encontrado (subs)",servicioEncontrado)
+  //   if(servicioEncontrado){
+  //     validarUsuarioParaResenia(servicioEncontrado);
+  //     setServicio(() => {
+  //       return servicioEncontrado;
+  //     });
+  //   }
+  //   else{
+  //     history.push("/404");
+  //   }
+  // })
 
   useEffect(() => {
-
-    const validarUsuarioParaResenia = async (serv) => {
-      if (serv) {
-        const usuarioLogeado = ClienteService.getUsuario();
-        if (ClienteService.getUsuario()) {
-          if (servicio) {
-            let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicio._id);
-            setPermitirReseñar(() => {
-              return resultado;
-            });
-          }
-        }
+    const buscarServicio = async ()=>{
+      if (!ServicioService.getServicios().length) {
+        await ServicioService.iniciarServicio()
       }
-      setPermitirReseñar(false);
-    }
-
-    if (ServicioService.getServicios().length) {
-      const servicioEncontrado = ServicioService.getServicioPorId(query.get("id"))
+      const servicioEncontrado = ServicioService.getServicioPorId(query.get("id"));
+      const usuarioLogeado = ClienteService.getUsuario();
       if (servicioEncontrado) {
-        validarUsuarioParaResenia(servicioEncontrado);
+        if(usuarioLogeado){
+          let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicioEncontrado._id);
+          console.log("Resultado verificacion de resenias; ",resultado);
+          setPermitirReseñar(() => {
+            return resultado;
+          });
+        }
+        setServicio(() => {
+          return servicioEncontrado;
+        })
       }
-      setServicio(() => {
-        return servicioEncontrado ?? history.push("/404");
-      })
+      else {
+        history.push("/404")
+      }
     }
+    buscarServicio();
     window.scrollTo(0, 0);
-  }, [query, history, precio, servicio])
+  }, [history,query])
 
 
   const handlerSubmit = (e) => {
@@ -75,9 +96,12 @@ function ServicioPage() {
     setPrecio(e.precio?.toFixed(2));
   }
 
-  const handlerSubmitResenia = (resenia) => {
+  const handlerSubmitResenia = async (resenia) => {
     resenia.usuario = ClienteService.getUsuario();
-    ServicioService.addResenia(resenia, servicio._id);
+    await ServicioService.addResenia(resenia, servicio._id);
+    setTimeout(()=>{
+      window.location.reload();
+    },1000)
   }
 
   return (
@@ -102,10 +126,7 @@ function ServicioPage() {
             {permitirReseñar ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio._id} /> : ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
-            {servicio.resenias.length ?
-              <ListaResenias listaResenias={servicio.resenias} /> :
-              "No hay reseñas aún"
-            }
+            <ListaResenias listaResenias={servicio.resenias} />
           </div>
         </div>
       </div>

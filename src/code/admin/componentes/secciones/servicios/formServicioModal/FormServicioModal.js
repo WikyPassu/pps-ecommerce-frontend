@@ -47,6 +47,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        //window.console.log("SERVICIO MODIFICADO ",elemento)
         (modificar === true) ? ServicioService.modifyServicio(elemento) : ServicioService.addServicio(elemento);
         onHide();
     }
