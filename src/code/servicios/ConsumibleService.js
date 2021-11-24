@@ -168,6 +168,7 @@ export default class ConsumibleService {
 				body: JSON.stringify({ _id: idConsumible, cantidadUsada })
 			});
 			const data = await res.json();
+			this.iniciarServicio();
 			console.log(data);
 		} catch (err) {
 			console.log(err);

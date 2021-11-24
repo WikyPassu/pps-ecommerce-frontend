@@ -44,7 +44,7 @@ export default function Secciones() {
           <Clientes />
         </div>
       </Tab>
-      {tipoUsuario?<Tab eventKey="empleados" title="Empleados">
+      {tipoUsuario==="ADMINISTRADOR"?<Tab eventKey="empleados" title="Empleados">
         <div className="tab-container">
           <Empleados />
         </div>

@@ -9,16 +9,17 @@ export default function Resultados({ busqueda, tipo, filtros }) {
     const [lista, setLista] = useState([]);
     const [tipoArticulo, setTipoArticulo] = useState(tipo)
     useEffect(() => {
+        //setTipoArticulo(tipo);
         const realizarBusqueda = async () => {
             let newList;
             if(tipo === "SERVICIO"){
                 newList = await ServicioService.getServiciosPorBusqueda(busqueda);
 
-                setTipoArticulo("servicio")
+                setTipoArticulo("SERVICIO")
             }
             else{
                 newList = await ProductoService.getProductosPorBusqueda(busqueda);
-                setTipoArticulo("producto")
+                setTipoArticulo("PRODUCTO")
             }
             console.log("Filtros: ",filtros);
             console.log("resultados: ", newList);

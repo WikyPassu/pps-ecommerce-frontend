@@ -40,14 +40,17 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     const [cliente, setCliente] = useState(ClienteService.getClienteByDNI(elemento.dniCliente));
     const [descontarStockConsumibles, setDescontarStockConsumibles] = useState(false)
     useEffect(() => {
+        if(!empleado && !elementoParaModificar.dniEmpleado){
+            setEmpleado(EmpleadoService.getEmpleadoByDNI(EmpleadoService.getUsuario()?.dni))
+        }
         setElemento((elemento) => {
             return {
                 ...elemento,
-                consumibles: listaDetalleElemento,
-
+                dniEmpleado: (!empleado && !elementoParaModificar.dniEmpleado)?EmpleadoService.getUsuario()?.dni: null,
+                consumibles: listaDetalleElemento
             }
         })
-    }, [listaDetalleElemento, detalleElemento])
+    }, [listaDetalleElemento, detalleElemento,empleado,elementoParaModificar])
 
     const handleChange = (e) => {
         let { name, value } = e.target;

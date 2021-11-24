@@ -8,7 +8,7 @@ function ListaItemsCarrito() {
         setItems({ lista: listaActualizada });
     })
     return (<>
-    {items.lista.map((itemCarrito) => { return <div className="item-producto-carrito"><ItemCarrito mostrarTodo  item={itemCarrito}/></div> })}
+    {items.lista.map((itemCarrito) => { return <div className="item-producto-carrito"><ItemCarrito  item={itemCarrito}/></div> })}
     </>);
 }
 

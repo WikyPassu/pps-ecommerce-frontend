@@ -1,6 +1,7 @@
 import UtilsService from "./UtilsService";
 const token = "TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854"
-export default class FacturasService{
+const axios = require("axios")
+export default class FacturasService {
 	static facturas = [];
 	static pagos = [];
 	static observers = [];
@@ -19,7 +20,7 @@ export default class FacturasService{
 	* TRAER OBJETOS DEL BACKEND.
 	* @returns Array de objetos
 	*/
-	static async iniciarServicio(){
+	static async iniciarServicio() {
 		console.log('Servicio Facturas iniciado');
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().factura.traerTodas);
@@ -40,9 +41,9 @@ export default class FacturasService{
 		return this.facturas;
 	}
 
-    static getFacturaPorId(_id){
-        return this.facturas.filter(c => c._id === _id)[0];
-    }
+	static getFacturaPorId(_id) {
+		return this.facturas.filter(c => c._id === _id)[0];
+	}
 
 	/**
 	 * GUARDAR CAMBIOS EN BACKEND
@@ -71,7 +72,7 @@ export default class FacturasService{
 	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static async modifyFactura(item){
+	static async modifyFactura(item) {
 		let _id = JSON.stringify(item);
 		delete item._id;
 		_id = JSON.parse(_id);
@@ -88,7 +89,7 @@ export default class FacturasService{
 			const data = await res.json();
 			console.log(data);
 			item._id = _id;
-			this.facturas = this.facturas.map((c)=> (c._id === item._id) ? item : c);
+			this.facturas = this.facturas.map((c) => (c._id === item._id) ? item : c);
 			this.notifySubscribers();
 		} catch (err) {
 			console.log(err);
@@ -111,86 +112,86 @@ export default class FacturasService{
 			});
 			const data = await res.json();
 			console.log(data);
-			this.facturas = this.facturas.filter((c)=> (c._id !== _id));
+			this.facturas = this.facturas.filter((c) => (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
 		}
 	}
 
-	static async getPagosFromMercadoPago(){
+	static async getPagosFromMercadoPago() {
 		try {
-			let res = await fetch("https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc",{
-				headers:{
-					"Authorization":"Bearer "+token,
+			let res = await fetch("https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc", {
+				headers: {
+					"Authorization": "Bearer " + token,
 					'Content-Type': 'application/json'
 				}
 			});
 			let data = await res.json();
 			this.pagos = data.results
-			.map(({
-				id, 
-				date_created, 
-				date_approved, 
-				payment_type_id,
-				status,
-				status_detail,
-				description,
-				currency_id,
-				payer,
-				additional_info,
-				transaction_amount,
-				order
-			})=>{
-				return {
-					id, 
-					date_created, 
-					date_approved, 
+				.map(({
+					id,
+					date_created,
+					date_approved,
 					payment_type_id,
 					status,
 					status_detail,
 					description,
 					currency_id,
-					amount:transaction_amount,
-					orderId:order.id,
-					payer:{
-						id:payer.id,
-						email:payer.email,
-						dni:payer.identification.number,
-						type:payer.type
-					},
-					items:additional_info.items.map(({quantity,title,unit_price})=>{
-						return {
-							quantity,
-							price:parseFloat(unit_price),
-							title
-						}
-					})
-				}
-			})
-			.filter((c)=>{
-				return c.status === "pending" || c.status === "approved" || c.status === "authorized" || c.status === "in_process" || c.status === "refunded";
-			});
+					payer,
+					additional_info,
+					transaction_amount,
+					order
+				}) => {
+					return {
+						id,
+						date_created,
+						date_approved,
+						payment_type_id,
+						status,
+						status_detail,
+						description,
+						currency_id,
+						amount: transaction_amount,
+						orderId: order.id,
+						payer: {
+							id: payer.id,
+							email: payer.email,
+							dni: payer.identification.number,
+							type: payer.type
+						},
+						items: additional_info.items.map(({ quantity, title, unit_price }) => {
+							return {
+								quantity,
+								price: parseFloat(unit_price),
+								title
+							}
+						})
+					}
+				})
+				.filter((c) => {
+					return c.status === "pending" || c.status === "approved" || c.status === "authorized" || c.status === "in_process" || c.status === "refunded";
+				});
 			return this.pagos;
 		} catch (error) {
 			Promise.reject(error);
 		}
 	}
 
-	static getPagos(){
+	static getPagos() {
 		return this.pagos;
 	}
 
-	static getPagosPorMes(anio = (new Date()).getFullYear()){
-		let pagosEsteAnio = this.pagos.filter((c)=>{
+	static getPagosPorMes(anio = (new Date()).getFullYear()) {
+		let pagosEsteAnio = this.pagos.filter((c) => {
 			let fechaPago = new Date(c.date_created);
 			return fechaPago.getFullYear() === anio;
 		});
-		return pagosEsteAnio.reduce((prev,curr)=>{
+		return pagosEsteAnio.reduce((prev, curr) => {
 			let fechaPago = new Date(curr.date_created);
 			prev[fechaPago.getMonth()].y++;
 			return prev;
-		},[
+		}, [
 			{ x: "Enero", y: 0 },
 			{ x: "Febrero", y: 0 },
 			{ x: "Marzo", y: 0 },
@@ -211,29 +212,23 @@ export default class FacturasService{
 	 * @param {*} orderId 
 	 * @returns 
 	 */
-	static async getPayerByOrderId(orderId){
-		const token = "TEST-8145171060277886-110105-845001e4473950c8bdb5f96ec41e17c5-256136854"
+	static async getPayerByPaymentId(paymentId) {
 		try {
-			const orderRes = await fetch("https://api.mercadopago.com/merchant_orders/"+orderId,{
-				method:"GET",
-				headers:{
-					"Authorization":"Bearer "+token,
+			let res = await axios({
+				url:UtilsService.getUrlsApi().metodoPago.obtenerComprador,
+				method:"post",
+				headers: {
 					'Content-Type': 'application/json'
-				}
+				},
+				data:{paymentId}
 			})
-			const order = await orderRes.json();
-			
-			const preferenceRes = await fetch("https://api.mercadopago.com/checkout/preferences/"+order.preference_id,{
-				headers:{
-					"Authorization":"Bearer "+token,
-					'Content-Type': 'application/json'
-				}
-			})
-			const preference = await preferenceRes.json()
-			return preference.payer;
+			let data = res.data;
+			return data;
 		} catch (error) {
-			console.error(error);
+			console.log(error)
 		}
 	}
-	
+
+
+
 }

@@ -7,7 +7,7 @@ function ResultadoTransaccionPage() {
     const history = useHistory();
     const params = useParams();
     useEffect(() => {
-        if(CarritoService.removeAllItems())
+        CarritoService.removeAllItems()
         setTimeout(() => {
             history.push("/");
         }, 5000)

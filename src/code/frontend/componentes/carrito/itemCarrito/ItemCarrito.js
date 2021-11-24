@@ -11,7 +11,7 @@ export default function ItemCarrito(props) {
     })
     return (<>
         <CloseButton className="item-carrito-remover" onClick={()=>{ CarritoService.removeItem(_id)}}  variant="dark" />
-        <div className="item-carrito-titulo">{props.mostrarTodo ? item.nombre : UtilsService.stringFormatter(item.nombre,25)}</div><br/>
+        <div className="item-carrito-titulo">{props.mostrarTodo ? item.nombre : UtilsService.stringFormatter(item.nombre,30)}</div><br/>
         <span className="item-carrito-cantidad">X{cantidad}</span>
         <span className="item-carrito-precio"> ${item.precio}</span>
         <br/>

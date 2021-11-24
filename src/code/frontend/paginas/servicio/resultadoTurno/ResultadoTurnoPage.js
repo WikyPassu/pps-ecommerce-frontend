@@ -8,7 +8,7 @@ function ResultadoTurnoPage() {
     useEffect(() => {
         setTimeout(() => {
             history.push("/");
-        }, 10000)
+        }, 8000)
     })
 
     return (<>

@@ -117,7 +117,7 @@ export default class TurnoService {
 				item._id = _id;
 				this.turnos = this.turnos.map((c) => (c._id === _id) ? item : c);
 			}
-			this.notifySubscribers();
+			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
 		}

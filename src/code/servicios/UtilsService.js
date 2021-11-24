@@ -66,7 +66,8 @@ export default class UtilsService {
     static getUrlsApi() {
         return {
             metodoPago:{
-                realizarPago:URLAPI+"/metodoPago/realizarPago"
+                realizarPago:URLAPI+"/metodoPago/realizarPago",
+                obtenerComprador:URLAPI+"/metodoPago/obtenerComprador"
             },
             productos:{
                 agregar:URLAPI+"/producto/agregar", 
