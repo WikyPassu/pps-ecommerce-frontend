@@ -22,6 +22,10 @@ export default function Productos() {
     {modalForm && <FormProductoModal
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
+      <br/>
+      <br/>
+      <br/>
+      <p>* (!) para los productos que tienen una existencia inferior a la mínima</p>
     <Listado
     attrFuncs={[
       {columnaIndex:3,attrFunc:(value)=>{
@@ -29,6 +33,9 @@ export default function Productos() {
       }},
       {columnaIndex:1,attrFunc:(value)=>{
         return UtilsService.stringFormatter(value,50);
+      }},
+      {columnaIndex:4,attrFunc:(v,obj)=>{
+        return v <= obj.existenciaMinima ? v + " (!)" : v;
       }}
     ]}
     columnas={[

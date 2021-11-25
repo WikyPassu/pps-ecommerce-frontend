@@ -14,6 +14,7 @@ export default function Servicios() {
   ServicioService.subscribe((nuevaLista) => {
     setLista(nuevaLista);
   });
+
   return (<>
     <label className="titulo-seccion">Servicios ofrecidos</label>
     <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Servicio</Button>
@@ -24,7 +25,7 @@ export default function Servicios() {
       attrFuncs={[
         {
           columnaIndex: 3, attrFunc: (value) => {
-            return UtilsService.stringFormatter(value, 50);
+            return UtilsService.stringFormatter(value, 150);
           }
         }
       ]}

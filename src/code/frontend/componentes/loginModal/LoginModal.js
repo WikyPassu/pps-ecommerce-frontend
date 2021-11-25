@@ -128,14 +128,14 @@ export default function LoginModal(props) {
                     </Row>
                     {modoRegistracion ?
                         <>
-                            <Row>
+                            {/* <Row>
                                 <Col>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label varaint="pink">Confirmar contraseña</Form.Label>
                                         <Form.Control required type="password" placeholder="Ingrese contraseña" />
                                     </Form.Group>
                                 </Col>
-                            </Row>
+                            </Row> */}
                             <Row>
                                 <Col>
                                     <Form.Group className="mb-3">
@@ -154,7 +154,7 @@ export default function LoginModal(props) {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>DNI</Form.Label>
-                                        <Form.Control required name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
+                                        <Form.Control required min="1000000" max="99999999" name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
                                     </Form.Group>
                                 </Col>
                                 <Col>

@@ -164,7 +164,6 @@ export default class ProductoService {
 	 * @param {*} item 
 	 */
 	static async modifyProducto(item) {
-		UtilsService.setLoading(true);
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
 
@@ -190,9 +189,7 @@ export default class ProductoService {
 			console.log(err);
 			alert("Error. No pudo eliminar el producto");
 		}
-		finally {
-			UtilsService.setLoading(false);
-		}
+		
 	}
 
 	/**

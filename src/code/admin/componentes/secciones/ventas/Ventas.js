@@ -26,6 +26,7 @@ export default function Ventas() {
     //console.log(FacturasService.getPagos());
   })
   useEffect(() => {
+    FacturasService.iniciarServicio();
   }, [])
   return (
     <div className="seccion-ventas">

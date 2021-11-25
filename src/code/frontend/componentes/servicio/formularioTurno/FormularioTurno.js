@@ -131,12 +131,12 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.nombre} placeholder="Nombre del perro" min="3" max="99999" name="nombre" type="text" />
                 </Col>
                 <Col>
-                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.peso} placeholder="Peso del perro" min="500" max="99999" name="peso" type="number" />
+                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.peso} placeholder="Peso del perro (gramos)" min="500" max="99999" name="peso" type="number" />
                 </Col>
             </Row>
             <Row sm={2}>
                 <Col>
-                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.edad} placeholder="Edad del perro" min="1" max="99" name="edad" type="number" />
+                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.edad} placeholder="Edad del perro (años)" min="1" max="99" name="edad" type="number" />
                 </Col>
                 <Col>
                     <Form.Select required onChange={handlerChangePerrito} value={formulario.perrito.raza} name="raza" defaultValue="Seleccione raza">

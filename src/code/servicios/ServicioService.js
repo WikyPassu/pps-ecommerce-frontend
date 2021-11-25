@@ -23,7 +23,18 @@ export default class ServicioService {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.traerTodos);
 			const data = await res.json();
 			console.log(data);
-			this.servicios = data.servicios;
+			this.servicios = !data.servicios? [] : data.servicios.map((c)=>{
+				if(c.categoria === "banio"){
+					c.duracion = 60
+				}
+				else if(c.categoria === "corte_de_pelo"){
+					c.duracion = 90
+				}
+				else if(c.categoria === "guarderia"){
+					c.duracion = 60
+				}
+				return c;
+			});
 			this.notifySubscribers();
 			return this.servicios;
 		} catch (err) {
@@ -76,7 +87,7 @@ export default class ServicioService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.traerMasVendido);
 			const data = await res.json();
-			console.log("SERVICIO MAS VENDIDO",data);
+			console.log("SERVICIO MAS VENDIDO", data);
 			this.notifySubscribers();
 
 			return data.servicio;
@@ -198,11 +209,11 @@ export default class ServicioService {
 	 * @param {*} idServicio 
 	 */
 	static async addResenia(resenia, idServicio) {
-		let servicio = this.getServicioPorId(idServicio);
-		console.log("Servicio Encontrado: ", servicio);
-		console.log("Resenia a agregar: ", resenia);
-		if (servicio) {
-			try {
+		try {
+			let servicio = this.getServicioPorId(idServicio);
+			console.log("Servicio Encontrado: ", servicio);
+			console.log("Resenia a agregar: ", resenia);
+			if (servicio) {
 				const res = await fetch(UtilsService.getUrlsApi().resenia.agregar, {
 					method: 'POST',
 					headers: {
@@ -215,9 +226,11 @@ export default class ServicioService {
 				servicio.resenias.push(resenia);
 				this.modifyServicio(servicio);
 				this.notifySubscribers();
-			} catch (err) {
-				console.log(err);
+				return true;
 			}
+		} catch (err) {
+			console.log(err);
+			return false;
 		}
 	}
 
@@ -259,46 +272,46 @@ export default class ServicioService {
 		}
 	}
 
-	static calcularCostoDelServicio(servicio,perrito){
+	static calcularCostoDelServicio(servicio, perrito) {
 		let costo = {
-			precio:0,
-			consumibles:[]
+			precio: 0,
+			consumibles: []
 		};
-		console.log("servicio a calcular",servicio)
-		if(servicio.categoria === "banio"){
+		console.log("servicio a calcular", servicio)
+		if (servicio.categoria === "banio") {
 			//Se utilizara un shampoo cada 8000g de perro
 			let consumible = ComsumiblesService.getConsumiblePorNombre("shampoo");
 			let costoComsumible = {
-				cantidad:0,
-				consumible:consumible
+				cantidad: 0,
+				consumible: consumible
 			}
 			costoComsumible.cantidad = perrito.peso / 8000;
 			costo.precio = (costoComsumible.cantidad * consumible.precioUnidad) * 1.3; //Ganancia del 30%
 			costo.consumibles.push(costoComsumible)
 		}
-		else if(servicio.categoria === "corte_de_cabello"){
+		else if (servicio.categoria === "corte_de_cabello") {
 			//Se consume lo mismo que banio solo que se aumenta mas la ganancia
 			let consumible = ComsumiblesService.getConsumiblePorNombre("shampoo");
 			let costoComsumible = {
-				cantidad:0,
-				consumible:consumible
+				cantidad: 0,
+				consumible: consumible
 			}
 			costoComsumible.cantidad = perrito.peso / 12000;
 			costo.precio = (costoComsumible.cantidad * consumible.precioUnidad) * 1.5; //Ganancia del 50%
 			costo.consumibles.push(costoComsumible)
 		}
-		else if(servicio.categoria === "guarderia"){
+		else if (servicio.categoria === "guarderia") {
 			//Se utilizara una bolsa de comida por cada 15000g de perro
 			let consumible = ComsumiblesService.getConsumiblePorNombre("comida");
 			let costoComsumible = {
-				cantidad:0,
-				consumible:consumible
+				cantidad: 0,
+				consumible: consumible
 			}
 			costoComsumible.cantidad = perrito.peso / 15000;
 			costo.precio = (costoComsumible.cantidad * consumible.precioUnidad) * 1.3; //Ganancia del 30%
 			costo.consumibles.push(costoComsumible)
 		}
-		console.log("Costo resultande",costo)
+		console.log("Costo resultande", costo)
 
 		return costo;
 	}

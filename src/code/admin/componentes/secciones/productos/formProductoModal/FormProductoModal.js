@@ -181,7 +181,7 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                     </Row>
                     <Row>
                         <Form.Group as={Col} className="mb-3">
-                            <Form.Label>Imagen del producto</Form.Label>
+                            <Form.Label>URL de Imagen</Form.Label>
                             {/* <Form.Control name="imagen" onChange={handleChange} type="file" /> */}
                             <Form.Control name="imagen" value={producto.imagen} onChange={handleChange} placeholder="Ingrese URL de imagen" />
                         </Form.Group>

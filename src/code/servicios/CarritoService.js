@@ -1,5 +1,6 @@
 import Cookies from "universal-cookie/es6";
 import ClienteService from "./ClienteService";
+import ProductoService from "./ProductoService";
 import EnviosService from "./EnviosService";
 export default class CarritoService {
 	static items_carrito_compras = [];
@@ -130,5 +131,26 @@ export default class CarritoService {
 		return parseFloat(this.items_carrito_compras.reduce((anterior, actual) => {
 			return anterior + (actual.item.precio * actual.cantidad);
 		}, 0).toFixed(2));
+	}
+
+	/**
+	 * Se decontara el stock de todos lo items del arrito
+	 */
+	static async descontarStockItemsCarrito(){
+		try {
+			const items = this.items_carrito_compras;
+			for(let i=0;i<items.length;i++){
+				let current = items[i];
+				current.item.existencia = current.item.existencia - current.cantidad;
+				if(current.item.existencia <= 0){
+					current.item.estado = "SIN_STOCK";
+				}
+				await ProductoService.modifyProducto(current.item);
+			}
+			return true;
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
 	}
 }

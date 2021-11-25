@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 //import { Button } from 'react-bootstrap';
 import TurnoService from '../../../../servicios/TurnoService';
 import UtilsService from '../../../../servicios/UtilsService';
@@ -14,6 +14,10 @@ export default function Turnos() {
   TurnoService.subscribe((nuevaLista) => {
     setLista(nuevaLista);
   });
+
+  useEffect(()=>{
+    TurnoService.iniciarServicio();
+  },[])
   return (<>
     <label className="titulo-seccion">Turnos</label>
     {/* <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Turno</Button> */}

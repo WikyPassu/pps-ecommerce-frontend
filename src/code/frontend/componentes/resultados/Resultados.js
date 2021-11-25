@@ -14,7 +14,6 @@ export default function Resultados({ busqueda, tipo, filtros }) {
             let newList;
             if(tipo === "SERVICIO"){
                 newList = await ServicioService.getServiciosPorBusqueda(busqueda);
-
                 setTipoArticulo("SERVICIO")
             }
             else{
@@ -55,6 +54,6 @@ export default function Resultados({ busqueda, tipo, filtros }) {
         <h2>Resultados de "{busqueda}"</h2>
         {lista && lista.length === 0 ? 
             <b>No se han encontrado productos</b> : 
-            lista.map((c) => { return tipoArticulo === "producto" ? <Producto producto={c} key={c._id} /> : <Servicio servicio={c} key={c._id} /> })}
+            lista.map((c) => { return tipoArticulo === "PRODUCTO" ? <Producto producto={c} key={c._id} /> : <Servicio servicio={c} key={c._id} /> })}
     </>
 }

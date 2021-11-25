@@ -97,9 +97,11 @@ function ServicioPage() {
   }
 
   const handlerSubmitResenia = async (resenia) => {
+    UtilsService.setLoading(true);
     resenia.usuario = ClienteService.getUsuario();
     await ServicioService.addResenia(resenia, servicio._id);
     setTimeout(()=>{
+      UtilsService.setLoading(false);
       window.location.reload();
     },1000)
   }
@@ -113,7 +115,10 @@ function ServicioPage() {
           <h1 className="item titulo">{UtilsService.stringFormatter(servicio.nombre, 50)}</h1>
           <p className="item descripcion">{UtilsService.stringFormatter(servicio.descripcion, 300)}</p>
           <div className="item precio">
-            {precio ? "$" + precio : ""}
+            Duración: {servicio.duracion} Minutos
+          </div>
+          <div className="item precio">
+            {precio && precio !== "NaN"  ? "Precio: $" + precio : ""}
             <br /><hr />
           </div>
           <div className="item form">

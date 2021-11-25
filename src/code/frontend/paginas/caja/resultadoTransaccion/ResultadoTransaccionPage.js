@@ -7,21 +7,28 @@ function ResultadoTransaccionPage() {
     const history = useHistory();
     const params = useParams();
     useEffect(() => {
-        CarritoService.removeAllItems()
-        setTimeout(() => {
-            history.push("/");
-        }, 5000)
-    },[history])
+        setTimeout(async ()=>{
+            if (params.resultado === "exitoso") {
+                let res = await CarritoService.descontarStockItemsCarrito();
+                if(res){
+                    await CarritoService.removeAllItems();
+                }
+            }
+            setTimeout(() => {
+               history.push("/");
+            }, 5000)
+        },200)
+    }, [history,params.resultado])
 
     return (<>
-            <HomeNavbar />
+        <HomeNavbar />
         <div className="resultado-transaccion">
             <div className="img">
-                {params.resultado === "pendiente" || params.resultado === "exitoso" ? 
-                    <label className="titulo">¡Gracias por comparar en Puppyness Pet Caring!</label>:
-                    <label  className="titulo">No se pudo concretar la compra</label>
-                    }
-                    <br/>
+                {params.resultado === "pendiente" || params.resultado === "exitoso" ?
+                    <label className="titulo">¡Gracias por comparar en Puppyness Pet Caring!</label> :
+                    <label className="titulo">No se pudo concretar la compra</label>
+                }
+                <br />
                 <label className="subtitulo">Será redirigido al sitio principal</label>
             </div>
         </div>

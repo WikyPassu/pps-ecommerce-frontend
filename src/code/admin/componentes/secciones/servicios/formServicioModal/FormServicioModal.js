@@ -109,9 +109,9 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                         <Form.Group as={Col}>
                             <Form.Label htmlFor="categoria">Categoria</Form.Label>
                             <Form.Select name="categoria" onChange={handleChange} value={elemento.categoria} >
-                                <option value="banio">Baño</option>
-                                <option value="guarderia">Guarderia</option>
-                                <option value="corte_de_pelo">Corte de Pelo</option>
+                                <option value="banio">Baño (60 minutos)</option>
+                                <option value="guarderia">Guarderia (60 minutos)</option>
+                                <option value="corte_de_pelo">Corte de Pelo (90 minutos)</option>
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -121,7 +121,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             <Form.Label htmlFor="descripcion">Descripcion</Form.Label>
                             <Form.Control
                                 name="descripcion"
-                                maxLength="100"
+                                maxLength="150"
                                 value={elemento.descripcion}
                                 onChange={handleChange}
                                 as="textarea"
@@ -130,7 +130,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
-                            <Form.Label htmlFor="imagen">Imagen</Form.Label>
+                            <Form.Label htmlFor="imagen">URL de Imagen</Form.Label>
                             <Form.Control
                                 name="imagen"
                                 maxLength="150"

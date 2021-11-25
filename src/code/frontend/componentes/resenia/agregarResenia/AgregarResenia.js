@@ -6,7 +6,7 @@ const initialValuesElemento = {
     "_id":Date.now(),
     "comentario":"",
     "fecha":Date.now(),
-    "estado":"PENDIENTE"
+    "estado":"ACEPTADA"
 };
 
 export default function AgregarResenia({idServicio, onSubmit}) {
