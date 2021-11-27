@@ -1,5 +1,7 @@
 import UtilsService from "./UtilsService";
 import ComsumiblesService from "./ConsumibleService";
+import TurnoService from "./TurnoService";
+
 export default class ServicioService {
 	static servicios = [];
 	static observers = [];
@@ -23,14 +25,14 @@ export default class ServicioService {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.traerTodos);
 			const data = await res.json();
 			console.log(data);
-			this.servicios = !data.servicios? [] : data.servicios.map((c)=>{
-				if(c.categoria === "banio"){
+			this.servicios = !data.servicios ? [] : data.servicios.map((c) => {
+				if (c.categoria === "banio") {
 					c.duracion = 60
 				}
-				else if(c.categoria === "corte_de_pelo"){
+				else if (c.categoria === "corte_de_pelo") {
 					c.duracion = 90
 				}
-				else if(c.categoria === "guarderia"){
+				else if (c.categoria === "guarderia") {
 					c.duracion = 60
 				}
 				return c;
@@ -314,5 +316,56 @@ export default class ServicioService {
 		console.log("Costo resultande", costo)
 
 		return costo;
+	}
+
+	/**
+	 * Devuelve los horarios disponibles para este servicio
+	 * @param {*} servicio 
+	 * @param {Date} fecha
+	 * @returns 
+	 */
+	static getHorariosPorServicio(servicio, fecha) {
+		//600 minutos o 10 Hs correspondiente al horario de trabajo (8 a 18hs)
+		const turnosAsociados = TurnoService.getTurnos().filter((turno) => turno.servicio._id === servicio._id);
+		const unidad = servicio.duracion * 60 * 1000;
+		let horarioReferencia = (new Date(11 * 60 * 60 * 1000));
+		const horarioFinal = (new Date(21 * 60 * 60 * 1000));
+		const horarios = [];
+		for (let i = 0; horarioReferencia.getTime() <= horarioFinal.getTime(); i++) {
+			const horario = ("0" + horarioReferencia.getHours()).slice(-2) + ":" + ("0" + horarioReferencia.getMinutes()).slice(-2);
+			const turnoMismoHorarioDia = turnosAsociados.find((turno) => {
+				let fechaTurno = new Date(turno.fecha);
+				return (
+					fechaTurno.getDate() === fecha.getDate() &&
+					fechaTurno.getMonth() === fecha.getMonth() &&
+					fechaTurno.getFullYear() === fecha.getFullYear() &&
+					fechaTurno.getHours() === horarioReferencia.getHours() &&
+					fechaTurno.getMinutes() === horarioReferencia.getMinutes()
+				);
+			})
+			horarioReferencia.setTime(horarioReferencia.getTime() + unidad);
+			if(!turnoMismoHorarioDia && horarioReferencia.getTime() <= horarioFinal.getTime() ){
+				horarios.push(horario);
+			}
+		}
+		return horarios;
+	}
+
+	/**
+	 * Busca todos los dias NO disponibles para un servicio
+	 * @param {String} idServicio 
+	 * @returns {Date[]}
+	 */
+	static getDiasNoDisponiblesPorServicio(servicio){
+		let fecha = new Date();
+		let diasNoDisponibles = [];
+		for(let i=1;i<=60;i++){
+			fecha.setTime(fecha.getTime()+(1000*60*60*24));
+			let horarios = this.getHorariosPorServicio(servicio,fecha);
+			if(!horarios.length){
+				diasNoDisponibles.push(new Date(fecha.getTime()))
+			}
+		}
+		return diasNoDisponibles;
 	}
 }

@@ -103,7 +103,12 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             },
             body:JSON.stringify({
                 productos:item,
-                cliente:usuario
+                cliente:usuario,
+                back_urls:{
+                    failure: "http://localhost:3000/admin/resultadoTransaccion/fallido",
+                    pending: "http://localhost:3000/admin/resultadoTransaccion/pendiente",
+                    success: "http://localhost:3000/admin/resultadoTransaccion/exitoso"
+                }
             })
         })
         .then(async (res)=>{

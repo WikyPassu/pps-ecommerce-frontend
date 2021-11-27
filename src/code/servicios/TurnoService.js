@@ -45,7 +45,7 @@ export default class TurnoService {
 	 * @param {*} _id 
 	 * @returns 
 	 */
-	static async getTurnoPorDni(_id) {
+	static async getTurnoPorId(_id) {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodosIdUsuario, {
 				method: 'POST',

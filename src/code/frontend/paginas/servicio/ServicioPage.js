@@ -26,36 +26,6 @@ function ServicioPage() {
   const [servicio, setServicio] = useState();
   const [permitirReseñar, setPermitirReseñar] = useState(false);
   const [precio, setPrecio] = useState(0);
-  
-  // const validarUsuarioParaResenia = async (serv) => {
-  //   if (serv) {
-  //     const usuarioLogeado = ClienteService.getUsuario();
-  //     if (usuarioLogeado) {
-  //       if (servicio) {
-  //         let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicio._id);
-  //         console.log("Resultado verificacion de resenias; ",resultado);
-  //         setPermitirReseñar(() => {
-  //           return resultado;
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
-
-  // ServicioService.subscribe(() => {
-  //   const servicioEncontrado = ServicioService.getServicioPorId(query.get("id"));
-  //   console.log("servicio encontrado (subs)",servicioEncontrado)
-  //   if(servicioEncontrado){
-  //     validarUsuarioParaResenia(servicioEncontrado);
-  //     setServicio(() => {
-  //       return servicioEncontrado;
-  //     });
-  //   }
-  //   else{
-  //     history.push("/404");
-  //   }
-  // })
-
   useEffect(() => {
     const buscarServicio = async ()=>{
       if (!ServicioService.getServicios().length) {

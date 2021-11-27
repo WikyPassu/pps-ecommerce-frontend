@@ -17,7 +17,7 @@ const initialValues = {
     },
     "consumibles": [],
     "fecha": Date.now(),
-    "hora":null,
+    "hora": null,
     "precio": null,
     "estado": "PENDIENTE"
 }
@@ -32,31 +32,41 @@ const initialValuesPerrito = {
 export default function FormularioTurno({ onSubmit, onChange = () => { }, servicio }) {
     const [usuarioLogeado] = useState(ClienteService.getUsuario());
     const [formulario, setFormulario] = useState(initialValues);
+    const [horarios, setHorarios] = useState([]);
+    const [diasNoDisponibles, setDiasNoDisponibles] = useState([]);
     const handlerChange = ({ target }) => {
-        const { name, value } = target;
+        let { name, value } = target;
+        if(name === "hora" && value){
+            const nuevaFecha = new Date(formulario.fecha);
+            nuevaFecha.setHours(value.split(":")[0]);
+            nuevaFecha.setMinutes(value.split(":")[1]);
+            nuevaFecha.setMilliseconds(0);
+            nuevaFecha.setSeconds(0);
+            value = nuevaFecha.getTime();
+            name = "fecha";
+        }
         if (name === "perrito") {
-             // eslint-disable-next-line
+            // eslint-disable-next-line
             const perritoEncontrado = usuarioLogeado.perrito.find((c) => c._id == value);
             setFormulario((formulario) => {
                 let newFormulario = {
                     ...formulario,
                     "perrito": perritoEncontrado || initialValuesPerrito,
                 };
-                let {precio, consumibles} = ServicioService.calcularCostoDelServicio(servicio, newFormulario.perrito);
+                let { precio, consumibles } = ServicioService.calcularCostoDelServicio(servicio, newFormulario.perrito);
                 return {
                     ...newFormulario,
                     precio,
                     consumibles
                 }
             })
-
         }
         else {
             setFormulario((formulario) => {
                 return { ...formulario, [name]: value };
             })
         }
-        
+
     }
     const handlerChangePerrito = ({ target }) => {
         let { name, value } = target;
@@ -71,15 +81,18 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     [name]: value
                 }
             }
-            let {precio, consumibles} = ServicioService.calcularCostoDelServicio(servicio, newFormulario.perrito);
+            let { precio, consumibles } = ServicioService.calcularCostoDelServicio(servicio, newFormulario.perrito);
             return {
                 ...newFormulario, precio, consumibles
             }
         })
     }
-    useEffect(()=>{
+    useEffect(() => {
+        let horarios = ServicioService.getHorariosPorServicio(servicio,new Date(formulario.fecha));
+        setDiasNoDisponibles(ServicioService.getDiasNoDisponiblesPorServicio(servicio))
+        setHorarios(horarios);
         onChange(formulario);
-    },[formulario,onChange])
+    }, [formulario,servicio, onChange])
 
     const handlerSubmit = (e) => {
         e.preventDefault();
@@ -87,7 +100,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
         formularioToSend.servicio = servicio;
         formularioToSend.dniCliente = usuarioLogeado.dni;
         onSubmit(formularioToSend);
-    } 
+    }
     return <Form onSubmit={handlerSubmit} className="formulario-compra">
         <Form.Group as={Row} controlId="formHorizontalEmail">
             <Row sm={2}>
@@ -96,7 +109,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                 </Form.Label>
                 <Col>
                     {/* <Form.Control onChange={handlerChange} name="fecha" min={nowFormated} defaultValue={nowFormated} type="date" /> */}
-                    <CalendarioTurno name="fecha" value={formulario.fecha} onChange={handlerChange} />
+                    <CalendarioTurno name="fecha" value={formulario.fecha} onChange={handlerChange} diasNoDisponibles={diasNoDisponibles} />
                 </Col>
             </Row>
             <Row sm={2}>
@@ -104,7 +117,11 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     Hora del turno
                 </Form.Label>
                 <Col>
-                    <Form.Control required value={formulario.hora} onChange={handlerChange} name="hora" type="time" />
+                    <Form.Select required onChange={handlerChange} value={formulario.hora} name="hora">
+                        <option>Seleccione un horario</option>
+                        {horarios.map((c)=><option value={c} key={c}>{c} Hs</option>)}
+                    </Form.Select>
+                    {/* <Form.Control required value={formulario.hora} onChange={handlerChange} name="hora" type="time" /> */}
                 </Col>
             </Row>
             {/* <Row>

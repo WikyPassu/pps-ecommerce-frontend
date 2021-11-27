@@ -24,6 +24,7 @@ import Loading from "./code/frontend/componentes/loading/Loading";
 import { useEffect } from "react";
 import ResultadoTurnoPage from "./code/frontend/paginas/servicio/resultadoTurno/ResultadoTurnoPage";
 import EnviosService from "./code/servicios/EnviosService";
+import ResultadoTransaccionAdminPage from "./code/admin/paginas/resultadoTransaccion/ResultadoTransaccionAdminPage";
 
 function App() {
   useEffect(() => {
@@ -52,6 +53,7 @@ function App() {
         <Route exact path="/caja/resultado/:resultado" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>
         <Route path="/admin/home" component={AdminHomePage}></Route>
+        <Route path="/admin/resultadoTransaccion/fallido" component={ResultadoTransaccionAdminPage}></Route>
         <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
         <Route exact path="/404" component={NotFoundPage}></Route>
       </Router>
