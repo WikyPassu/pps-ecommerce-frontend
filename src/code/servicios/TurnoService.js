@@ -107,7 +107,7 @@ export default class TurnoService {
 	 * GUARDAR CAMBIOS EN BACKEND
 	 * @param {*} item 
 	 */
-	static async modifyTurno(item, descontarStockConsumibles) {
+	static async modifyTurno(item, descontarStockConsumibles = false) {
 		console.log("TURNO A MODIFICAR: ", item, descontarStockConsumibles)
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;

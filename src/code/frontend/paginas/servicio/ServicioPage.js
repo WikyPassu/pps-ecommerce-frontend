@@ -101,7 +101,7 @@ function ServicioPage() {
             {permitirReseñar ? <AgregarResenia onSubmit={handlerSubmitResenia} idServicio={servicio._id} /> : ""}
             <h2 className="item-titulo-resenia">Reseñas del servicio</h2>
             <br />
-            <ListaResenias listaResenias={servicio.resenias} />
+            <ListaResenias listaResenias={servicio.resenias} servicio={servicio} />
           </div>
         </div>
       </div>

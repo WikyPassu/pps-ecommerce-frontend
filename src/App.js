@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import ResultadoTurnoPage from "./code/frontend/paginas/servicio/resultadoTurno/ResultadoTurnoPage";
 import EnviosService from "./code/servicios/EnviosService";
 import ResultadoTransaccionAdminPage from "./code/admin/paginas/resultadoTransaccion/ResultadoTransaccionAdminPage";
+import ConfiguracionCuentaPage from "./code/frontend/paginas/configuracionCuenta/ConfiguracionCuentaPage";
 
 function App() {
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
         <Route path="/home" component={HomePage}></Route>
         <Route path="/busqueda" component={BusquedaPage}></Route>
         <Route path="/producto" component={ProductoPage} />
+        <Route path="/configuracionCuenta" component={ConfiguracionCuentaPage}></Route>
         <Route exact path="/servicio" component={ServicioPage} />
         <Route exact path="/servicio/resultado/:resultado" component={ResultadoTurnoPage}></Route>
         <Route exact path="/caja" component={CajaPage}></Route>

@@ -1,0 +1,43 @@
+.configuracion-cuenta{
+    margin: 12vh auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: var(--width-container);
+    gap: 30px;
+}
+
+.configuracion-cuenta .datos-cliente{
+    grid-column: 1/2;
+}
+
+.configuracion-cuenta .lista-turnos{
+    grid-column: 2/3;
+
+}
+
+.lista{
+    overflow-y: auto;
+    max-height: 570px;
+    /* max-height: ; */
+}
+
+@media (max-width:575px){
+
+    .configuracion-cuenta{
+        width: 90%;
+    }
+
+    .configuracion-cuenta .titulo{
+        font-size: 27px;
+        width: 100%;
+        margin-bottom: 80px;
+    }
+
+    .configuracion-cuenta .img{
+        padding: 10px;
+        background-size: 40%;
+        background-position: bottom right;
+        /* background-image: none; */
+    }
+    
+}

@@ -45,7 +45,7 @@ export default function Turnos() {
     ]}
     attrFuncs={[
       {columnaIndex:1,attrFunc:(value,obj)=>value.nombre},
-      {columnaIndex:4,attrFunc:UtilsService.timeStampToStringDate}
+      {columnaIndex:5,attrFunc:UtilsService.timeStampToStringDate}
     ]}
       onEditClick={(e) => {
         setMostrarModalModificar(true);

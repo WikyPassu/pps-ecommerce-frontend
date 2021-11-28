@@ -37,13 +37,16 @@ export default function HomeNavbar() {
                                         <Nav.Link variant="end">{"Hola! " + usuarioLogeado.apellido + " " + usuarioLogeado.nombre}</Nav.Link>
                                     </Nav>
                                     <Nav>
-                                        <Nav.Link variant="end" onClick={cerrarSesion} href="#login">Cerrar Sesion</Nav.Link>
+                                        <Nav.Link variant="end" href="/configuracionCuenta">Configuración de Cuenta</Nav.Link>
+                                    </Nav>
+                                    <Nav>
+                                        <Nav.Link variant="end" onClick={cerrarSesion}>Cerrar Sesion</Nav.Link>
                                     </Nav>
                                     <Carrito />
                                 </>
                                 :
                                 <Nav>
-                                    <Nav.Link variant="end" onClick={() => setModalShow(true)} href="#login">Iniciar Sesion</Nav.Link>
+                                    <Nav.Link variant="end" onClick={() => setModalShow(true)}>Iniciar Sesion</Nav.Link>
                                 </Nav>
                         }
                     </Navbar.Collapse>

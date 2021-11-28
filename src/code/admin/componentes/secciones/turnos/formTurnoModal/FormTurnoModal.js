@@ -202,23 +202,11 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                     {!modificar ? "Alta Turno" : "Modificar Turno"}
                     <label >Total: ${
                         elemento.precio.toFixed(2)
-                        // listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)
                     }</ label>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
-                    {/* <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number"  min="1000000" max="99999999" onChange={handleUsuarioChange} placeholder={empleado ? empleado.dni : "DNI de empleado"} name="dniEmpleado" required />
-                    </InputGroup>
-                    {empleado ? <b>Se ha seleccionado a {empleado.nombre} {empleado.apellido}</b> : <p>No se han encontrado resultados</p>}
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
-                        <FormControl type="number" min="1000000" max="99999999" onChange={handleUsuarioChange} placeholder={cliente ? cliente.dni : "DNI de cliente"} name="dniCliente" required />
-                    </InputGroup>
-                    {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>} */}
-
                     <Row>
                         <Col>
                             <InputGroup className="input-formulario">
@@ -319,7 +307,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                     </Row>
                     <Row>
                         <Col>
-                            Ganancia:  ${(elemento.precio - listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)).toFixed(2)}
+                            Ganancia:  ${(elemento.precio - listaDetalleElemento.reduce((p, c) => p + c.cantidad * c.consumible.precioUnidad, 0)).toFixed(2)} ({elemento.servicio.costo.porcentajeGanancia}%)
                         </Col>
                     </Row>
                     <Row>

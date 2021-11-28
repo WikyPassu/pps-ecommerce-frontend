@@ -257,17 +257,18 @@ export default class ServicioService {
 
 
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().resenia.eliminar, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ _id: idResenia })
-			});
-			const data = await res.json();
-			console.log(data);
+			// const res = await fetch(UtilsService.getUrlsApi().resenia.eliminar, {
+			// 	method: 'DELETE',
+			// 	headers: {
+			// 		'Content-Type': 'application/json'
+			// 	},
+			// 	body: JSON.stringify({ _id: idResenia })
+			// });
+			//this.modifyServicio(servicio);
+			// const data = await res.json();
+			// console.log(data);
 			servicio.resenias = servicio.resenias.filter(r => r._id !== idResenia);
-			this.modifyServicio(servicio);
+			await this.modifyServicio(servicio);
 			this.notifySubscribers();
 		} catch (err) {
 			console.log(err);
@@ -300,7 +301,7 @@ export default class ServicioService {
 	 */
 	static getHorariosPorServicio(servicio, fecha) {
 		//600 minutos o 10 Hs correspondiente al horario de trabajo (8 a 18hs)
-		const turnosAsociados = TurnoService.getTurnos().filter((turno) => turno.servicio._id === servicio._id);
+		const turnosAsociados = TurnoService.getTurnos().filter((turno) => turno.servicio._id === servicio._id && turno.estado === "PENDIENTE");
 		const unidad = servicio.duracion * 60 * 1000;
 		let horarioReferencia = (new Date(11 * 60 * 60 * 1000));
 		const horarioFinal = (new Date(21 * 60 * 60 * 1000));

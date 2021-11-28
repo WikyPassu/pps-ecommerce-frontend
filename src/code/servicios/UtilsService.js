@@ -60,6 +60,15 @@ export default class UtilsService {
     }
 
     /**
+     * 
+     * @param {number} price 
+     * @returns 
+     */
+    static priceFormater(price){
+        return parseFloat(price.toFixed(2));
+    }
+
+    /**
      * @todo Agregar todas las urls que faltan. Asegurarse de que tengan un nombre de atributo acorde.
      * @returns Devuelve un objeto con todas las url de la api.
      */

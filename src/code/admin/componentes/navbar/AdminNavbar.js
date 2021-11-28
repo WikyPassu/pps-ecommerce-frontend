@@ -21,7 +21,9 @@ export default function AdminNavbar() {
         <>
             <Navbar className="home-navbar" variant="dark">
                 <Container>
-                    <Navbar.Brand  onClick={() => { history.push("/") }}>
+                    <Navbar.Brand  onClick={() => {  
+                        window.location.href = "/";
+                    }}>
                         <img alt="logo-img" width="25px" className="logo-img" src={logo} />
                         Puppyness Pet Caring
                     </Navbar.Brand>

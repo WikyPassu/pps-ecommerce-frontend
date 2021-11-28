@@ -1,14 +1,14 @@
 .busqueda-container{
     display: grid;
     max-width: var(--width-container);
+    margin: 12vh auto;
+    /* margin: 20px auto auto; */
     min-width: 900px;
-    margin: 20px auto auto;
     min-height: 550px;
     height: 75vh;
     overflow: hidden;
     grid-template-columns: repeat(12,1fr);
     grid-template-rows: repeat(11,1fr);
-    margin: 12vh auto;
     box-shadow: 0px 10px 50px -30px black;
 }
 

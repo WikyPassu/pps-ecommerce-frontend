@@ -61,9 +61,8 @@ export default function LoginModal(props) {
     }
 
     const handlerChangeRegistracion = (e) => {
-        e.preventDefault();
         let { value, name } = e.target;
-        if (name === "telefono") {
+        if (name === "telefono" || name === "dni") {
             value = parseInt(value)
         }
         setFormRegistracion((formRegistracion) => {
@@ -85,6 +84,7 @@ export default function LoginModal(props) {
     const handlerSubmitRegistracion = (e) => {
         e.preventDefault();
         console.log("forRegistracion", formRegistracion)
+        
         ClienteService.signUp(formRegistracion)
             .then(() => {
                 console.log("usuarioLogeado", ClienteService.getUsuario())
