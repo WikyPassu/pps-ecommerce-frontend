@@ -37,7 +37,7 @@ const FormDatosCliente = ({ datosUsuario, onSubmit }) => {
     }
 
     return (
-        <>{usuario ?
+        <div>{usuario ?
             <Form onSubmit={handlerSubmit}>
                 <h2>Datos del Cliente</h2>
                 <Row>
@@ -129,7 +129,7 @@ const FormDatosCliente = ({ datosUsuario, onSubmit }) => {
             </Form> :
             <Alert variant="warning">No pudo encontrar los datos del cliente</Alert>
         }
-        </>
+        </div>
     )
 }
 

@@ -52,6 +52,11 @@
 .servicio-page .precio{
     grid-column: 2/3;
 }
+
+.servicio-page .duracion{
+    grid-column: 2/3; 
+}
+
 .servicio-page .precio .label{
     font-size: 26px;
     font-weight: bold;
@@ -87,7 +92,7 @@
     }
     .servicio-page .servicio-info-container{
         grid-template-columns: repeat(1,1fr);
-        grid-template-rows: repeat(18,60px);
+        grid-template-rows: repeat(17,60px);
         width: 100vw;
         padding-left: 10px;
         padding-right: 10px;
@@ -115,13 +120,16 @@
     }
     .servicio-page .descripcion{
         grid-column: 2/2;
-
+        grid-row: 9/9;
     }
     .servicio-page .precio{
-         grid-row: auto;  
+         grid-row:  11/11;  
+    }
+    .servicio-page .duracion{
+        grid-row: 10/10; 
     }
     .servicio-page .form{
-        grid-row: auto;
+        grid-row: 12/12;
     }
     .servicio-page .btn-agregar-carrito{
         grid-row: 7/8;

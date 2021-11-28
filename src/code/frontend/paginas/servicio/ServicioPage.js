@@ -31,10 +31,14 @@ function ServicioPage() {
       if (!ServicioService.getServicios().length) {
         await ServicioService.iniciarServicio()
       }
+      if(!servicio){
+        window.scrollTo(0, 0);
+      }
       const servicioEncontrado = ServicioService.getServicioPorId(query.get("id"));
       const usuarioLogeado = ClienteService.getUsuario();
       if (servicioEncontrado) {
         if(usuarioLogeado){
+          
           let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicioEncontrado._id);
           console.log("Resultado verificacion de resenias; ",resultado);
           setPermitirReseñar(() => {
@@ -50,8 +54,8 @@ function ServicioPage() {
       }
     }
     buscarServicio();
-    window.scrollTo(0, 0);
-  }, [history,query])
+    
+  }, [history,query,servicio])
 
 
   const handlerSubmit = (e) => {
@@ -84,7 +88,7 @@ function ServicioPage() {
           <div className="item imagen" style={{ backgroundImage: `url("${servicio.imagen}")` }}></div>
           <h1 className="item titulo">{UtilsService.stringFormatter(servicio.nombre, 50)}</h1>
           <p className="item descripcion">{UtilsService.stringFormatter(servicio.descripcion, 300)}</p>
-          <div className="item precio">
+          <div className="item duracion">
             Duración: {servicio.duracion} Minutos
           </div>
           <div className="item precio">

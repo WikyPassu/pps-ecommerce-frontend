@@ -31,11 +31,8 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
     //const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento)
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
     const handleChange = (e) => {
-        if (e.target.name === "telefono") {
-            e.target.value = parseInt(e.target.value)
-        }
         setElemento((elemento) => {
-            return { ...elemento, [e.target.name]: e.target.value }
+            return { ...elemento, [e.target.name]: (e.target.name === "telefono" || e.target.name === "dni") ? parseInt(e.target.value) : e.target.value }
         })
     }
 

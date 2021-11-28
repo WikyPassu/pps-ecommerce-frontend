@@ -17,10 +17,18 @@ const initialValuesElemento = {
     "estado": "preparando"
 };
 
+
+
 function FormularioFactura() {
     
     const [factura,setFactura] = useState(initialValuesElemento);
+    const [envios, setEnvios] = useState(false);
     const history = useHistory();
+
+    CarritoService.subscribe(()=>{
+        console.log("HAY ENVIOS: ",CarritoService.getItems().find((c)=>c._id === "envios")?"si":"no");
+        setEnvios(CarritoService.getItems().find((c)=>c._id === "envios")?"si":"no")
+    })
 
     useEffect(()=>{
         const usuarioLogeado = ClienteService.getUsuario();
@@ -31,15 +39,18 @@ function FormularioFactura() {
             setFactura((factura)=>{
                 return {...factura,usuarioRegistrado:usuarioLogeado};
             })
+            setEnvios(CarritoService.getItems().find((c)=>c._id === "envios")?"si":"no")
         }
 
     },[history])
     const handlerChange = ({target})=>{
         let {value} = target;
-        if(value === "a_domicilio"){
+        if(value === "si"){
+            setEnvios(value)
             CarritoService.addEnvios();
         }
-        else{
+        else {
+            setEnvios("no")
             CarritoService.removeEnvios();
         }
     }
@@ -77,10 +88,9 @@ function FormularioFactura() {
                 </InputGroup>
                 <InputGroup className="input-formulario">
                     <InputGroup.Text><MdLocalShipping /></InputGroup.Text>
-                    <Form.Select onChange={handlerChange}>
-                        <option>¿Quiere envío a domicilio?</option>
-                        <option value="a_domicilio">SI</option>
-                        <option value="retiro_local">NO</option>
+                    <Form.Select value={envios} onChange={handlerChange}>
+                        <option value="si">SI</option>
+                        <option value="no">NO</option>
                     </Form.Select>
                 </InputGroup>
             </Form>

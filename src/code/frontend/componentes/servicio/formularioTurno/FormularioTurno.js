@@ -36,7 +36,11 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
     const [diasNoDisponibles, setDiasNoDisponibles] = useState([]);
     const handlerChange = ({ target }) => {
         let { name, value } = target;
-        if(name === "hora" && value){
+        console.log(name,value)
+        if (name === "hora" && value) {
+            setFormulario((formulario) => {
+                return { ...formulario, "hora": value};
+            })
             const nuevaFecha = new Date(formulario.fecha);
             nuevaFecha.setHours(value.split(":")[0]);
             nuevaFecha.setMinutes(value.split(":")[1]);
@@ -88,18 +92,24 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
         })
     }
     useEffect(() => {
-        let horarios = ServicioService.getHorariosPorServicio(servicio,new Date(formulario.fecha));
+        let horarios = ServicioService.getHorariosPorServicio(servicio, new Date(formulario.fecha));
         setDiasNoDisponibles(ServicioService.getDiasNoDisponiblesPorServicio(servicio))
         setHorarios(horarios);
         onChange(formulario);
-    }, [formulario,servicio, onChange])
+    }, [formulario, servicio, onChange])
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        let formularioToSend = formulario;
-        formularioToSend.servicio = servicio;
-        formularioToSend.dniCliente = usuarioLogeado.dni;
-        onSubmit(formularioToSend);
+        if (!formulario.fecha || !formulario.hora) {
+            alert("Por favor, asegurese de haber establecido una y horario validos");
+            return;
+        }
+        else if (window.confirm("¿Seguro que desea reservar este turno?")) {
+            let formularioToSend = formulario;
+            formularioToSend.servicio = servicio;
+            formularioToSend.dniCliente = usuarioLogeado.dni;
+            onSubmit(formularioToSend);
+        }
     }
     return <Form onSubmit={handlerSubmit} className="formulario-compra">
         <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -113,13 +123,13 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                 </Col>
             </Row>
             <Row sm={2}>
-                <Form.Label  htmlFor="hora" className="label-fecha-turno" column sm={4}>
+                <Form.Label htmlFor="hora" className="label-fecha-turno" column sm={4}>
                     Hora del turno
                 </Form.Label>
                 <Col>
-                    <Form.Select required onChange={handlerChange} value={formulario.hora} name="hora">
+                    <Form.Select required onChange={handlerChange} name="hora">
                         <option>Seleccione un horario</option>
-                        {horarios.map((c)=><option value={c} key={c}>{c} Hs</option>)}
+                        {horarios.map((c) => <option value={c} key={c}>{c} Hs</option>)}
                     </Form.Select>
                     {/* <Form.Control required value={formulario.hora} onChange={handlerChange} name="hora" type="time" /> */}
                 </Col>

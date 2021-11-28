@@ -12,7 +12,6 @@ export default function FormularioCompra({ onSubmit, onChange, stock }) {
                 </Col>
             </Row>
             <Row>
-
                 <div className="grupo-botones">
                     <Button type="submit" size="lg">Agregar al Carrito</Button>
                 </div>

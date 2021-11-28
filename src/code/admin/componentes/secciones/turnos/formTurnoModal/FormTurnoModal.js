@@ -68,6 +68,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
             }
         }
         else {
+            value = (name === "dniEmpleado" || name === "dniCliente") ? parseInt(value) : value;
             setElemento((elemento) => {
                 return { ...elemento, [name]: value }
             });

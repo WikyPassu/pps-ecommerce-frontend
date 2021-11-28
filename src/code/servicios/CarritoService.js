@@ -53,9 +53,18 @@ export default class CarritoService {
 			item,
 			cantidad: parseInt(cantidad)
 		};
-		this.items_carrito_compras.push(unItem);
+		let itemExiste = this.items_carrito_compras.find((c)=>c.item._id === item._id);
+		if(itemExiste){
+			for(const key in itemExiste){
+				if(key === "cantidad"){
+					itemExiste[key] += cantidad;
+				}
+			}
+		}
+		else{
+			this.items_carrito_compras.push(unItem);
+		}
 		this.notifySubscribers();
-
 		const cookies = new Cookies();
 		let items = cookies.get("items");
 		items.push(unItem);

@@ -71,10 +71,16 @@
     .home-carrusel .carrusel{
         border-radius: 0 !important;
     }
+    .home-carrusel .carousel-caption{
+        max-width: 70vw;
+        max-height: 20vh;
+    }
     .home-carrusel .carousel-caption h3{
         text-align: left;
         text-shadow: 0px 0px 10px black;
         font-weight: bold;
+        font-size: 20px;
+
     }
     .home-carrusel .carousel-caption p{
         text-align: left;

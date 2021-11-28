@@ -28,7 +28,7 @@ const ModalTurno = ({ turno, onHide, show }) => {
                 <div>
                     <h2>Datos del Turno</h2>
                     <li>Fecha del Turno: {UtilsService.timeStampToStringDate(turno.fecha)}</li>
-                    <li>Precio: ${turno.precio}</li>
+                    <li>Precio: ${UtilsService.priceFormater(turno.precio)}</li>
                     <li>Servicio: {turno.servicio.nombre}</li>
                     <li>Estado: {turno.estado}</li>
                     <hr />

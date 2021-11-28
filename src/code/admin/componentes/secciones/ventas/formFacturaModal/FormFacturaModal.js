@@ -100,9 +100,9 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
                 productos: item,
                 cliente: usuario,
                 back_urls: {
-                    failure: "http://localhost:3000/admin/resultadoTransaccion/fallido",
-                    pending: "http://localhost:3000/admin/resultadoTransaccion/pendiente",
-                    success: "http://localhost:3000/admin/resultadoTransaccion/exitoso"
+                    failure: window.location.protocol+"//"+window.location.host+"/admin/resultadoTransaccion/fallido",
+                    pending: window.location.protocol+"//"+window.location.host+"/admin/resultadoTransaccion/pendiente",
+                    success: window.location.protocol+"//"+window.location.host+"/admin/resultadoTransaccion/exitoso"
                 }
             })
         })

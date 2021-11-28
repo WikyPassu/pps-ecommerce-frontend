@@ -17,7 +17,12 @@ function MetodoPago(){
             },
             body:JSON.stringify({
                 productos:CarritoService.getItems(),
-                cliente:ClienteService.getUsuario()
+                cliente:ClienteService.getUsuario(),
+                back_urls:{
+                    failure: window.location.protocol+"//"+window.location.host+"/caja/resultado/fallido",
+                    pending: window.location.protocol+"//"+window.location.host+"/caja/resultado/pendiente",
+                    success: window.location.protocol+"//"+window.location.host+"/caja/resultado/exitoso"
+                }
             })
         })
         .then(async (res)=>{

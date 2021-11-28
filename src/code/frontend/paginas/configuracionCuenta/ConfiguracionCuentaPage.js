@@ -50,7 +50,9 @@ function ConfiguracionCuentaPage() {
             turno={turnoMostrar}
             onHide={() => { setModalTurno(false) }} />}
         <div className="configuracion-cuenta">
-            <FormDatosCliente className="datos-cliente" datosUsuario={usuario} onSubmit={handlerSubmit} />
+            <div className="datos-cliente">
+                <FormDatosCliente datosUsuario={usuario} onSubmit={handlerSubmit} />
+            </div>
             <div className="lista-turnos">
                 <h2>Mis Turnos</h2>
                 <div className="lista">
