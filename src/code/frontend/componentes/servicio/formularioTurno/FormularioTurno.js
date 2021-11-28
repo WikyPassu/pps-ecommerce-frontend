@@ -104,7 +104,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
     return <Form onSubmit={handlerSubmit} className="formulario-compra">
         <Form.Group as={Row} controlId="formHorizontalEmail">
             <Row sm={2}>
-                <Form.Label className="label-fecha-turno" column sm={4}>
+                <Form.Label className="label-fecha-turno" htmlFor="fecha" column sm={4}>
                     Fecha del turno
                 </Form.Label>
                 <Col>
@@ -113,7 +113,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                 </Col>
             </Row>
             <Row sm={2}>
-                <Form.Label className="label-fecha-turno" column sm={4}>
+                <Form.Label  htmlFor="hora" className="label-fecha-turno" column sm={4}>
                     Hora del turno
                 </Form.Label>
                 <Col>

@@ -28,6 +28,7 @@ export default function Turnos() {
     columnas={[
           "ID",
           "Servicio",
+          "Precio",
           "DNI Cliente",
           "DNI Empleado",
           "Fecha",
@@ -36,6 +37,7 @@ export default function Turnos() {
     atributos={[
       "_id",
       "servicio",
+      "precio",
       "dniCliente",
       "dniEmpleado",
       "fecha",

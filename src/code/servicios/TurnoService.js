@@ -23,8 +23,18 @@ export default class TurnoService {
 			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodos);
 			const data = await res.json();
 			console.log(data);
-			if(data.exito){
-				this.turnos = data.turnos;
+			if (data.exito) {
+				this.turnos = data.turnos.sort((a,b)=>{
+					let dateA = new Date(a.fecha).getTime();
+					let dateB = new Date(b.fecha).getTime();
+					if(dateA > dateB){
+						return 1
+					}
+					else if(dateA < dateB){
+						return -1
+					}
+					return 0;
+				});
 				this.notifySubscribers();
 			}
 			return this.turnos;
@@ -56,14 +66,18 @@ export default class TurnoService {
 			});
 			const data = await res.json();
 			console.log(data);
-			if(data.exito){
-				return this.data.turnos;	
+			if (data.exito) {
+				return data.turnos[0];
 			}
 			return [];
-		} catch(err){
+		} catch (err) {
 			console.log(err);
 		}
-		
+	}
+
+	static getTurnosPorDni(dni) {
+		// eslint-disable-next-line
+		return this.turnos.filter((c)=>c.dniCliente == dni)
 	}
 
 	/**
@@ -94,7 +108,7 @@ export default class TurnoService {
 	 * @param {*} item 
 	 */
 	static async modifyTurno(item, descontarStockConsumibles) {
-		console.log(item,descontarStockConsumibles)
+		console.log("TURNO A MODIFICAR: ", item, descontarStockConsumibles)
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
 
@@ -107,10 +121,10 @@ export default class TurnoService {
 				body: JSON.stringify({ _id: _id, turno: item })
 			});
 			const data = await res.json();
-			if(data.exito){
-				if(descontarStockConsumibles){
-					item.consumibles.forEach(async (c)=>{
-						await ConsumibleService.registrarConsumibleUsado(c.consumible._id,c.cantidad);
+			if (data.exito) {
+				if (descontarStockConsumibles) {
+					item.consumibles.forEach(async (c) => {
+						await ConsumibleService.registrarConsumibleUsado(c.consumible._id, c.cantidad);
 					})
 				}
 				console.log(data);

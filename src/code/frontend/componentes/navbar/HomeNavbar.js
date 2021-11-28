@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useHistory } from 'react-router';
 import './HomeNavbar.css';
 import LoginModal from '../../componentes/loginModal/LoginModal';
 import Carrito from '../../componentes/carrito/Carrito';
@@ -11,10 +10,8 @@ import ClienteService from '../../../servicios/ClienteService';
 export default function HomeNavbar() {
     const [modalShow, setModalShow] = React.useState(false);
     const [usuarioLogeado] = useState(ClienteService.getUsuario());//ClienteService.getUsuario();
-    const history = useHistory();
 
     const cerrarSesion = ()=>{
-        //UtilsService.setLoading(true);
         ClienteService.cerrarSesion()
         window.location.reload();
     }
@@ -22,7 +19,10 @@ export default function HomeNavbar() {
         <>
             <Navbar collapseOnSelect fixed="top" className="home-navbar" expand="sm" variant="dark">
                 <Container>
-                    <Navbar.Brand onClick={() => { history.push("/") }}>
+                    <Navbar.Brand onClick={() => { 
+                        //history.push("/") 
+                        window.location.href = "/"
+                        }}>
                         <img alt="logo-img" width="30px" className="logo-img" src={logo} />
                         Puppyness Pet Caring
                     </Navbar.Brand>

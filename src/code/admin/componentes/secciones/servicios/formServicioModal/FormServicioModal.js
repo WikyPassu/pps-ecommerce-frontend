@@ -4,13 +4,19 @@ import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import Listado from '../../../listado/Listado';
 import UtilsService from '../../../../../servicios/UtilsService';
 import ServicioService from '../../../../../servicios/ServicioService';
+import ConsumibleService from '../../../../../servicios/ConsumibleService';
 
 const initialValuesElemento = {
     nombre: "",
     categoria: "banio",
     descripcion: "",
     imagen: "",
-    estado: "",
+    estado: "HABILITADO",
+    "costo": {
+        "consumible": null,
+        "gramosPerroPorUnidad": null,
+        "porcentajeGanancia": null
+    },
     resenias: []
 };
 
@@ -27,17 +33,33 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
     const [detalleElemento, setDetalleElemento] = useState(initialValuesDetalleElemento);
     const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.resenias : []);
-
+    const [listaConsumibles, setListaConsumibles] = useState([]);
     useEffect(() => {
+        setListaConsumibles(ConsumibleService.getConsumibles());
         setElemento((elemento) => {
             return { ...elemento, resenias: listaDetalleElemento }
         })
     }, [listaDetalleElemento, detalleElemento])
 
-    const handleChange = (e) => {
-        setElemento((elemento) => {
-            return { ...elemento, [e.target.name]: e.target.value }
-        });
+    const handlerChange = (e) => {
+        let { name, value } = e.target;
+        if (name.includes("costo.")) {
+            name = name.replace("costo.", "");
+            value = (name === "porcentajeGanancia" || name === "gramosPerroPorUnidad") ? parseInt(value) : value;
+            setElemento((elemento) => {
+                return {
+                    ...elemento, costo: {
+                        ...elemento.costo,
+                        [name]: value
+                    }
+                }
+            });
+        }
+        else {
+            setElemento((elemento) => {
+                return { ...elemento, [name]: value }
+            });
+        }
     }
 
     const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
@@ -52,7 +74,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
         onHide();
     }
 
-    const handleChangeDetalleElemento = (e) => {
+    const handlerChangeDetalleElemento = (e) => {
         setDetalleElemento((detalleElemento) => {
             return { ...detalleElemento, [e.target.name]: e.target.value };
         });
@@ -91,7 +113,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                     <Row>
                         <Form.Group as={Col}>
                             <Form.Label htmlFor="nombre">Nombre</Form.Label>
@@ -100,7 +122,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                 maxLength="20"
                                 type="text"
                                 value={elemento.nombre}
-                                onChange={handleChange}
+                                onChange={handlerChange}
                                 placeholder="Ingrese nombre del servicio"
                                 required />
                             {validarInputText(elemento.nombre)}
@@ -108,7 +130,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label htmlFor="categoria">Categoria</Form.Label>
-                            <Form.Select name="categoria" onChange={handleChange} value={elemento.categoria} >
+                            <Form.Select name="categoria" onChange={handlerChange} value={elemento.categoria} >
                                 <option value="banio">Baño (60 minutos)</option>
                                 <option value="guarderia">Guarderia (60 minutos)</option>
                                 <option value="corte_de_pelo">Corte de Pelo (90 minutos)</option>
@@ -123,10 +145,48 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                 name="descripcion"
                                 maxLength="150"
                                 value={elemento.descripcion}
-                                onChange={handleChange}
+                                onChange={handlerChange}
                                 as="textarea"
                                 placeholder="Ingrese descripcion del servicio" />
                         </Form.Group>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group as={Col}>
+                                <Form.Label htmlFor="costo.consumible">Consumible</Form.Label>
+                                <Form.Select
+                                    name="costo.consumible"
+                                    onChange={handlerChange}
+                                    value={elemento.costo.consumible}>
+                                    {listaConsumibles.map((c) => <option value={c.nombre} key={c.nombre}>{c.nombre}</option>)}
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group as={Col}>
+                                <Form.Label htmlFor="costo.gramosPerroPorUnidad">Gramos de perro por unidad de consumible</Form.Label>
+                                <Form.Control
+                                    name="costo.gramosPerroPorUnidad"
+                                    min="0"
+                                    type="number"
+                                    value={elemento.costo.gramosPerroPorUnidad}
+                                    onChange={handlerChange}
+                                    placeholder="Gramos de Perro por Unidad de Consumible" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group as={Col}>
+                                <Form.Label htmlFor="costo.gramosPerroPorUnidad">Porcentaje Ganancia</Form.Label>
+                                <Form.Control
+                                    name="costo.porcentajeGanancia"
+                                    max="100"
+                                    min="0"
+                                    type="number"
+                                    value={elemento.costo.porcentajeGanancia}
+                                    onChange={handlerChange}
+                                    placeholder="Porcentaje Ganancia" />
+                            </Form.Group>
+                        </Col>
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
@@ -135,12 +195,12 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                 name="imagen"
                                 maxLength="150"
                                 value={elemento.imagen}
-                                onChange={handleChange}
+                                onChange={handlerChange}
                                 placeholder="Ingrese url de imagen" />
                         </Form.Group>
                         <Form.Group as={Col} sm={4}>
                             <Form.Label htmlFor="estado">Estado</Form.Label>
-                            <Form.Select name="estado" onChange={handleChange} value={elemento.estado}>
+                            <Form.Select name="estado" onChange={handlerChange} value={elemento.estado}>
                                 <option value="HABILITADO">HABILITADO</option>
                                 <option value="DESHABILITADO">DESHABILITADO</option>
                             </Form.Select>
@@ -157,7 +217,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             </Col>
                             <Col className="campos-modificar-resenia" sm={4}>
                                 <Form.Group as={Col} className="mb-3">
-                                    <Form.Select name="estado" onChange={handleChangeDetalleElemento} value={detalleElemento.estado}>
+                                    <Form.Select name="estado" onChange={handlerChangeDetalleElemento} value={detalleElemento.estado}>
                                         <option value="ACEPTADA">ACEPTADA</option>
                                         <option value="PENDIENTE">PENDIENTE</option>
                                         <option value="RECHAZADA">RECHAZADA</option>

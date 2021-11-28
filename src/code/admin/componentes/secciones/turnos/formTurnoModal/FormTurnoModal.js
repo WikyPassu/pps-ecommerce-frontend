@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './FormTurnoModal.css';
-import { Modal, InputGroup, Form, Button, FormControl, Row, Col } from 'react-bootstrap';
+import { Modal, InputGroup, Form, Button, FormControl, Row, Col, Alert } from 'react-bootstrap';
 import { BsFillPersonFill } from 'react-icons/bs';
 import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
@@ -36,21 +36,18 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     const [elemento, setElemento] = useState(elementoParaModificar || initialValuesElemento);
     const [detalleElemento] = useState(initialValuesDetalleElemento);
     const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.consumibles : []);
-    const [empleado, setEmpleado] = useState(EmpleadoService.getEmpleadoByDNI(elemento.dniEmpleado));
-    const [cliente, setCliente] = useState(ClienteService.getClienteByDNI(elemento.dniCliente));
+    const [empleado, setEmpleado] = useState(null);
+    const [cliente, setCliente] = useState(null);
     const [descontarStockConsumibles, setDescontarStockConsumibles] = useState(false)
     useEffect(() => {
-        if(!empleado && !elementoParaModificar.dniEmpleado){
-            setEmpleado(EmpleadoService.getEmpleadoByDNI(EmpleadoService.getUsuario()?.dni))
-        }
-        setElemento((elemento) => {
-            return {
-                ...elemento,
-                dniEmpleado: (!empleado && !elementoParaModificar.dniEmpleado)?EmpleadoService.getUsuario()?.dni: null,
-                consumibles: listaDetalleElemento
-            }
+        setEmpleado((empleado) => {
+            return EmpleadoService.getEmpleadoByDNI(elemento.dniEmpleado);
         })
-    }, [listaDetalleElemento, detalleElemento,empleado,elementoParaModificar])
+        setCliente((cliente) => {
+            return ClienteService.getClienteByDNI(elemento.dniCliente);
+        })
+
+    }, [listaDetalleElemento, detalleElemento, empleado, elementoParaModificar,elemento])
 
     const handleChange = (e) => {
         let { name, value } = e.target;
@@ -76,6 +73,17 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
             });
         }
 
+        if (name === "dniEmpleado") {
+            setEmpleado((empleado) => {
+                return EmpleadoService.getEmpleadoByDNI(value);
+            })
+        }
+        else if(name === "dniCliente"){
+            setCliente((cliente) => {
+                return ClienteService.getClienteByDNI(value);
+            })
+        }
+
     }
 
     //const validarInputText = (valor) => (!valor.trim()) && <Form.Text>Este campo no puede estar vacío</Form.Text>;
@@ -85,44 +93,57 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (window.confirm("¿Esta seguro que sea modificar el turno?")) {
-            (modificar === true) ? TurnoService.modifyTurno(elemento,descontarStockConsumibles) : TurnoService.addTurno(elemento);
-            onHide();
+        let continuar = true;
+        if(!empleado){
+            continuar = window.confirm("No se ha encontrado ningún empleado que coincida con el DNI. ¿Desea continuar de todas formas?")
         }
+        else if(!cliente){
+            continuar = window.confirm("No se ha encontrado ningún cliente que coincida con el DNI. ¿Desea continuar de todas formas?")
+        }
+
+        if(continuar){
+            if (window.confirm("¿Esta seguro que sea modificar el turno?")) {
+                (modificar === true) ? TurnoService.modifyTurno(elemento, descontarStockConsumibles) : TurnoService.addTurno(elemento);
+                onHide();
+            }
+        }
+       
     }
 
-    const handleUsuarioChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "dniEmpleado") {
-            let empleadoEncontrado = EmpleadoService.getEmpleadoByDNI(value);
-            if (empleadoEncontrado) {
-                setEmpleado(EmpleadoService.getEmpleadoByDNI(value));
-                setElemento((elemento) => {
-                    return { ...elemento, dniEmpleado: empleadoEncontrado.dni }
-                })
-            }
-            else {
-                setElemento((elemento) => {
-                    return { ...elemento, dniEmpleado: 0 }
-                })
-            }
-        }
-        else {
-            let clienteEncontrado = ClienteService.getClienteByDNI(value);
-            console.log(clienteEncontrado)
-            if (clienteEncontrado) {
-                setCliente(clienteEncontrado);
-                setElemento((elemento) => {
-                    return { ...elemento, dniCliente: clienteEncontrado.dni }
-                })
-            }
-            else {
-                setElemento((elemento) => {
-                    return { ...elemento, dniCliente: 0 }
-                })
-            }
-        }
-    }
+    // const handleUsuarioChange = (e) => {
+    //     const { name, value } = e.target;
+    //     if (name === "dniEmpleado") {
+    //         let empleadoEncontrado = EmpleadoService.getEmpleadoByDNI(value);
+    //         if (empleadoEncontrado) {
+    //             setEmpleado(empleadoEncontrado);
+    //             setElemento((elemento) => {
+    //                 return { ...elemento, dniEmpleado: empleadoEncontrado.dni }
+    //             })
+    //         }
+    //         else {
+    //             setEmpleado(null);
+    //             setElemento((elemento) => {
+    //                 return { ...elemento, dniEmpleado: 0 }
+    //             })
+    //         }
+    //     }
+    //     else {
+    //         let clienteEncontrado = ClienteService.getClienteByDNI(value);
+    //         console.log(clienteEncontrado)
+    //         if (clienteEncontrado) {
+    //             setCliente(clienteEncontrado);
+    //             setElemento((elemento) => {
+    //                 return { ...elemento, dniCliente: clienteEncontrado.dni }
+    //             })
+    //         }
+    //         else {
+    //             setCliente(null);
+    //             setElemento((elemento) => {
+    //                 return { ...elemento, dniCliente: 0 }
+    //             })
+    //         }
+    //     }
+    // }
 
     // const agregarDetalleElemento = (e) => {
     //     if (!detalleElemento.consumible) {
@@ -186,8 +207,8 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form noValidate onSubmit={handleSubmit}>
-                    <InputGroup className="input-formulario">
+                <Form onSubmit={handleSubmit}>
+                    {/* <InputGroup className="input-formulario">
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
                         <FormControl type="number"  min="1000000" max="99999999" onChange={handleUsuarioChange} placeholder={empleado ? empleado.dni : "DNI de empleado"} name="dniEmpleado" required />
                     </InputGroup>
@@ -196,23 +217,59 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                         <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
                         <FormControl type="number" min="1000000" max="99999999" onChange={handleUsuarioChange} placeholder={cliente ? cliente.dni : "DNI de cliente"} name="dniCliente" required />
                     </InputGroup>
-                    {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>}
+                    {cliente ? <b>Se ha seleccionado a {cliente.nombre} {cliente.apellido}</b> : <p>No se han encontrado resultados</p>} */}
+
+                    <Row>
+                        <Col>
+                            <InputGroup className="input-formulario">
+                                <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                                <FormControl type="number" min="1000000" max="99999999" value={elemento.dniEmpleado} onChange={handleChange} name="dniEmpleado" required />
+                                <Button onClick={()=>{
+                                    setEmpleado(EmpleadoService.getUsuario())
+                                    setElemento((elemento)=>{
+                                        return {...elemento, dniEmpleado:EmpleadoService.getUsuario().dni}; 
+                                    })
+                                }}>Usar empleado logeado</Button>
+                            </InputGroup>
+                            <Alert key="alertEmpleado" variant={empleado ? "success" : "warning"}>
+                                {empleado ? `Se seleccionó a ${empleado.nombre} ${empleado.apellido}` : "No se encontró el empleado"}
+                            </Alert>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <InputGroup className="input-formulario">
+                                <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                                <FormControl type="number" min="1000000" max="99999999" value={elemento.dniCliente} onChange={handleChange} name="dniCliente" required />
+                            </InputGroup>
+                            <Alert key="alertCliente" variant={cliente ? "success" : "warning"}>
+                                {cliente ? `Se seleccionó a ${cliente.nombre} ${cliente.apellido}` : "No se encontró el cliente"}
+                            </Alert>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col sm={12}>
-                            <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id} required>
-                                <option>Seleccione un Servicio</option>
-                                {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
-                            </Form.Select>
+                            <InputGroup className="input-formulario">
+                                <InputGroup.Text>Servicio</InputGroup.Text>
+                                <Form.Select onChange={handleChange} name="servicio" value={elemento.servicio._id} required>
+                                    <option>Seleccione un Servicio</option>
+                                    {ServicioService.getServicios().map((p) => <option value={p._id}>{p.nombre}</option>)}
+                                </Form.Select>
+                            </InputGroup>
                             <br />
                         </Col>
                     </Row>
                     <Row>
                         <Col sm={12}>
-                            <Form.Select onChange={handleChange} name="estado" value={elemento.estado}>
-                                <option value="PENDIENTE">Pendiente</option>
-                                <option value="CANCELADO">Cancelado</option>
-                                <option value="FINALIZADO">Finalizado</option>
-                            </Form.Select>
+                            <InputGroup className="input-formulario">
+                                <InputGroup.Text>Estado</InputGroup.Text>
+                                <Form.Select onChange={handleChange} name="estado" value={elemento.estado}>
+                                    <option value="PENDIENTE">Pendiente</option>
+                                    <option value="CANCELADO">Cancelado</option>
+                                    <option value="FINALIZADO">Finalizado</option>
+                                </Form.Select>
+                            </InputGroup>
+
                             <br />
                         </Col>
                     </Row>
@@ -226,21 +283,6 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                     <li><b>Peso:</b> {elemento.perrito.peso} g</li>
                     <li><b>Edad:</b> {elemento.perrito.edad} Años</li>
                     <li><b>Raza:</b> {elemento.perrito.raza}</li>
-
-                    {/* <Row>
-                        <Col sm={6}>
-                            <Form.Select onChange={handleChangeDetalleElemento} name="consumible" value={detalleElemento.consumible._id}>
-                                <option>Seleccione un Consumible</option>
-                                {ConsumibleService.getConsumibles().map((p) => <option value={p._id}>{p.nombre}</option>)}
-                            </Form.Select>
-                        </Col>
-                        <Col>
-                            <FormControl onChange={handleChangeDetalleElemento} value={detalleElemento.cantidad} name="cantidad" placeholder="Cantidad" type="number" min="1" />
-                        </Col>
-                        <Col>
-                            <Button type="button" onClick={agregarDetalleElemento} size="lg">Agregar</Button>
-                        </Col>
-                    </Row> */}
 
                     <Row className="input-formulario">
                         <Col>

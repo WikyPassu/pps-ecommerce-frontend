@@ -50,29 +50,14 @@ export default function Ventas() {
         </Col>
       </Row>
 
-            
+
       <Grafico datos={FacturasService.getPagosPorMes()} titulo="Cantidad de Ventas" />
       <br />
-      {/* <Listado
-        columnas={["ID", "Total", "Fecha", "Estado"]}
-        atributos={["_id", "total", "fecha", "estado"]}
-        attrKey={"_id"}
-        onEditClick={(e) => {
-          setMostrarModalModificar(true);
-          setElementoModificar(e);
-        }}
-        attrFuncs={[{columnaIndex:2,attrFunc:(e)=>UtilsService.timeStampToStringDate(e)}]}
-        datos={lista}
-      /> */}
       <Listado
         columnas={["ID", "Total", "Fecha", "Comprador", "Estado"]}
         atributos={["id", "amount", "date_created", "payer", "status"]}
         attrKey={"id"}
         attrFuncs={[{ columnaIndex: 3, attrFunc: (c) => c.email }]}
-        // onEditClick={(e) => {
-        //   setMostrarModalModificar(true);
-        //   setElementoModificar(e);
-        // }}
         onShowClick={(e) => {
           console.log(e)
           setMostrarDetalleModal(true);
@@ -81,21 +66,18 @@ export default function Ventas() {
         }
         datos={pagos}
       />
+      {/* <Pagination>
+        <Pagination.First />
+        <Pagination.Prev />
+        <Pagination.Item>{1}</Pagination.Item>
+        <Pagination.Next />
+        <Pagination.Last />
+      </Pagination> */}
       {mostrarDetalleModal && <FormFacturaDetallesModal
         show={mostrarDetalleModal}
         elementoParaMostrar={elementoMostrar}
         onHide={() => {
           setMostrarDetalleModal(false);
-          // setLista(FacturasService.getFacturas());
         }} />}
-
-
-      {/* {mostrarModalModificar && <FormFacturaModal
-        elementoParaModificar={elementoModificar}
-        show={mostrarModalModificar}
-        onHide={() => {
-          setMostrarModalModificar(false);
-          setLista(FacturasService.getFacturas());
-        }} />} */}
     </div>)
 }

@@ -53,7 +53,7 @@ function App() {
         <Route exact path="/caja/resultado/:resultado" component={ResultadoTransaccionPage}></Route>
         <Route path="/admin/login" component={LoginAdminPage}></Route>
         <Route path="/admin/home" component={AdminHomePage}></Route>
-        <Route path="/admin/resultadoTransaccion/fallido" component={ResultadoTransaccionAdminPage}></Route>
+        <Route path="/admin/resultadoTransaccion/:resultado" component={ResultadoTransaccionAdminPage}></Route>
         <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
         <Route exact path="/404" component={NotFoundPage}></Route>
       </Router>

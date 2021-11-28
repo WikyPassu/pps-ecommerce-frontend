@@ -39,7 +39,7 @@ export default class ConsumibleService {
 	}
 
 	static getConsumiblePorNombre(nombre) {
-		return this.consumibles.filter(c => c.nombre.toLowerCase() === nombre)[0];
+		return this.consumibles.find(c => c.nombre.toLowerCase() === nombre.toLowerCase());
 	}
 
 	/**

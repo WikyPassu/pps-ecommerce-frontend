@@ -6,11 +6,12 @@ function ResultadoTransaccionAdminPage() {
     const history = useHistory();
     const params = useParams();
     useEffect(() => {
-        setTimeout(async ()=>{
-            setTimeout(() => {
-               history.push("/admin/home");
-            }, 5000)
-        },200)
+        const timeOut = setTimeout(() => {
+            window.location.href = "/admin/home";
+         }, 5000)
+        return ()=>{
+            clearTimeout(timeOut)
+        }
     }, [history,params.resultado])
 
     return (<>

@@ -50,15 +50,19 @@ function CalendarioTurno({ diasNoDisponibles, onChange, name, value = new Date()
     };
 
     return (
-        <div onMouseLeave={() => { setVisibilidadCalendario(false) }} className="CalendarioTurno">
-            <FormControl readOnly onClick={() => { setVisibilidadCalendario(true) }} value={`${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`} />
-            {visibilidadCalendario && <Calendar
-
+        <div
+            onMouseLeave={() => { setVisibilidadCalendario(false) }}
+            className="CalendarioTurno">
+            <FormControl
+                readOnly
+                onClick={() => { setVisibilidadCalendario(true) }}
+                value={`${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`} />
+            {visibilidadCalendario && 
+            <Calendar
                 onChange={handleChange}
                 tileDisabled={diasDeshabilitados}
                 view="month"
-                defaultValue={fecha}
-            />}
+                defaultValue={fecha} />}
         </div>
     );
 }
