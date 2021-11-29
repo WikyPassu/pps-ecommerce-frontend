@@ -45,13 +45,13 @@ export default function LoginAdminPage() {
                     <Row>
                         <InputGroup>
                             <InputGroup.Text><HiMail /></InputGroup.Text>
-                            <FormControl onChange={handlerChange} name="correo" type="email" required placeholder="Correo" />
+                            <FormControl onChange={handlerChange} value={usuario.correo} name="correo" type="email" required placeholder="Correo" />
                         </InputGroup>
                     </Row>
                     <Row>
                         <InputGroup>
                             <InputGroup.Text><HiKey /></InputGroup.Text>
-                            <FormControl onChange={handlerChange} name="clave" type="password" required placeholder="Contraseña" />
+                            <FormControl onChange={handlerChange} value={usuario.clave} name="clave" type="password" required placeholder="Contraseña" />
                         </InputGroup>
                     </Row>
                     <Row>

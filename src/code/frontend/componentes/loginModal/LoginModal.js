@@ -140,13 +140,13 @@ export default function LoginModal(props) {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Nombre</Form.Label>
-                                        <Form.Control required name="nombre" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="nombre" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese su nombre" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Apellido</Form.Label>
-                                        <Form.Control required name="apellido" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="apellido" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese su apellido" />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -154,13 +154,13 @@ export default function LoginModal(props) {
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>DNI</Form.Label>
-                                        <Form.Control required min="1000000" max="99999999" name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese correo" />
+                                        <Form.Control required min="1000000" max="99999999" name="dni" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese DNI" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Domicilio</Form.Label>
-                                        <Form.Control required name="domicilio" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Control required name="domicilio" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese domicilio" />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -188,17 +188,20 @@ export default function LoginModal(props) {
                                     </Form.Group>
                                 </Col> : ""}
                             </Row>
+                            <br/>
                             <Row>
                                 <Col>
+                                
                                     <Form.Group className="mb-3">
-                                        <Form.Label>Codigo Postal</Form.Label>
-                                        <Form.Control required name="codigoPostal" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese correo" />
+                                        <Form.Label>Código Postal</Form.Label>
+                                        <Form.Control required name="codigoPostal" onChange={handlerChangeRegistracion} type="text" placeholder="Ingrese código postal" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>Telefono</Form.Label>
-                                        <Form.Control required name="telefono" onChange={handlerChangeRegistracion} type="number" placeholder="Ingrese Telefono" />
+                                        <Form.Label>Teléfono</Form.Label>
+                                        <Form.Control type="number" required name="telefono" onChange={handlerChangeRegistracion} placeholder="Ingrese teléfono" />
+                                      
                                     </Form.Group>
                                 </Col>
                             </Row>
