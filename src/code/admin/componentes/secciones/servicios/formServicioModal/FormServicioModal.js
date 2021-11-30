@@ -244,7 +244,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                             </Col>
                         </Row></>}
                     <Row>
-                        <Col>
+                        <Col  style={{textAlign:"center"}}>
                             <br />
                             <Button type="submit" size="lg">Guardar</Button>
                             {/* {listaDetalleElemento.length ? <Button type="submit" size="lg">Guardar</Button> : <Button disabled type="submit" size="lg">Guardar</Button>} */}

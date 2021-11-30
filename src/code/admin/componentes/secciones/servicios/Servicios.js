@@ -17,7 +17,7 @@ export default function Servicios() {
 
   return (<>
     <label className="titulo-seccion">Servicios ofrecidos</label>
-    <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Servicio</Button>
+    {/* <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Servicio</Button> */}
     {modalForm && <FormServicioModal
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
@@ -47,7 +47,7 @@ export default function Servicios() {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p) => { ServicioService.removeServicio(p._id) }}
+      // onDeleteClick={(p) => { ServicioService.removeServicio(p._id) }}
       attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormServicioModal

@@ -38,7 +38,7 @@ export default function Banner() {
                         maxLength="30"
                         onChange={handleChange}
                     />
-                     <Form.Select className="banner-input-search-type" name="tipo" onChange={handleChange} value={busqueda.tipo}>
+                     <Form.Select style={{cursor:"pointer"}} className="banner-input-search-type" name="tipo" onChange={handleChange} value={busqueda.tipo}>
                             <option value="PRODUCTO">PRODUCTO</option>
                             <option value="SERVICIO">SERVICIO</option>
                         </Form.Select>

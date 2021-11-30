@@ -169,7 +169,7 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
                     </InputGroup> */}
                     <br />
                     <Row>
-                        <Col>
+                        <Col  style={{textAlign:"center"}}>
                             <Button type="submit" size="lg">Guardar</Button>
                         </Col>
                     </Row>

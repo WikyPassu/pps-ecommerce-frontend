@@ -187,9 +187,11 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
                         <Image as={Col} style={{ maxWidth: "300px" }} src={producto.imagen} />
                     </Row>
                     <br />
+                    <div style={{textAlign:"center"}}>
                     <Button variant="primary" type="submit">
                         {modificar ? "Modificar" : "Agregar"}
                     </Button>
+                    </div>
                 </Form>
             </Modal.Body>
         </Modal>

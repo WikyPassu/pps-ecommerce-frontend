@@ -28,7 +28,7 @@ export default function Servicio(props) {
     }
 
     return (
-        <Card className="card-servicio">
+        <Card className="card-servicio" style={{cursor:"pointer"}}>
             <Card.Img className="image" onClick={irAlServicio} variant="top" style={styleImg} />
             <Card.Body>
                 <Card.Title className="nombre">{UtilsService.stringFormatter(nombre,36)}</Card.Title>

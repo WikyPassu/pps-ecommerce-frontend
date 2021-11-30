@@ -28,6 +28,7 @@ export default function Filtros({ onSumbit = () => { }, onReset = () => { }, def
     const handlerReset = () => {
         setFiltros({ ...initialState, tipo: defaultType });
         onReset();
+        setBusqueda("");
     }
 
     const handlerSumit = (e) => {

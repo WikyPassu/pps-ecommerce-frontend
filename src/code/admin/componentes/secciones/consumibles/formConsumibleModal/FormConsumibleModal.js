@@ -95,7 +95,7 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col style={{textAlign:"center"}}>
                             <br />
                             <Button type="submit" size="lg">Guardar</Button>
                         </Col>
