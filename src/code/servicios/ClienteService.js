@@ -24,7 +24,6 @@ export default class ClienteService{
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			this.clientes = data.usuariosRegistrados;
 			this.notifySubscribers();
 			return this.clientes;
@@ -55,15 +54,13 @@ export default class ClienteService{
 	 */
 	static async addCliente(newItem) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.agregar, {
+			await fetch(UtilsService.getUrlsApi().usuarioRegistrado.agregar, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ usuarioRegistrado: newItem })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.clientes.push(newItem);
 			this.iniciarServicio();
 		} catch (err) {
@@ -82,15 +79,14 @@ export default class ClienteService{
 		_id = _id._id;
 
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.modificar, {
+			await fetch(UtilsService.getUrlsApi().usuarioRegistrado.modificar, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id, usuarioRegistrado: item })
 			});
-			const data = await res.json();
-			console.log(data);
+			//await res.json();
 			item._id = _id;
 			this.clientes = this.clientes.map((c)=> (c._id === item._id) ? item : c);
 			this.notifySubscribers();
@@ -105,15 +101,13 @@ export default class ClienteService{
 	 */
 	 static async removeCliente(_id) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().usuarioRegistrado.eliminar, {
+			await fetch(UtilsService.getUrlsApi().usuarioRegistrado.eliminar, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.clientes = this.clientes.filter((c)=> (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
@@ -130,7 +124,6 @@ export default class ClienteService{
 	 */
 	static async isDisponibleParaResenia(dniCliente, idServicio){
 		try {
-			console.log("Buscando resnias de: ",dniCliente, idServicio)
 			const res = await fetch(UtilsService.getUrlsApi().resenia.verificarCompraPrevia, {
 				method: 'POST',
 				headers: {
@@ -139,7 +132,6 @@ export default class ClienteService{
 				body: JSON.stringify({ dniCliente: dniCliente, idServicio: idServicio})
 			});
 			const data = await res.json();
-			console.log(data);
 			return data.exito;
 		} catch (err) {
 			console.log(err);
@@ -162,7 +154,6 @@ export default class ClienteService{
 				body: JSON.stringify({ correo: correo, clave: clave })
 			});
 			const data = await res.json();
-			console.log(data);
 			if(data.usuario){
 				this.usuario = data.usuario;
 				const cookies = new Cookies();

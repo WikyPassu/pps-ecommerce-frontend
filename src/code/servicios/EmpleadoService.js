@@ -142,7 +142,6 @@ export default class EmpleadoService {
  */
 	static async login(correo, clave) {
 		try {
-			console.log(correo,clave)
 			const res = await fetch(UtilsService.getUrlsApi().empleado.login, {
 				method: 'POST',
 				headers: {

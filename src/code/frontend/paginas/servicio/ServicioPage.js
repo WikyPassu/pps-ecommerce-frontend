@@ -40,7 +40,6 @@ function ServicioPage() {
         if(usuarioLogeado){
           
           let resultado = await ClienteService.isDisponibleParaResenia(usuarioLogeado.dni, servicioEncontrado._id);
-          console.log("Resultado verificacion de resenias; ",resultado);
           setPermitirReseñar(() => {
             return resultado;
           });

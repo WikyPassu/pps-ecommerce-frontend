@@ -21,13 +21,11 @@ export default class FacturasService {
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio() {
-		console.log('Servicio Facturas iniciado');
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().factura.traerTodas);
 			const data = await res.json();
 			this.facturas = data.facturas;
 			await this.getPagosFromMercadoPago();
-			console.log(this.pagos)
 			this.notifySubscribers();
 			return this.facturas;
 		} catch (err) {
@@ -52,15 +50,13 @@ export default class FacturasService {
 	 */
 	static async addFactura(newItem) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().factura.agregar, {
+			await fetch(UtilsService.getUrlsApi().factura.agregar, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ factura: newItem })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.facturas.push(newItem);
 			this.iniciarServicio();
 		} catch (err) {
@@ -79,15 +75,13 @@ export default class FacturasService {
 		_id = _id._id;
 
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().factura.modificar, {
+			await fetch(UtilsService.getUrlsApi().factura.modificar, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id, factura: item })
 			});
-			const data = await res.json();
-			console.log(data);
 			item._id = _id;
 			this.facturas = this.facturas.map((c) => (c._id === item._id) ? item : c);
 			this.notifySubscribers();
@@ -103,15 +97,13 @@ export default class FacturasService {
 	 */
 	static async removeFactura(_id) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().factura.eliminar, {
+			await fetch(UtilsService.getUrlsApi().factura.eliminar, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.facturas = this.facturas.filter((c) => (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
@@ -248,7 +240,7 @@ export default class FacturasService {
 				console.log(error)
 			}
 		}
-
+d
 
 
 }

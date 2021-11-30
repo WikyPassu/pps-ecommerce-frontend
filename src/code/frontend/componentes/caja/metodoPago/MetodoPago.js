@@ -28,7 +28,6 @@ function MetodoPago(){
         .then(async (res)=>{
             if(res.ok){
                 let jsonData = await res.json();
-                console.log(jsonData);
                 window.location.href = jsonData.mercadoPago.response.init_point;
             }
             else{

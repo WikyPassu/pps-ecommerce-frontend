@@ -114,12 +114,8 @@ export default function LoginModal(props) {
         formRegistracion.nombre = UtilsService.ponerMayusIniciales(formRegistracion.nombre);
         formRegistracion.apellido = UtilsService.ponerMayusIniciales(formRegistracion.apellido);
         
-        console.log("forRegistracion", formRegistracion)
-        
-        
         ClienteService.signUp(formRegistracion)
             .then(() => {
-                console.log("usuarioLogeado", ClienteService.getUsuario())
                 window.location.reload();
                 props.onHide();
             });
