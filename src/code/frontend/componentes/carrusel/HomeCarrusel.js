@@ -21,7 +21,7 @@ function HomeCarrusel() {
 
     return (
         <div className="home-carrusel">
-            <Carousel className="carrusel">
+            <Carousel className="carrusel" style={{cursor:"pointer"}}>
                 {productoMasVendido?<Carousel.Item >
                     <div
                         className="img-carousel"

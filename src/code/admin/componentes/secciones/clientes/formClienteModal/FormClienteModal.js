@@ -92,19 +92,19 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                 <Form noValidate onSubmit={handleSubmit}>
                     <label className="title-factura">Datos del Cliente</label><br />
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                        <InputGroup.Text>Nombre<BsFillPersonFill /></InputGroup.Text>
                         <FormControl onChange={handleChange} value={elemento.nombre} name="nombre" required placeholder="Nombre" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                        <InputGroup.Text>Apellido<BsFillPersonFill /></InputGroup.Text>
                         <FormControl onChange={handleChange} value={elemento.apellido} name="apellido" required placeholder="Apellido" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                        <InputGroup.Text>DNI<BsFillPersonFill /></InputGroup.Text>
                         <FormControl onChange={handleChange} min="1000000" max="99999999" type="number" value={elemento.dni} name="dni" required placeholder="DNI" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text> <BsBuilding /></InputGroup.Text>
+                        <InputGroup.Text>Localidad<BsBuilding /></InputGroup.Text>
                         <FormControl onChange={handleChange} value={elemento.localidad} name="localidad" required placeholder="Localidad" />
                         <Form.Select name="localidad" value={elemento.localidad} onChange={handleChange}>
                             <option value="">Otra localidad</option>
@@ -120,24 +120,20 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                         </Form.Select>
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsMap /></InputGroup.Text>
+                        <InputGroup.Text>Domicilio<BsMap /></InputGroup.Text>
                         <FormControl onChange={handleChange} value={elemento.domicilio} name="domicilio" required placeholder="Domicilio" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsFilePost /></InputGroup.Text>
+                        <InputGroup.Text>CP<BsFilePost /></InputGroup.Text>
                         <FormControl onChange={handleChange} value={elemento.codigoPostal} name="codigoPostal" required placeholder="Codigo Postal" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><BsPhone /></InputGroup.Text>
+                        <InputGroup.Text>Telefono<BsPhone /></InputGroup.Text>
                         <FormControl onChange={handleChange} type="number" value={elemento.telefono} name="telefono" required placeholder="Numero de telefono" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
-                        <InputGroup.Text><MdMail /></InputGroup.Text>
+                        <InputGroup.Text>Correo<MdMail /></InputGroup.Text>
                         <FormControl onChange={handleChange} type="email" name="correo" value={elemento.correo} required placeholder="Correo Electrónico" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text><HiKey /></InputGroup.Text>
-                        <FormControl onChange={handleChange} type="password" name="clave" value={elemento.clave} required placeholder="Clave" />
                     </InputGroup>
                     <InputGroup className="input-formulario">
                         <InputGroup.Text>Estado</InputGroup.Text>
@@ -182,7 +178,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                     </Row> */}
                     <br />
                     <Row>
-                        <Col>
+                        <Col style={{textAlign:"center"}}>
                             <Button type="submit" size="lg">Guardar</Button>
                         </Col>
                     </Row>

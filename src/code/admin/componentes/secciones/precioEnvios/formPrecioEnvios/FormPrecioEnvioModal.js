@@ -70,7 +70,7 @@ export default function FormPrecioEnvioModal({ elementoParaModificar, onHide, sh
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col style={{textAlign:"center"}}>
                             <br />
                             <Button type="submit" size="lg">Guardar</Button>
                         </Col>

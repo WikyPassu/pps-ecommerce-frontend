@@ -29,7 +29,7 @@ export default function Producto(props) {
     }
 
     return (
-        <Card className="card-producto">
+        <Card className="card-producto" style={{cursor:"pointer"}}>
             <Card.Img className="image" onClick={irAlProducto} variant="top" style={styleImg} />
             <Card.Body>
                 <Card.Title className="nombre">{UtilsService.stringFormatter(nombre,36)}</Card.Title>

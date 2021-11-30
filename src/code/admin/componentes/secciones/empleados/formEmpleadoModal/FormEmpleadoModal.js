@@ -121,8 +121,8 @@ export default function FormEmpleadoModal({ elementoParaModificar, onHide, show 
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Col>
-                            <br />
+                        <Col style={{textAlign:"center"}}>
+                            <br/>
                             <Button type="submit" size="lg">Guardar</Button>
                         </Col>
                     </Row>

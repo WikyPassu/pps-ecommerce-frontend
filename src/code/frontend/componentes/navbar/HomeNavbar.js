@@ -5,7 +5,6 @@ import LoginModal from '../../componentes/loginModal/LoginModal';
 import Carrito from '../../componentes/carrito/Carrito';
 import logo from '../../../../assets/logo.png';
 import ClienteService from '../../../servicios/ClienteService';
-//import UtilsService from '../../../servicios/UtilsService';
 import { useHistory } from 'react-router-dom';
 
 export default function HomeNavbar() {
@@ -28,7 +27,9 @@ export default function HomeNavbar() {
         <>
             <Navbar collapseOnSelect fixed="top" className="home-navbar" expand="sm" variant="dark">
                 <Container>
-                    <Navbar.Brand onClick={() => { 
+                    <Navbar.Brand 
+                        style={{cursor:"pointer"}}
+                    onClick={() => { 
                         //history.push("/") 
                         window.location.href = "/"
                         }}>

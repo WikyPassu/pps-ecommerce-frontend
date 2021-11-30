@@ -27,6 +27,13 @@ export default function Consumibles() {
           "Existencia Minima",
           "Precio Unidad"
         ]}
+
+        attrFuncs={[
+          {
+            columnaIndex:2, attrFunc:(value, object)=>{return (parseFloat(value)).toFixed(2)}
+          }
+        ]}
+      
     atributos={[
       "_id",
       "nombre",

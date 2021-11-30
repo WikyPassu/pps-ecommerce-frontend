@@ -249,9 +249,11 @@ export default function LoginModal(props) {
                         </>
                     }
                     <br />
+                    <div style={{textAlign:"center"}}>
                     <Button variant="primary" type="submit">
                         Enviar
                     </Button>
+                    </div>
                 </Form>
 
             </Modal.Body>
