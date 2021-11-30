@@ -69,7 +69,7 @@ function ProductoPage() {
             <label className="label">${productoActual.precio}</label>
             <br /><hr />
           </div>
-          <div className="item precio">
+          <div className="item stock">
             <label className="label">Stock: {productoActual.existencia}</label>
             <br /><hr />
           </div>
