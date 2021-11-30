@@ -38,7 +38,7 @@ const ModalTurno = ({ turno, onHide, show }) => {
                     <li>Edad: {turno.perrito.edad} años</li>
                     <li>Raza: {turno.perrito.raza}</li>
                     <br/>
-                    <Button onClick={cancelarTurno} disabled={turno.estado === "CANCELADO"} variant="danger">Cancelar Turno</Button>
+                    <Button onClick={cancelarTurno} disabled={turno.estado === "CANCELADO" || turno.estado === "FINALIZADO"} variant="danger">Cancelar Turno</Button>
                 </div>
             </Modal.Body>
         </Modal>
