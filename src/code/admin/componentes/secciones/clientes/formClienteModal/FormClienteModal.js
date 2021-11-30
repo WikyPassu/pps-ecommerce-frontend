@@ -85,7 +85,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {!modificar ? "Alta Venta" : "Modificar Venta"}
+                    {!modificar ? "Alta Cliente" : "Modificar Cliente"}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -143,7 +143,7 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                         <InputGroup.Text>Estado</InputGroup.Text>
                         <Form.Select name="estado" onChange={handleChange} value={elemento.estado}>
                             <option value="ACTIVO">ACTIVO</option>
-                            <option value="PENDIENTE">PENDIENTE</option>
+                            {/* <option value="PENDIENTE">PENDIENTE</option> */}
                             <option value="SUSPENDIDO">SUSPENDIDO</option>
                             <option value="BAJA">BAJA</option>
                         </Form.Select>

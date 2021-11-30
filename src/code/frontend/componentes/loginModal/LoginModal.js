@@ -85,19 +85,27 @@ export default function LoginModal(props) {
         e.preventDefault();
         UtilsService.setLoading(true);
         ClienteService.login(formLogin.correo, formLogin.clave)
-            .then((value) => {
+        .then((value) => {
+            const usuarioLogueado = ClienteService.getUsuario();
+            if(usuarioLogueado.estado !== "BAJA"){
                 if(value){
-                    UtilsService.setLoading(false);
                     window.location.reload();
                     props.onHide();
                 }
                 else{
                     alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
                 }
-            })
-            .catch(()=>{
+            }
+            else{
                 alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
-            })
+            }
+        })
+        .catch(()=>{
+            alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
+        })
+        .finally(()=>{
+            UtilsService.setLoading(false);
+        })
     }
 
     const handlerSubmitRegistracion = (e) => {

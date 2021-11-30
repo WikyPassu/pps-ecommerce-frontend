@@ -101,15 +101,20 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        if (!formulario.fecha || !formulario.hora) {
-            alert("Por favor, asegurese de haber establecido una y horario validos");
-            return;
+        if(usuarioLogeado.estado === "ACTIVO"){
+            if (!formulario.fecha || !formulario.hora) {
+                alert("Por favor, asegurese de haber establecido una y horario validos");
+                return;
+            }
+            else if (window.confirm("¿Seguro que desea reservar este turno?")) {
+                let formularioToSend = formulario;
+                formularioToSend.servicio = servicio;
+                formularioToSend.dniCliente = usuarioLogeado.dni;
+                onSubmit(formularioToSend);
+            }
         }
-        else if (window.confirm("¿Seguro que desea reservar este turno?")) {
-            let formularioToSend = formulario;
-            formularioToSend.servicio = servicio;
-            formularioToSend.dniCliente = usuarioLogeado.dni;
-            onSubmit(formularioToSend);
+        else{
+            alert("No puede reservar turnos porque su usuario esta suspendido")
         }
     }
     return <Form onSubmit={handlerSubmit} className="formulario-compra">
@@ -167,12 +172,13 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.edad} placeholder="Edad del perro (años)" min="1" max="99" name="edad" type="number" />
                 </Col>
                 <Col>
-                    <Form.Select required onChange={handlerChangePerrito} value={formulario.perrito.raza} name="raza" defaultValue="Seleccione raza">
+                    {/* <Form.Select required onChange={handlerChangePerrito} value={formulario.perrito.raza} name="raza" defaultValue="Seleccione raza">
                         <option>Seleccione raza</option>
-                        <option value="labrado">Labrador</option>
+                        <option value="labrador">Labrador</option>
                         <option value="siberiano">Siberiano</option>
                         <option value="caniche">Caniche</option>
-                    </Form.Select>
+                    </Form.Select> */}
+                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.raza} placeholder="Raza del perro" min="3" max="99999" name="raza" type="text" />
                 </Col>
             </Row>
             <Row>
