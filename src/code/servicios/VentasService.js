@@ -26,6 +26,7 @@ export default class FacturasService {
 			const data = await res.json();
 			this.facturas = data.facturas;
 			await this.getPagosFromMercadoPago();
+			//console.log(this.pagos)
 			this.notifySubscribers();
 			return this.facturas;
 		} catch (err) {
