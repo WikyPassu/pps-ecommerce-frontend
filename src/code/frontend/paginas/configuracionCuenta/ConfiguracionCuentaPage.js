@@ -103,7 +103,7 @@ function ConfiguracionCuentaPage() {
                 <div className="lista">
                     <Listado
                         datos={pagos}
-                        attrKey="id"
+                        attrKey="id" 
                         columnas={["Monto", "Fecha", "Estado"]}
                         atributos={["transaction_amount", "date_approved", "status"]}
                         onShowClick={(e) => {
