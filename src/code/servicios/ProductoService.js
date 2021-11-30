@@ -182,7 +182,7 @@ export default class ProductoService {
 			}
 			else {
 				console.log(data);
-				alert("Error al modificar el producto");
+				//alert("Error al modificar el producto");
 			}
 
 		} catch (err) {
