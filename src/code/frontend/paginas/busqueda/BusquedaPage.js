@@ -25,9 +25,8 @@ export default function BusquedaPage() {
         window.scrollTo(0, 0);
     },[filtros])
 
-    const handlerSubmitFiltros = (e) => {
-        history.push("/busqueda?q="+query+"&type=" + e.tipo);
-        console.log(e);
+    const handlerSubmitFiltros = (e, b) => {
+        history.push("/busqueda?q="+b+"&type=" + e.tipo);
         setFiltros(e);
     }
     return <>
