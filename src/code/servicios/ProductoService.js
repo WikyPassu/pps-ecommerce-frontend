@@ -1,4 +1,5 @@
 import UtilsService from "./UtilsService";
+import FacturasService from "./VentasService";
 export default class ProductoService {
 	static productos = [];
 	static observers = [];
@@ -68,10 +69,68 @@ export default class ProductoService {
 	 */
 	static async getMasVendido() {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendido);
-			const data = await res.json();
-			this.notifySubscribers();
-			return data.producto;
+			// const res = await fetch(UtilsService.getUrlsApi().productos.traerMasVendido);
+			// const data = await res.json();
+			// this.notifySubscribers();
+			// return data.producto;
+			let ventas;
+			const items = [];
+			FacturasService.getPagosFromMercadoPago()
+			.then(pagos => {
+				ventas = pagos;
+				ventas.forEach(pago => {	
+					pago.items.forEach(item => {
+						if(!item.title.includes("Servicio")){
+							items.push({
+								producto: item.title,
+								cantidad: parseInt(item.quantity)
+							});
+						}
+					});
+				});
+				console.log(items);
+				// let productos = [];
+				// for(let i=0; i<items.length; i++){
+				// 	let contador = 0;
+				// 	for(let j=0; j<productos.length; j++){
+				// 		if(items[i].producto === productos[j].producto){
+				// 			contador++;
+				// 			//productos[j].cantidad += items[i].cantidad;
+				// 		}
+				// 	}
+				// 	if(!contador){
+				// 		productos.push(items[i]);
+				// 	}
+				// }
+				// productos.forEach(producto => producto.cantidad = 0);
+				let previous = items.reduce((previous, current) => {
+					// console.log("Prevoius: ", previous);
+					// console.log("\nCurrent: ", current);
+					let existeProducto = previous.find(c => c.producto === current.producto);
+					if(existeProducto){
+						previous = previous.map(c => {
+							if(c.producto === current.producto){
+								let suma = c.cantidad + current.cantidad;
+								c.cantidad = suma;
+							}
+							return c;
+						});
+					}
+					else{
+						previous.push(current);
+					}
+					return previous;
+				},[]);
+				console.log("Reduced", previous);
+				// items.forEach(item => {
+				// 	productos.forEach(producto => {
+				// 		if(item.producto === producto.producto){
+				// 			producto.cantidad += item.cantidad;
+				// 		}
+				// 	});
+				// });
+				//console.log(productos);
+			});
 		} catch (err) {
 			console.log(err);
 		}
