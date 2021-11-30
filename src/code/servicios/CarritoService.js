@@ -17,9 +17,9 @@ export default class CarritoService {
 	static async iniciarServicio() {
 		console.log("Carrito servicio iniciado");
 		const cookies = new Cookies();
-		let items = cookies.get("items");
+		let items = cookies.get("items",{path:"/"});
 		if (!items) {
-			cookies.set("items", []);
+			cookies.set("items", [],{path:"/"});
 			return [];
 		}
 		else {
@@ -66,9 +66,9 @@ export default class CarritoService {
 		}
 		this.notifySubscribers();
 		const cookies = new Cookies();
-		let items = cookies.get("items");
+		let items = cookies.get("items",{path:"/"});
 		items.push(unItem);
-		cookies.set("items", items);
+		cookies.set("items", items,{path:"/"});
 	}
 
 	/**
@@ -79,9 +79,9 @@ export default class CarritoService {
 		this.items_carrito_compras = this.items_carrito_compras.filter(c => c._id !== _id);
 		this.notifySubscribers();
 		const cookies = new Cookies();
-		let items = cookies.get("items");
+		let items = cookies.get("items",{path:"/"});
 		items = items.filter(item => item._id !== _id);
-		cookies.set("items", items);
+		cookies.set("items", items,{path:"/"});
 	}
 
 	/**
@@ -105,9 +105,9 @@ export default class CarritoService {
 			this.items_carrito_compras.push(itemEnvio);
 			this.notifySubscribers();
 			const cookies = new Cookies();
-			let items = cookies.get("items");
+			let items = cookies.get("items",{path:"/"});
 			items.push(itemEnvio);
-			cookies.set("items", items);
+			cookies.set("items", items,{path:"/"});
 		}
 	}
 
@@ -118,9 +118,9 @@ export default class CarritoService {
 		this.items_carrito_compras = this.items_carrito_compras.filter((c) => c._id !== "envios");
 		this.notifySubscribers();
 		const cookies = new Cookies();
-		let items = cookies.get("items");
+		let items = cookies.get("items",{path:"/"});
 		items = items.filter(item => item._id !== "envios");
-		cookies.set("items", items);
+		cookies.set("items", items,{path:"/"});
 	}
 
 		/**
@@ -129,7 +129,8 @@ export default class CarritoService {
 		 static removeAllItems() {
 			this.items_carrito_compras = [];
 			const cookies = new Cookies();
-			cookies.set("items", []);
+			cookies.remove("items",{path:"/"})
+			cookies.set("items",[],{path:"/"});
 			this.notifySubscribers();
 		}
 
@@ -147,14 +148,17 @@ export default class CarritoService {
 	 */
 	static async descontarStockItemsCarrito(){
 		try {
+			await this.iniciarServicio();
 			const items = this.items_carrito_compras;
+			console.log("ITEMS ",items)
 			for(let i=0;i<items.length;i++){
 				let current = items[i];
 				current.item.existencia = current.item.existencia - current.cantidad;
 				if(current.item.existencia <= 0){
 					current.item.estado = "SIN_STOCK";
 				}
-				await ProductoService.modifyProducto(current.item);
+				let res = await ProductoService.modifyProducto(current.item);
+				console.log("actualizacion del stock ",res)
 			}
 			return true;
 		} catch (error) {

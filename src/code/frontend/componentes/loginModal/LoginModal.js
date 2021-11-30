@@ -87,7 +87,6 @@ export default function LoginModal(props) {
         ClienteService.login(formLogin.correo, formLogin.clave)
             .then((value) => {
                 if(value){
-                    UtilsService.setLoading(false);
                     window.location.reload();
                     props.onHide();
                 }
@@ -97,6 +96,9 @@ export default function LoginModal(props) {
             })
             .catch(()=>{
                 alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
+            })
+            .finally(()=>{
+                UtilsService.setLoading(false);
             })
     }
 

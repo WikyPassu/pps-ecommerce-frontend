@@ -166,7 +166,7 @@ export default class ProductoService {
 	static async modifyProducto(item) {
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
-
+		console.log("modify producto",item)
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().productos.modificar, {
 				method: 'PUT',

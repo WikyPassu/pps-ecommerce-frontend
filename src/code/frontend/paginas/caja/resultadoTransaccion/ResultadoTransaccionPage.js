@@ -11,6 +11,7 @@ function ResultadoTransaccionPage() {
             if (params.resultado === "exitoso") {
                 let res = await CarritoService.descontarStockItemsCarrito();
                 if(res){
+                    // alert("aca deberian borrarse las cookies")
                     await CarritoService.removeAllItems();
                 }
             }
