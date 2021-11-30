@@ -21,10 +21,8 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        //console.log(name,value);
         //Guardar cambios
         if (name === "existencia" || name === "existenciaMinima" || name === "existenciaMaxima") {
-            console.log("name", name)
             setProducto({
                 ...producto,
                 [name]: parseInt(value)
@@ -62,7 +60,6 @@ export default function FormProductoModal({ produtoParaModificar, onHide, show }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("SEN ENVIO FORMULARIO", producto);
         (modificar === true) ? ProductoService.modifyProducto(producto) : ProductoService.addProducto(producto);
         onHide();
     }

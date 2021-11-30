@@ -1,5 +1,3 @@
-import React from 'react'
-console.log('Configuracion Frontend servicios iniciado');
 import samples from "../../samples/storefront.json";
 export default class StorefrontService {
 	static configuracion = {
@@ -18,7 +16,6 @@ export default class StorefrontService {
 	}
 
 	static async iniciarServicio() {
-		console.log('Servicio Storefront iniciado');
 		this.configuracion = samples[0];//SOLO DEBE HACER UN SOLO OBJETO DE CONFIGURACION
 		return samples;
 	}

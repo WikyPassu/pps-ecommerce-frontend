@@ -20,8 +20,6 @@ export default function Resultados({ busqueda, tipo, filtros }) {
                 newList = await ProductoService.getProductosPorBusqueda(busqueda);
                 setTipoArticulo("PRODUCTO")
             }
-            console.log("Filtros: ",filtros);
-            console.log("resultados: ", newList);
             if(filtros){
                 if(filtros.categoria){
                     newList = newList?.filter((c)=>{
@@ -40,7 +38,6 @@ export default function Resultados({ busqueda, tipo, filtros }) {
                 }
             }
             if(newList && newList.length){
-                console.log("new List",newList)
                 setLista(newList);
             }
             else{

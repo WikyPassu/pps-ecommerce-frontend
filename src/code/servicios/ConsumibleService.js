@@ -21,7 +21,6 @@ export default class ConsumibleService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().consumible.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			this.consumibles = data.consumibles;
 			this.notifySubscribers();
 			return this.consumibles;
@@ -94,7 +93,6 @@ export default class ConsumibleService {
 				body: JSON.stringify({ consumible: newItem })
 			});
 			const data = await res.json();
-			console.log(data);
 			this.consumibles.push(data.consumible);
 			this.iniciarServicio();
 		} catch (err) {
@@ -113,15 +111,13 @@ export default class ConsumibleService {
 		_id = _id._id;
 
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().consumible.modificar, {
+			await fetch(UtilsService.getUrlsApi().consumible.modificar, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id, consumible: item })
 			});
-			const data = await res.json();
-			console.log(data);
 			item._id = _id;
 			this.consumibles = this.consumibles.map((c) => (c._id === item._id) ? item : c);
 			this.notifySubscribers();
@@ -136,15 +132,13 @@ export default class ConsumibleService {
 	 */
 	static async removeConsumible(_id) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().consumible.eliminar, {
+			await fetch(UtilsService.getUrlsApi().consumible.eliminar, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.consumibles = this.consumibles.filter((c) => (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
@@ -160,16 +154,14 @@ export default class ConsumibleService {
 	static async registrarConsumibleUsado(idConsumible, cantidadUsada){
 		//Basicamente es un modify consumible pero mas amigable
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().consumible.actualizar, {
+			await fetch(UtilsService.getUrlsApi().consumible.actualizar, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: idConsumible, cantidadUsada })
 			});
-			const data = await res.json();
 			this.iniciarServicio();
-			console.log(data);
 		} catch (err) {
 			console.log(err);
 		}

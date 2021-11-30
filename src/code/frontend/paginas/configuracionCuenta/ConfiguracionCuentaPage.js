@@ -35,7 +35,6 @@ function ConfiguracionCuentaPage() {
                 setUsuario(usuarioLogeado);
                 setTurnos(TurnoService.getTurnosPorDni(usuarioLogeado.dni));
                 const pagosEncontrados = await FacturasService.getPaymentsByEmail(usuarioLogeado.correo);
-                console.log("PAGOS DEL USUARIO: ", pagosEncontrados);
                 setPagos(pagosEncontrados);
             }
         }

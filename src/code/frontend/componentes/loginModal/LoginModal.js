@@ -121,12 +121,9 @@ export default function LoginModal(props) {
             alert("Por favor, ingrese un apellido válido");
             return;
         }
-
-        console.log("forRegistracion", formRegistracion)
         
         ClienteService.signUp(formRegistracion)
             .then(() => {
-                console.log("usuarioLogeado", ClienteService.getUsuario())
                 window.location.reload();
                 props.onHide();
             })
