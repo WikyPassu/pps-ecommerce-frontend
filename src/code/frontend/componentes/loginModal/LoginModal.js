@@ -73,7 +73,7 @@ export default function LoginModal(props) {
     const hasNumeros = (str)=>{
         for (let i = 0; i < str.length; i++) {
             let letra = str.charAt(i);
-            if (!(letra == ' ')){
+            if (!(letra === ' ')){
                 if (!isNaN(letra)) {
                     return true;
                 }
@@ -85,10 +85,18 @@ export default function LoginModal(props) {
         e.preventDefault();
         UtilsService.setLoading(true);
         ClienteService.login(formLogin.correo, formLogin.clave)
-            .then(() => {
-                UtilsService.setLoading(false);
-                window.location.reload();
-                props.onHide();
+            .then((value) => {
+                if(value){
+                    UtilsService.setLoading(false);
+                    window.location.reload();
+                    props.onHide();
+                }
+                else{
+                    alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
+                }
+            })
+            .catch(()=>{
+                alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
             })
     }
 

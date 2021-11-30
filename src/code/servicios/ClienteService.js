@@ -163,10 +163,13 @@ export default class ClienteService{
 			});
 			const data = await res.json();
 			console.log(data);
-			this.usuario = data.usuario;
-			const cookies = new Cookies();
-			cookies.set("usuario", data.usuario);
-			Promise.resolve(data.exito);
+			if(data.usuario){
+				this.usuario = data.usuario;
+				const cookies = new Cookies();
+				cookies.set("usuario", data.usuario);
+				return true;
+			}
+			Promise.reject();
 		} catch (err) {
 			console.log(err);
 			Promise.reject(err);

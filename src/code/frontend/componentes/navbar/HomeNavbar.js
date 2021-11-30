@@ -17,7 +17,7 @@ export default function HomeNavbar() {
         
         const paginaActual = window.location.pathname;
         
-        if(paginaActual == "/home"){
+        if(paginaActual === "/home"){
             window.location.reload();
         }
         else{
