@@ -89,7 +89,6 @@ export default function LoginModal(props) {
             const usuarioLogueado = ClienteService.getUsuario();
             if(usuarioLogueado.estado !== "BAJA"){
                 if(value){
-                    UtilsService.setLoading(false);
                     window.location.reload();
                     props.onHide();
                 }
@@ -103,6 +102,9 @@ export default function LoginModal(props) {
         })
         .catch(()=>{
             alert("No se ha podido iniciar sesion. Verifique que los datos ingresados sean correctos");
+        })
+        .finally(()=>{
+            UtilsService.setLoading(false);
         })
     }
 
