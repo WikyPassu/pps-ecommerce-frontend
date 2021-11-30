@@ -13,6 +13,7 @@ function HomeCarrusel() {
         const getMasVendidos = async () =>{
             let producto = await ProductoService.getMasVendido();
             let servicio = await ServicioService.getMasVendido();
+            console.log("Servucui ebcitbradi ", producto);
             setServicioMasVendido(servicio);
             setProductoMasVendido(producto);
         }

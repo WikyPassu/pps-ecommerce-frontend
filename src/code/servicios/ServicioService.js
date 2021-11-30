@@ -1,6 +1,7 @@
 import UtilsService from "./UtilsService";
 import ComsumiblesService from "./ConsumibleService";
 import TurnoService from "./TurnoService";
+import FacturasService from "./VentasService";
 
 export default class ServicioService {
 	static servicios = [];
@@ -85,10 +86,60 @@ export default class ServicioService {
 	  */
 	static async getMasVendido() {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().servicio.traerMasVendido);
-			const data = await res.json();
-			this.notifySubscribers();
-			return data.servicio;
+			let pagos = await FacturasService.getPagosFromMercadoPago()
+
+
+			const items = pagos
+				.reduce((prev, curr) => {
+					return [...prev, ...curr.items];
+				}, [])
+				.filter((c) => {
+					return c.title.includes("Servicio");
+				})
+				.map((c) => {
+					return {
+						producto: c.title,
+						cantidad: parseInt(c.quantity)
+					}
+				})
+
+			let itemMaxVendido = items.reduce((previous, current) => {
+				let existeProducto = previous.find(c => c.producto === current.producto);
+				if (existeProducto) {
+					return previous.map(c => {
+						if (c.producto === current.producto) {
+							let suma = c.cantidad + current.cantidad;
+							c.cantidad = suma;
+						}
+						return c;
+					});
+				}
+				else {
+					previous.push(current);
+					return previous;
+				}
+
+			}, [])
+				.filter((c) => {
+					return this.getServicios().find((v) => {
+						return v.nombre === c.producto;
+					}) ? true : false;
+				})
+				.reduce((prev, curr) => {
+					if (!prev) {
+						return curr;
+					}
+					if (curr.cantidad > prev.cantidad) {
+						return curr;
+					}
+					else {
+						return prev;
+					}
+				}, null)
+				
+
+			return this.getServicios().find((c) => c.nombre === itemMaxVendido.producto);
+
 		} catch (err) {
 			console.log(err);
 		}
