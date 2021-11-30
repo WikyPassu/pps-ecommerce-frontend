@@ -208,8 +208,7 @@ export default class FacturasService {
 	}
 
 	/**
-	 * @todo NO FUNCIONA. TIRA ERROR DE CORS. POSIBLEMENTE SEA CULPA DE MELI
-	 * @param {*} orderId 
+	 * @param {*} paymentId 
 	 * @returns 
 	 */
 	static async getPayerByPaymentId(paymentId) {
@@ -228,6 +227,27 @@ export default class FacturasService {
 			console.log(error)
 		}
 	}
+
+	/**
+	 * @param {*} email 
+	 * @returns 
+	 */
+		 static async getPaymentsByEmail(email) {
+			try {
+				let res = await axios({
+					url:UtilsService.getUrlsApi().metodoPago.obtenerPagosPorEmail,
+					method:"post",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					data:{email}
+				})
+				let data = res.data;
+				return data;
+			} catch (error) {
+				console.log(error)
+			}
+		}
 
 
 

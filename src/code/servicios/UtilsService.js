@@ -76,7 +76,8 @@ export default class UtilsService {
         return {
             metodoPago:{
                 realizarPago:URLAPI+"/metodoPago/realizarPago",
-                obtenerComprador:URLAPI+"/metodoPago/obtenerComprador"
+                obtenerComprador:URLAPI+"/metodoPago/obtenerComprador",
+                obtenerPagosPorEmail:URLAPI+"/metodoPago/obtenerPagosPorEmail"
             },
             productos:{
                 agregar:URLAPI+"/producto/agregar", 
