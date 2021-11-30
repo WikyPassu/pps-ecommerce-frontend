@@ -20,6 +20,30 @@ export default class UtilsService {
         })
     }
 
+    static ponerMayusIniciales(str){
+        str = str.toLowerCase();
+        str = str.charAt(0).toUpperCase() + str.slice(1);
+        
+        for (let i = 1; i < str.length; i++) {
+            let letra = str.charAt(i - 1);
+            if (letra === ' '){
+                str = str.slice(0, i) + str.charAt(i).toUpperCase() + str.slice(i + 1);
+            }
+        }
+        return str;
+    }
+
+    static hasNumeros = (str)=>{
+        for (let i = 0; i < str.length; i++) {
+            let letra = str.charAt(i);
+            if (!(letra === ' ')){
+                if (!isNaN(letra)) {
+                    return true;
+                }
+            }
+        }
+    };
+
     /**
      * Muestra o desaparece icono de cargar el parametro que se ingresa
      * @param {*} state 

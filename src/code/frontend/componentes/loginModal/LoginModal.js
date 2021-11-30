@@ -70,17 +70,6 @@ export default function LoginModal(props) {
         })
     }
 
-    const hasNumeros = (str)=>{
-        for (let i = 0; i < str.length; i++) {
-            let letra = str.charAt(i);
-            if (!(letra === ' ')){
-                if (!isNaN(letra)) {
-                    return true;
-                }
-            }
-        }
-    };
-
     const handlerSubmitLogin = (e) => {
         e.preventDefault();
         UtilsService.setLoading(true);
@@ -113,20 +102,23 @@ export default function LoginModal(props) {
         const nombre = formRegistracion.nombre;
         const apellido = formRegistracion.apellido;
 
-        if(hasNumeros(nombre)){
+        if(UtilsService.hasNumeros(nombre)){
                 alert("Por favor, ingrese un nombre válido");
                 return;
         }
-        else if(hasNumeros(apellido)){
+        else if(UtilsService.hasNumeros(apellido)){
             alert("Por favor, ingrese un apellido válido");
             return;
         }
+
+        formRegistracion.nombre = UtilsService.ponerMayusIniciales(formRegistracion.nombre);
+        formRegistracion.apellido = UtilsService.ponerMayusIniciales(formRegistracion.apellido);
         
         ClienteService.signUp(formRegistracion)
             .then(() => {
                 window.location.reload();
                 props.onHide();
-            })
+            });
     }
     const existeLocalidad = (localidad) => {
         return EnviosService.getPrecioEnvios().find((c) => {
