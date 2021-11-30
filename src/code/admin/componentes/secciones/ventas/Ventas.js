@@ -54,10 +54,9 @@ export default function Ventas() {
       <Grafico datos={FacturasService.getPagosPorMes()} titulo="Cantidad de Ventas" />
       <br />
       <Listado
-        columnas={["ID", "Total", "Fecha", "Comprador", "Estado"]}
-        atributos={["id", "amount", "date_created", "payer", "status"]}
+        columnas={["ID", "Total", "Fecha", "Estado"]}
+        atributos={["id", "amount", "date_created", "status"]}
         attrKey={"id"}
-        attrFuncs={[{ columnaIndex: 3, attrFunc: (c) => c.email }]}
         onShowClick={(e) => {
           console.log(e)
           setMostrarDetalleModal(true);

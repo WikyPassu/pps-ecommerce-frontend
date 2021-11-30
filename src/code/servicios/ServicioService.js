@@ -24,7 +24,6 @@ export default class ServicioService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			this.servicios = !data.servicios ? [] : data.servicios.map((c) => {
 				if (c.categoria === "banio") {
 					c.duracion = 60
@@ -72,7 +71,6 @@ export default class ServicioService {
 				body: JSON.stringify({ busqueda: busqueda }),
 			});
 			const data = await res.json();
-			console.log(data);
 			this.notifySubscribers();
 
 			return data.servicios;
@@ -89,9 +87,7 @@ export default class ServicioService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().servicio.traerMasVendido);
 			const data = await res.json();
-			console.log("SERVICIO MAS VENDIDO", data);
 			this.notifySubscribers();
-
 			return data.servicio;
 		} catch (err) {
 			console.log(err);
@@ -105,14 +101,12 @@ export default class ServicioService {
 	 * @returns 
 	 */
 	static async getServiciosOrdenados(tipoOrden) {
-		console.info(this.servicios);
 
 		switch (tipoOrden) {
 			case "MAS_VENDIDOS":
 				try {
 					const res = await fetch(UtilsService.getUrlsApi().servicios.traerMasVendidos);
 					const data = await res.json();
-					console.log(data);
 					this.servicios = data.servicios;
 					this.notifySubscribers();
 
@@ -125,7 +119,6 @@ export default class ServicioService {
 				console.error("ERROR: codigo inalcanzable");
 				break;
 		}
-		console.info(this.servicios);
 		return this.servicios;
 	}
 
@@ -137,15 +130,13 @@ export default class ServicioService {
 	 */
 	static async addServicio(newItem) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().servicio.agregar, {
+			await fetch(UtilsService.getUrlsApi().servicio.agregar, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ servicio: newItem })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.servicios.push(newItem);
 			//this.notifySubscribers();
 			this.iniciarServicio();
@@ -165,15 +156,13 @@ export default class ServicioService {
 		_id = _id._id;
 
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().servicio.modificar, {
+			await fetch(UtilsService.getUrlsApi().servicio.modificar, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id, servicio: item })
 			});
-			const data = await res.json();
-			console.log(data);
 			item._id = _id;
 			this.servicios = this.servicios.map((c) => (c._id === item._id) ? item : c);
 			this.notifySubscribers();
@@ -188,15 +177,13 @@ export default class ServicioService {
 	 */
 	static async removeServicio(_id) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().servicio.eliminar, {
+			await fetch(UtilsService.getUrlsApi().servicio.eliminar, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.servicios = this.servicios.filter((c) => (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
@@ -213,18 +200,14 @@ export default class ServicioService {
 	static async addResenia(resenia, idServicio) {
 		try {
 			let servicio = this.getServicioPorId(idServicio);
-			console.log("Servicio Encontrado: ", servicio);
-			console.log("Resenia a agregar: ", resenia);
 			if (servicio) {
-				const res = await fetch(UtilsService.getUrlsApi().resenia.agregar, {
+				await fetch(UtilsService.getUrlsApi().resenia.agregar, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({ resenia: resenia })
 				});
-				const data = await res.json();
-				console.log(data);
 				servicio.resenias.push(resenia);
 				this.modifyServicio(servicio);
 				this.notifySubscribers();
@@ -254,19 +237,7 @@ export default class ServicioService {
 	 */
 	static async removeResenia(idResenia, idServicio) {
 		let servicio = this.getServicioPorId(idServicio);
-
-
 		try {
-			// const res = await fetch(UtilsService.getUrlsApi().resenia.eliminar, {
-			// 	method: 'DELETE',
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	},
-			// 	body: JSON.stringify({ _id: idResenia })
-			// });
-			//this.modifyServicio(servicio);
-			// const data = await res.json();
-			// console.log(data);
 			servicio.resenias = servicio.resenias.filter(r => r._id !== idResenia);
 			await this.modifyServicio(servicio);
 			this.notifySubscribers();
@@ -280,7 +251,6 @@ export default class ServicioService {
 			precio: 0,
 			consumibles: []
 		};
-		console.log("servicio a calcular", servicio)
 		const {consumible, gramosPerroPorUnidad, porcentajeGanancia} = servicio.costo;
 		let consumibleOriginal = ComsumiblesService.getConsumiblePorNombre(consumible);
 		let costoComsumible = {
@@ -299,7 +269,7 @@ export default class ServicioService {
 		else{
 			costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
 		}
-
+		costo.precio = parseInt(costo.precio);
 		costo.consumibles.push(costoComsumible)
 		return costo;
 	}

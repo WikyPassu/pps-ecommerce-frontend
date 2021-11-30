@@ -1,4 +1,3 @@
-console.log('Utils service iniciado');
 //const URLAPI = "http://localhost:8080";
 const URLAPI = "https://api-ppc.herokuapp.com";
 
@@ -20,6 +19,30 @@ export default class UtilsService {
             current(this.loading);
         })
     }
+
+    static ponerMayusIniciales(str){
+        str = str.toLowerCase();
+        str = str.charAt(0).toUpperCase() + str.slice(1);
+        
+        for (let i = 1; i < str.length; i++) {
+            let letra = str.charAt(i - 1);
+            if (letra === ' '){
+                str = str.slice(0, i) + str.charAt(i).toUpperCase() + str.slice(i + 1);
+            }
+        }
+        return str;
+    }
+
+    static hasNumeros = (str)=>{
+        for (let i = 0; i < str.length; i++) {
+            let letra = str.charAt(i);
+            if (!(letra === ' ')){
+                if (!isNaN(letra)) {
+                    return true;
+                }
+            }
+        }
+    };
 
     /**
      * Muestra o desaparece icono de cargar el parametro que se ingresa
@@ -76,7 +99,8 @@ export default class UtilsService {
         return {
             metodoPago:{
                 realizarPago:URLAPI+"/metodoPago/realizarPago",
-                obtenerComprador:URLAPI+"/metodoPago/obtenerComprador"
+                obtenerComprador:URLAPI+"/metodoPago/obtenerComprador",
+                obtenerPagosPorEmail:URLAPI+"/metodoPago/obtenerPagosPorEmail"
             },
             productos:{
                 agregar:URLAPI+"/producto/agregar", 

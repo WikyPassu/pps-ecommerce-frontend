@@ -15,9 +15,11 @@ export default function Turnos() {
     setLista(nuevaLista);
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     TurnoService.iniciarServicio();
-  },[])
+  }, [])
+
+  //window.location.reload();
   return (<>
     <label className="titulo-seccion">Turnos</label>
     {/* <Button className="btn-agregar" onClick={() => setModalForm(true)}>Agregar Turno</Button> */}
@@ -25,33 +27,33 @@ export default function Turnos() {
       show={modalForm}
       onHide={() => { setModalForm(false) }} />}
     <Listado
-    columnas={[
-          "ID",
-          "Servicio",
-          "Precio",
-          "DNI Cliente",
-          "DNI Empleado",
-          "Fecha",
-          "Estado"
-        ]}
-    atributos={[
-      "_id",
-      "servicio",
-      "precio",
-      "dniCliente",
-      "dniEmpleado",
-      "fecha",
-      "estado"
-    ]}
-    attrFuncs={[
-      {columnaIndex:1,attrFunc:(value,obj)=>value.nombre},
-      {columnaIndex:5,attrFunc:UtilsService.timeStampToStringDate}
-    ]}
+      columnas={[
+        "ID",
+        "Servicio",
+        "Precio",
+        "DNI Cliente",
+        "DNI Empleado",
+        "Fecha",
+        "Estado"
+      ]}
+      atributos={[
+        "_id",
+        "servicio",
+        "precio",
+        "dniCliente",
+        "dniEmpleado",
+        "fecha",
+        "estado"
+      ]}
+      attrFuncs={[
+        { columnaIndex: 1, attrFunc: (value, obj) => value.nombre },
+        { columnaIndex: 5, attrFunc: UtilsService.timeStampToStringDate }
+      ]}
       onEditClick={(e) => {
         setMostrarModalModificar(true);
         setElementoModificar(e);
       }}
-      onDeleteClick={(p)=>{TurnoService.removeTurno(p._id)}}
+      onDeleteClick={(p) => { TurnoService.removeTurno(p._id) }}
       attrKey="_id"
       datos={lista}></Listado>
     {mostrarModalModificar && <FormTurnoModal

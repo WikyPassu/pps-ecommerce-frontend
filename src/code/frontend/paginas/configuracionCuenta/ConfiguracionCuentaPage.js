@@ -7,17 +7,23 @@ import UtilsService from '../../../servicios/UtilsService';
 import FormDatosCliente from '../../componentes/configuracionCuenta/formDatosCliente/FormDatosCliente';
 import Listado from '../../componentes/listado/Listado';
 import ModalTurno from '../../componentes/configuracionCuenta/modalTurno/ModalTurno';
+import FacturasService from '../../../servicios/VentasService';
+import ModalPago from '../../componentes/configuracionCuenta/modalPago/ModalPago';
 
 function ConfiguracionCuentaPage() {
 
     const [usuario, setUsuario] = useState(null);
-    //const [pagos, setPagos] = useState([]);
+
     const [turnos, setTurnos] = useState([]);
     const [turnoMostrar, setTurnoMostrar] = useState(null);
     const [modalTurno, setModalTurno] = useState(false);
 
-    TurnoService.subscribe(()=>{
-        if(usuario)
+    const [pagos, setPagos] = useState([]);
+    const [pagoMostrar, setPagoMostrar] = useState(null);
+    const [modalPago, setModalPago] = useState(false);
+
+    TurnoService.subscribe(() => {
+        if (usuario)
             setTurnos(TurnoService.getTurnosPorDni(usuario.dni))
     })
 
@@ -27,7 +33,9 @@ function ConfiguracionCuentaPage() {
             const usuarioLogeado = ClienteService.getUsuario();
             if (usuarioLogeado) {
                 setUsuario(usuarioLogeado);
-                setTurnos(TurnoService.getTurnosPorDni(usuarioLogeado.dni))
+                setTurnos(TurnoService.getTurnosPorDni(usuarioLogeado.dni));
+                const pagosEncontrados = await FacturasService.getPaymentsByEmail(usuarioLogeado.correo);
+                setPagos(pagosEncontrados);
             }
         }
         obtenerDatos().finally(() => {
@@ -49,6 +57,11 @@ function ConfiguracionCuentaPage() {
             show={modalTurno}
             turno={turnoMostrar}
             onHide={() => { setModalTurno(false) }} />}
+        {modalPago && <ModalPago
+            show={modalPago}
+            pago={pagoMostrar}
+            onHide={() => { setModalPago(false) }} />}
+
         <div className="configuracion-cuenta">
             <div className="datos-cliente">
                 <FormDatosCliente datosUsuario={usuario} onSubmit={handlerSubmit} />
@@ -59,7 +72,7 @@ function ConfiguracionCuentaPage() {
                     <Listado
                         datos={turnos}
                         attrKey="_id"
-                        atributos={["Fecha", "Precio", "Servicio", "Estado"]}
+                        atributos={["fecha", "precio", "servicio", "estado"]}
                         attrFuncs={[
                             {
                                 columnaIndex: 0, attrFunc: (value) => {
@@ -68,7 +81,7 @@ function ConfiguracionCuentaPage() {
                             },
                             {
                                 columnaIndex: 1, attrFunc: (value) => {
-                                    return "$" + UtilsService.priceFormater(value);
+                                    return "$" + (value ? UtilsService.priceFormater(value) : value);
                                 }
                             },
                             {
@@ -80,6 +93,21 @@ function ConfiguracionCuentaPage() {
                         onShowClick={(e) => {
                             setTurnoMostrar(e)
                             setModalTurno(true);
+                        }}
+                    />
+                </div>
+            </div>
+            <div className="lista-pagos">
+                <h2>Mis Pagos</h2>
+                <div className="lista">
+                    <Listado
+                        datos={pagos}
+                        attrKey="id" 
+                        columnas={["Monto", "Fecha", "Estado"]}
+                        atributos={["transaction_amount", "date_approved", "status"]}
+                        onShowClick={(e) => {
+                            setPagoMostrar(e)
+                            setModalPago(true);
                         }}
                     />
                 </div>

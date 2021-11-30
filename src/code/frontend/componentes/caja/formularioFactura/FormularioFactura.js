@@ -26,7 +26,6 @@ function FormularioFactura() {
     const history = useHistory();
 
     CarritoService.subscribe(()=>{
-        console.log("HAY ENVIOS: ",CarritoService.getItems().find((c)=>c._id === "envios")?"si":"no");
         setEnvios(CarritoService.getItems().find((c)=>c._id === "envios")?"si":"no")
     })
 

@@ -22,7 +22,6 @@ export default class TurnoService {
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().turno.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			if (data.exito) {
 				this.turnos = data.turnos.sort((a,b)=>{
 					let dateA = new Date(a.fecha).getTime();
@@ -65,7 +64,6 @@ export default class TurnoService {
 				body: JSON.stringify({ _id })
 			});
 			const data = await res.json();
-			console.log(data);
 			if (data.exito) {
 				return data.turnos[0];
 			}
@@ -87,15 +85,13 @@ export default class TurnoService {
 	 */
 	static async addTurno(newItem) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().turno.agregar, {
+			await fetch(UtilsService.getUrlsApi().turno.agregar, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ turno: newItem })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.turnos.push(newItem);
 			this.iniciarServicio();
 		} catch (err) {
@@ -108,7 +104,6 @@ export default class TurnoService {
 	 * @param {*} item 
 	 */
 	static async modifyTurno(item, descontarStockConsumibles = false) {
-		console.log("TURNO A MODIFICAR: ", item, descontarStockConsumibles)
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
 
@@ -127,7 +122,6 @@ export default class TurnoService {
 						await ConsumibleService.registrarConsumibleUsado(c.consumible._id, c.cantidad);
 					})
 				}
-				console.log(data);
 				item._id = _id;
 				this.turnos = this.turnos.map((c) => (c._id === _id) ? item : c);
 			}
@@ -143,19 +137,20 @@ export default class TurnoService {
 	 */
 	static async removeTurno(_id) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().turno.eliminar, {
+			await fetch(UtilsService.getUrlsApi().turno.eliminar, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.turnos = this.turnos.filter((c) => (c._id !== _id));
+			this.notifySubscribers();
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
+			this.notifySubscribers();
+			this.iniciarServicio();
 		}
 	}
 }

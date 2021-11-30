@@ -11,7 +11,6 @@ export default function ListaResenias({listaResenias, servicio}) {
             return ClienteService.getUsuario();
         })
         setLista(()=>{
-            console.log("seteando lista")
             return listaResenias.filter((c)=>c.estado === "ACEPTADA");
         })
     },[listaResenias])
@@ -25,7 +24,7 @@ export default function ListaResenias({listaResenias, servicio}) {
         {(!lista.length)?
         <div className="no-resenias">No se han encontrado reseñas</div> : 
         <div>
-            {lista.map(c=><Resenia resenia={c} key={c._id} usuarioLogeado={usuarioLogeado} onClickEliminar={handlerClickEliminar} />)} {console.log(lista)}
+            {lista.map(c=><Resenia resenia={c} key={c._id} usuarioLogeado={usuarioLogeado} onClickEliminar={handlerClickEliminar} />)}
         </div>}
     </>)
 };

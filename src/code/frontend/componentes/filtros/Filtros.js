@@ -45,7 +45,7 @@ export default function Filtros({ onSumbit = () => { }, onReset = () => { }, def
         <hr />
         <Form onSubmit={handlerSumit} onReset={handlerReset}>
             <Form.Label>Buscar:</Form.Label>
-            <Form.Control required value={busqueda} onChange={handlerChange} type="text" name="busqueda" placeholder="Hola, qué busca?" />
+            <Form.Control required value={busqueda} onChange={handlerChange} type="text" name="busqueda" placeholder="Hola, ¿qué busca?" />
             <Form.Label>Tipo</Form.Label>
             <Form.Group controlId="formBasicCheckbox">
                 <Row>

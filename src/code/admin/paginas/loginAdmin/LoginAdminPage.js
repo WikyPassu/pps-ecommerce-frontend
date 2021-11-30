@@ -15,7 +15,6 @@ export default function LoginAdminPage() {
     const history = useHistory()
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("correo:"+usuario.correo,"clave: "+usuario.clave)
         let res = await EmpleadoService.login(usuario.correo,usuario.clave);
         if(res){
             history.push("/admin/home");

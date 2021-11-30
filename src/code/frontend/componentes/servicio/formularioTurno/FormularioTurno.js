@@ -36,7 +36,6 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
     const [diasNoDisponibles, setDiasNoDisponibles] = useState([]);
     const handlerChange = ({ target }) => {
         let { name, value } = target;
-        console.log(name,value)
         if (name === "hora" && value) {
             setFormulario((formulario) => {
                 return { ...formulario, "hora": value};
@@ -58,7 +57,6 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     "perrito": perritoEncontrado || initialValuesPerrito,
                 };
                 let { precio, consumibles } = ServicioService.calcularCostoDelServicio(servicio, newFormulario.perrito);
-                console.info(precio);
                 return {
                     ...newFormulario,
                     precio,
@@ -118,7 +116,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
         }
     }
     return <Form onSubmit={handlerSubmit} className="formulario-compra">
-        <Form.Group as={Row} controlId="formHorizontalEmail">
+        <Form.Group as={Row}>
             <Row sm={2}>
                 <Form.Label className="label-fecha-turno" htmlFor="fecha" column sm={4}>
                     Fecha del turno

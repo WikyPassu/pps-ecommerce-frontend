@@ -8,13 +8,10 @@ export default class EnviosService {
 	}
 
 	static async iniciarServicio() {
-		console.log("Servicio Envios iniciado");
         try {
 			const res = await fetch(UtilsService.getUrlsApi().precioEnvios.traerTodos);
 			const data = await res.json();
-			console.log(data);
 			this.precioEnvios = data.precioEnvioss;
-			console.log("PRECIO ENVIOS",this.precioEnvios);
 			this.notifySubscribers();
 			return this.precioEnvios;
 		} catch (err) {

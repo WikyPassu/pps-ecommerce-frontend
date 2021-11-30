@@ -15,7 +15,6 @@ export default class CarritoService {
 	 * @returns Array de items del carrito guardado en las cookies. Si no existe, devuelve array vacio.
 	 */
 	static async iniciarServicio() {
-		console.log("Carrito servicio iniciado");
 		const cookies = new Cookies();
 		let items = cookies.get("items",{path:"/"});
 		if (!items) {
@@ -47,7 +46,6 @@ export default class CarritoService {
 	 * 
 	 */
 	static addItem(item, cantidad = 1) {
-		console.log("Agregando item")
 		let unItem = {
 			_id: (new Date()).getTime(),
 			item,
@@ -90,7 +88,6 @@ export default class CarritoService {
 	 * @param {*} precio 
 	 */
 	static addEnvios() {
-		console.log("Agregando item")
 		let existeEnvio = this.items_carrito_compras.filter(i => i._id === "envios")[0];
 		if (existeEnvio == null) {
 			let localidad = ClienteService.getUsuario().localidad;
@@ -151,15 +148,13 @@ export default class CarritoService {
 		try {
 			await this.iniciarServicio();
 			const items = this.items_carrito_compras;
-			console.log("ITEMS ",items)
 			for(let i=0;i<items.length;i++){
 				let current = items[i];
 				current.item.existencia = current.item.existencia - current.cantidad;
 				if(current.item.existencia <= 0){
 					current.item.estado = "SIN_STOCK";
 				}
-				let res = await ProductoService.modifyProducto(current.item);
-				console.log("actualizacion del stock ",res)
+				await ProductoService.modifyProducto(current.item);
 			}
 			return true;
 		} catch (error) {

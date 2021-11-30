@@ -65,8 +65,6 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
                 return { ...elemento, usuarioRegistrado: cliente }
             })
             setListaTurnos(()=>{
-                console.log("TODOS LOS TURNOS: ",TurnoService.getTurnos());
-                console.log("TURNOS DEL DNI "+cliente.dni,TurnoService.getTurnosPorDni(cliente.dni)) 
                 return TurnoService.getTurnosPorDni(cliente.dni).filter((c)=>new Date(c.fecha).getTime()>Date.now());
             })
         }
@@ -109,7 +107,6 @@ export default function FormFacturaModal({ elementoParaModificar, onHide, show }
             .then(async (res) => {
                 if (res.ok) {
                     let jsonData = await res.json();
-                    console.log(jsonData);
                     window.location.href = jsonData.mercadoPago.response.init_point;
                 }
                 else {

@@ -19,7 +19,6 @@ export default function ListaProductos({listaProductos}) {
     useEffect(() => {
         const ordenarElementos = async () => {
             setLista(async (lista)=>{
-                console.warn("EL ORDENAMIENTO DE LA LISTA DE PRODUCTOS ESTA HARDCODEADA")
                 return await ProductoService.getProductosOrdenados("MAYOR_PRECIO")
             })
         }

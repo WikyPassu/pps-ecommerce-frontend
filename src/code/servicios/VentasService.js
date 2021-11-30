@@ -21,7 +21,6 @@ export default class FacturasService {
 	* @returns Array de objetos
 	*/
 	static async iniciarServicio() {
-		console.log('Servicio Facturas iniciado');
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().factura.traerTodas);
 			const data = await res.json();
@@ -52,15 +51,13 @@ export default class FacturasService {
 	 */
 	static async addFactura(newItem) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().factura.agregar, {
+			await fetch(UtilsService.getUrlsApi().factura.agregar, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ factura: newItem })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.facturas.push(newItem);
 			this.iniciarServicio();
 		} catch (err) {
@@ -79,15 +76,13 @@ export default class FacturasService {
 		_id = _id._id;
 
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().factura.modificar, {
+			await fetch(UtilsService.getUrlsApi().factura.modificar, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id, factura: item })
 			});
-			const data = await res.json();
-			console.log(data);
 			item._id = _id;
 			this.facturas = this.facturas.map((c) => (c._id === item._id) ? item : c);
 			this.notifySubscribers();
@@ -103,15 +98,13 @@ export default class FacturasService {
 	 */
 	static async removeFactura(_id) {
 		try {
-			const res = await fetch(UtilsService.getUrlsApi().factura.eliminar, {
+			await fetch(UtilsService.getUrlsApi().factura.eliminar, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ _id: _id })
 			});
-			const data = await res.json();
-			console.log(data);
 			this.facturas = this.facturas.filter((c) => (c._id !== _id));
 			this.iniciarServicio();
 		} catch (err) {
@@ -208,8 +201,7 @@ export default class FacturasService {
 	}
 
 	/**
-	 * @todo NO FUNCIONA. TIRA ERROR DE CORS. POSIBLEMENTE SEA CULPA DE MELI
-	 * @param {*} orderId 
+	 * @param {*} paymentId 
 	 * @returns 
 	 */
 	static async getPayerByPaymentId(paymentId) {
@@ -229,6 +221,27 @@ export default class FacturasService {
 		}
 	}
 
+	/**
+	 * @param {*} email 
+	 * @returns 
+	 */
+		 static async getPaymentsByEmail(email) {
+			try {
+				let res = await axios({
+					url:UtilsService.getUrlsApi().metodoPago.obtenerPagosPorEmail,
+					method:"post",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					data:{email}
+				})
+				let data = res.data;
+				return data;
+			} catch (error) {
+				console.log(error)
+			}
+		}
+d
 
 
 }

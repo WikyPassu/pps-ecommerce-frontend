@@ -143,7 +143,6 @@ export default class ProductoService {
 	 * @returns 
 	 */
 	static async getProductosOrdenados(tipoOrden) {
-		console.info(this.productos);
 		switch (tipoOrden) {
 			case "MAS_VENDIDOS":
 				try {
@@ -183,7 +182,6 @@ export default class ProductoService {
 				console.error("ERROR: codigo inalcanzable");
 				break;
 		}
-		console.info(this.productos);
 		return this.productos;
 	}
 
@@ -207,7 +205,6 @@ export default class ProductoService {
 				this.iniciarServicio();
 			}
 			else {
-				console.log(data);
 				alert("Error. No se pudo agregar el producto");
 			}
 		} catch (err) {
@@ -225,7 +222,6 @@ export default class ProductoService {
 	static async modifyProducto(item) {
 		let _id = JSON.parse(JSON.stringify(item))._id;
 		delete item._id;
-		console.log("modify producto",item)
 		try {
 			const res = await fetch(UtilsService.getUrlsApi().productos.modificar, {
 				method: 'PUT',
@@ -238,10 +234,6 @@ export default class ProductoService {
 			if (data.status === 200) {
 				this.productos = this.productos.map((c) => (c._id === item._id) ? item : c);
 				this.iniciarServicio();
-			}
-			else {
-				console.log(data);
-				//alert("Error al modificar el producto");
 			}
 
 		} catch (err) {
