@@ -100,15 +100,20 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        if (!formulario.fecha || !formulario.hora) {
-            alert("Por favor, asegurese de haber establecido una y horario validos");
-            return;
+        if(usuarioLogeado.estado === "ACTIVO"){
+            if (!formulario.fecha || !formulario.hora) {
+                alert("Por favor, asegurese de haber establecido una y horario validos");
+                return;
+            }
+            else if (window.confirm("¿Seguro que desea reservar este turno?")) {
+                let formularioToSend = formulario;
+                formularioToSend.servicio = servicio;
+                formularioToSend.dniCliente = usuarioLogeado.dni;
+                onSubmit(formularioToSend);
+            }
         }
-        else if (window.confirm("¿Seguro que desea reservar este turno?")) {
-            let formularioToSend = formulario;
-            formularioToSend.servicio = servicio;
-            formularioToSend.dniCliente = usuarioLogeado.dni;
-            onSubmit(formularioToSend);
+        else{
+            alert("No puede reservar turnos porque su usuario esta suspendido")
         }
     }
     return <Form onSubmit={handlerSubmit} className="formulario-compra">
