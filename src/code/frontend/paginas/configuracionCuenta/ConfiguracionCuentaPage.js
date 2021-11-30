@@ -59,7 +59,7 @@ function ConfiguracionCuentaPage() {
                     <Listado
                         datos={turnos}
                         attrKey="_id"
-                        atributos={["fecha", "precio", "servicio", "estado"]}
+                        atributos={["Fecha", "Precio", "Servicio", "Estado"]}
                         attrFuncs={[
                             {
                                 columnaIndex: 0, attrFunc: (value) => {

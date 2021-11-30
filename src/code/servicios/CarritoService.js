@@ -63,6 +63,7 @@ export default class CarritoService {
 		}
 		else{
 			this.items_carrito_compras.push(unItem);
+			alert("Producto agregado!");
 		}
 		this.notifySubscribers();
 		const cookies = new Cookies();

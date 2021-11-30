@@ -41,7 +41,7 @@ export default function FormEmpleadoModal({ elementoParaModificar, onHide, show 
             centered>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    {!modificar ? "Alta Servicio" : "Modificar Servicio"}
+                    {!modificar ? "Alta Empleado" : "Modificar Empleado"}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

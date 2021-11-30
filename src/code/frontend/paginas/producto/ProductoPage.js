@@ -69,6 +69,10 @@ function ProductoPage() {
             <label className="label">${productoActual.precio}</label>
             <br /><hr />
           </div>
+          <div className="item precio">
+            <label className="label">Stock: {productoActual.existencia}</label>
+            <br /><hr />
+          </div>
           <div className="item form">
             {ClienteService.getUsuario() ? <FormularioCompra stock={productoActual.existencia} onSubmit={handleSubmit} /> : <p style={{color:"red"}}>Deberá iniciar sesión o registrarse para poder comprar un producto</p>}
           </div>

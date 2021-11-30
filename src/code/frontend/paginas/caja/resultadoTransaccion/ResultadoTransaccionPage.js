@@ -26,7 +26,7 @@ function ResultadoTransaccionPage() {
         <div className="resultado-transaccion">
             <div className="img">
                 {params.resultado === "pendiente" || params.resultado === "exitoso" ?
-                    <label className="titulo">¡Gracias por comparar en Puppyness Pet Caring!</label> :
+                    <label className="titulo">¡Gracias por comprar en Puppyness Pet Caring!</label> :
                     <label className="titulo">No se pudo concretar la compra</label>
                 }
                 <br />

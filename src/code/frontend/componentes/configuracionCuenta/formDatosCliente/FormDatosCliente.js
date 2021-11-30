@@ -92,7 +92,7 @@ const FormDatosCliente = ({ datosUsuario, onSubmit }) => {
                     {!existeLocalidad(usuario.localidad) ? <Col>
                         <Form.Label>Otra localidad</Form.Label>
                         <Form.Group>
-                            <Form.Control required name="localidad" minLength="3" maxLength="50" onChange={handlerChange} type="text" placeholder="Ingrese su localidad" />
+                            <Form.Control required value={usuario.localidad} name="localidad" minLength="3" maxLength="50" onChange={handlerChange} type="text" placeholder="Ingrese su localidad" />
                         </Form.Group>
                     </Col> : ""}
                 </Row>

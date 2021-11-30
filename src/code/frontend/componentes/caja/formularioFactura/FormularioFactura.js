@@ -59,35 +59,44 @@ function FormularioFactura() {
             <Form>
                 <label className="title-factura">Caja</label><br />
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                    <InputGroup.Text><BsFillPersonFill />
+                <Form.Label style={{marginTop:"1vh"}}>Nombre</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura.usuarioRegistrado?.nombre}  placeholder="Nombres" />
                 </InputGroup>
+
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><BsFillPersonFill /></InputGroup.Text>
+                    <InputGroup.Text><BsFillPersonFill />
+                <Form.Label style={{marginTop:"1vh"}}>Apellido</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura?.usuarioRegistrado?.apellido} placeholder="Apellido" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text> <BsBuilding /></InputGroup.Text>
+                    <InputGroup.Text><BsBuilding />
+                <Form.Label style={{marginTop:"1vh"}}>Localidad</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura.usuarioRegistrado?.localidad} placeholder="Localidad" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><BsMap /></InputGroup.Text>
+                    <InputGroup.Text><BsMap />
+                <Form.Label style={{marginTop:"1vh"}}>Domicilio</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura.usuarioRegistrado?.domicilio} placeholder="Domicilio" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><BsFilePost /></InputGroup.Text>
+                    <InputGroup.Text><BsFilePost />
+                <Form.Label style={{marginTop:"1vh"}}>CP</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura.usuarioRegistrado?.codigoPostal} placeholder="Codigo Postal" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><BsPhone /></InputGroup.Text>
+                    <InputGroup.Text><BsPhone />
+                <Form.Label style={{marginTop:"1vh"}}>Telefono</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura.usuarioRegistrado?.telefono} placeholder="Numero de teléfono" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><MdMail /></InputGroup.Text>
+                    <InputGroup.Text><MdMail />
+                <Form.Label style={{marginTop:"1vh"}}>Correo</Form.Label></InputGroup.Text>
                     <FormControl readOnly value={factura.usuarioRegistrado?.correo} placeholder="Correo Electrónico" />
                 </InputGroup>
                 <InputGroup className="input-formulario">
-                    <InputGroup.Text><MdLocalShipping /></InputGroup.Text>
+                    <InputGroup.Text><MdLocalShipping />
+                <Form.Label style={{marginTop:"1vh"}}>Envío</Form.Label></InputGroup.Text>
                     <Form.Select value={envios} onChange={handlerChange}>
                         <option value="si">SI</option>
                         <option value="no">NO</option>
