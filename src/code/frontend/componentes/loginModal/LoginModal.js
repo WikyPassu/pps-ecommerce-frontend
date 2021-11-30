@@ -70,6 +70,17 @@ export default function LoginModal(props) {
         })
     }
 
+    const hasNumeros = (str)=>{
+        for (let i = 0; i < str.length; i++) {
+            let letra = str.charAt(i);
+            if (!(letra == ' ')){
+                if (!isNaN(letra)) {
+                    return true;
+                }
+            }
+        }
+    };
+
     const handlerSubmitLogin = (e) => {
         e.preventDefault();
         UtilsService.setLoading(true);
@@ -83,6 +94,18 @@ export default function LoginModal(props) {
 
     const handlerSubmitRegistracion = (e) => {
         e.preventDefault();
+        const nombre = formRegistracion.nombre;
+        const apellido = formRegistracion.apellido;
+
+        if(hasNumeros(nombre)){
+                alert("Por favor, ingrese un nombre válido");
+                return;
+        }
+        else if(hasNumeros(apellido)){
+            alert("Por favor, ingrese un apellido válido");
+            return;
+        }
+
         console.log("forRegistracion", formRegistracion)
         
         ClienteService.signUp(formRegistracion)

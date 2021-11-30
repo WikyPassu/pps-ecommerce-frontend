@@ -53,7 +53,7 @@ export default function Resultados({ busqueda, tipo, filtros }) {
     return <>
         <h2>Resultados de "{busqueda}"</h2>
         {lista && lista.length === 0 ? 
-            <b>No se han encontrado ningún resultado</b> : 
+            <b>No se ha encontrado ningún resultado</b> : 
             lista.map((c) => { return tipoArticulo === "PRODUCTO" ? <Producto producto={c} key={c._id} /> : <Servicio servicio={c} key={c._id} /> })}
     </>
 }

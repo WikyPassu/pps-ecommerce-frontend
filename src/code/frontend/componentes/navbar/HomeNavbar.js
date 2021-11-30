@@ -6,14 +6,23 @@ import Carrito from '../../componentes/carrito/Carrito';
 import logo from '../../../../assets/logo.png';
 import ClienteService from '../../../servicios/ClienteService';
 //import UtilsService from '../../../servicios/UtilsService';
+import { useHistory } from 'react-router-dom';
 
 export default function HomeNavbar() {
     const [modalShow, setModalShow] = React.useState(false);
     const [usuarioLogeado] = useState(ClienteService.getUsuario());//ClienteService.getUsuario();
-
+    const history = useHistory();
     const cerrarSesion = ()=>{
-        ClienteService.cerrarSesion()
-        window.location.reload();
+        ClienteService.cerrarSesion();
+        
+        const paginaActual = window.location.pathname;
+        
+        if(paginaActual == "/home"){
+            window.location.reload();
+        }
+        else{
+            history.push("/home");
+        }
     }
     return (
         <>
