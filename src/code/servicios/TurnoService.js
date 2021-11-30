@@ -153,9 +153,12 @@ export default class TurnoService {
 			const data = await res.json();
 			console.log(data);
 			this.turnos = this.turnos.filter((c) => (c._id !== _id));
+			this.notifySubscribers();
 			this.iniciarServicio();
 		} catch (err) {
 			console.log(err);
+			this.notifySubscribers();
+			this.iniciarServicio();
 		}
 	}
 }
