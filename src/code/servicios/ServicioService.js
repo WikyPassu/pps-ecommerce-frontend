@@ -299,7 +299,7 @@ export default class ServicioService {
 		else{
 			costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
 		}
-
+		costo.precio = parseInt(costo.precio);
 		costo.consumibles.push(costoComsumible)
 		return costo;
 	}
