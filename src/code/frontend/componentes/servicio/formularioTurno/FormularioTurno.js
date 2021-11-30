@@ -58,6 +58,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     "perrito": perritoEncontrado || initialValuesPerrito,
                 };
                 let { precio, consumibles } = ServicioService.calcularCostoDelServicio(servicio, newFormulario.perrito);
+                console.info(precio);
                 return {
                     ...newFormulario,
                     precio,
@@ -163,7 +164,7 @@ export default function FormularioTurno({ onSubmit, onChange = () => { }, servic
                     <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.nombre} placeholder="Nombre del perro" min="3" max="99999" name="nombre" type="text" />
                 </Col>
                 <Col>
-                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.peso} placeholder="Peso del perro (gramos)" min="500" max="99999" name="peso" type="number" />
+                    <Form.Control required onChange={handlerChangePerrito} value={formulario.perrito.peso} placeholder="Peso del perro (kilos)" min="1" max="99999" name="peso" type="number" />
                 </Col>
             </Row>
             <Row sm={2}>

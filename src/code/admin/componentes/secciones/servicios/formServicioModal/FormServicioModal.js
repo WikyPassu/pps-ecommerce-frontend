@@ -179,7 +179,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                 <Form.Label htmlFor="costo.gramosPerroPorUnidad">Porcentaje Ganancia</Form.Label>
                                 <Form.Control
                                     name="costo.porcentajeGanancia"
-                                    max="100"
+                                    max="1000"
                                     min="0"
                                     type="number"
                                     value={elemento.costo.porcentajeGanancia}

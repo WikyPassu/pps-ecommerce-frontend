@@ -287,8 +287,19 @@ export default class ServicioService {
 			cantidad: 0,
 			consumible: consumibleOriginal
 		}
-		costoComsumible.cantidad = perrito.peso / gramosPerroPorUnidad;
-		costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
+		costoComsumible.cantidad = (perrito.peso * 1000) / gramosPerroPorUnidad;
+
+		if (perrito.peso < 8){
+			
+			costo.precio = ((8 * 1000) / gramosPerroPorUnidad) * consumibleOriginal.precioUnidad * (porcentajeGanancia/100+1);
+		}
+		else if(servicio.categoria === "guarderia" && perrito.peso < 20){
+			costo.precio = ((20 * 1000) / gramosPerroPorUnidad) * consumibleOriginal.precioUnidad * (porcentajeGanancia/100+1);
+		}
+		else{
+			costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
+		}
+
 		costo.consumibles.push(costoComsumible)
 		return costo;
 	}

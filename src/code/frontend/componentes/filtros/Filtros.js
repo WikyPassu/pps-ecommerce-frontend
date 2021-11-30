@@ -6,17 +6,23 @@ const initialState = {
     tipo: "PRODUCTO",
     minimo: 0,
     maximo: 0,
-    categoria: "",
-    busqueda: ""
+    categoria: ""
 }
 
 export default function Filtros({ onSumbit = () => { }, onReset = () => { }, defaultType = "PRODUCTO" }) {
     const [filtros, setFiltros] = useState({ ...initialState, tipo: defaultType });
+
+    const [busqueda, setBusqueda] = useState("");
+
+
     const handlerChange = ({ target }) => {
         let { name, value } = target;
-        setFiltros((filtros) => {
-            return { ...filtros, [name]: value }
-        })
+
+        name === "busqueda" ? setBusqueda(value) :
+            setFiltros((filtros) => {
+                return { ...filtros, [name]: value }
+            });
+        
     }
 
     const handlerReset = () => {
@@ -26,8 +32,7 @@ export default function Filtros({ onSumbit = () => { }, onReset = () => { }, def
 
     const handlerSumit = (e) => {
         e.preventDefault();
-        onSumbit(filtros);
-        setFiltros({ ...initialState, tipo: defaultType });
+        onSumbit(filtros, busqueda);
     }
 
     useEffect(() => {
@@ -39,6 +44,8 @@ export default function Filtros({ onSumbit = () => { }, onReset = () => { }, def
         </div>
         <hr />
         <Form onSubmit={handlerSumit} onReset={handlerReset}>
+            <Form.Label>Buscar:</Form.Label>
+            <Form.Control required value={busqueda} onChange={handlerChange} type="text" name="busqueda" placeholder="Hola, qué busca?" />
             <Form.Label>Tipo</Form.Label>
             <Form.Group controlId="formBasicCheckbox">
                 <Row>
