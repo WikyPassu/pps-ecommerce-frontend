@@ -38,7 +38,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.consumibles : []);
     const [empleado, setEmpleado] = useState(null);
     const [cliente, setCliente] = useState(null);
-    const [descontarStockConsumibles, setDescontarStockConsumibles] = useState(false)
+    const [descontarStockConsumibles, setDescontarStockConsumibles] = useState(true);
     useEffect(() => {
         setEmpleado((empleado) => {
             return EmpleadoService.getEmpleadoByDNI(elemento.dniEmpleado);
@@ -290,15 +290,18 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col style={{textAlign:"center"}}>
+                        <hr/>
+                            <label>Descontar stock de consumibles?</label>
                             <Form.Check
                                 type="checkbox"
-                                label={`Descontar stock de consumibles`}
+                                checked={descontarStockConsumibles}
                                 value={descontarStockConsumibles}
-                                onChange={({ target }) => {
+                                onChange={({ target, value }) => {
                                     setDescontarStockConsumibles(target.checked)
                                 }}
                             />
+                            <hr/>
                         </Col>
                     </Row>
                     <Row>
