@@ -58,7 +58,7 @@ function App() {
           <Route path="/admin/home" component={AdminHomePage}></Route>
           <Route path="/admin/resultadoTransaccion/:resultado" component={ResultadoTransaccionAdminPage}></Route>
           <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
-          <Route path="*" exact="true" component={NotFoundPage}></Route>
+          <Route path="*" exact component={NotFoundPage}></Route>
         </Switch>
       </Router>
     </div>

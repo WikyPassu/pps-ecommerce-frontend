@@ -38,7 +38,6 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
     const [listaDetalleElemento, setListaDetalleElemento] = useState(elementoParaModificar ? elementoParaModificar.consumibles : []);
     const [empleado, setEmpleado] = useState(null);
     const [cliente, setCliente] = useState(null);
-    const [descontarStockConsumibles, setDescontarStockConsumibles] = useState(true);
     
     useEffect(() => {
         setEmpleado((empleado) => {
@@ -105,7 +104,7 @@ export default function FormTurnoModal({ elementoParaModificar, onHide, show }) 
 
         if(continuar){
             if (window.confirm("¿Esta seguro que sea modificar el turno?")) {
-                (modificar === true) ? TurnoService.modifyTurno(elemento, descontarStockConsumibles) : TurnoService.addTurno(elemento);
+                (modificar === true) ? TurnoService.modifyTurno(elemento, true) : TurnoService.addTurno(elemento);
                 onHide();
             }
         }
