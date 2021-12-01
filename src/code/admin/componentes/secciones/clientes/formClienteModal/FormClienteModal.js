@@ -5,7 +5,7 @@ import { BsFillPersonFill, BsMap, BsBuilding, BsFilePost, BsPhone } from 'react-
 import { MdMail } from 'react-icons/md';
 // import Listado from '../../../listado/Listado';
 import ClienteService from '../../../../../servicios/ClienteService';
-import { HiKey } from 'react-icons/hi';
+//import { HiKey } from 'react-icons/hi';
 import EnviosService from '../../../../../servicios/EnviosService';
 
 const initialValuesElemento = {
