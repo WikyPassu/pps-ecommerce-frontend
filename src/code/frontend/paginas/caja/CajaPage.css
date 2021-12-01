@@ -64,7 +64,7 @@
     .cajaPage .item-btn-pagar{
         grid-column:1/5;
         width: 100% ;
-        grid-row: 18/19;
+        grid-row: 19/19;
         margin: auto;
     }
     .cajaPage .item-productos-carrito{
