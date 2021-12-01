@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './puppyness-theme.css';
 import HomePage from './code/frontend/paginas/home/HomePage';
@@ -42,22 +42,24 @@ function App() {
 
   return (
     <div className="App">
-      <Loading/>
+      <Loading />
       <Router>
-        <Route path="/" exact><Redirect to="/home" /></Route>
-        <Route path="/home" component={HomePage}></Route>
-        <Route path="/busqueda" component={BusquedaPage}></Route>
-        <Route path="/producto" component={ProductoPage} />
-        <Route path="/configuracionCuenta" component={ConfiguracionCuentaPage}></Route>
-        <Route exact path="/servicio" component={ServicioPage} />
-        <Route exact path="/servicio/resultado/:resultado" component={ResultadoTurnoPage}></Route>
-        <Route exact path="/caja" component={CajaPage}></Route>
-        <Route exact path="/caja/resultado/:resultado" component={ResultadoTransaccionPage}></Route>
-        <Route path="/admin/login" component={LoginAdminPage}></Route>
-        <Route path="/admin/home" component={AdminHomePage}></Route>
-        <Route path="/admin/resultadoTransaccion/:resultado" component={ResultadoTransaccionAdminPage}></Route>
-        <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
-        <Route exact path="*" component={NotFoundPage}></Route>
+        <Switch>
+          <Route path="/" exact><Redirect to="/home" /></Route>
+          <Route exact path="/home" component={HomePage}></Route>
+          <Route path="/busqueda" component={BusquedaPage}></Route>
+          <Route path="/producto" component={ProductoPage} />
+          <Route path="/configuracionCuenta" component={ConfiguracionCuentaPage}></Route>
+          <Route exact path="/servicio" component={ServicioPage} />
+          <Route exact path="/servicio/resultado/:resultado" component={ResultadoTurnoPage}></Route>
+          <Route exact path="/caja" component={CajaPage}></Route>
+          <Route exact path="/caja/resultado/:resultado" component={ResultadoTransaccionPage}></Route>
+          <Route path="/admin/login" component={LoginAdminPage}></Route>
+          <Route path="/admin/home" component={AdminHomePage}></Route>
+          <Route path="/admin/resultadoTransaccion/:resultado" component={ResultadoTransaccionAdminPage}></Route>
+          <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
+          <Route path="*" exact="true" component={NotFoundPage}></Route>
+        </Switch>
       </Router>
     </div>
   );
