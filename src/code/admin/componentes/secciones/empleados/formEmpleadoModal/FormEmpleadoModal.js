@@ -85,18 +85,6 @@ export default function FormEmpleadoModal({ elementoParaModificar, onHide, show 
                                 placeholder="Ingrese Correo" />
                             {validarInputText(elemento.correo)}
                         </Form.Group>
-                        <Form.Group as={Col}>
-                            <Form.Label htmlFor="clave">Clave</Form.Label>
-                            <Form.Control
-                                name="clave"
-                                maxLength="20"
-                                type="password"
-                                required
-                                value={elemento.clave}
-                                onChange={handleChange}
-                                placeholder="Ingrese clave" />
-                            {validarInputText(elemento.clave)}
-                        </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group as={Col}>

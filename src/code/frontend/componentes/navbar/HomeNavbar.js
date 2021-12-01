@@ -44,7 +44,7 @@ export default function HomeNavbar() {
                             usuarioLogeado ?
                                 <>
                                     <Nav>
-                                        <Nav.Link variant="end">{"Hola! " + usuarioLogeado.apellido + " " + usuarioLogeado.nombre}</Nav.Link>
+                                        <Nav.Link style={{cursor:"default"}} variant="end">{"Hola! " + usuarioLogeado.apellido + " " + usuarioLogeado.nombre}</Nav.Link>
                                     </Nav>
                                     <Nav>
                                         <Nav.Link variant="end" href="/configuracionCuenta">Configuración de Cuenta</Nav.Link>

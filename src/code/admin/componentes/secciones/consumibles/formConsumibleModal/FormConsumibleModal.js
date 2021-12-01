@@ -63,7 +63,7 @@ export default function FormConsumibleModal({ elementoParaModificar, onHide, sho
                             <Form.Control
                                 name="existencia"
                                 required
-                                value={elemento.existencia}
+                                value={parseFloat(elemento.existencia).toFixed(2)}
                                 onChange={handleChange}
                                 type="number"
                                 placeholder="Existencia" />
