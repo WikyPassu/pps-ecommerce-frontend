@@ -71,7 +71,6 @@ export default class ProductoService {
 		try {
 			let pagos = await FacturasService.getPagosFromMercadoPago()
 
-
 			const items = pagos
 				.reduce((prev, curr) => {
 					return [...prev, ...curr.items];
@@ -104,7 +103,6 @@ export default class ProductoService {
 
 			}, [])
 				.filter((c) => {
-					//console.log("item: ",c)
 					return this.getProductos().find((v) => {
 						return v.nombre === c.producto;
 					}) ? true : false;
@@ -120,7 +118,7 @@ export default class ProductoService {
 						return prev;
 					}
 				}, null)
-				
+
 
 			return this.getProductos().find((c) => c.nombre === itemMaxVendido.producto);
 

@@ -302,28 +302,51 @@ export default class ServicioService {
 			precio: 0,
 			consumibles: []
 		};
-		const {consumible, gramosPerroPorUnidad, porcentajeGanancia} = servicio.costo;
+		const {consumible, gramosPerroPorUnidad, porcentajeGanancia, precioMinimo} = servicio.costo;
 		let consumibleOriginal = ComsumiblesService.getConsumiblePorNombre(consumible);
 		let costoComsumible = {
 			cantidad: 0,
 			consumible: consumibleOriginal
 		}
 		costoComsumible.cantidad = (perrito.peso * 1000) / gramosPerroPorUnidad;
+		costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
 
-		if (perrito.peso < 8){
-			
-			costo.precio = ((8 * 1000) / gramosPerroPorUnidad) * consumibleOriginal.precioUnidad * (porcentajeGanancia/100+1);
+		if(costo.precio < precioMinimo){
+			costo.precio = precioMinimo;
 		}
-		else if(servicio.categoria === "guarderia" && perrito.peso < 20){
-			costo.precio = ((20 * 1000) / gramosPerroPorUnidad) * consumibleOriginal.precioUnidad * (porcentajeGanancia/100+1);
-		}
-		else{
-			costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
-		}
-		costo.precio = parseInt(costo.precio);
+		
+		costo.precio = parseFloat(costo.precio);
 		costo.consumibles.push(costoComsumible)
 		return costo;
 	}
+
+	// static calcularCostoDelServicio(servicio, perrito) {
+	// 	let costo = {
+	// 		precio: 0,
+	// 		consumibles: []
+	// 	};
+	// 	const {consumible, gramosPerroPorUnidad, porcentajeGanancia} = servicio.costo;
+	// 	let consumibleOriginal = ComsumiblesService.getConsumiblePorNombre(consumible);
+	// 	let costoComsumible = {
+	// 		cantidad: 0,
+	// 		consumible: consumibleOriginal
+	// 	}
+	// 	costoComsumible.cantidad = (perrito.peso * 1000) / gramosPerroPorUnidad;
+
+	// 	if (perrito.peso < 8){
+			
+	// 		costo.precio = ((8 * 1000) / gramosPerroPorUnidad) * consumibleOriginal.precioUnidad * (porcentajeGanancia/100+1);
+	// 	}
+	// 	else if(servicio.categoria === "guarderia" && perrito.peso < 20){
+	// 		costo.precio = ((20 * 1000) / gramosPerroPorUnidad) * consumibleOriginal.precioUnidad * (porcentajeGanancia/100+1);
+	// 	}
+	// 	else{
+	// 		costo.precio = (costoComsumible.cantidad * consumibleOriginal.precioUnidad) * (porcentajeGanancia/100+1);
+	// 	}
+	// 	costo.precio = parseInt(costo.precio);
+	// 	costo.consumibles.push(costoComsumible)
+	// 	return costo;
+	// }
 
 	/**
 	 * Devuelve los horarios disponibles para este servicio
