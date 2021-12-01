@@ -144,38 +144,6 @@ export default function FormClienteModal({ elementoParaModificar, onHide, show }
                             <option value="BAJA">BAJA</option>
                         </Form.Select>
                     </InputGroup>
-                    {/* <InputGroup>
-                        <label className="title">Sus perros</label>
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text>Nombre</InputGroup.Text>
-                        <FormControl onChange={handleChangeDetalleElemento} value={detalleElemento.nombre} name="nombre" placeholder="nombre" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text>Peso</InputGroup.Text>
-                        <FormControl onChange={handleChangeDetalleElemento} type="number" min="0" value={detalleElemento.peso} name="peso" placeholder="Peso (gr)" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text>Edad</InputGroup.Text>
-                        <FormControl onChange={handleChangeDetalleElemento} type="number" min="0" value={detalleElemento.edad} name="edad" placeholder="edad (años)" />
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <InputGroup.Text>Raza</InputGroup.Text>
-                        <Form.Select onChange={handleChangeDetalleElemento} name="raza" value={detalleElemento.raza}>
-                            <option>Seleccionar Raza</option>
-                            <option value="labrado">Labrador</option>
-                            <option value="siberiano">Siberiano</option>
-                            <option value="caniche">Caniche</option>
-                        </Form.Select>
-                    </InputGroup>
-                    <InputGroup className="input-formulario">
-                        <Button type="button" onClick={agregarDetalleElemento} size="lg">Agregar</Button>
-                    </InputGroup>
-                    <Row className="input-formulario">
-                        <Col>
-                            <Listado atributos={["peso", "nombre", "edad", "raza"]} attrKey="id" onDeleteClick={handleDeleteClick} datos={listaDetalleElemento} btnEliminar="true"></Listado>
-                        </Col>
-                    </Row> */}
                     <br />
                     <Row>
                         <Col style={{textAlign:"center"}}>

@@ -57,7 +57,7 @@ function App() {
         <Route path="/admin/home" component={AdminHomePage}></Route>
         <Route path="/admin/resultadoTransaccion/:resultado" component={ResultadoTransaccionAdminPage}></Route>
         <Route exact path="/admin"><Redirect to="/admin/login" /></Route>
-        <Route exact path="/404" component={NotFoundPage}></Route>
+        <Route exact path="*" component={NotFoundPage}></Route>
       </Router>
     </div>
   );

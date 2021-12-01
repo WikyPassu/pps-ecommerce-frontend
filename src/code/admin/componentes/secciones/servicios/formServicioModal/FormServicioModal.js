@@ -15,7 +15,8 @@ const initialValuesElemento = {
     "costo": {
         "consumible": null,
         "gramosPerroPorUnidad": null,
-        "porcentajeGanancia": null
+        "porcentajeGanancia": null,
+        "precioMinimo":0
     },
     resenias: []
 };
@@ -45,7 +46,7 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
         let { name, value } = e.target;
         if (name.includes("costo.")) {
             name = name.replace("costo.", "");
-            value = (name === "porcentajeGanancia" || name === "gramosPerroPorUnidad") ? parseInt(value) : value;
+            value = (name === "porcentajeGanancia" || name === "gramosPerroPorUnidad" || name === "precioMinimo") ? parseInt(value) : value;
             setElemento((elemento) => {
                 return {
                     ...elemento, costo: {
@@ -185,6 +186,19 @@ export default function FormServicioModal({ elementoParaModificar, onHide, show 
                                     value={elemento.costo.porcentajeGanancia}
                                     onChange={handlerChange}
                                     placeholder="Porcentaje Ganancia" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group as={Col}>
+                                <Form.Label htmlFor="costo.gramosPerroPorUnidad">Precio Mínimo</Form.Label>
+                                <Form.Control
+                                    name="costo.precioMinimo"
+                                    required
+                                    min="0"
+                                    type="number"
+                                    value={elemento.costo.precioMinimo}
+                                    onChange={handlerChange}
+                                    placeholder="Precio Mínimo" />
                             </Form.Group>
                         </Col>
                     </Row>
