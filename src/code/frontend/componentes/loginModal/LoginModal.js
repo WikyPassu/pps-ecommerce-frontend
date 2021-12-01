@@ -99,32 +99,49 @@ export default function LoginModal(props) {
 
     const handlerSubmitRegistracion = (e) => {
         e.preventDefault();
-        const nombre = formRegistracion.nombre;
-        const apellido = formRegistracion.apellido;
+        const clientes = ClienteService.getClientes();
+        console.log(clientes);
+        let existeCliente = false;
+        for(let i=0; i<clientes.length; i++){
+            if(clientes[i].correo === formRegistracion.correo || clientes[i].dni === formRegistracion.dni){
+                existeCliente = true;
+                break;
+            }
+        }
 
-        if(UtilsService.hasNumeros(nombre)){
-                alert("Por favor, ingrese un nombre válido");
+        if(!existeCliente){
+            const nombre = formRegistracion.nombre;
+            const apellido = formRegistracion.apellido;
+    
+            if(UtilsService.hasNumeros(nombre)){
+                    alert("Por favor, ingrese un nombre válido");
+                    return;
+            }
+            else if(UtilsService.hasNumeros(apellido)){
+                alert("Por favor, ingrese un apellido válido");
                 return;
+            }
+    
+            formRegistracion.nombre = UtilsService.ponerMayusIniciales(formRegistracion.nombre);
+            formRegistracion.apellido = UtilsService.ponerMayusIniciales(formRegistracion.apellido);
+            
+            ClienteService.signUp(formRegistracion)
+                .then(() => {
+                    window.location.reload();
+                    props.onHide();
+                });
         }
-        else if(UtilsService.hasNumeros(apellido)){
-            alert("Por favor, ingrese un apellido válido");
-            return;
+        else{
+            alert("Ya existe un usuario registrado con ese correo/dni");
         }
-
-        formRegistracion.nombre = UtilsService.ponerMayusIniciales(formRegistracion.nombre);
-        formRegistracion.apellido = UtilsService.ponerMayusIniciales(formRegistracion.apellido);
-        
-        ClienteService.signUp(formRegistracion)
-            .then(() => {
-                window.location.reload();
-                props.onHide();
-            });
     }
+
     const existeLocalidad = (localidad) => {
         return EnviosService.getPrecioEnvios().find((c) => {
             return c.localidad === localidad;
         });
     }
+    
     return (
         <Modal
             {...props}
